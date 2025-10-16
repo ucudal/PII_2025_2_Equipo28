@@ -1,9 +1,10 @@
-namespace Library;
-
-public class Mensajes : Interaccion
+namespace Library
 {
-    public Mensajes(Cliente cliente, string tema, string fecha) : base(cliente, tema, fecha)
+    public class Mensajes : Interaccion
     {
-        
+        public Mensajes(Cliente cliente, string tema, string fecha) : base(cliente, tema, fecha)
+        {
+
+        }
     }
 }

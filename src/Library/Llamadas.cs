@@ -1,9 +1,10 @@
-namespace Library;
-
-public class Llamadas: Interaccion
+namespace Library
 {
-    public Llamadas(Cliente cliente, string tema, string fecha) : base(cliente, tema, fecha)
+    public class Llamadas : Interaccion
     {
-        
+        public Llamadas(Cliente cliente, string tema, string fecha) : base(cliente, tema, fecha)
+        {
+
+        }
     }
 }
