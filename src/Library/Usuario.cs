@@ -31,4 +31,3 @@ public class Usuario
         Cotizaciones.Add(cotizacion);
     }
 }
-}
