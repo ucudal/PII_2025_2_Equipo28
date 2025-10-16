@@ -2,7 +2,7 @@ namespace Library;
 
 public class Usuario
 {
-    public List<Interacciones> Interacciones { get; private set; } = new List<Interacciones>();
+    public List<Interaccion> Interacciones { get; private set; } = new List<Interaccion>();
     public List<string> Total_Ventas { get; private set; } = new List<string>();
     public List<string> VentaCliente { get; private set; } = new List<string>();
     public List<string> Cotizaciones { get; private set; } = new List<string>();
@@ -15,7 +15,7 @@ public class Usuario
 
     public void AgregarEtiqueta(Cliente cliente, string etiqueta)
     {
-        cliente.etiqueta = etiqueta;
+        cliente.Etiqueta = etiqueta;
     }
 
     public void VentaClienteAdd(string que, string cuando, string precio)
@@ -30,5 +30,4 @@ public class Usuario
         string cotizacion = $"Fecha: {cuando}, Motivo: {porque}";
         Cotizaciones.Add(cotizacion);
     }
-}
 }

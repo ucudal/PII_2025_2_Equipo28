@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 
-namespace Library;
-
 namespace Library
 {
     public class Panel
