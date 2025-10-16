@@ -1,39 +1,42 @@
 using System;
-namespace Library;
+using System.Collections.Generic;
 
-public class ClienteLista
+namespace Library
 {
-    public List<Cliente> Clientes { get; private set; }
-
-    public ClienteLista()
+    public class ClienteLista
     {
-        Clientes = new List<Cliente>();
-    }
+        public List<Cliente> Clientes { get; private set; }
 
-    public void AgregaCliente(Cliente cliente)
-    {
-        if (cliente != null)
+        public ClienteLista()
         {
-            Clientes.Add(cliente);
-            Console.WriteLine($"Se agregó: {cliente.Nombre} {cliente.Apellido}");
+            Clientes = new List<Cliente>();
         }
-    }
 
-    public void EliminarCliente(string correo)
-    {
-        int removed = Clientes.RemoveAll(c => c.Correo.Equals(correo, StringComparison.OrdinalIgnoreCase));
-        if (removed > 0)
+        public void AgregaCliente(Cliente cliente)
         {
-            Console.WriteLine($"Se eliminó {removed} cliente con el mail: {correo}");
+            if (cliente != null)
+            {
+                Clientes.Add(cliente);
+                Console.WriteLine($"Se agregó: {cliente.Nombre} {cliente.Apellido}");
+            }
         }
-        else
-        {
-            Console.WriteLine($"No se encontró el cliente con el mail {correo}");
-        }
-    }
 
-    public List<Cliente> BuscarCliente(string nombre)
-    {
-        return Clientes.FindAll(c => c.Nombre.Equals(nombre, StringComparison.OrdinalIgnoreCase));
+        public void EliminarCliente(string correo)
+        {
+            int removed = Clientes.RemoveAll(c => c.Correo.Equals(correo, StringComparison.OrdinalIgnoreCase));
+            if (removed > 0)
+            {
+                Console.WriteLine($"Se eliminó {removed} cliente con el mail: {correo}");
+            }
+            else
+            {
+                Console.WriteLine($"No se encontró el cliente con el mail {correo}");
+            }
+        }
+
+        public List<Cliente> BuscarCliente(string nombre)
+        {
+            return Clientes.FindAll(c => c.Nombre.Equals(nombre, StringComparison.OrdinalIgnoreCase));
+        }
     }
 }
