@@ -1,6 +1,7 @@
 ﻿using System; 
 using System.Collections.Generic;
-namespace Program;
+namespace Program
+{
 
 class Program
 {
@@ -8,4 +9,5 @@ class Program
     {
         Console.WriteLine("Hello, World!");
     }
+}
 }

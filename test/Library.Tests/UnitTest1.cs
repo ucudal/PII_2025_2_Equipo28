@@ -1,4 +1,5 @@
-namespace Library.Tests;
+namespace Library.Tests
+{
 
 public class Tests
 {
@@ -12,4 +13,5 @@ public class Tests
     {
         Assert.Pass();
     }
+}
 }
