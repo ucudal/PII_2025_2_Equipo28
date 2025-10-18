@@ -5,10 +5,10 @@ namespace Library
 {
     public class Vendedor
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string NombreCompleto { get; set; }
 
-        public Vendedor(int id, string nombre)
+        public Vendedor(string id, string nombre)
         {
             Id = id;
             NombreCompleto = nombre;

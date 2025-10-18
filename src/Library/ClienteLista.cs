@@ -38,5 +38,19 @@ namespace Library
         {
             return Clientes.FindAll(c => c.Nombre.Equals(nombre, StringComparison.OrdinalIgnoreCase));
         }
+
+        public Cliente BuscarUnCliente(string nombre)
+        {
+            foreach (var cliente in Clientes)
+            {
+                if (cliente.Nombre == nombre)
+                {
+                    return cliente;
+                }
+               
+            }
+            Console.WriteLine("No se encontro el cliente");
+            return null;
+        }
     }
 }

@@ -3,9 +3,11 @@ namespace Library
 
     public class Correos : Interaccion
     {
-        public Correos(Cliente cliente, string tema, string fecha) : base(cliente, tema, fecha)
+        public string correo { get; set; }
+        public Correos(Cliente cliente, string tema, string correo) : base(cliente, tema)
         {
-
+            this.correo = correo;
+            this.tipo = "correo";
         }
     }
 }
