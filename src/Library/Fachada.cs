@@ -7,19 +7,20 @@ namespace Library
     {
         private Listas listas = new Listas();
         private ClienteLista clienteLista = new ClienteLista();
-        
-        public void RegistarMensaje(string clienteNombre,string mensaje, string tema, string usuarioId)
+
+        public void RegistarMensaje(string clienteNombre, string mensaje, string tema, string usuarioId)
         {
             Usuario usuario = listas.BuscarUsuario(usuarioId);
-            if (usuario!=null)
+            if (usuario != null)
             {
                 Cliente cliente = clienteLista.BuscarUnCliente(clienteNombre);
-                if (cliente!= null)
+                if (cliente != null)
                 {
                     Mensajes Mensaje = new Mensajes(cliente, tema, mensaje);
                     usuario.Interacciones.Add(Mensaje);
                 }
             }
+
             return;
         }
 
@@ -33,5 +34,6 @@ namespace Library
         {
             interaccion.AgergarNotas(nota);
         }
+    }*/
     }
 }
