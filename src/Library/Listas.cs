@@ -9,7 +9,7 @@ namespace Library
         public static List<Administrador> Administradores = new List<Administrador>();
         public static List<Vendedor> Vendedores = new List<Vendedor>();
 
-        public Usuario BuscarUsuario(string id)
+        public static Usuario BuscarUsuario(string id)
         {
             foreach (Usuario usuario in Listas.Usuarios)
             {
@@ -25,7 +25,7 @@ namespace Library
             return null;
         }
 
-        public Vendedor BuscarVendedor(string id)
+        public static Vendedor BuscarVendedor(string id)
         {
             foreach (Vendedor vendedor in Listas.Vendedores)
             {
@@ -39,11 +39,11 @@ namespace Library
                 "Su Id de vendedor no corresponde con una id conocida\nPor favor verifique el ID. En caso de no tener un vendedor, solicitelo a un administrador");
             return null;
         }
-        public Administrador BuscarAdministrador(string id)
+        public static Administrador BuscarAdministrador(string id)
         {
             foreach (Administrador administrador in Listas.Administradores)
             {
-                if (Administrador.ID == id)
+                if (administrador.ID == id)
                 {
                     return administrador;
                 }

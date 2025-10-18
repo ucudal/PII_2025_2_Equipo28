@@ -6,7 +6,7 @@ namespace Library
     public class Administrador
     {
         public List<Usuario> UsuariosSuspendidos = new List<Usuario>();
-        public static string ID { get; set; }
+        public string ID { get; set; }
         public string Nombre { get; set; }
 
         public Administrador(string id, string nombre)

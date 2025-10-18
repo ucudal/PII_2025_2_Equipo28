@@ -39,11 +39,11 @@ namespace Library
             return Clientes.FindAll(c => c.Nombre.Equals(nombre, StringComparison.OrdinalIgnoreCase));
         }
 
-        public Cliente BuscarUnCliente(string nombre)
+        public Cliente BuscarUnCliente(string nombre, string apellido)
         {
             foreach (var cliente in Clientes)
             {
-                if (cliente.Nombre == nombre)
+                if (cliente.Nombre == nombre && cliente.Apellido == apellido)
                 {
                     return cliente;
                 }
