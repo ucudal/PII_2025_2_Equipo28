@@ -23,7 +23,7 @@ namespace Library
             return;
         }
 
-        public void RegistrarCorreos(Cliente cliente,string correo, string tema, string fecha, Usuario usuario)
+        /*public void RegistrarCorreos(Cliente cliente,string correo, string tema, string fecha, Usuario usuario)
         {
             Correos Correo = new Correos(cliente, tema, fecha, correo);
             usuario.Interacciones.Add(Correo);
