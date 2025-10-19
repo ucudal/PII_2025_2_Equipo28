@@ -5,6 +5,7 @@ namespace Library
 {
     public class Vendedor
     {
+        public List<Cliente> Clientes = new List<Cliente>();
         public string Id { get; set; }
         public string NombreCompleto { get; set; }
 
@@ -14,11 +15,12 @@ namespace Library
             NombreCompleto = nombre;
         }
 
-        public void AsignarCliente(Cliente cliente)
+        public void AsignarCliente(Cliente cliente, Vendedor vendedor)
         {
             if (cliente != null)
             {
-                Console.WriteLine($"Al cliente {cliente.Nombre} {cliente.Apellido} se le asignó: {NombreCompleto}");
+                vendedor.Clientes.Add(cliente);
+                Console.WriteLine($"Al cliente {cliente.Nombre} {cliente.Apellido} se le asignó: {vendedor.NombreCompleto}");
             }
         }
     }
