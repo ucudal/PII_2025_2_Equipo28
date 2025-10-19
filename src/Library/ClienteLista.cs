@@ -21,22 +21,65 @@ namespace Library
             }
         }
 
-        public void EliminarCliente(string correo)
+        public void EliminarCliente(Cliente cliente)
         {
-            int removed = Clientes.RemoveAll(c => c.Correo.Equals(correo, StringComparison.OrdinalIgnoreCase));
-            if (removed > 0)
+            bool removed = Clientes.Remove(cliente);
+            if (removed)
             {
-                Console.WriteLine($"Se eliminó {removed} cliente con el mail: {correo}");
+                Console.WriteLine($"Se eliminó el cliente.");
             }
             else
             {
-                Console.WriteLine($"No se encontró el cliente con el mail {correo}");
+                Console.WriteLine($"No se encontró el cliente.");
             }
         }
 
-        public List<Cliente> BuscarCliente(string nombre)
+        public List<Cliente> BuscarCliente(string atributo, string valorBusqueda)
         {
-            return Clientes.FindAll(c => c.Nombre.Equals(nombre, StringComparison.OrdinalIgnoreCase));
+            string attr = atributo.Trim().ToLower();
+            string val = valorBusqueda.Trim();
+
+            List<Cliente> resultados = new List<Cliente>();
+
+            switch (attr)
+            {
+                case "id": 
+                    resultados = Clientes.FindAll(c => c.Id.Equals(val, StringComparison.OrdinalIgnoreCase));
+                    break;
+                case "nombre":
+                    resultados = Clientes.FindAll(c => c.Nombre.Equals(val, StringComparison.OrdinalIgnoreCase));
+                    break;
+
+                case "apellido":
+                    resultados = Clientes.FindAll(c => c.Apellido.Equals(val, StringComparison.OrdinalIgnoreCase));
+                    break;
+
+                case "telefono":
+                    resultados = Clientes.FindAll(c => c.Telefono.Equals(val, StringComparison.OrdinalIgnoreCase));
+                    break;
+
+                case "correo":
+                    resultados = Clientes.FindAll(c => c.Correo.Equals(val, StringComparison.OrdinalIgnoreCase));
+                    break;
+
+                case "etiqueta":
+                    resultados = Clientes.FindAll(c => c.Etiqueta.Equals(val, StringComparison.OrdinalIgnoreCase));
+                    break;
+                
+                case "genero":
+                    resultados = Clientes.FindAll(c => c.Genero.Equals(val, StringComparison.OrdinalIgnoreCase));
+                    break;
+
+                case "fechadenacimiento":
+                    resultados = Clientes.FindAll(c => c.FechaDeNacimiento.Equals(val, StringComparison.OrdinalIgnoreCase));
+                    break;
+
+                default:
+                    Console.WriteLine($"No es un atributo válido");
+                    break;
+            }
+
+            return resultados;
         }
 
         public Cliente BuscarUnCliente(string nombre, string apellido)
