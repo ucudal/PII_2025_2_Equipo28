@@ -14,20 +14,23 @@ namespace Library
             
         }
 
-        public void CrearUsuario(string id,string nombre)
+        public Usuario CrearUsuario(string id,string nombre)
         {
             Usuario usuario = new Usuario(id,nombre);
             Listas.Usuarios.Add(usuario);
+            return usuario;
         }
-        public void CrearVendedor(string id,string nombre)
+        public Vendedor CrearVendedor(string id,string nombre)
         {
             Vendedor vendedor = new Vendedor(id,nombre);
             Listas.Vendedores.Add(vendedor);
+            return vendedor;
         }
-        public void CrearAdministrador(string id,string nombre)
+        public Administrador CrearAdministrador(string id,string nombre)
         {
             Administrador administrador = new Administrador(id,nombre);
             Listas.Administradores.Add(administrador);
+            return administrador;
         }
 
         public void SuspenderUsuario(Usuario usuario)
