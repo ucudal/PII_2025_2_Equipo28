@@ -11,7 +11,8 @@ namespace Library
 
         public Administrador(string id, string nombre)
         {
-            
+            this.ID = id;
+            this.Nombre = nombre;
         }
 
         public Usuario CrearUsuario(string id,string nombre)
