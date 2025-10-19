@@ -161,11 +161,11 @@ namespace Library
             Llamadas.Add(llamada);
         }
 
-        public void RegistrarReunion(string id, string tema, string fecha, string ubicacion)
+        public void RegistrarReunion(string id, string tema, string ubicacion, string reunion, string cuando)
         {
             Cliente cliente = listaClientes.BuscarCliente("id", id)[0];
-            Reunion reunion = new Reunion(cliente, tema, fecha, ubicacion);
-            Reuniones.Add(reunion);
+            Reunion Reunion = new Reunion(cliente, tema, ubicacion, reunion, cuando);
+            Reuniones.Add(Reunion);
         }
     }
 }
