@@ -72,8 +72,6 @@ namespace Library.Tests
                 { interaccion.Cliente.Nombre, interaccion.Tema, interaccion.lugar, interaccion.Fecha };
             CollectionAssert.AreEqual(esperado, resultado);
         }
-
-
     }
 }
     
