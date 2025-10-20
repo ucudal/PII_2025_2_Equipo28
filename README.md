@@ -11,7 +11,7 @@ La planificación y división de tareas se realiza en **Trello**
 
 🔗 [Tablero Trello](https://trello.com/invite/b/68ee454952ea5cb366736671/ATTI47495b8d46b377d3fb5435bbe7c2c4ea144F20E7/proyecto-p2)
 
-## Diagrama de Clases (Mermaid)
+## 🧩 Diagrama de Clases (Mermaid)
 
 El diseño de clases fue hecho con **Mermaid** para tener una idea de qué clases serían necesarias para llevar a cabo este proyecto previamente a hacerlo.
 
@@ -21,3 +21,7 @@ El diseño de clases fue hecho con **Mermaid** para tener una idea de qué clase
   <img src="https://github.com/user-attachments/assets/b4006d5b-7789-47f2-adc3-e9eb365f0715" width="800">
 </p>
 
+## 📜 Notas
+
+Los principales desafios que encontramos al trabajar sobre el proyecto fueron la correcta distribución de responsabilidades entre las clases y sus relaciones entre sí, y el mantener una aplicación consistente de los principios SOLID, además de acostumbrarse a trabajar con y solucionar los conflicos de Git.<br><br>
+En general, el proyecto viene siendo una buena oportunidad para poner en práctica lo visto en clase, tanto lo que se trata de conceptos como de código.

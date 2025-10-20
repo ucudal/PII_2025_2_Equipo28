@@ -28,12 +28,10 @@ namespace Library
     // Reunion sin romper la lógica.
     public class Reunion : Interaccion
     {
-        public string Ubicacion { get; set; }
-
         public Reunion(Cliente cliente, string tema, string ubicacion, string reunion, string cuando = "00/00/0000") :
             base(cliente, tema, reunion)
         {
-            this.Ubicacion = ubicacion;
+            this.lugar = ubicacion;
             this.tipo = "reunion";
             if (cuando != "00/00/0000")
             {
