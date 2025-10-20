@@ -50,7 +50,7 @@ namespace Library.Tests
 
             Assert.That(panel.ReunionesProximas.Count, Is.EqualTo(1));
             Assert.That(panel.ReunionesProximas[0], Is.EqualTo(reunion));
-            Assert.That(panel.ReunionesProximas[0].Ubicacion, Is.EqualTo("Oficina"));
+            Assert.That(panel.ReunionesProximas[0].lugar, Is.EqualTo("Oficina"));
             Assert.That(panel.ReunionesProximas[0].Fecha, Is.EqualTo(new DateTime(2025, 10, 20)));
         }
 

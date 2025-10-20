@@ -279,7 +279,7 @@ namespace Library
                     {
                         Console.WriteLine(inter.Cliente.Nombre + " " + inter.Cliente.Apellido +
                                           " - " + inter.Tema + " en " +
-                                          ((Reunion)inter).Ubicacion +
+                                          ((Reunion)inter).lugar +
                                           " (" + inter.Fecha.ToShortDateString() + ")");
                     }
                 }
