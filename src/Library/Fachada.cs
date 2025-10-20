@@ -22,7 +22,7 @@ namespace Library
             }
         }
 
-        public void RegistrarCorreos(string clienteNombre, string clienteApellido, string correo, string tema,
+        public void RegistrarCorreo(string clienteNombre, string clienteApellido, string correo, string tema,
             string usuarioId)
         {
             Usuario usuario = Listas.BuscarUsuario(usuarioId);
@@ -77,7 +77,7 @@ namespace Library
             }
         }
 
-        public void RegistarCotizacion(string clienteNombre, string clienteApellido, string producto, string fecha,
+        public void RegistarCotizacion(string clienteNombre, string clienteApellido, string fecha,
             string precio, string usuarioId)
         {
             Usuario usuario = Listas.BuscarUsuario(usuarioId);
