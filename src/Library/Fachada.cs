@@ -5,7 +5,7 @@ namespace Library
 {
     public class Fachada
     {
-        private ClienteLista clienteLista = new ClienteLista();
+        public ClienteLista clienteLista = new ClienteLista();
         
         public void RegistarMensaje(string clienteId, string mensaje, string tema,
             string usuarioId)
@@ -292,14 +292,13 @@ namespace Library
                 Console.WriteLine("Usuario no encontrado.");
             }
         }
-
-        public ClienteLista listaClientes = new ClienteLista();
+        
         public List<Llamadas> Llamadas = new List<Llamadas>();
         public List<Reunion> Reuniones = new List<Reunion>();
 
         public List<Cliente> BuscarClientesFachada(string atributo, string valorBusqueda)
         {
-            return listaClientes.BuscarCliente(atributo, valorBusqueda);
+            return clienteLista.BuscarCliente(atributo, valorBusqueda);
         }
 
         public Cliente CrearNuevoCliente(string nombre, string apellido, string telefono, string correo)
@@ -309,7 +308,7 @@ namespace Library
 
         public void ModificarInfo(string id, string atributo, string nuevoValor)
         {
-            Cliente cliente = listaClientes.BuscarCliente("id", id)[0];
+            Cliente cliente = clienteLista.BuscarCliente("id", id)[0];
 
             string atributoNormalizado = atributo.Trim().ToLower();
             switch (atributoNormalizado)
@@ -350,25 +349,25 @@ namespace Library
 
         public void EliminarClienteFachada(string id)
         {
-            Cliente cliente = listaClientes.BuscarCliente("id", id)[0];
-            listaClientes.EliminarCliente(cliente);
+            Cliente cliente = clienteLista.BuscarCliente("id", id)[0];
+            clienteLista.EliminarCliente(cliente);
         }
 
         public ClienteLista VerClientes()
         {
-            return listaClientes;
+            return clienteLista;
         }
 
         public void RegistrarLlamada(string id, string tema, string contenido)
         {
-            Cliente cliente = listaClientes.BuscarCliente("id", id)[0];
+            Cliente cliente = clienteLista.BuscarCliente("id", id)[0];
             Llamadas llamada = new Llamadas(cliente, tema, contenido);
             Llamadas.Add(llamada);
         }
 
         public void RegistrarReunion(string id, string tema, string ubicacion, string reunion, string cuando)
         {
-            Cliente cliente = listaClientes.BuscarCliente("id", id)[0];
+            Cliente cliente = clienteLista.BuscarCliente("id", id)[0];
             Reunion Reunion = new Reunion(cliente, tema, ubicacion, reunion, cuando);
             Reuniones.Add(Reunion);
         }

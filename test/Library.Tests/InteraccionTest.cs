@@ -4,7 +4,6 @@ using NUnit.Framework;
 
 namespace Library.Tests
 {
-    [TestFixture]
     public class Testsinteracciones
     {
         [Test]
@@ -48,7 +47,7 @@ namespace Library.Tests
             Correos correo = new Correos(cliente, "Vegetta777", "Te correo porque vegeta consiguio el SSJ3");
             usuario.Interacciones.Add(correo);
             List<string> esperado = new List<string>()
-                { "Rosita", "Vegetta777", "Te llamo correo vegeta consiguio el SSJ3" };
+                { "Rosita", "Vegetta777", "Te correo porque vegeta consiguio el SSJ3" };
             Interaccion interaccion = usuario.BuscarInteraccion("correo", "Vegetta777");
             List<string> resultado = new List<string>()
                 { interaccion.Cliente.Nombre, interaccion.Tema, interaccion.contenido };
@@ -69,11 +68,21 @@ namespace Library.Tests
                 { "Rosita", "Vegetta777", "El plantea x", "reunion para reunioniar", fecha };
             Interaccion interaccion = usuario.BuscarInteraccion("reunion", "Vegetta777");
             List<Object> resultado = new List<Object>()
-                { interaccion.Cliente.Nombre, interaccion.Tema, interaccion.lugar, interaccion.Fecha };
+                { interaccion.Cliente.Nombre, interaccion.Tema, interaccion.lugar,interaccion.contenido, interaccion.Fecha };
             CollectionAssert.AreEqual(esperado, resultado);
         }
 
+        [Test]
+        public void bla()
+        {
+            Usuario usuario = new Usuario("1", "a");
+            Cliente cliente = new Cliente("h", "j", "k0", "j");
+            usuario.VentaClienteAdd(cliente, "h", "10/12/2011", "h");
+            DateTime fecha = usuario.Total_Ventas[0].Fecha;
+            DateTime fecha1 = new DateTime(2011, 12, 10);
+            Assert.AreEqual(fecha1,fecha);
 
+        }
     }
 }
     
