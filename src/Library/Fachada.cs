@@ -6,7 +6,7 @@ namespace Library
     public class Fachada
     {
         private ClienteLista clienteLista = new ClienteLista();
-
+        
         public void RegistarMensaje(string clienteNombre, string clienteApellido, string mensaje, string tema,
             string usuarioId)
         {
@@ -246,7 +246,6 @@ namespace Library
         }
 
         //Como usuario quiero ver un panel con clientes totales, interacciones recientes y reuniones próximas, para tener un resumen rápido.
-        private ClienteLista clienteLista = new ClienteLista();
 
         public void VerPanelResumen(string usuarioId)
         {
@@ -359,10 +358,10 @@ namespace Library
             return listaClientes;
         }
 
-        public void RegistrarLlamada(string id, string tema, string correo, string fecha)
+        public void RegistrarLlamada(string id, string tema, string contenido)
         {
             Cliente cliente = listaClientes.BuscarCliente("id", id)[0];
-            Llamadas llamada = new Llamadas(cliente, tema, correo, fecha);
+            Llamadas llamada = new Llamadas(cliente, tema, contenido);
             Llamadas.Add(llamada);
         }
 
