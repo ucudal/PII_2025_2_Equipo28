@@ -1,20 +1,23 @@
 using System;
 using System.Collections.Generic;
 using NUnit.Framework;
+
 namespace Library.Tests
 {
-    public class TestFachada_Historia_8_15_
+    public class TestFachadaHistoria815
     {
         [Test]
         public void RegistarMensajeTest()
         {
             Interaccion interaccion = usuario.BuscarInteraccion("mensaje", "saludo");
         }
+
         [Test]
         public void RegistrarCorreoTest()
         {
             Interaccion interaccion = usuario.BuscarInteraccion("correo", "saludo");
         }
+
         [Test]
         public void AgregarNotaTest()
         {
@@ -35,8 +38,9 @@ namespace Library.Tests
         [Test]
         public void RegistarCotizacionTest()
         {
-            
+
             Cotizacion cotizacion = usuario.Cotizaciones[0];
-        
+
+        }
     }
 }
