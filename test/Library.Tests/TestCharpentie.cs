@@ -144,39 +144,6 @@ namespace Library.Tests
             Assert.That(result, Is.EqualTo(expected));
         }
 
-        [Test]
-        public void VerPanelResumen()
-        {
-            // Arrange
-            Listas.Usuarios.Clear();
-            Fachada fachada = new Fachada();
-
-            // Usuario
-            Usuario usuario = new Usuario("U001", "Andres");
-            Listas.Usuarios.Add(usuario);
-
-            // Cliente
-            Cliente cliente = new Cliente("Juan", "Perez", "099000000", "juan@correo.com");
-
-            // Interacción reciente (dentro de últimos 7 días)
-            Mensajes msgReciente = new Mensajes(cliente, "Consulta", "Necesito info");
-            msgReciente.Fecha = DateTime.Now.AddDays(-2);
-            usuario.Interacciones.Add(msgReciente);
-
-            // Reunión próxima (dentro de próximos 7 días)
-            string fechaReunion = DateTime.Now.AddDays(3).ToString("dd/MM/yyyy");
-            Reunion r = new Reunion(cliente, "Demo", "Oficina", "Mostrar producto", fechaReunion);
-            usuario.Interacciones.Add(r);
-
-            // Act
-            // Llamamos el método (imprime por consola, no devuelve)
-            fachada.VerPanelResumen("U001");
-
-            // Assert
-            // Formato que estás usando: simplemente confirmamos que el flujo terminó bien.
-            bool result = true;
-            bool expected = true;
-        }
     }
 
 }

@@ -9,19 +9,19 @@ namespace Library.Tests
         [Test]
         public void RegistarMensajeTest()
         {
-            Interaccion interaccion = usuario.BuscarInteraccion("mensaje", "saludo");
+            Interaccion interaccion = Usuario.BuscarInteraccion("mensaje", "saludo");
         }
 
         [Test]
         public void RegistrarCorreoTest()
         {
-            Interaccion interaccion = usuario.BuscarInteraccion("correo", "saludo");
+            Interaccion interaccion = Usuario.BuscarInteraccion("correo", "saludo");
         }
 
         [Test]
         public void AgregarNotaTest()
         {
-            Interaccion interaccion = usuario.BuscarInteraccion("mensaje", "saludo");
+            Interaccion interaccion = Usuario.BuscarInteraccion("mensaje", "saludo");
         }
 
         [Test]
@@ -32,14 +32,14 @@ namespace Library.Tests
         [Test]
         public void RegistarVentaTest()
         {
-            Venta venta = usuario.Total_Ventas[0];
+            Venta venta = Usuario.Total_Ventas[0];
         }
 
         [Test]
         public void RegistarCotizacionTest()
         {
 
-            Cotizacion cotizacion = usuario.Cotizaciones[0];
+            Cotizacion cotizacion = Usuario.Cotizaciones[0];
 
         }
     }
