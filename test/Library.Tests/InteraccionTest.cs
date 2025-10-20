@@ -68,8 +68,20 @@ namespace Library.Tests
                 { "Rosita", "Vegetta777", "El plantea x", "reunion para reunioniar", fecha };
             Interaccion interaccion = usuario.BuscarInteraccion("reunion", "Vegetta777");
             List<Object> resultado = new List<Object>()
-                { interaccion.Cliente.Nombre, interaccion.lugar, interaccion.Tema, interaccion.Fecha };
+                { interaccion.Cliente.Nombre, interaccion.Tema, interaccion.lugar,interaccion.contenido, interaccion.Fecha };
             CollectionAssert.AreEqual(esperado, resultado);
+        }
+
+        [Test]
+        public void bla()
+        {
+            Usuario usuario = new Usuario("1", "a");
+            Cliente cliente = new Cliente("h", "j", "k0", "j");
+            usuario.VentaClienteAdd(cliente, "h", "10/12/2011", "h");
+            DateTime fecha = usuario.Total_Ventas[0].Fecha;
+            DateTime fecha1 = new DateTime(2011, 12, 10);
+            Assert.AreEqual(fecha1,fecha);
+
         }
     }
 }

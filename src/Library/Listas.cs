@@ -8,8 +8,9 @@ namespace Library
         public static List<Usuario> Usuarios = new List<Usuario>();
         public static List<Administrador> Administradores = new List<Administrador>();
         public static List<Vendedor> Vendedores = new List<Vendedor>();
+        public static List<Cliente> ClientesTotales = new List<Cliente>();
 
-        public static Usuario BuscarUsuario(string id)
+    public static Usuario BuscarUsuario(string id)
         {
             foreach (Usuario usuario in Listas.Usuarios)
             {
@@ -51,6 +52,20 @@ namespace Library
 
             Console.WriteLine(
                 "Su Id de Administrador no corresponde con una id conocida\nPor favor verifique el ID.");
+            return null;
+        }
+        public static Cliente BuscarCliente(string id)
+        {
+            foreach (Cliente cliente in Listas.ClientesTotales)
+            {
+                if (cliente.Id == id)
+                {
+                    return cliente;
+                }
+            }
+
+            Console.WriteLine(
+                "Su Id de cliente no corresponde con una id conocida\nPor favor verifique el ID.");
             return null;
         }
     }
