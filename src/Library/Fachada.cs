@@ -7,28 +7,29 @@ namespace Library
     {
         private ClienteLista clienteLista = new ClienteLista();
         
-        public void RegistarMensaje(string clienteNombre, string clienteApellido, string mensaje, string tema,
+        public void RegistarMensaje(string clienteId, string mensaje, string tema,
             string usuarioId)
         {
             Usuario usuario = Listas.BuscarUsuario(usuarioId);
             if (usuario != null)
             {
-                Cliente cliente = clienteLista.BuscarUnCliente(clienteNombre, clienteApellido);
+                Cliente cliente = Listas.BuscarCliente(clienteId);
                 if (cliente != null)
                 {
                     Mensajes Mensaje = new Mensajes(cliente, tema, mensaje);
                     usuario.Interacciones.Add(Mensaje);
+                    Console.WriteLine(usuario.Interacciones.Count.ToString());
                 }
             }
         }
 
-        public void RegistrarCorreo(string clienteNombre, string clienteApellido, string correo, string tema,
+        public void RegistrarCorreo(string clienteId, string correo, string tema,
             string usuarioId)
         {
             Usuario usuario = Listas.BuscarUsuario(usuarioId);
             if (usuario != null)
             {
-                Cliente cliente = clienteLista.BuscarUnCliente(clienteNombre, clienteApellido);
+                Cliente cliente = Listas.BuscarCliente(clienteId);
                 if (cliente != null)
                 {
                     Correos Correo = new Correos(cliente, tema, correo);
@@ -50,12 +51,12 @@ namespace Library
             }
         }
 
-        public void AgregarEtiqueta(string clienteNombre, string clienteApellido, string etiqueta, string usuarioId)
+        public void AgregarEtiqueta(string clienteId, string etiqueta, string usuarioId)
         {
             Usuario usuario = Listas.BuscarUsuario(usuarioId);
             if (usuario != null)
             {
-                Cliente cliente = clienteLista.BuscarUnCliente(clienteNombre, clienteApellido);
+                Cliente cliente = Listas.BuscarCliente(clienteId);
                 if (cliente != null)
                 {
                     usuario.AgregarEtiqueta(cliente, etiqueta);
@@ -63,13 +64,13 @@ namespace Library
             }
         }
 
-        public void RegistrarVenta(string clienteNombre, string clienteApellido, string producto, string fecha,
+        public void RegistrarVenta(string clienteId, string producto, string fecha,
             string precio, string usuarioId)
         {
             Usuario usuario = Listas.BuscarUsuario(usuarioId);
             if (usuario != null)
             {
-                Cliente cliente = clienteLista.BuscarUnCliente(clienteNombre, clienteApellido);
+                Cliente cliente = Listas.BuscarCliente(clienteId);
                 if (cliente != null)
                 {
                     usuario.VentaClienteAdd(cliente, producto, fecha, precio);
@@ -77,13 +78,13 @@ namespace Library
             }
         }
 
-        public void RegistarCotizacion(string clienteNombre, string clienteApellido, string fecha,
+        public void RegistarCotizacion(string clienteId, string fecha,
             string precio, string usuarioId)
         {
             Usuario usuario = Listas.BuscarUsuario(usuarioId);
             if (usuario != null)
             {
-                Cliente cliente = clienteLista.BuscarUnCliente(clienteNombre, clienteApellido);
+                Cliente cliente = Listas.BuscarCliente(clienteId);
                 if (cliente != null)
                 {
                     usuario.AgregarCotizacion(cliente, fecha, precio);

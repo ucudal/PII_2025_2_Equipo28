@@ -17,6 +17,7 @@ namespace Library
             if (cliente != null)
             {
                 Clientes.Add(cliente);
+                Listas.ClientesTotales.Add(cliente);
                 Console.WriteLine($"Se agregó: {cliente.Nombre} {cliente.Apellido}");
             }
         }

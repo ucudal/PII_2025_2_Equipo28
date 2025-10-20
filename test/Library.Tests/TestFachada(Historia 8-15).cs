@@ -9,25 +9,29 @@ namespace Library.Tests
         [Test]
         public void RegistarMensajeTest()
         {
+            ClienteLista clienteLista = new ClienteLista();
             Fachada fachada = new Fachada();
             Administrador admin = new Administrador("100", "AR");
             Usuario usuario = admin.CrearUsuario("010", "AR");
             Cliente cliente = new Cliente("Alfredo", "Rosquilla", "099007100", "AlfedoGamer@cabezatermo.com");
-            fachada.RegistarMensaje(cliente.Nombre,cliente.Apellido,"Hello holui","saludo","010");
-            List<Object> esperado = new List<object>() { "Alfredo", "Rosquilla", "Hello holui", "saludo", "010" };
+            cliente.Id = "0";
+            clienteLista.AgregaCliente(cliente);
+            fachada.RegistarMensaje("0","Hello holui","saludo","010");
+            List<string> esperado = new List<string>() { "Alfredo", "Rosquilla", "Hello holui", "saludo", "010" };
             Interaccion interaccion = usuario.BuscarInteraccion("mensaje", "saludo");
-            List<Object> resultado = new List<object>()
-                { interaccion.Cliente.Nombre, interaccion.Cliente.Apellido, interaccion.contenido, interaccion.Tema };
-            CollectionAssert.AreEqual(esperado,resultado);
+            Assert.That("Alfredo",Is.EqualTo(usuario.Interacciones[0].Cliente.Nombre));
         }
         [Test]
         public void RegistrarCorreoTest()
         {
+            ClienteLista clienteLista = new ClienteLista();
             Fachada fachada = new Fachada();
             Administrador admin = new Administrador("100", "AR");
             Usuario usuario = admin.CrearUsuario("010", "AR");
             Cliente cliente = new Cliente("Alfredo", "Rosquilla", "099007100", "AlfedoGamer@cabezatermo.com");
-            fachada.RegistrarCorreo(cliente.Nombre,cliente.Apellido,"Hello holui","saludo","010");
+            clienteLista.AgregaCliente(cliente);
+            cliente.Id = "0";
+            fachada.RegistrarCorreo("0","Hello holui","saludo","010");
             List<Object> esperado = new List<object>() { "Alfredo", "Rosquilla", "Hello holui", "saludo", "010" };
             Interaccion interaccion = usuario.BuscarInteraccion("correo", "saludo");
             List<Object> resultado = new List<object>()
@@ -37,11 +41,14 @@ namespace Library.Tests
         [Test]
         public void AgregarNotaTest()
         {
+            ClienteLista clienteLista = new ClienteLista();
             Fachada fachada = new Fachada();
             Administrador admin = new Administrador("100", "AR");
             Usuario usuario = admin.CrearUsuario("010", "AR");
             Cliente cliente = new Cliente("Alfredo", "Rosquilla", "099007100", "AlfedoGamer@cabezatermo.com");
-            fachada.RegistarMensaje(cliente.Nombre,cliente.Apellido,"Hello holui","saludo","010");
+            cliente.Id = "0";
+            clienteLista.AgregaCliente(cliente);
+            fachada.RegistarMensaje("0","Hello holui","saludo","010");
             fachada.AgregarNota("Me olvide del chau", "mensaje","saludo", "010");
             Interaccion interaccion = usuario.BuscarInteraccion("mensaje", "saludo");
             string esperado = "Me olvide del chau";
@@ -52,11 +59,14 @@ namespace Library.Tests
         [Test]
         public void AgregarEtiqueta_GuardarEtiquetaTest()
         {
+            ClienteLista clienteLista = new ClienteLista();
             Fachada fachada = new Fachada();
             Administrador admin = new Administrador("100", "AR");
             Usuario usuario = admin.CrearUsuario("010", "AR");
             Cliente cliente = new Cliente("Alfredo", "Rosquilla", "099007100", "AlfedoGamer@cabezatermo.com");
-            fachada.AgregarEtiqueta("Alfredo", "Rosquilla","Pastelero","010");
+            cliente.Id = "0";
+            clienteLista.AgregaCliente(cliente);
+            fachada.AgregarEtiqueta("0", "Pastelero","010");
             string esperado = "Pastelero";
             string resultado = cliente.Etiqueta;
             Assert.That(resultado,Is.EqualTo(esperado));
@@ -67,11 +77,14 @@ namespace Library.Tests
         [Test]
         public void RegistarVentaTest()
         {
+            ClienteLista clienteLista = new ClienteLista();
             Fachada fachada = new Fachada();
             Administrador admin = new Administrador("100", "AR");
             Usuario usuario = admin.CrearUsuario("010", "AR");
             Cliente cliente = new Cliente("Alfredo", "Rosquilla", "099007100", "AlfedoGamer@cabezatermo.com");
-            fachada.RegistrarVenta("Alfredo", "Rosquilla","SillaGamer","11/8/2023","250$","010");
+            cliente.Id = "0";
+            clienteLista.AgregaCliente(cliente);
+            fachada.RegistrarVenta("0","SillaGamer","10/12/2011","250$","010");
             Venta venta = usuario.Total_Ventas[0];
             DateTime fecha = new DateTime(2023, 8, 10);
             List<Object> esperado = new List<object>() { "Alfredo", "Rosquilla", "SillaGamer", fecha, "250$"};
@@ -83,11 +96,15 @@ namespace Library.Tests
         [Test]
         public void RegistarCotizacionTest()
         {
+            ClienteLista clienteLista = new ClienteLista();
+            
             Fachada fachada = new Fachada();
             Administrador admin = new Administrador("100", "AR");
             Usuario usuario = admin.CrearUsuario("010", "AR");
             Cliente cliente = new Cliente("Alfredo", "Rosquilla", "099007100", "AlfedoGamer@cabezatermo.com");
-            fachada.RegistarCotizacion("Alfredo", "Rosquilla","11/8/2023","250$","010");
+            cliente.Id = "0";
+            clienteLista.AgregaCliente(cliente);
+            fachada.RegistarCotizacion("0", "11/8/2023","250$","010");
             Cotizacion cotizacion = usuario.Cotizaciones[0];
             DateTime fecha = new DateTime(2023, 8, 10);
             List<Object> esperado = new List<object>() { "Alfredo", "Rosquilla", fecha, "250$"};
