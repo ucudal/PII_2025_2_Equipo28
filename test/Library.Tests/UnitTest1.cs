@@ -70,7 +70,7 @@ namespace Library.Tests
             Interaccion interaccion = usuario.BuscarInteraccion("reunion", "Vegetta777");
             List<Object> resultado = new List<Object>()
                 { interaccion.Cliente.Nombre, interaccion.Tema, interaccion.lugar, interaccion.Fecha };
-            CollectionAssert.AreEqual(esperado, resultado);
+            Assert.That(resultado, Is.EqualTo(esperado));
         }
 
 
