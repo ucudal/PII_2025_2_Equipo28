@@ -1,5 +1,5 @@
 using System;
-using System.ComponentModel;
+using System.Collections.Generic;
 
 namespace Library
 {
@@ -7,12 +7,13 @@ namespace Library
     {
         private ClienteLista clienteLista = new ClienteLista();
 
-        public void RegistarMensaje(string clienteNombre,string clienteApellido, string mensaje, string tema, string usuarioId)
+        public void RegistarMensaje(string clienteNombre, string clienteApellido, string mensaje, string tema,
+            string usuarioId)
         {
             Usuario usuario = Listas.BuscarUsuario(usuarioId);
             if (usuario != null)
             {
-                Cliente cliente = clienteLista.BuscarUnCliente(clienteNombre,clienteApellido);
+                Cliente cliente = clienteLista.BuscarUnCliente(clienteNombre, clienteApellido);
                 if (cliente != null)
                 {
                     Mensajes Mensaje = new Mensajes(cliente, tema, mensaje);
@@ -21,7 +22,8 @@ namespace Library
             }
         }
 
-        public void RegistrarCorreos(string clienteNombre, string clienteApellido, string correo, string tema, string usuarioId)
+        public void RegistrarCorreos(string clienteNombre, string clienteApellido, string correo, string tema,
+            string usuarioId)
         {
             Usuario usuario = Listas.BuscarUsuario(usuarioId);
             if (usuario != null)
@@ -56,13 +58,13 @@ namespace Library
                 Cliente cliente = clienteLista.BuscarUnCliente(clienteNombre, clienteApellido);
                 if (cliente != null)
                 {
-                    usuario.AgregarEtiqueta(cliente,etiqueta);
+                    usuario.AgregarEtiqueta(cliente, etiqueta);
                 }
             }
         }
 
         public void RegistrarVenta(string clienteNombre, string clienteApellido, string producto, string fecha,
-            string precio,string usuarioId)
+            string precio, string usuarioId)
         {
             Usuario usuario = Listas.BuscarUsuario(usuarioId);
             if (usuario != null)
@@ -70,7 +72,7 @@ namespace Library
                 Cliente cliente = clienteLista.BuscarUnCliente(clienteNombre, clienteApellido);
                 if (cliente != null)
                 {
-                    usuario.VentaClienteAdd(cliente,producto,fecha,precio);
+                    usuario.VentaClienteAdd(cliente, producto, fecha, precio);
                 }
             }
         }
@@ -84,13 +86,14 @@ namespace Library
                 Cliente cliente = clienteLista.BuscarUnCliente(clienteNombre, clienteApellido);
                 if (cliente != null)
                 {
-                    usuario.AgregarCotizacion(cliente,fecha,precio);
+                    usuario.AgregarCotizacion(cliente, fecha, precio);
                 }
             }
         }
-        
+
         //Cómo usuario quiero saber los clientes que hace cierto tiempo que no tengo ninguna interacción con ellos, para no peder contacto con ellos.
-        public void VerInteraccionesDeCliente(string clienteNombre, string clienteApellido, string usuarioId, string tipo = "")
+        public void VerInteraccionesDeCliente(string clienteNombre, string clienteApellido, string usuarioId,
+            string tipo = "")
         {
             Usuario usuario = Listas.BuscarUsuario(usuarioId);
             if (usuario != null)
@@ -128,167 +131,246 @@ namespace Library
             }
         }
 
-       // Como administrador quiero crear, suspender o eliminar usuarios, para mantener control sobre los accesos.
+        // Como administrador quiero crear, suspender o eliminar usuarios, para mantener control sobre los accesos.
 
-       public void CrearUsuario(string adminId, string nuevoId, string nuevoNombre)
-       {
-           Administrador admin = Listas.BuscarAdministrador(adminId);
-           if (admin != null)
-           {
-               Usuario nuevo = admin.CrearUsuario(nuevoId, nuevoNombre);
-               Console.WriteLine("Usuario creado correctamente: " + nuevo.Nombre);
-           }
-           else
-           {
-               Console.WriteLine("Administrador no encontrado.");
-           }
-       }
+        public void CrearUsuario(string adminId, string nuevoId, string nuevoNombre)
+        {
+            Administrador admin = Listas.BuscarAdministrador(adminId);
+            if (admin != null)
+            {
+                Usuario nuevo = admin.CrearUsuario(nuevoId, nuevoNombre);
+                Console.WriteLine("Usuario creado correctamente: " + nuevo.Nombre);
+            }
+            else
+            {
+                Console.WriteLine("Administrador no encontrado.");
+            }
+        }
 
-       public void SuspenderUsuario(string adminId, string usuarioId)
-       {
-           Administrador admin = Listas.BuscarAdministrador(adminId);
-           if (admin != null)
-           {
-               Usuario usuario = Listas.BuscarUsuario(usuarioId);
-               if (usuario != null)
-               {
-                   admin.SuspenderUsuario(usuario);
-                   Console.WriteLine("Usuario suspendido: " + usuario.Nombre);
-               }
-               else
-               {
-                   Console.WriteLine("Usuario no encontrado.");
-               }
-           }
-           else
-           {
-               Console.WriteLine("Administrador no encontrado.");
-           }
-       }
+        public void SuspenderUsuario(string adminId, string usuarioId)
+        {
+            Administrador admin = Listas.BuscarAdministrador(adminId);
+            if (admin != null)
+            {
+                Usuario usuario = Listas.BuscarUsuario(usuarioId);
+                if (usuario != null)
+                {
+                    admin.SuspenderUsuario(usuario);
+                    Console.WriteLine("Usuario suspendido: " + usuario.Nombre);
+                }
+                else
+                {
+                    Console.WriteLine("Usuario no encontrado.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Administrador no encontrado.");
+            }
+        }
 
-       public void EliminarUsuario(string adminId, string usuarioId)
-       {
-           Administrador admin = Listas.BuscarAdministrador(adminId);
-           if (admin != null)
-           {
-               Usuario usuario = Listas.BuscarUsuario(usuarioId);
-               if (usuario != null)
-               {
-                   admin.EliminarUsuario(usuario);
-                   Console.WriteLine("Usuario eliminado: " + usuario.Nombre);
-               }
-               else
-               {
-                   Console.WriteLine("Usuario no encontrado.");
-               }
-           }
-           else
-           {
-               Console.WriteLine("Administrador no encontrado.");
-           }
-       }
-       
-      // Como vendedor, quiero poder asignar un cliente a otro vendedor para distribuir el trabajo en el equipo.
+        public void EliminarUsuario(string adminId, string usuarioId)
+        {
+            Administrador admin = Listas.BuscarAdministrador(adminId);
+            if (admin != null)
+            {
+                Usuario usuario = Listas.BuscarUsuario(usuarioId);
+                if (usuario != null)
+                {
+                    admin.EliminarUsuario(usuario);
+                    Console.WriteLine("Usuario eliminado: " + usuario.Nombre);
+                }
+                else
+                {
+                    Console.WriteLine("Usuario no encontrado.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Administrador no encontrado.");
+            }
+        }
 
-       public void AsignarClienteAOtroVendedor(string idVendedorActual, string idVendedorNuevo, string nombreCliente, string apellidoCliente)
-       {
-           Vendedor vendedorActual = Listas.BuscarVendedor(idVendedorActual);
-           Vendedor vendedorNuevo = Listas.BuscarVendedor(idVendedorNuevo);
-           Cliente cliente = clienteLista.BuscarUnCliente(nombreCliente, apellidoCliente);
+        // Como vendedor, quiero poder asignar un cliente a otro vendedor para distribuir el trabajo en el equipo.
 
-           if (vendedorActual != null && vendedorNuevo != null && cliente != null)
-           {
-               vendedorActual.Clientes.Remove(cliente);
-               vendedorNuevo.Clientes.Add(cliente);
-               Console.WriteLine("Cliente reasignado correctamente.");
-           }
-           else
-           {
-               Console.WriteLine("Error: vendedor o cliente no encontrado.");
-           }
-       }
-       
-       //Como usuario quiero saber el total de ventas de un periodo dado, para analizar en rendimiento de mi negocio.
+        public void AsignarClienteAOtroVendedor(string idVendedorActual, string idVendedorNuevo, string nombreCliente,
+            string apellidoCliente)
+        {
+            Vendedor vendedorActual = Listas.BuscarVendedor(idVendedorActual);
+            Vendedor vendedorNuevo = Listas.BuscarVendedor(idVendedorNuevo);
+            Cliente cliente = clienteLista.BuscarUnCliente(nombreCliente, apellidoCliente);
 
-       public void TotalDeVentasEnPeriodo(string usuarioId, string fechaInicioTexto, string fechaFinTexto)
-       {
-           Usuario usuario = Listas.BuscarUsuario(usuarioId);
+            if (vendedorActual != null && vendedorNuevo != null && cliente != null)
+            {
+                vendedorActual.Clientes.Remove(cliente);
+                vendedorNuevo.Clientes.Add(cliente);
+                Console.WriteLine("Cliente reasignado correctamente.");
+            }
+            else
+            {
+                Console.WriteLine("Error: vendedor o cliente no encontrado.");
+            }
+        }
 
-           if (usuario != null)
-           {
-               DateTime fechaInicio = DateTime.Parse(fechaInicioTexto);
-               DateTime fechaFin = DateTime.Parse(fechaFinTexto);
-               double total = 0;
+        //Como usuario quiero saber el total de ventas de un periodo dado, para analizar en rendimiento de mi negocio.
 
-               foreach (Venta venta in usuario.Total_Ventas)
-               {
-                   if (venta.Fecha >= fechaInicio && venta.Fecha <= fechaFin)
-                   {
-                       double importe;
-                       if (double.TryParse(venta.Importe, out importe))
-                       {
-                           total = total + importe;
-                       }
-                   }
-               }
+        public void TotalDeVentasEnPeriodo(string usuarioId, string fechaInicioTexto, string fechaFinTexto)
+        {
+            Usuario usuario = Listas.BuscarUsuario(usuarioId);
 
-               Console.WriteLine("Total de ventas desde " + fechaInicio.ToShortDateString() +
-                                 " hasta " + fechaFin.ToShortDateString() + ": $" + total);
-           }
-           else
-           {
-               Console.WriteLine("Usuario no encontrado.");
-           }
-       }
-       
-       //Como usuario quiero ver un panel con clientes totales, interacciones recientes y reuniones próximas, para tener un resumen rápido.
-       private ClienteLista clienteLista = new ClienteLista();
+            if (usuario != null)
+            {
+                DateTime fechaInicio = DateTime.Parse(fechaInicioTexto);
+                DateTime fechaFin = DateTime.Parse(fechaFinTexto);
+                double total = 0;
 
-       public void VerPanelResumen(string usuarioId)
-       {
-           Usuario usuario = Listas.BuscarUsuario(usuarioId);
-           if (usuario != null)
-           {
-               Console.WriteLine("===== PANEL DE RESUMEN =====");
+                foreach (Venta venta in usuario.Total_Ventas)
+                {
+                    if (venta.Fecha >= fechaInicio && venta.Fecha <= fechaFin)
+                    {
+                        double importe;
+                        if (double.TryParse(venta.Importe, out importe))
+                        {
+                            total = total + importe;
+                        }
+                    }
+                }
 
-               // Clientes totales
-               Console.WriteLine("Clientes totales: " + clienteLista.Clientes.Count);
+                Console.WriteLine("Total de ventas desde " + fechaInicio.ToShortDateString() +
+                                  " hasta " + fechaFin.ToShortDateString() + ": $" + total);
+            }
+            else
+            {
+                Console.WriteLine("Usuario no encontrado.");
+            }
+        }
 
-               // Interacciones recientes (últimos 7 días)
-               DateTime limite = DateTime.Now.AddDays(-7);
-               Console.WriteLine("\nInteracciones recientes (últimos 7 días):");
-               foreach (Interaccion inter in usuario.Interacciones)
-               {
-                   if (inter.Fecha >= limite)
-                   {
-                       Console.WriteLine(inter.Cliente.Nombre + " " + inter.Cliente.Apellido +
-                                         " - " + inter.tipo + " (" + inter.Fecha.ToShortDateString() + ")");
-                   }
-               }
+        //Como usuario quiero ver un panel con clientes totales, interacciones recientes y reuniones próximas, para tener un resumen rápido.
+        private ClienteLista clienteLista = new ClienteLista();
 
-               // Reuniones próximas (próximos 7 días)
-               DateTime hoy = DateTime.Now;
-               DateTime futuro = hoy.AddDays(7);
-               Console.WriteLine("\nReuniones próximas (próximos 7 días):");
-               foreach (Interaccion inter in usuario.Interacciones)
-               {
-                   if (inter.tipo == "reunion" && inter.Fecha >= hoy && inter.Fecha <= futuro)
-                   {
-                       Console.WriteLine(inter.Cliente.Nombre + " " + inter.Cliente.Apellido +
-                                         " - " + inter.Tema + " en " +
-                                         ((Reunion)inter).Ubicacion +
-                                         " (" + inter.Fecha.ToShortDateString() + ")");
-                   }
-               }
+        public void VerPanelResumen(string usuarioId)
+        {
+            Usuario usuario = Listas.BuscarUsuario(usuarioId);
+            if (usuario != null)
+            {
+                Console.WriteLine("===== PANEL DE RESUMEN =====");
 
-               Console.WriteLine("=============================");
-           }
-           else
-           {
-               Console.WriteLine("Usuario no encontrado.");
-           }
-       }
+                // Clientes totales
+                Console.WriteLine("Clientes totales: " + clienteLista.Clientes.Count);
 
+                // Interacciones recientes (últimos 7 días)
+                DateTime limite = DateTime.Now.AddDays(-7);
+                Console.WriteLine("\nInteracciones recientes (últimos 7 días):");
+                foreach (Interaccion inter in usuario.Interacciones)
+                {
+                    if (inter.Fecha >= limite)
+                    {
+                        Console.WriteLine(inter.Cliente.Nombre + " " + inter.Cliente.Apellido +
+                                          " - " + inter.tipo + " (" + inter.Fecha.ToShortDateString() + ")");
+                    }
+                }
 
-    } 
+                // Reuniones próximas (próximos 7 días)
+                DateTime hoy = DateTime.Now;
+                DateTime futuro = hoy.AddDays(7);
+                Console.WriteLine("\nReuniones próximas (próximos 7 días):");
+                foreach (Interaccion inter in usuario.Interacciones)
+                {
+                    if (inter.tipo == "reunion" && inter.Fecha >= hoy && inter.Fecha <= futuro)
+                    {
+                        Console.WriteLine(inter.Cliente.Nombre + " " + inter.Cliente.Apellido +
+                                          " - " + inter.Tema + " en " +
+                                          ((Reunion)inter).Ubicacion +
+                                          " (" + inter.Fecha.ToShortDateString() + ")");
+                    }
+                }
+
+                Console.WriteLine("=============================");
+            }
+            else
+            {
+                Console.WriteLine("Usuario no encontrado.");
+            }
+        }
+
+        public ClienteLista listaClientes = new ClienteLista();
+        public List<Llamadas> Llamadas = new List<Llamadas>();
+        public List<Reunion> Reuniones = new List<Reunion>();
+
+        public List<Cliente> BuscarClientesFachada(string atributo, string valorBusqueda)
+        {
+            return listaClientes.BuscarCliente(atributo, valorBusqueda);
+        }
+
+        public Cliente CrearNuevoCliente(string nombre, string apellido, string telefono, string correo)
+        {
+            return new Cliente(nombre, apellido, telefono, correo);
+        }
+
+        public void ModificarInfo(string id, string atributo, string nuevoValor)
+        {
+            Cliente cliente = listaClientes.BuscarCliente("id", id)[0];
+
+            string atributoNormalizado = atributo.Trim().ToLower();
+            switch (atributoNormalizado)
+            {
+                case "nombre":
+                    cliente.CambiarNombre(nuevoValor);
+                    break;
+
+                case "apellido":
+                    cliente.CambiarApellido(nuevoValor);
+                    break;
+
+                case "telefono":
+                    cliente.CambiarTelefono(nuevoValor);
+                    break;
+
+                case "correo":
+                    cliente.CambiarCorreo(nuevoValor);
+                    break;
+
+                case "genero":
+                    cliente.AsignarGenero(nuevoValor);
+                    break;
+
+                case "etiqueta":
+                    cliente.AsignarEtiqueta(nuevoValor);
+                    break;
+
+                case "fechadenacimiento":
+                    cliente.AsignarFechaDeNacimiento(nuevoValor);
+                    break;
+
+                default:
+                    Console.WriteLine($"Atributo '{atributo}' no reconocido.");
+                    break;
+            }
+        }
+
+        public void EliminarClienteFachada(string id)
+        {
+            Cliente cliente = listaClientes.BuscarCliente("id", id)[0];
+            listaClientes.EliminarCliente(cliente);
+        }
+
+        public ClienteLista VerClientes()
+        {
+            return listaClientes;
+        }
+
+        public void RegistrarLlamada(string id, string tema, string correo, string fecha)
+        {
+            Cliente cliente = listaClientes.BuscarCliente("id", id)[0];
+            Llamadas llamada = new Llamadas(cliente, tema, correo, fecha);
+            Llamadas.Add(llamada);
+        }
+
+        public void RegistrarReunion(string id, string tema, string ubicacion, string reunion, string cuando)
+        {
+            Cliente cliente = listaClientes.BuscarCliente("id", id)[0];
+            Reunion Reunion = new Reunion(cliente, tema, ubicacion, reunion, cuando);
+            Reuniones.Add(Reunion);
+        }
+    }
 }
