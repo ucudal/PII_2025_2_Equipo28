@@ -3,7 +3,7 @@
 > Proyecto del curso **Programación II**, Universidad Católica del Uruguay.
 > Integrantes: Horacio Díaz, Andrés Charpentié y Andrés Rodriguéz.
 
----
+--
 
 ## 🗂️ Organización del equipo
 
@@ -11,7 +11,7 @@ La planificación y división de tareas se realiza en **Trello**
 
 🔗 [Tablero Trello](https://trello.com/invite/b/68ee454952ea5cb366736671/ATTI47495b8d46b377d3fb5435bbe7c2c4ea144F20E7/proyecto-p2)
 
----
+--
 
 ## Diagrama de Clases (Mermaid)
 
