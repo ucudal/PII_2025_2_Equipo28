@@ -3,6 +3,13 @@ using System.Collections.Generic;
 
 namespace Library
 {
+    // SRP 
+    // Esta clase cumple SRP porque su única responsabilidad es mantener listas globales
+    // de usuarios, administradores, vendedores y clientes, y proporcionar métodos de búsqueda.
+    //
+    // Expert 
+    // Listas es la experta en acceder a estas colecciones, ya que conoce todas las listas
+    // y puede buscar elementos por ID de manera eficiente.
     public class Listas
     {
         public static List<Usuario> Usuarios = new List<Usuario>();

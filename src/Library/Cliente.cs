@@ -2,6 +2,13 @@ using System;
 
 namespace Library
 {
+    // SRP 
+    // Esta clase cumple SRP porque su única responsabilidad es modelar un cliente
+    // y permitir modificar su información básica (nombre, apellido, teléfono, correo, género, etiqueta, fecha de nacimiento).
+    //
+    // Expert 
+    // La clase Cliente es experta en manejar su propia información, ya que contiene todos
+    // los datos relevantes de un cliente y proporciona métodos para modificarlos.
     public class Cliente
     {
         public string Id { get; set; }

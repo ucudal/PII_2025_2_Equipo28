@@ -3,6 +3,13 @@ using System.Collections.Generic;
 
 namespace Library
 {
+    // SRP 
+    // Esta clase cumple SRP porque su única responsabilidad es representar una cotización:
+    // contiene información del cliente, fecha e importe, y puede generar un resumen.
+    //
+    // Expert 
+    // Cotizacion es la experta en manejar su propia información, ya que contiene todos
+    // los datos necesarios sobre la cotización (cliente, fecha, importe).
     public class Cotizacion
     {
         public Cliente Cliente { get; set; }

@@ -3,6 +3,13 @@ using System.Collections.Generic;
 
 namespace Library
 {
+    // SRP 
+    // Esta clase cumple SRP porque su única responsabilidad es representar una venta:
+    // contiene información sobre el cliente, el producto, la fecha y el importe.
+    //
+    // Expert 
+    // Venta es la experta en manejar su propia información, ya que contiene todos los datos
+    // necesarios para describir la venta y generar un resumen.
     public class Venta
     {
         public Cliente Cliente { get; set; }
