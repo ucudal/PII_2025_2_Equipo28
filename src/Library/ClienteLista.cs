@@ -3,6 +3,14 @@ using System.Collections.Generic;
 
 namespace Library
 {
+    // SRP 
+    // Esta clase cumple SRP porque su única responsabilidad es gestionar una lista de clientes:
+    // agregar, eliminar y buscar clientes dentro de la lista.
+    //
+    // Expert 
+    // ClienteLista es la experta en gestionar la colección de clientes, ya que conoce todas
+    // las operaciones posibles sobre la lista (agregar, eliminar, buscar) y tiene acceso a todos
+    // los datos necesarios de los clientes para esas operaciones.
     public class ClienteLista
     {
         public List<Cliente> Clientes { get; private set; }
@@ -17,6 +25,7 @@ namespace Library
             if (cliente != null)
             {
                 Clientes.Add(cliente);
+                Listas.ClientesTotales.Add(cliente);
                 Console.WriteLine($"Se agregó: {cliente.Nombre} {cliente.Apellido}");
             }
         }
@@ -80,6 +89,20 @@ namespace Library
             }
 
             return resultados;
+        }
+
+        public Cliente BuscarUnCliente(string nombre, string apellido)
+        {
+            foreach (var cliente in Clientes)
+            {
+                if (cliente.Nombre == nombre && cliente.Apellido == apellido)
+                {
+                    return cliente;
+                }
+               
+            }
+            Console.WriteLine("No se encontro el cliente");
+            return null;
         }
     }
 }
