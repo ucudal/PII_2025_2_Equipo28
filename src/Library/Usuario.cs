@@ -3,6 +3,13 @@ using System.Collections.Generic;
 
 namespace Library
 {
+    // SRP 
+    // Esta clase cumple SRP porque su única responsabilidad es representar un usuario del sistema:
+    // almacenar sus datos, interacciones, ventas y cotizaciones, y permitir operaciones relacionadas con ellos.
+    //
+    // Expert
+    // Usuario es la experta en manejar su propia información y la relación con clientes:
+    // conoce sus interacciones, cotizaciones, ventas y etiquetas, y puede agregarlas.
     public class Usuario
     {
         public string ID { get; set; }

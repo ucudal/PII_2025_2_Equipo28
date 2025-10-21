@@ -3,6 +3,13 @@ using System.Collections.Generic;
 
 namespace Library
 {
+    // SRP 
+    // Esta clase cumple SRP porque su única responsabilidad es representar un vendedor
+    // y gestionar la asignación de clientes a él.
+    //
+    // Expert 
+    // Vendedor es la experta en manejar su propia lista de clientes,
+    // ya que conoce todos los clientes que le han sido asignados y puede agregarlos.
     public class Vendedor
     {
         public List<Cliente> Clientes = new List<Cliente>();
