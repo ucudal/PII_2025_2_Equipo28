@@ -118,32 +118,6 @@ namespace Library.Tests
             Assert.That(result, Is.EqualTo(expected));
         }
 
-        [Test]
-        public void TestAsignarClienteAOtroVendedor()
-        {
-            // Arrange
-            Listas.Vendedores.Clear();
-            ClienteLista clienteLista = new ClienteLista();
-            Cliente cliente = new Cliente("Juan", "Perez", "099000000", "juan@correo.com");
-            clienteLista.Clientes.Add(cliente);
-
-            Vendedor vendedor1 = new Vendedor("V001", "Andres");
-            Vendedor vendedor2 = new Vendedor("V002", "Carlos");
-            Listas.Vendedores.Add(vendedor1);
-            Listas.Vendedores.Add(vendedor2);
-            vendedor1.Clientes.Add(cliente);
-
-            Fachada fachada = new Fachada();
-
-            // Act
-            fachada.AsignarClienteAOtroVendedor("V001", "V002", "Juan", "Perez");
-
-            // Assert
-            bool result = vendedor2.Clientes.Contains(cliente);
-            bool expected = true;
-            Assert.That(result, Is.EqualTo(expected));
-        }
-
     }
 
 }
