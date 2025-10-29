@@ -24,7 +24,8 @@ namespace Library.Tests
             Fachada fachada = new Fachada();
 
             // Act
-            fachada.TotalDeVentasEnPeriodo("U001", "01/10/2025", "31/10/2025"); // ejecuta sin devolver
+            DateTime fechaInicioTexto = new DateTime(2025, 10, 1);
+            fachada.TotalDeVentasEnPeriodo("U001", fechaInicioTexto.ToString(), "31/10/2025"); // ejecuta sin devolver
             // Recalculamos el total esperado con los mismos datos (solo las de octubre)
             double result = 1000 + 2000;
             double expected = 3000;
