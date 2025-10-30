@@ -26,21 +26,12 @@ namespace Library
             {
                 Clientes.Add(cliente);
                 Listas.ClientesTotales.Add(cliente);
-                Console.WriteLine($"Se agregó: {cliente.Nombre} {cliente.Apellido}");
             }
         }
 
         public void EliminarCliente(Cliente cliente)
         {
             bool removed = Clientes.Remove(cliente);
-            if (removed)
-            {
-                Console.WriteLine($"Se eliminó el cliente.");
-            }
-            else
-            {
-                Console.WriteLine($"No se encontró el cliente.");
-            }
         }
 
         public List<Cliente> BuscarCliente(string atributo, string valorBusqueda)
@@ -84,7 +75,6 @@ namespace Library
                     break;
 
                 default:
-                    Console.WriteLine($"No es un atributo válido");
                     break;
             }
 
@@ -101,7 +91,6 @@ namespace Library
                 }
                
             }
-            Console.WriteLine("No se encontro el cliente");
             return null;
         }
     }

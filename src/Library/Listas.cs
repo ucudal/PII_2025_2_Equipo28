@@ -27,9 +27,7 @@ namespace Library
                 }
                 
             }
-
-            Console.WriteLine(
-                "Su Id de usuario no corresponde con una id conocida\nPor favor verifique el ID. En caso de no tener un usuario, solicitelo a un administrador");
+            
             return null;
         }
 
@@ -42,9 +40,7 @@ namespace Library
                     return vendedor;
                 }
             }
-
-            Console.WriteLine(
-                "Su Id de vendedor no corresponde con una id conocida\nPor favor verifique el ID. En caso de no tener un vendedor, solicitelo a un administrador");
+            
             return null;
         }
         public static Administrador BuscarAdministrador(string id)
@@ -56,9 +52,7 @@ namespace Library
                     return administrador;
                 }
             }
-
-            Console.WriteLine(
-                "Su Id de Administrador no corresponde con una id conocida\nPor favor verifique el ID.");
+            
             return null;
         }
         public static Cliente BuscarCliente(string id)
@@ -70,9 +64,7 @@ namespace Library
                     return cliente;
                 }
             }
-
-            Console.WriteLine(
-                "Su Id de cliente no corresponde con una id conocida\nPor favor verifique el ID.");
+            
             return null;
         }
     }

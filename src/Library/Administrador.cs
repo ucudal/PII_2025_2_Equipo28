@@ -7,13 +7,13 @@ namespace Library
     // no manejar datos de otras cosas fuera de eso.
     //Expert: La clase es la experta en crear y agregar objetos relacionados, porque tiene acceso a toda
     //la información necesaria para instanciarlos y registrarlos en las listas.
-    public class Administrador
+    public class Administrador : Usuario
     {
         public List<Usuario> UsuariosSuspendidos = new List<Usuario>();
         public string ID { get; set; }
         public string Nombre { get; set; }
 
-        public Administrador(string id, string nombre)
+        public Administrador(string id, string nombre) : base(id, nombre)
         {
             this.ID = id;
             this.Nombre = nombre;
@@ -40,7 +40,6 @@ namespace Library
 
         public void SuspenderUsuario(Usuario usuario)
         {
-            Console.WriteLine("Usuario suspendido.");
             Listas.Usuarios.Remove(usuario);
             UsuariosSuspendidos.Add(usuario);
 
@@ -49,7 +48,6 @@ namespace Library
         public void EliminarUsuario(Usuario usuario)
         {
             Listas.Usuarios.Remove(usuario);
-            Console.WriteLine("Usuario eliminado.");
         }
         public void AgregarAdministrador(Administrador administrador)
         {
