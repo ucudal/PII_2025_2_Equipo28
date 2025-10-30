@@ -10,8 +10,6 @@ namespace Library
     public class Administrador : Usuario
     {
         public List<Usuario> UsuariosSuspendidos = new List<Usuario>();
-        public string ID { get; set; }
-        public string Nombre { get; set; }
 
         public Administrador(string id, string nombre) : base(id, nombre)
         {
