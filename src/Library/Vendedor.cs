@@ -10,13 +10,13 @@ namespace Library
     // Expert 
     // Vendedor es la experta en manejar su propia lista de clientes,
     // ya que conoce todos los clientes que le han sido asignados y puede agregarlos.
-    public class Vendedor
+    public class Vendedor : Usuario
     {
         public List<Cliente> Clientes = new List<Cliente>();
         public string Id { get; set; }
         public string NombreCompleto { get; set; }
 
-        public Vendedor(string id, string nombre)
+        public Vendedor(string id, string nombre) : base(id, nombre)
         {
             Id = id;
             NombreCompleto = nombre;
