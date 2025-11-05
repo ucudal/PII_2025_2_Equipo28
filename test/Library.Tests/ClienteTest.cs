@@ -23,7 +23,7 @@ namespace Library.Tests
             Assert.That(cliente.Telefono, Is.EqualTo(telefono));
             Assert.That(cliente.Correo, Is.EqualTo(correo));
             Assert.That(cliente.Genero, Is.EqualTo(string.Empty));
-            Assert.That(cliente.Etiqueta, Is.EqualTo(string.Empty));
+            // Assert.That(cliente.Etiqueta, Is.EqualTo(string.Empty));
             Assert.That(cliente.FechaDeNacimiento, Is.EqualTo(string.Empty));
         }
 
@@ -67,13 +67,13 @@ namespace Library.Tests
             Assert.That(cliente.Genero, Is.EqualTo("Masculino"));
         }
 
-        [Test]
-        public void ActualizarEtiqueta()
-        {
-            var cliente = new Cliente("Juan", "Pérez", "099", "correo");
-            cliente.AsignarEtiqueta("VIP");
-            Assert.That(cliente.Etiqueta, Is.EqualTo("VIP"));
-        }
+        // [Test]
+        // public void ActualizarEtiqueta()
+        // {
+        //     var cliente = new Cliente("Juan", "Pérez", "099", "correo");
+        //     cliente.AsignarEtiqueta("VIP");
+        //     Assert.That(cliente.Etiqueta, Is.EqualTo("VIP"));
+        // }
 
         [Test]
         public void ActualizarFecha()

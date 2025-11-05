@@ -62,9 +62,9 @@ namespace Library
                     resultados = Clientes.FindAll(c => c.Correo.Equals(val, StringComparison.OrdinalIgnoreCase));
                     break;
 
-                case "etiqueta":
-                    resultados = Clientes.FindAll(c => c.Etiqueta.Equals(val, StringComparison.OrdinalIgnoreCase));
-                    break;
+                // case "etiqueta":
+                //     resultados = Clientes.FindAll(c => c.Etiquetas.Equals(val, StringComparison.OrdinalIgnoreCase));
+                //     break;
                 
                 case "genero":
                     resultados = Clientes.FindAll(c => c.Genero.Equals(val, StringComparison.OrdinalIgnoreCase));

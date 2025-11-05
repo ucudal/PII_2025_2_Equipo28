@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 
 namespace Library
 {
@@ -28,23 +29,31 @@ namespace Library
     // Reunion sin romper la lógica.
     public class Reunion : Interaccion
     {
-        public Reunion(Cliente cliente, string tema, string ubicacion, string reunion, string cuando = "00/00/0000") :
+        public Reunion(Cliente cliente, string tema, string lugar, string reunion, string cuando = "00/00/0000") :
             base(cliente, tema, reunion)
         {
-            this.lugar = ubicacion;
-            this.tipo = "reunion";
+            if (cliente == null || tema == null || reunion == null || cuando == null || lugar==null)
+            {
+                throw new ArgumentNullException();
+            }
+            if (tema == "" || reunion == "" || cuando == "" || lugar=="")
+            {
+                throw new Excepciones.EmptyStringException();
+            }
             if (cuando != "00/00/0000")
             {
                 DateTime fecha;
-                if (DateTime.TryParseExact(cuando, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None,
-                        out fecha))
+                if (DateTime.TryParseExact(cuando, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out fecha))
                 {
                     this.Fecha = fecha;
                 }
                 else
                 {
                     Console.WriteLine("Fecha no valida");
+                    throw new Excepciones.InvalidDateException();
                 }
+                this.Lugar = lugar;
+                this.Tipo = TipoInterracion.Reunion;
             }
         }
     }

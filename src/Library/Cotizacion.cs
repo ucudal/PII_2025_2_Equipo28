@@ -19,6 +19,15 @@ namespace Library
 
         public Cotizacion(Cliente cliente, DateTime fecha, string importe)
         {
+            if (cliente == null || importe == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            if (importe == "")
+            {
+                throw new Excepciones.EmptyStringException();
+            }
             Cliente = cliente;
             Fecha = fecha;
             Importe = importe;

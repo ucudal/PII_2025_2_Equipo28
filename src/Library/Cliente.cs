@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Library
 {
@@ -17,7 +18,7 @@ namespace Library
         public string Telefono { get; set; }
         public string Correo { get; set; }
         public string Genero { get; set; }
-        public string Etiqueta { get; set; }
+        public List<string> Etiquetas { get; set; } = new List<string>();
         public string FechaDeNacimiento { get; set; }
 
         public Cliente(string nombre, string apellido, string telefono, string correo)
@@ -28,7 +29,6 @@ namespace Library
             Correo = correo;
 
             Genero = string.Empty;
-            Etiqueta = string.Empty;
             FechaDeNacimiento = string.Empty;
         }
         
@@ -59,7 +59,8 @@ namespace Library
         
         public void AsignarEtiqueta(string nuevaEtiqueta)
         {
-            Etiqueta = nuevaEtiqueta;
+            Etiquetas.Add(nuevaEtiqueta);
+            Console.WriteLine($"Se asignó la etiqueta '{nuevaEtiqueta}' a {Nombre}");
         }
 
         

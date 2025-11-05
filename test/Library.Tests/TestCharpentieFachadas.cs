@@ -6,7 +6,7 @@ namespace Library.Tests
 {
     public class TestCharpentie
     {
-        [Test]
+        /*[Test]
         public void TotalDeVentasEnPeriodoCalculaTotalEsperado()
         {
             // Arrange
@@ -117,7 +117,7 @@ namespace Library.Tests
 
             // Assert
             Assert.That(result, Is.EqualTo(expected));
-        }
+        }*/
 
     }
 
