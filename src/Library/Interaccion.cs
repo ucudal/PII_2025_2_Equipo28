@@ -28,21 +28,29 @@ namespace Library
         public Cliente Cliente { get; set; }
         public string Tema { get; set; }
         public DateTime Fecha { get; set; }
-        public string tipo { get; set; }
-        public string contenido { get; set; }
-        public string lugar { get; set; }
+        public TipoInterracion Tipo { get; set; }
+        public string Contenido { get; set; }
+        public string Lugar { get; set; }
         public Interaccion(Cliente cliente, string tema, string contenido)
         {
             this.Cliente = cliente;
             this.Tema = tema;
             this.Fecha = DateTime.Today;
-            this.contenido = contenido;
+            this.Contenido = contenido;
         }
 
         public void AgergarNotas(string notas)
         {
             this.Notas = notas;
 
+        }
+        public enum TipoInterracion
+        {
+            Mensaje,
+            Llamada,
+            Reunion,
+            Correo,
+            Nada //Solo por necesidad
         }
     }
 }
