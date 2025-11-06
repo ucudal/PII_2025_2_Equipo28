@@ -134,12 +134,14 @@ namespace Library
                 Cliente cliente = Listas.BuscarCliente(clienteId);
                 if (cliente != null)
                 {
-                    Cotizaciones.AgregarCotizacion(cliente,fecha,precio,usuario);
+                    Cotizaciones.AgregarCotizacion(cliente, fecha, precio, usuario);
                 }
             }
-            //Cómo usuario quiero saber los clientes que hace cierto tiempo que no tengo ninguna interacción con ellos, para no peder contacto con ellos.
-            public void VerInteraccionesDeCliente(string clienteNombre, string clienteApellido, string usuarioId,
-                string tipo = "")
+        }
+
+        //Cómo usuario quiero saber los clientes que hace cierto tiempo que no tengo ninguna interacción con ellos, para no peder contacto con ellos.
+        public void VerInteraccionesDeCliente(string clienteNombre, string clienteApellido, string usuarioId,
+            string tipo = "")
             {
                 Usuario usuario = Listas.BuscarUsuario(usuarioId);
                 if (usuario != null)
