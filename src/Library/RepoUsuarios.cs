@@ -8,16 +8,26 @@ namespace Library
     // de usuarios, administradores, vendedores y clientes, y proporcionar métodos de búsqueda.
     //
     // Expert 
-    // Listas es la experta en acceder a estas colecciones, ya que conoce todas las listas
+    // Usuarios es la experta en acceder a estas colecciones, ya que conoce todas las listas
     // y puede buscar elementos por ID de manera eficiente.
-    public class Listas
+    public class RepoUsuarios
     {
-        public static List<Usuario> Usuarios = new List<Usuario>();
-        public static List<Administrador> Administradores = new List<Administrador>();
-        public static List<Vendedor> Vendedores = new List<Vendedor>();
-        public static List<Cliente> ClientesTotales = new List<Cliente>();
+        public List<Usuario> Usuarios = new List<Usuario>();
+        public List<Administrador> Administradores = new List<Administrador>();
+        public List<Vendedor> Vendedores = new List<Vendedor>();
+        public List<Cliente> ClientesTotales = new List<Cliente>();
 
-    public static Usuario BuscarUsuario(string id)
+        public void AgregarUsuario(Usuario usuario)
+        {
+            this.Usuarios.Add(usuario);
+        }
+
+        public void EliminarUsuario(Usuario usuario)
+        {
+            this.Usuarios.Remove(usuario);
+        }
+
+        public Usuario BuscarUsuario(string id)
         {
             if (id == null)
             {
@@ -28,7 +38,7 @@ namespace Library
             {
                 throw new Excepciones.EmptyStringException("datos de ususario vacios");
             }
-            foreach (Usuario usuario in Listas.Usuarios)
+            foreach (Usuario usuario in this.Usuarios)
             {
                 if (usuario.ID == id)
                 {
@@ -40,9 +50,9 @@ namespace Library
             return null;
         }
 
-        public static Vendedor BuscarVendedor(string id)
+        public Vendedor BuscarVendedor(string id)
         {
-            foreach (Vendedor vendedor in Listas.Vendedores)
+            foreach (Vendedor vendedor in this.Vendedores)
             {
                 if (vendedor.Id == id)
                 {
@@ -52,9 +62,9 @@ namespace Library
             
             return null;
         }
-        public static Administrador BuscarAdministrador(string id)
+        public Administrador BuscarAdministrador(string id)
         {
-            foreach (Administrador administrador in Listas.Administradores)
+            foreach (Administrador administrador in this.Administradores)
             {
                 if (administrador.ID == id)
                 {
@@ -64,9 +74,9 @@ namespace Library
             
             return null;
         }
-        public static Cliente BuscarCliente(string id)
+        public Cliente BuscarCliente(string id)
         {
-            foreach (Cliente cliente in Listas.ClientesTotales)
+            foreach (Cliente cliente in this.ClientesTotales)
             {
                 if (cliente.Id == id)
                 {

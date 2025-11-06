@@ -11,13 +11,18 @@ namespace Library
     // ClienteLista es la experta en gestionar la colección de clientes, ya que conoce todas
     // las operaciones posibles sobre la lista (agregar, eliminar, buscar) y tiene acceso a todos
     // los datos necesarios de los clientes para esas operaciones.
-    public class ClienteLista
+    public class RepoClientes
     {
         public List<Cliente> Clientes { get; private set; }
 
-        public ClienteLista()
+        private RepoEtiquetas etiquetas;
+        private RepoUsuarios usuarios;
+
+        public RepoClientes(RepoEtiquetas etiquetas, RepoUsuarios usuarios)
         {
             Clientes = new List<Cliente>();
+            this.etiquetas = etiquetas;
+            this.usuarios = usuarios;
         }
 
         public void AgregaCliente(Cliente cliente)
@@ -25,7 +30,7 @@ namespace Library
             if (cliente != null)
             {
                 Clientes.Add(cliente);
-                Listas.ClientesTotales.Add(cliente);
+                usuarios.ClientesTotales.Add(cliente);
             }
         }
 
