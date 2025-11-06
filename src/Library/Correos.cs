@@ -28,30 +28,8 @@ namespace Library
 
     public class Correos : Interaccion
     {
-        public Correos(Cliente cliente, string tema, string correo, string cuando = "00/00/0000") : base(cliente, tema,correo)
+        public Correos(Cliente cliente, string tema, string correo, string cuando) : base(cliente, tema,correo,cuando)
         {
-            if (cliente == null || tema == null || correo == null || cuando == null)
-            {
-                throw new ArgumentNullException();
-            }
-
-            if (tema == "" || correo == "" || cuando == "")
-            {
-                throw new Excepciones.EmptyStringException();
-            }
-            if (cuando != "00/00/0000")
-            {
-                DateTime fecha;
-                if (DateTime.TryParseExact(cuando, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out fecha))
-                {
-                    this.Fecha = fecha;
-                }
-                else
-                {
-                    Console.WriteLine("Fecha no valida");
-                    throw new Excepciones.InvalidDateException();
-                }
-            }
             this.Tipo = TipoInterracion.Correo;
         }
     }

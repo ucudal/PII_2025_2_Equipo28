@@ -39,7 +39,7 @@ namespace Library.Tests
             Administrador administrador = new Administrador("001", "Andres R");
             Usuario usuario = administrador.CrearUsuario("010", "Andres R");
             Cliente cliente = new Cliente("Rosita", "pintada", "0987770100", "Rosame@Cabezatermo.com");
-            Mensajes mensajes = new Mensajes(cliente, "Vegetta777", "Te mensajeo porque vegeta consiguio el SSJ3");
+            Mensajes mensajes = new Mensajes(cliente, "Vegetta777", "Te mensajeo porque vegeta consiguio el SSJ3","10/09/1000");
             RepoInteracciones repoInteracciones = new RepoInteracciones();
             repoInteracciones.AgregarInteraccion(mensajes, usuario);
             List<string> esperado = new List<string>()
@@ -56,7 +56,7 @@ namespace Library.Tests
             Administrador administrador = new Administrador("001", "Andres R");
             Usuario usuario = administrador.CrearUsuario("010", "Andres R");
             Cliente cliente = new Cliente("Rosita", "pintada", "0987770100", "Rosame@Cabezatermo.com");
-            Correos correo = new Correos(cliente, "Vegetta777", "Te correo porque vegeta consiguio el SSJ3");
+            Correos correo = new Correos(cliente, "Vegetta777", "Te correo porque vegeta consiguio el SSJ3","10/09/1000");
             RepoInteracciones repoInteracciones = new RepoInteracciones();
             repoInteracciones.AgregarInteraccion(correo, usuario);
             List<string> esperado = new List<string>()

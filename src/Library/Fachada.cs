@@ -14,13 +14,29 @@ namespace Library
         public void RegistarMensaje(string clienteId, string mensaje, string tema,
             string usuarioId, string cuando)
         {
-            Usuario usuario = Listas.BuscarUsuario(usuarioId);
+            Usuario usuario=null;
+            Mensajes Mensaje=null; //Inicializando larailala
+            Cliente cliente=null;
+            try
+            {
+                usuario = Listas.BuscarUsuario(usuarioId);
+                cliente = clienteLista.BuscarUnCliente(clienteId);
+                // Cliente cliente = Listas.BuscarCliente(clienteId); //Hecho comentario por si acaso
+                Mensaje = new Mensajes(cliente, tema, mensaje, cuando);
+
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch (Excepciones.EmptyStringException e)
+            {
+                Console.WriteLine(e.Message);
+            }
             if (usuario != null)
             {
-                Cliente cliente = Listas.BuscarCliente(clienteId);
                 if (cliente != null)
                 {
-                    Mensajes Mensaje = new Mensajes(cliente, tema, mensaje, cuando);
                     Interacciones.AgregarInteraccion(Mensaje, usuario);
                 }
             }
@@ -29,13 +45,29 @@ namespace Library
         public void RegistrarCorreo(string clienteId, string correo, string tema,
             string usuarioId, string cuando)
         {
-            Usuario usuario = Listas.BuscarUsuario(usuarioId);
+            Usuario usuario=null;
+            Correos Correo=null; //Inicializando larailala
+            Cliente cliente=null;
+            try
+            {
+                usuario = Listas.BuscarUsuario(usuarioId);
+                cliente = clienteLista.BuscarUnCliente(clienteId);
+                // Cliente cliente = Listas.BuscarCliente(clienteId); //Hecho comentario por si acaso
+                Correo = new Correos(cliente, tema, correo, cuando);
+
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch (Excepciones.EmptyStringException e)
+            {
+                Console.WriteLine(e.Message);
+            }
             if (usuario != null)
             {
-                Cliente cliente = Listas.BuscarCliente(clienteId);
                 if (cliente != null)
                 {
-                    Correos Correo = new Correos(cliente, tema, correo, cuando);
                     Interacciones.AgregarInteraccion(Correo, usuario);
                 }
             }
@@ -70,6 +102,15 @@ namespace Library
             }
         }
 
+        public void AgregarEtiquetaLista(string etiqueta, string usuarioId)
+        {
+            Usuario usuario = Listas.BuscarUsuario(usuarioId);
+            if (usuario != null)
+            {
+                
+            }
+        }
+
         public void RegistrarVenta(string clienteId, string producto, string fecha,
             string precio, string usuarioId)
         {
@@ -96,7 +137,6 @@ namespace Library
                     Cotizaciones.AgregarCotizacion(cliente,fecha,precio,usuario);
                 }
             }
-            /*
             //Cómo usuario quiero saber los clientes que hace cierto tiempo que no tengo ninguna interacción con ellos, para no peder contacto con ellos.
             public void VerInteraccionesDeCliente(string clienteNombre, string clienteApellido, string usuarioId,
                 string tipo = "")
@@ -375,7 +415,7 @@ namespace Library
                 Cliente cliente = clienteLista.BuscarCliente("id", id)[0];
                 Reunion Reunion = new Reunion(cliente, tema, ubicacion, reunion, cuando);
                 Reuniones.Add(Reunion);
-            }*/
+            }
         }
     }
-}
+

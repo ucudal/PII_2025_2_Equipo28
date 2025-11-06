@@ -29,32 +29,10 @@ namespace Library
     public class Llamadas : Interaccion
     {
         
-        public Llamadas(Cliente cliente, string tema,string llamada,string cuando = "00/00/0000") : base(cliente, tema,llamada)
+        public Llamadas(Cliente cliente, string tema,string llamada,string cuando) : base(cliente, tema,llamada,cuando)
         {
-            if (cliente == null || tema == null || llamada == null || cuando == null)
-            {
-                throw new ArgumentNullException();
-            }
-
-            if (tema == "" || llamada == "" || cuando == "")
-            {
-                throw new Excepciones.EmptyStringException();
-            }
-            if (cuando != "00/00/0000")
-            {
-                DateTime fecha;
-                if (DateTime.TryParseExact(cuando, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out fecha))
-                {
-                    this.Fecha = fecha;
-                }
-                else
-                {
-                    Console.WriteLine("Fecha no valida");
-                    throw new Excepciones.InvalidDateException();
-                }
                 this.Tipo = TipoInterracion.Llamada;
             }
 
         }
     }
-}

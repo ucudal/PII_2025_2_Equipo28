@@ -17,6 +17,8 @@ namespace Library.Tests
             lista = new ClienteLista();
             cliente1 = new Cliente("Juan", "Pérez", "099123456", "juan@example.com");
             cliente2 = new Cliente("María", "García", "098765432", "maria@example.com");
+            cliente1.Id = "1";
+            cliente2.Id = "2";
         }
 
         [Test]
@@ -90,7 +92,7 @@ namespace Library.Tests
         public void BuscarUnCliente_DeberiaRetornarClienteCorrecto()
         {
             lista.AgregaCliente(cliente1);
-            var encontrado = lista.BuscarUnCliente("Juan", "Pérez");
+            var encontrado = lista.BuscarUnCliente("1");
 
             Assert.That(encontrado, Is.Not.Null);
             Assert.That(encontrado.Nombre, Is.EqualTo("Juan"));
@@ -101,7 +103,7 @@ namespace Library.Tests
         public void BuscarUnCliente_NoExistente_DeberiaRetornarNull()
         {
             lista.AgregaCliente(cliente1);
-            var resultado = lista.BuscarUnCliente("Pedro", "López");
+            var resultado = lista.BuscarUnCliente("3");
             Assert.That(resultado, Is.Null);
         }
     }

@@ -29,34 +29,23 @@ namespace Library
     // Reunion sin romper la lógica.
     public class Reunion : Interaccion
     {
-        public Reunion(Cliente cliente, string tema, string lugar, string reunion, string cuando = "00/00/0000") :
-            base(cliente, tema, reunion)
+        public Reunion(Cliente cliente, string tema, string lugar, string reunion, string cuando) :
+            base(cliente, tema, reunion,cuando)
         {
-            if (cliente == null || tema == null || reunion == null || cuando == null || lugar==null)
+            if (lugar == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException("Datos de interacion null");
             }
-            if (tema == "" || reunion == "" || cuando == "" || lugar=="")
+
+            if (lugar == "")
             {
-                throw new Excepciones.EmptyStringException();
+                throw new Excepciones.EmptyStringException("datos de interaccion vacios");
             }
-            if (cuando != "00/00/0000")
-            {
-                DateTime fecha;
-                if (DateTime.TryParseExact(cuando, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out fecha))
-                {
-                    this.Fecha = fecha;
-                }
-                else
-                {
-                    Console.WriteLine("Fecha no valida");
-                    throw new Excepciones.InvalidDateException();
-                }
-                this.Lugar = lugar;
-                this.Tipo = TipoInterracion.Reunion;
+            this.Lugar = lugar;
+            this.Tipo = TipoInterracion.Reunion;
             }
         }
     }
-}
+
         
     

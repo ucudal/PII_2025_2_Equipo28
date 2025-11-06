@@ -81,11 +81,20 @@ namespace Library
             return resultados;
         }
 
-        public Cliente BuscarUnCliente(string nombre, string apellido)
+        public Cliente BuscarUnCliente(string ClienteId)
         {
+            if (ClienteId == null)
+            {
+                throw new ArgumentNullException("datos de cliente null");
+            }
+
+            if (ClienteId == "")
+            {
+                throw new Excepciones.EmptyStringException("datos de cliente vacios");
+            }
             foreach (var cliente in Clientes)
             {
-                if (cliente.Nombre == nombre && cliente.Apellido == apellido)
+                if (cliente.Id==ClienteId)
                 {
                     return cliente;
                 }

@@ -7,47 +7,51 @@ namespace Library.Tests
 {
     public class TestFachada_Historia_8_15_
     {
-        //     [SetUp]
-        //     public void Setup()
-        //     {
-        //         Listas.Usuarios = new List<Usuario>();
-        //         Listas.Administradores = new List<Administrador>();
-        //         Listas.Vendedores = new List<Vendedor>();
-        //         Listas.ClientesTotales = new List<Cliente>();
-        //     }
-        //     
-        //     [Test]
-        //     public void RegistarMensajeTest()
-        //     {
-        //         ClienteLista clienteLista = new ClienteLista();
-        //         Fachada fachada = new Fachada();
-        //         Administrador admin = new Administrador("100", "AR");
-        //         Usuario usuario = admin.CrearUsuario("010", "AR");
-        //         Cliente cliente = new Cliente("Alfredo", "Rosquilla", "099007100", "AlfedoGamer@cabezatermo.com");
-        //         cliente.Id = "0";
-        //         clienteLista.AgregaCliente(cliente);
-        //         fachada.RegistarMensaje("0","Hello holui","saludo","010","10/01/2010");
-        //         List<string> esperado = new List<string>() { "Alfredo", "Rosquilla", "Hello holui", "saludo", "010" };
-        //         Interaccion interaccion = fachada.Interacciones.BuscarInteraccion("mensaje", "saludo");
-        //         Assert.That("Alfredo",Is.EqualTo(fachada.Interacciones.Interacciones[0].Cliente.Nombre));
-        //     }
-        //     /*[Test]
-        //     public void RegistrarCorreoTest()
-        //     {
-        //         ClienteLista clienteLista = new ClienteLista();
-        //         Fachada fachada = new Fachada();
-        //         Administrador admin = new Administrador("100", "AR");
-        //         Usuario usuario = admin.CrearUsuario("010", "AR");
-        //         Cliente cliente = new Cliente("Alfredo", "Rosquilla", "099007100", "AlfedoGamer@cabezatermo.com");
-        //         clienteLista.AgregaCliente(cliente);
-        //         cliente.Id = "0";
-        //         fachada.RegistrarCorreo("0","Hello holui","saludo","010");
-        //         List<Object> esperado = new List<object>() { "Alfredo", "Rosquilla", "Hello holui", "saludo" };
-        //         Interaccion interaccion = usuario.BuscarInteraccion("correo", "saludo");
-        //         List<Object> resultado = new List<object>()
-        //             { interaccion.Cliente.Nombre, interaccion.Cliente.Apellido, interaccion.contenido, interaccion.Tema };
-        //         CollectionAssert.AreEqual(esperado,resultado);
-        //     }
+        private Fachada fachada;
+        private Usuario usuario;
+        private Cliente cliente;
+        private Administrador administrador;
+        
+        
+            [SetUp]
+            public void Setup()
+            {
+                Listas.Usuarios = new List<Usuario>();
+                Listas.Administradores = new List<Administrador>();
+                Listas.Vendedores = new List<Vendedor>();
+                Listas.ClientesTotales = new List<Cliente>();
+                fachada = new Fachada();
+                administrador = new Administrador("001", "Don Tomasino");
+                administrador.CrearUsuario("1", "Argonauta");
+                usuario = Listas.BuscarUsuario("1");
+                cliente = new Cliente("Di", "Caprio", "09781764", "Oscar@cabezatermo.com");
+                cliente.Id = "01";
+                fachada.clienteLista.AgregaCliente(cliente);
+
+            }
+            
+            [Test]
+            public void RegistarMensajeTest()
+            {
+                fachada.RegistarMensaje("01","Mensajeo","UltraMensaje","1","20/12/1998");
+                List<object> esperado = new List<object>()
+                    { cliente, "Mensajeo", "UltraMensaje", new DateTime(1998, 12, 20) };
+                Interaccion mensaje = fachada.Interacciones.BuscarInteraccion("mensaje", "UltraMensaje");
+                List<object> resultado = new List<object>()
+                    { mensaje.Cliente, mensaje.Contenido, mensaje.Tema, mensaje.Fecha };
+                Assert.AreEqual(esperado,resultado);
+            }
+            [Test]
+            public void RegistrarCorreoTest()
+            {
+                fachada.RegistrarCorreo("01", "correando", "cococoreo", "1", "20/12/1998");
+                List<object> esperado = new List<object>()
+                    { cliente, "correando", "cococoreo", new DateTime(1998, 12, 20) };
+                Interaccion correo = fachada.Interacciones.BuscarInteraccion("correo", "cococoreo");
+                List<object> resultado = new List<object>()
+                    { correo.Cliente, correo.Contenido, correo.Tema, correo.Fecha };
+                Assert.AreEqual(esperado,resultado);
+            }
         //     [Test]
         //     public void AgregarNotaTest()
         //     {
@@ -82,7 +86,7 @@ namespace Library.Tests
         //         Assert.That(resultado,Is.EqualTo(esperado));
         //         string resultado2 = usuario.Etiqueteas[0];
         //         Assert.That(resultado2,Is.EqualTo(esperado));
-        //     }*/
+        //     }
         //     
         //     [Test]
         //     public void RegistarVentaTest()

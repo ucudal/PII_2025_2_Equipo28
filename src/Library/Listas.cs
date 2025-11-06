@@ -19,6 +19,15 @@ namespace Library
 
     public static Usuario BuscarUsuario(string id)
         {
+            if (id == null)
+            {
+                throw new ArgumentNullException("datos de usurio null");
+            }
+
+            if (id == "")
+            {
+                throw new Excepciones.EmptyStringException("datos de ususario vacios");
+            }
             foreach (Usuario usuario in Listas.Usuarios)
             {
                 if (usuario.ID == id)

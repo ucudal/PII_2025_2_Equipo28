@@ -15,7 +15,7 @@ namespace Library
     {
         public string ID { get; set; }
         public string Nombre { get; set; }
-        public List<Interaccion> InteraccionesUsuario = new List<Interaccion>();
+        public List<Interaccion> InteraccionesUsuario { get; private set; } = new List<Interaccion>();
         public List<Venta> Total_Ventas { get; private set; } = new List<Venta>();
         public List<Venta> VentaCliente { get; private set; } = new List<Venta>();
         public List<Cotizacion> CotizacionesUsuario { get; private set; } = new List<Cotizacion>();
@@ -43,6 +43,6 @@ namespace Library
         {
             InteraccionesUsuario.Add(interaccion);
         }
-        //ghgh
+        
     }
 }
