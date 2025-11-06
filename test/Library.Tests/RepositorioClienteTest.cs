@@ -5,16 +5,16 @@ using Library;
 namespace Library.Tests
 {
     [TestFixture]
-    public class ClienteListaTest
+    public class RepositorioClienteTest
     {
-        private ClienteLista lista;
+        private RepositorioCliente lista;
         private Cliente cliente1;
         private Cliente cliente2;
 
         [SetUp]
         public void Setup()
         {
-            lista = new ClienteLista();
+            lista = new RepositorioCliente();
             cliente1 = new Cliente("Juan", "Pérez", "099123456", "juan@example.com");
             cliente2 = new Cliente("María", "García", "098765432", "maria@example.com");
         }

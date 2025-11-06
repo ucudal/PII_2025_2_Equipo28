@@ -18,13 +18,13 @@ namespace Library.Tests
         [Test]
         public void RegistarMensajeTest()
         {
-            ClienteLista clienteLista = new ClienteLista();
+            RepositorioCliente repositorioCliente = new RepositorioCliente();
             Fachada fachada = new Fachada();
             Administrador admin = new Administrador("100", "AR");
             Usuario usuario = admin.CrearUsuario("010", "AR");
             Cliente cliente = new Cliente("Alfredo", "Rosquilla", "099007100", "AlfedoGamer@cabezatermo.com");
             cliente.Id = "0";
-            clienteLista.AgregaCliente(cliente);
+            repositorioCliente.AgregaCliente(cliente);
             fachada.RegistarMensaje("0","Hello holui","saludo","010");
             List<string> esperado = new List<string>() { "Alfredo", "Rosquilla", "Hello holui", "saludo", "010" };
             Interaccion interaccion = usuario.BuscarInteraccion("mensaje", "saludo");
@@ -33,12 +33,12 @@ namespace Library.Tests
         [Test]
         public void RegistrarCorreoTest()
         {
-            ClienteLista clienteLista = new ClienteLista();
+            RepositorioCliente repositorioCliente = new RepositorioCliente();
             Fachada fachada = new Fachada();
             Administrador admin = new Administrador("100", "AR");
             Usuario usuario = admin.CrearUsuario("010", "AR");
             Cliente cliente = new Cliente("Alfredo", "Rosquilla", "099007100", "AlfedoGamer@cabezatermo.com");
-            clienteLista.AgregaCliente(cliente);
+            repositorioCliente.AgregaCliente(cliente);
             cliente.Id = "0";
             fachada.RegistrarCorreo("0","Hello holui","saludo","010");
             List<Object> esperado = new List<object>() { "Alfredo", "Rosquilla", "Hello holui", "saludo" };
@@ -50,13 +50,13 @@ namespace Library.Tests
         [Test]
         public void AgregarNotaTest()
         {
-            ClienteLista clienteLista = new ClienteLista();
+            RepositorioCliente repositorioCliente = new RepositorioCliente();
             Fachada fachada = new Fachada();
             Administrador admin = new Administrador("100", "AR");
             Usuario usuario = admin.CrearUsuario("010", "AR");
             Cliente cliente = new Cliente("Alfredo", "Rosquilla", "099007100", "AlfedoGamer@cabezatermo.com");
             cliente.Id = "0";
-            clienteLista.AgregaCliente(cliente);
+            repositorioCliente.AgregaCliente(cliente);
             fachada.RegistarMensaje("0","Hello holui","saludo","010");
             fachada.AgregarNota("Me olvide del chau", "mensaje","saludo", "010");
             Interaccion interaccion = usuario.BuscarInteraccion("mensaje", "saludo");
@@ -68,13 +68,13 @@ namespace Library.Tests
         [Test]
         public void AgregarEtiqueta_GuardarEtiquetaTest()
         {
-            ClienteLista clienteLista = new ClienteLista();
+            RepositorioCliente repositorioCliente = new RepositorioCliente();
             Fachada fachada = new Fachada();
             Administrador admin = new Administrador("100", "AR");
             Usuario usuario = admin.CrearUsuario("010", "AR");
             Cliente cliente = new Cliente("Alfredo", "Rosquilla", "099007100", "AlfedoGamer@cabezatermo.com");
             cliente.Id = "0";
-            clienteLista.AgregaCliente(cliente);
+            repositorioCliente.AgregaCliente(cliente);
             fachada.AgregarEtiqueta("0", "Pastelero","010");
             string esperado = "Pastelero";
             string resultado = cliente.Etiqueta;
@@ -86,13 +86,13 @@ namespace Library.Tests
         [Test]
         public void RegistarVentaTest()
         {
-            ClienteLista clienteLista = new ClienteLista();
+            RepositorioCliente repositorioCliente = new RepositorioCliente();
             Fachada fachada = new Fachada();
             Administrador admin = new Administrador("100", "AR");
             Usuario usuario = admin.CrearUsuario("010", "AR");
             Cliente cliente = new Cliente("Alfredo", "Rosquilla", "099007100", "AlfedoGamer@cabezatermo.com");
             cliente.Id = "0";
-            clienteLista.AgregaCliente(cliente);
+            repositorioCliente.AgregaCliente(cliente);
             fachada.RegistrarVenta("0","SillaGamer","10/08/2023","250$","010");
             Venta venta = usuario.Total_Ventas[0];
             DateTime fecha = new DateTime(2023, 8, 10);
@@ -105,14 +105,14 @@ namespace Library.Tests
         [Test]
         public void RegistarCotizacionTest()
         {
-            ClienteLista clienteLista = new ClienteLista();
+            RepositorioCliente repositorioCliente = new RepositorioCliente();
             
             Fachada fachada = new Fachada();
             Administrador admin = new Administrador("100", "AR");
             Usuario usuario = admin.CrearUsuario("010", "AR");
             Cliente cliente = new Cliente("Alfredo", "Rosquilla", "099007100", "AlfedoGamer@cabezatermo.com");
             cliente.Id = "0";
-            clienteLista.AgregaCliente(cliente);
+            repositorioCliente.AgregaCliente(cliente);
             fachada.RegistarCotizacion("0", "11/08/2023","250$","010");
             Cotizacion cotizacion = usuario.Cotizaciones[0];
             DateTime fecha = new DateTime(2023, 8, 11);

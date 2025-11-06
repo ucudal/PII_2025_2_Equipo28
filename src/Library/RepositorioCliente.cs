@@ -11,11 +11,11 @@ namespace Library
     // ClienteLista es la experta en gestionar la colección de clientes, ya que conoce todas
     // las operaciones posibles sobre la lista (agregar, eliminar, buscar) y tiene acceso a todos
     // los datos necesarios de los clientes para esas operaciones.
-    public class ClienteLista
+    public class RepositorioCliente
     {
         public List<Cliente> Clientes { get; private set; }
 
-        public ClienteLista()
+        public RepositorioCliente()
         {
             Clientes = new List<Cliente>();
         }

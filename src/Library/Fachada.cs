@@ -5,7 +5,7 @@ namespace Library
 {
     public class Fachada
     {
-        public ClienteLista clienteLista = new ClienteLista();
+        public RepositorioCliente RepositorioCliente = new RepositorioCliente();
         
         public void RegistarMensaje(string clienteId, string mensaje, string tema,
             string usuarioId)
@@ -99,7 +99,7 @@ namespace Library
             Usuario usuario = Listas.BuscarUsuario(usuarioId);
             if (usuario != null)
             {
-                Cliente cliente = clienteLista.BuscarUnCliente(clienteNombre, clienteApellido);
+                Cliente cliente = RepositorioCliente.BuscarUnCliente(clienteNombre, clienteApellido);
                 if (cliente != null)
                 {
                     Console.WriteLine($"Interacciones con {clienteNombre} {clienteApellido}:");
@@ -199,7 +199,7 @@ namespace Library
         {
             Vendedor vendedorActual = Listas.BuscarVendedor(idVendedorActual);
             Vendedor vendedorNuevo = Listas.BuscarVendedor(idVendedorNuevo);
-            Cliente cliente = clienteLista.BuscarUnCliente(nombreCliente, apellidoCliente);
+            Cliente cliente = RepositorioCliente.BuscarUnCliente(nombreCliente, apellidoCliente);
 
             if (vendedorActual != null && vendedorNuevo != null && cliente != null)
             {
@@ -256,7 +256,7 @@ namespace Library
                 Console.WriteLine("===== PANEL DE RESUMEN =====");
 
                 // Clientes totales
-                Console.WriteLine("Clientes totales: " + clienteLista.Clientes.Count);
+                Console.WriteLine("Clientes totales: " + RepositorioCliente.Clientes.Count);
 
                 // Interacciones recientes (últimos 7 días)
                 DateTime limite = DateTime.Now.AddDays(-7);
@@ -298,7 +298,7 @@ namespace Library
 
         public List<Cliente> BuscarClientesFachada(string atributo, string valorBusqueda)
         {
-            return clienteLista.BuscarCliente(atributo, valorBusqueda);
+            return RepositorioCliente.BuscarCliente(atributo, valorBusqueda);
         }
 
         public Cliente CrearNuevoCliente(string nombre, string apellido, string telefono, string correo)
@@ -308,7 +308,7 @@ namespace Library
 
         public void ModificarInfo(string id, string atributo, string nuevoValor)
         {
-            Cliente cliente = clienteLista.BuscarCliente("id", id)[0];
+            Cliente cliente = RepositorioCliente.BuscarCliente("id", id)[0];
 
             string atributoNormalizado = atributo.Trim().ToLower();
             switch (atributoNormalizado)
@@ -349,25 +349,25 @@ namespace Library
 
         public void EliminarClienteFachada(string id)
         {
-            Cliente cliente = clienteLista.BuscarCliente("id", id)[0];
-            clienteLista.EliminarCliente(cliente);
+            Cliente cliente = RepositorioCliente.BuscarCliente("id", id)[0];
+            RepositorioCliente.EliminarCliente(cliente);
         }
 
-        public ClienteLista VerClientes()
+        public RepositorioCliente VerClientes()
         {
-            return clienteLista;
+            return RepositorioCliente;
         }
 
         public void RegistrarLlamada(string id, string tema, string contenido)
         {
-            Cliente cliente = clienteLista.BuscarCliente("id", id)[0];
+            Cliente cliente = RepositorioCliente.BuscarCliente("id", id)[0];
             Llamadas llamada = new Llamadas(cliente, tema, contenido);
             Llamadas.Add(llamada);
         }
 
         public void RegistrarReunion(string id, string tema, string ubicacion, string reunion, string cuando)
         {
-            Cliente cliente = clienteLista.BuscarCliente("id", id)[0];
+            Cliente cliente = RepositorioCliente.BuscarCliente("id", id)[0];
             Reunion Reunion = new Reunion(cliente, tema, ubicacion, reunion, cuando);
             Reuniones.Add(Reunion);
         }
