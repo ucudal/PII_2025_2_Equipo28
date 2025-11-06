@@ -15,9 +15,14 @@ namespace Library
     {
         public List<Cliente> Clientes { get; private set; }
 
-        public RepoClientes()
+        private RepoEtiquetas etiquetas;
+        private RepoUsuarios usuarios;
+
+        public RepoClientes(RepoEtiquetas etiquetas, RepoUsuarios usuarios)
         {
             Clientes = new List<Cliente>();
+            this.etiquetas = etiquetas;
+            this.usuarios = usuarios;
         }
 
         public void AgregaCliente(Cliente cliente)
@@ -25,7 +30,7 @@ namespace Library
             if (cliente != null)
             {
                 Clientes.Add(cliente);
-                Listas.ClientesTotales.Add(cliente);
+                usuarios.ClientesTotales.Add(cliente);
             }
         }
 
