@@ -79,16 +79,135 @@ namespace Library
             }
         }
 
-        public void AgregarNota(string nota, string tipointeraccion, string tema, string usuarioId)
+        public void RegistarLlamada(string clienteId, string llamada, string tema,
+            string usuarioId, string cuando)
         {
-            Usuario usuario = this.Usuarios.BuscarUsuario(usuarioId);
+            Usuario usuario = null;
+            Llamadas LLamada = null; //Inicializando larailala
+            Cliente cliente = null;
+            try
+            {
+                usuario = this.Usuarios.BuscarUsuario(usuarioId);
+                cliente = Clientes.BuscarUnCliente(clienteId);
+                // Cliente cliente = Usuarios.BuscarCliente(clienteId); //Hecho comentario por si acaso
+                LLamada = new Llamadas(cliente, tema, llamada, cuando);
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch (Excepciones.EmptyStringException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
             if (usuario != null)
             {
-                Interaccion interaccion = Interacciones.BuscarInteraccion(tipointeraccion, tema);
+                if (cliente != null)
+                {
+                    Interacciones.AgregarInteraccion(LLamada, usuario);
+                }
+            }
+        }
+
+        public void RegistarReunion(string clienteId, string reunion, string tema,
+            string usuarioId, string cuando, string lugar)
+        {
+            Usuario usuario = null;
+            Reunion Reunion = null; //Inicializando larailala
+            Cliente cliente = null;
+            try
+            {
+                usuario = this.Usuarios.BuscarUsuario(usuarioId);
+                cliente = Clientes.BuscarUnCliente(clienteId);
+                // Cliente cliente = Usuarios.BuscarCliente(clienteId); //Hecho comentario por si acaso
+                Reunion = new Reunion(cliente, tema, lugar, reunion,cuando);
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch (Excepciones.EmptyStringException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            if (usuario != null)
+            {
+                if (cliente != null)
+                {
+                    Interacciones.AgregarInteraccion(Reunion, usuario);
+                }
+            }
+        }
+
+        public void AgregarNota(string nota, string tipointeraccion, string tema, string usuarioId)
+        {
+            Usuario usuario = null;
+            Interaccion interaccion = null;
+            try
+            {
+                usuario = this.Usuarios.BuscarUsuario(usuarioId);
+                interaccion = Interacciones.BuscarInteraccion(tipointeraccion, tema);
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch (Excepciones.EmptyStringException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            if (usuario != null)
+            {
                 if (interaccion != null)
                 {
                     interaccion.AgergarNotas(nota);
                 }
+            }
+        }
+
+        public string InteraccionesCliente(string clienteId,string usuarioId,string tipo="",string fecha="")
+        {
+            Usuario usuario = null;
+            List<Interaccion> interaccionesCliente = null;
+            Cliente cliente = null;
+            try
+            {
+                usuario = this.Usuarios.BuscarUsuario(usuarioId);
+                cliente = Clientes.BuscarUnCliente(clienteId);
+                interaccionesCliente = Interacciones.BuscarInteraccion(cliente, tipo, fecha);
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch (Excepciones.EmptyStringException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            
+            if (tipo != "" && fecha != "")
+            {
+                string informacion =
+                    $"las interaccion de {cliente.Nombre} {cliente.Apellido} del tipo {tipo} de la fecha {fecha} son las siguientes:\n";
+                foreach (Interaccion interaccion in interaccionesCliente)
+                {
+                    informacion += $"\n{interaccion.Tema}:\n{interaccion.Contenido}\n";
+                }
+
+                return informacion;
+            }
+            else 
+            {
+                string informacion = $"Las interacciones de {cliente.Nombre} {cliente.Apellido} son:\n";
+                foreach (Interaccion interaccion in interaccionesCliente)
+                {
+                    informacion +=
+                        $"\n{interaccion.Tipo} del {interaccion.Fecha}\n{interaccion.Tema}:\n{interaccion.Contenido}\n";
+                }
+
+                return informacion;
             }
         }
 
@@ -145,45 +264,45 @@ namespace Library
         }
 
         //Cómo usuario quiero saber los clientes que hace cierto tiempo que no tengo ninguna interacción con ellos, para no peder contacto con ellos.
-        public void VerInteraccionesDeCliente(string clienteNombre, string clienteApellido, string usuarioId,
-            string tipo = "")
-
-        {
-            Usuario usuario = this.Usuarios.BuscarUsuario(usuarioId);
-            if (usuario != null)
-            {
-                // Cliente cliente = Clientes.BuscarUnCliente(idcliente);
-                // if (cliente != null)
-                // {
-                //     Console.WriteLine($"Interacciones con {clienteNombre} {clienteApellido}:");
-                //
-                //     foreach (Interaccion interaccion in usuario.Interacciones)
-                //     {
-                //         // Verifica que la interacción sea del cliente buscado
-                //         if (interaccion.Cliente == cliente)
-                //         {
-                //             // Si se pasa un tipo, solo muestra las que coincidan
-                //             if (tipo == "" || interaccion.tipo == tipo)
-                //             {
-                //                 Console.WriteLine("-----------------------------------");
-                //                 Console.WriteLine($"Tipo: {interaccion.tipo}");
-                //                 Console.WriteLine($"Fecha: {interaccion.Fecha}");
-                //                 Console.WriteLine($"Tema: {interaccion.Tema}");
-                //                 Console.WriteLine($"Descripción: {interaccion.contenido}");
-                //             }
-                //         }
-                //     }
-                // }
-                // else
-                // {
-                //     Console.WriteLine("Cliente no encontrado.");
-                // }
-            }
-            else
-            {
-                Console.WriteLine("Usuario no encontrado.");
-            }
-        }
+        // public void VerInteraccionesDeCliente(string clienteNombre, string clienteApellido, string usuarioId,
+        //     string tipo = "")
+        //
+        // {
+        //     Usuario usuario = this.Usuarios.BuscarUsuario(usuarioId);
+        //     if (usuario != null)
+        //     {
+        //         // Cliente cliente = Clientes.BuscarUnCliente(idcliente);
+        //         // if (cliente != null)
+        //         // {
+        //         //     Console.WriteLine($"Interacciones con {clienteNombre} {clienteApellido}:");
+        //         //
+        //         //     foreach (Interaccion interaccion in usuario.Interacciones)
+        //         //     {
+        //         //         // Verifica que la interacción sea del cliente buscado
+        //         //         if (interaccion.Cliente == cliente)
+        //         //         {
+        //         //             // Si se pasa un tipo, solo muestra las que coincidan
+        //         //             if (tipo == "" || interaccion.tipo == tipo)
+        //         //             {
+        //         //                 Console.WriteLine("-----------------------------------");
+        //         //                 Console.WriteLine($"Tipo: {interaccion.tipo}");
+        //         //                 Console.WriteLine($"Fecha: {interaccion.Fecha}");
+        //         //                 Console.WriteLine($"Tema: {interaccion.Tema}");
+        //         //                 Console.WriteLine($"Descripción: {interaccion.contenido}");
+        //         //             }
+        //         //         }
+        //         //     }
+        //         // }
+        //         // else
+        //         // {
+        //         //     Console.WriteLine("Cliente no encontrado.");
+        //         // }
+        //     }
+        //     else
+        //     {
+        //         Console.WriteLine("Usuario no encontrado.");
+        //     }
+        // }
 
 
         // Como administrador quiero crear, suspender o eliminar usuarios, para mantener control sobre los accesos.
@@ -485,19 +604,19 @@ namespace Library
             return Clientes;
         }
 
-        public void RegistrarLlamada(string id, string tema, string contenido)
-        {
-            // Cliente cliente = Clientes.BuscarCliente("id", id)[0];
-            // Llamadas llamada = new Llamadas(cliente, tema, contenido);
-            // Llamadas.Add(llamada);
-        }
+        // public void RegistrarLlamada(string id, string tema, string contenido)
+        // {
+        //     // Cliente cliente = Clientes.BuscarCliente("id", id)[0];
+        //     // Llamadas llamada = new Llamadas(cliente, tema, contenido);
+        //     // Llamadas.Add(llamada);
+        // }
 
-        public void RegistrarReunion(string id, string tema, string ubicacion, string reunion, string cuando)
-        {
-            Cliente cliente = Clientes.BuscarCliente("id", id)[0];
-            Reunion Reunion = new Reunion(cliente, tema, ubicacion, reunion, cuando);
-            Reuniones.Add(Reunion);
-        }
+        // public void RegistrarReunion(string id, string tema, string ubicacion, string reunion, string cuando)
+        // {
+        //     Cliente cliente = Clientes.BuscarCliente("id", id)[0];
+        //     Reunion Reunion = new Reunion(cliente, tema, ubicacion, reunion, cuando);
+        //     Reuniones.Add(Reunion);
+        // }
 
         public Usuario BuscarUsuario(string usuarioId)
         {

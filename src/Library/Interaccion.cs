@@ -67,6 +67,15 @@ namespace Library
 
         public void AgergarNotas(string notas)
             {
+                if (notas == null)
+                {
+                    throw new ArgumentNullException("El contenido de la nota es null");
+                }
+
+                if (notas == "")
+                {
+                    throw new Excepciones.EmptyStringException("el contenido de la nota esta vacio");
+                }
                 this.Notas = notas;
             }
 
