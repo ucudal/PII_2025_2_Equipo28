@@ -1,3 +1,5 @@
+using System;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 
 namespace Library
@@ -27,10 +29,10 @@ namespace Library
     public class Llamadas : Interaccion
     {
         
-        public Llamadas(Cliente cliente, string tema,string llamada) : base(cliente, tema,llamada)
+        public Llamadas(Cliente cliente, string tema,string llamada,string cuando) : base(cliente, tema,llamada,cuando)
         {
-            this.tipo = "llamada";
-           
+                this.Tipo = TipoInterracion.Llamada;
+            }
+
         }
     }
-}

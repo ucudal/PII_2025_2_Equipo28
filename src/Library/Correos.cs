@@ -1,3 +1,6 @@
+using System;
+using System.Globalization;
+
 namespace Library
 {
     /// Representa una interacción de tipo correo con un cliente y el usuario.
@@ -25,9 +28,9 @@ namespace Library
 
     public class Correos : Interaccion
     {
-        public Correos(Cliente cliente, string tema, string correo) : base(cliente, tema,correo)
+        public Correos(Cliente cliente, string tema, string correo, string cuando) : base(cliente, tema,correo,cuando)
         {
-            this.tipo = "correo";
+            this.Tipo = TipoInterracion.Correo;
         }
     }
 }

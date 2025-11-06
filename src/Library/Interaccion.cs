@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace Library
 {   //SRP 
@@ -28,21 +29,54 @@ namespace Library
         public Cliente Cliente { get; set; }
         public string Tema { get; set; }
         public DateTime Fecha { get; set; }
-        public string tipo { get; set; }
-        public string contenido { get; set; }
-        public string lugar { get; set; }
-        public Interaccion(Cliente cliente, string tema, string contenido)
+        public TipoInterracion Tipo { get; set; }
+        public string Contenido { get; set; }
+        public string Lugar { get; set; }
+
+        public Interaccion(Cliente cliente, string tema, string contenido, string cuando = "00/00/0000")
         {
-            this.Cliente = cliente;
-            this.Tema = tema;
-            this.Fecha = DateTime.Today;
-            this.contenido = contenido;
+            if (cliente == null || tema == null || contenido == null || cuando == null)
+            {
+                throw new ArgumentNullException("datos de mensaje null");
+            }
+
+            if (tema == "" || contenido == "" || cuando == "")
+            {
+                throw new Excepciones.EmptyStringException("datos de mensaje vacios");
+            }
+
+            if (cuando != "00/00/0000")
+            {
+                DateTime fecha;
+                if (DateTime.TryParseExact(cuando, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None,
+                        out fecha))
+                {
+                    this.Fecha = fecha;
+                }
+                else
+                {
+                    Console.WriteLine("Fecha no valida");
+                    throw new Excepciones.InvalidDateException("Fecha no valida");
+                }
+
+                this.Cliente = cliente;
+                this.Tema = tema;
+                this.Contenido = contenido;
+            }
         }
 
         public void AgergarNotas(string notas)
-        {
-            this.Notas = notas;
+            {
+                this.Notas = notas;
+            }
 
-        }
+            public enum TipoInterracion
+            {
+                Mensaje,
+                Llamada,
+                Reunion,
+                Correo,
+                Nada //Solo por necesidad
+            }
     }
 }

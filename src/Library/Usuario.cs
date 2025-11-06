@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace Library
 {
@@ -14,11 +15,10 @@ namespace Library
     {
         public string ID { get; set; }
         public string Nombre { get; set; }
-        public List<string> Etiqueteas = new List<string>();
-        public List<Interaccion> Interacciones { get; private set; } = new List<Interaccion>();
-        public List<Venta> Total_Ventas { get; private set; } = new List<Venta>();
+        public List<Interaccion> InteraccionesUsuario { get; private set; } = new List<Interaccion>();
+        public List<Venta> TotalVentas { get; private set; } = new List<Venta>();
         public List<Venta> VentaCliente { get; private set; } = new List<Venta>();
-        public List<Cotizacion> Cotizaciones { get; private set; } = new List<Cotizacion>();
+        public List<Cotizacion> CotizacionesUsuario { get; private set; } = new List<Cotizacion>();
 
         // Métodos del diagrama
         public Usuario(string id,string nombre)
@@ -30,54 +30,19 @@ namespace Library
         {
             Console.WriteLine($"Recordatorio creado: {que}, para {cuando}");
         }
-
-        public void AgregarEtiqueta(Cliente cliente, string etiqueta)
+        public void VentaClienteAdd(Venta venta)
         {
-            cliente.Etiqueta = etiqueta;
-            if (!(Etiqueteas.Contains(etiqueta)))
-            {
-                Etiqueteas.Add(etiqueta);
-            }
+            TotalVentas.Add(venta);
         }
 
-        public void VentaClienteAdd(Cliente cliente, string producto, string cuando, string precio)
+        public void AgregarCotizacion(Cotizacion cotizacion)
         {
-            DateTime fecha;
-            if (DateTime.TryParseExact(cuando, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out fecha))
-            {
-                this.Total_Ventas.Add(new Venta(cliente,producto,fecha,precio));
-                this.VentaCliente.Add(new Venta(cliente,producto,fecha,precio));
-            }
-            else
-            {
-                Console.WriteLine("Fecha no valida");
-            }
+            CotizacionesUsuario.Add(cotizacion);
         }
-
-        public void AgregarCotizacion(Cliente cliente,string cuando, string precio)
+        public void AgregarInteraccion(Interaccion interaccion)
         {
-            DateTime fecha;
-            if (DateTime.TryParseExact(cuando, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out fecha))
-            {
-                this.Cotizaciones.Add(new Cotizacion(cliente,fecha,precio));
-            }
-            else
-            {
-                Console.WriteLine("Fecha no valida");
-            }
+            InteraccionesUsuario.Add(interaccion);
         }
-
-        public Interaccion BuscarInteraccion(string tipo, string tema)
-        {
-            foreach (Interaccion interaccion in Interacciones)
-            {
-                if (interaccion.tipo == tipo && interaccion.Tema == tema)
-                {
-                    return interaccion;
-                }
-            }
-            Console.WriteLine("No se encontro la interaccion");
-            return null;
-        }
+        
     }
 }

@@ -1,3 +1,6 @@
+using System;
+using System.Globalization;
+
 namespace Library
 {
     // Representa una interacción de tipo mensaje con un cliente y el usuario.
@@ -24,9 +27,13 @@ namespace Library
     // Mensajes sin romper la lógica.
     public class Mensajes : Interaccion
     {
-        public Mensajes(Cliente cliente, string tema, string mensaje) : base(cliente, tema,mensaje)
+        public Mensajes(Cliente cliente, string tema, string mensaje, string cuando) : base(cliente,
+            tema, mensaje,cuando)
         {
-            this.tipo = "mensaje";
+                this.Tipo = TipoInterracion.Mensaje;
+            }
         }
     }
-}
+
+        
+    
