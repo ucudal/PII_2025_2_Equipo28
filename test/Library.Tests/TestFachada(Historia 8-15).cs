@@ -26,7 +26,7 @@ namespace Library.Tests
                 usuario = Listas.BuscarUsuario("1");
                 cliente = new Cliente("Di", "Caprio", "09781764", "Oscar@cabezatermo.com");
                 cliente.Id = "01";
-                fachada.clienteLista.AgregaCliente(cliente);
+                fachada.RepoClientes.AgregaCliente(cliente);
 
             }
             

@@ -16,10 +16,10 @@ namespace Library.Tests
 
             Cliente c = new Cliente("Juan", "Perez", "099000000", "juan@correo.com");
             // Ventas dentro del período
-            usuario.Total_Ventas.Add(new Venta(c, "Prod A", new DateTime(2025, 10, 05), "1000"));
-            usuario.Total_Ventas.Add(new Venta(c, "Prod B", new DateTime(2025, 10, 10), "2000"));
+            usuario.TotalVentas.Add(new Venta(c, "Prod A", new DateTime(2025, 10, 05), "1000"));
+            usuario.TotalVentas.Add(new Venta(c, "Prod B", new DateTime(2025, 10, 10), "2000"));
             // Fuera del período
-            usuario.Total_Ventas.Add(new Venta(c, "Prod C", new DateTime(2025, 09, 30), "9999"));
+            usuario.TotalVentas.Add(new Venta(c, "Prod C", new DateTime(2025, 09, 30), "9999"));
 
             Fachada fachada = new Fachada();
 
@@ -44,8 +44,8 @@ namespace Library.Tests
 
             Cliente c = new Cliente("Ana", "Gomez", "098000000", "ana@correo.com");
             // Todas fuera del rango (septiembre)
-            usuario.Total_Ventas.Add(new Venta(c, "Prod X", new DateTime(2025, 09, 10), "1500"));
-            usuario.Total_Ventas.Add(new Venta(c, "Prod Y", new DateTime(2025, 09, 25), "500"));
+            usuario.TotalVentas.Add(new Venta(c, "Prod X", new DateTime(2025, 09, 10), "1500"));
+            usuario.TotalVentas.Add(new Venta(c, "Prod Y", new DateTime(2025, 09, 25), "500"));
 
             Fachada fachada = new Fachada();
 
