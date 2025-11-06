@@ -11,13 +11,6 @@ namespace Library
     // ClienteLista es la experta en gestionar la colección de clientes, ya que conoce todas
     // las operaciones posibles sobre la lista (agregar, eliminar, buscar) y tiene acceso a todos
     // los datos necesarios de los clientes para esas operaciones.
-<<<<<<<< HEAD:src/Library/RepositorioCliente.cs
-    public class RepositorioCliente
-    {
-        public List<Cliente> Clientes { get; private set; }
-
-        public RepositorioCliente()
-========
     public class RepoClientes
     {
         public List<Cliente> Clientes { get; private set; }
@@ -26,7 +19,6 @@ namespace Library
         private RepoUsuarios usuarios;
 
         public RepoClientes(RepoEtiquetas etiquetas, RepoUsuarios usuarios)
->>>>>>>> main2:src/Library/RepoClientes.cs
         {
             Clientes = new List<Cliente>();
             this.etiquetas = etiquetas;
