@@ -565,5 +565,78 @@ namespace Library
         {
             return this.Usuarios.BuscarUsuario(usuarioId);
         }
+        //=======================================================================================
+        //                          Venta
+        //=======================================================================================
+        public string RegistrarVentaCliente(string clienteId, string producto, string fecha, string precio, string usuarioId)
+        {
+            Usuario usuario;
+            Cliente cliente;
+
+            // 1) Buscar usuario con manejo de errores propios
+            try
+            {
+                usuario = this.Usuarios.BuscarUsuario(usuarioId);
+            }
+            catch (ArgumentNullException)
+            {
+                return "Error: faltan datos para registrar la venta.";
+            }
+            catch (Excepciones.EmptyStringException)
+            {
+                return "Error: uno o más campos están vacíos.";
+            }
+
+            if (usuario == null)
+            {
+                return $"Error: no se encontró un usuario con ID '{usuarioId}'.";
+            }
+
+            // 2) Buscar cliente con manejo de errores propios
+            try
+            {
+                cliente = this.Clientes.BuscarUnCliente(clienteId);
+            }
+            catch (ArgumentNullException)
+            {
+                return "Error: faltan datos para registrar la venta.";
+            }
+            catch (Excepciones.EmptyStringException)
+            {
+                return "Error: uno o más campos están vacíos.";
+            }
+
+            if (cliente == null)
+            {
+                return $"Error: no se encontró un cliente con ID '{clienteId}'.";
+            }
+
+            // 3) Registrar venta con manejo de validaciones del repo
+            try
+            {
+                this.Ventas.AgregarVenta(cliente, fecha, precio, producto, usuario);
+                return $"Venta registrada: {cliente.Nombre} compró '{producto}' por ${precio} el {fecha}.";
+            }
+            catch (Excepciones.InvalidDateException)
+            {
+                return "Error: la fecha ingresada no es válida.";
+            }
+            catch (Excepciones.EmptyStringException)
+            {
+                return "Error: uno o más campos están vacíos.";
+            }
+            catch (ArgumentNullException)
+            {
+                return "Error: faltan datos para registrar la venta.";
+            }
+            catch (Exception)
+            {
+                return "Error: ocurrió un problema al registrar la venta.";
+            }
+        }
+
+
+
+
     }
 }
