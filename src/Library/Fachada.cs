@@ -11,7 +11,7 @@ namespace Library
         public RepoCotizaciones Cotizaciones = new RepoCotizaciones();
         public RepoVentas Ventas = new RepoVentas();
         public RepoUsuarios Usuarios = new RepoUsuarios();
-
+        public List<Usuario> UsuariosSuspendidos = new List<Usuario>();
         public Fachada()
         {
             this.Clientes = new RepoClientes(this.Etiquetas, this.Usuarios);
@@ -306,7 +306,7 @@ namespace Library
 
 
         // Como administrador quiero crear, suspender o eliminar usuarios, para mantener control sobre los accesos.
-        private List<Usuario> UsuariosSuspendidos = new List<Usuario>();
+       
 
         /// <summary>
         /// Crea un nuevo usuario si no existe otro con el mismo ID.
@@ -377,64 +377,7 @@ namespace Library
                 return $"No se encontró un usuario con ID '{id}'.";
             }
         }
-
-        // public void CrearUsuario(string adminId, string nuevoId, string nuevoNombre)
-        //   {
-        //     Administrador admin = Usuarios.BuscarAdministrador(adminId);
-        //     if (admin != null)
-        //    {
-        //         Usuario nuevo = admin.CrearUsuario(nuevoId, nuevoNombre);
-        //         Console.WriteLine("Usuario creado correctamente: " + nuevo.Nombre);
-        //     }
-        //    else
-//{
-        //        Console.WriteLine("Administrador no encontrado.");
-//}
-// }
-
-//  public void SuspenderUsuario(string adminId, string usuarioId)
-//{
-// Administrador admin = Usuarios.BuscarAdministrador(adminId);
-// if (admin != null)
-//   {
-//      Usuario usuario = Usuarios.BuscarUsuario(usuarioId);
-//    if (usuario != null)
-//    {
-//        admin.SuspenderUsuario(usuario);
-//        Console.WriteLine("Usuario suspendido: " + usuario.Nombre);
-//   }
-//    else
-//  {
-//      Console.WriteLine("Usuario no encontrado.");
-// }
-//  }
-// else
-// {
-//    Console.WriteLine("Administrador no encontrado.");
-//  }
-// }
-
-// public void EliminarUsuario(string adminId, string usuarioId)
-//{
-//   Administrador admin = Usuarios.BuscarAdministrador(adminId);
-//  if (admin != null)
-//  {
-//   Usuario usuario = Usuarios.BuscarUsuario(usuarioId);
-//   if (usuario != null)
-//  {
-//     admin.EliminarUsuario(usuario);
-//     Console.WriteLine("Usuario eliminado: " + usuario.Nombre);
-// }
-// else
-//  {
-//     Console.WriteLine("Usuario no encontrado.");
-//   }
-// }
-//else
-// {
-//    Console.WriteLine("Administrador no encontrado.");
-//}
-// }
+        
 
 // Como vendedor, quiero poder asignar un cliente a otro vendedor para distribuir el trabajo en el equipo.
 
