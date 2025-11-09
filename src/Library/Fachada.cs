@@ -17,7 +17,7 @@ namespace Library
             this.Clientes = new RepoClientes(this.Etiquetas, this.Usuarios);
         }
 
-        public void RegistarMensaje(string clienteId, string mensaje, string tema,
+        public string RegistarMensaje(string clienteId, string mensaje, string tema,
             string usuarioId, string cuando)
         {
             Usuario usuario = null;
@@ -28,15 +28,22 @@ namespace Library
                 usuario = this.Usuarios.BuscarUsuario(usuarioId);
                 cliente = Clientes.BuscarUnCliente(clienteId);
                 // Cliente cliente = Usuarios.BuscarCliente(clienteId); //Hecho comentario por si acaso
-                Mensaje = new Mensajes(usuario,cliente, tema, mensaje, cuando);
+                Mensaje = new Mensajes(usuario, cliente, tema, mensaje, cuando);
             }
             catch (ArgumentNullException e)
             {
                 Console.WriteLine(e.Message);
+                return e.Message;
             }
             catch (Excepciones.EmptyStringException e)
             {
                 Console.WriteLine(e.Message);
+                return e.Message;
+            }
+            catch (Excepciones.InvalidDateException e)
+            {
+                Console.WriteLine(e.Message);
+                return e.Message;
             }
 
             if (usuario != null)
@@ -44,11 +51,14 @@ namespace Library
                 if (cliente != null)
                 {
                     Interacciones.AgregarInteraccion(Mensaje, usuario);
+                    return "Mensaje registrado";
                 }
             }
+
+            return "El usuario o cliente no existen";
         }
 
-        public void RegistrarCorreo(string clienteId, string correo, string tema,
+        public string RegistrarCorreo(string clienteId, string correo, string tema,
             string usuarioId, string cuando)
         {
             Usuario usuario = null;
@@ -64,10 +74,17 @@ namespace Library
             catch (ArgumentNullException e)
             {
                 Console.WriteLine(e.Message);
+                return e.Message;
             }
             catch (Excepciones.EmptyStringException e)
             {
                 Console.WriteLine(e.Message);
+                return e.Message;
+            }
+            catch (Excepciones.InvalidDateException e)
+            {
+                Console.WriteLine(e.Message);
+                return e.Message;
             }
 
             if (usuario != null)
@@ -75,11 +92,13 @@ namespace Library
                 if (cliente != null)
                 {
                     Interacciones.AgregarInteraccion(Correo, usuario);
+                    return "Correo registrado";
                 }
             }
+            return "El usuario o cliente no existen";
         }
 
-        public void RegistarLlamada(string clienteId, string llamada, string tema,
+        public string RegistarLlamada(string clienteId, string llamada, string tema,
             string usuarioId, string cuando)
         {
             Usuario usuario = null;
@@ -95,10 +114,17 @@ namespace Library
             catch (ArgumentNullException e)
             {
                 Console.WriteLine(e.Message);
+                return e.Message;
             }
             catch (Excepciones.EmptyStringException e)
             {
                 Console.WriteLine(e.Message);
+                return e.Message;
+            }
+            catch (Excepciones.InvalidDateException e)
+            {
+                Console.WriteLine(e.Message);
+                return e.Message;
             }
 
             if (usuario != null)
@@ -106,11 +132,14 @@ namespace Library
                 if (cliente != null)
                 {
                     Interacciones.AgregarInteraccion(LLamada, usuario);
+                    return "llamada registrada";
+
                 }
             }
+            return "El usuario o cliente no existen";
         }
 
-        public void RegistarReunion(string clienteId, string reunion, string tema,
+        public string RegistarReunion(string clienteId, string reunion, string tema,
             string usuarioId, string cuando, string lugar)
         {
             Usuario usuario = null;
@@ -126,10 +155,17 @@ namespace Library
             catch (ArgumentNullException e)
             {
                 Console.WriteLine(e.Message);
+                return e.Message;
             }
             catch (Excepciones.EmptyStringException e)
             {
                 Console.WriteLine(e.Message);
+                return e.Message;
+            }
+            catch (Excepciones.InvalidDateException e)
+            {
+                Console.WriteLine(e.Message);
+                return e.Message;
             }
 
             if (usuario != null)
@@ -137,11 +173,14 @@ namespace Library
                 if (cliente != null)
                 {
                     Interacciones.AgregarInteraccion(Reunion, usuario);
+                    return "Reuion registrada";
+
                 }
             }
+            return "El usuario o cliente no existen";
         }
 
-        public void AgregarNota(string nota, string tipointeraccion, string tema, string usuarioId)
+        public string AgregarNota(string nota, string tipointeraccion, string tema, string usuarioId)
         {
             Usuario usuario = null;
             Interaccion interaccion = null;
@@ -153,18 +192,23 @@ namespace Library
             catch (ArgumentNullException e)
             {
                 Console.WriteLine(e.Message);
+                return e.Message;
             }
             catch (Excepciones.EmptyStringException e)
             {
                 Console.WriteLine(e.Message);
+                return e.Message;
             }
             if (usuario != null)
             {
                 if (interaccion != null)
                 {
                     interaccion.AgergarNotas(nota);
+                    return "Nota agregada";
                 }
             }
+
+            return "El usuario o interaccion no existen";
         }
 
         public string InteraccionesCliente(string clienteId,string usuarioId,string tipo="",string fecha="")
@@ -181,10 +225,17 @@ namespace Library
             catch (ArgumentNullException e)
             {
                 Console.WriteLine(e.Message);
+                return e.Message;
             }
             catch (Excepciones.EmptyStringException e)
             {
                 Console.WriteLine(e.Message);
+                return e.Message;
+            }
+            catch (Excepciones.InvalidDateException e)
+            {
+                Console.WriteLine(e.Message);
+                return e.Message;
             }
             
             if (tipo != "" && fecha != "")
@@ -221,10 +272,12 @@ namespace Library
             catch (ArgumentNullException e)
             {
                 Console.WriteLine(e.Message);
+                return e.Message;
             }
             catch (Excepciones.EmptyStringException e)
             {
                 Console.WriteLine(e.Message);
+                return e.Message;
             }
             if (usuario == null)
             {
@@ -286,10 +339,7 @@ namespace Library
                     Panel += $"Tema de la reunion: {interaccion.Tema}. Fecha: {interaccion.Fecha}\n";
                 }
             }
-
             return Panel;
-
-
         }
 
         // public void AgregarEtiquetaCliente(string clienteId, string etiqueta, string usuarioId)
