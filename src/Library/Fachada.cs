@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Library
 {
@@ -316,7 +317,7 @@ namespace Library
             }
 
             string Panel = $"Los Clientes totales son los siguientes:\n";
-            foreach (Cliente cliente in this.Clientes.Clientes)
+            foreach (Cliente cliente in this.Clientes.Clientes2)
             {
                 Panel += $"{cliente.Nombre} {cliente.Apellido}\n";
             }
@@ -619,10 +620,10 @@ namespace Library
             return Clientes.BuscarCliente(atributo, valorBusqueda);
         }
 
-        public Cliente CrearNuevoCliente(string nombre, string apellido, string telefono, string correo)
+        public Cliente CrearNuevoCliente(string id, string nombre, string apellido, string telefono, string correo)
         {
-            this.Clientes.AgregaCliente(new Cliente(nombre, apellido, telefono, correo));
-            return new Cliente(nombre, apellido, telefono, correo);
+            this.Clientes.AgregaCliente(new Cliente(id, nombre, apellido, telefono, correo));
+            return new Cliente(id, nombre, apellido, telefono, correo);
         }
 
         public void ModificarInfo(string id, string atributo, string nuevoValor)

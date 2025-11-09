@@ -20,7 +20,7 @@ namespace Library.Tests
             fachada.CrearUsuario(usuarioId, "Matteo");
 
             // Cliente válido con Id asignado 
-            cliente = new Cliente("Juan", "Pérez", "099123123", "jperez@mail.com");
+            cliente = new Cliente("1", "Juan", "Pérez", "099123123", "jperez@mail.com");
             cliente.Id = "C001";                   // <<< asignar Id
             fachada.Clientes.AgregaCliente(cliente);
         }

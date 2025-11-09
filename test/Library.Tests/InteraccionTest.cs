@@ -13,7 +13,7 @@ namespace Library.Tests
         public void setup()
         {
             usuario = new Usuario("1", "CJ");
-            cliente = new Cliente("Vela", "La sopla vela", "099878655", "VelySape@cabezatermo.com");
+            cliente = new Cliente("1","Vela", "La sopla vela", "099878655", "VelySape@cabezatermo.com");
         }
 
 

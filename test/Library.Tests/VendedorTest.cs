@@ -14,7 +14,7 @@ namespace Library.Tests
         {
             vendedor1 = new Vendedor("1", "Juan Pérez");
             vendedor2 = new Vendedor("2", "María García");
-            cliente = new Cliente("Pedro", "López", "099123456", "pedro@example.com");
+            cliente = new Cliente("1","Pedro", "López", "099123456", "pedro@example.com");
         }
 
         [Test]

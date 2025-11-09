@@ -21,8 +21,9 @@ namespace Library
         public List<string> Etiquetas { get; set; } = new List<string>();
         public string FechaDeNacimiento { get; set; }
 
-        public Cliente(string nombre, string apellido, string telefono, string correo)
+        public Cliente(string id, string nombre, string apellido, string telefono, string correo)
         {
+            Id = id;
             Nombre = nombre;
             Apellido = apellido;
             Telefono = telefono;
