@@ -27,17 +27,18 @@ namespace Library
     {
         public string Notas { get; set; }
         public Cliente Cliente { get; set; }
+        public Usuario Usuario { get; set; }
         public string Tema { get; set; }
         public DateTime Fecha { get; set; }
         public TipoInterracion Tipo { get; set; }
         public string Contenido { get; set; }
         public string Lugar { get; set; }
 
-        public Interaccion(Cliente cliente, string tema, string contenido, string cuando = "00/00/0000")
+        public Interaccion(Usuario usuario, Cliente cliente, string tema, string contenido, string cuando = "00/00/0000")
         {
-            if (cliente == null || tema == null || contenido == null || cuando == null)
+            if (cliente == null || tema == null || contenido == null || cuando == null||usuario==null)
             {
-                throw new ArgumentNullException("datos de mensaje null");
+                throw new ArgumentNullException("datos de interaccion null");
             }
 
             if (tema == "" || contenido == "" || cuando == "")
@@ -52,6 +53,7 @@ namespace Library
                         out fecha))
                 {
                     this.Fecha = fecha;
+                    this.FechaIncorrecta(fecha);
                 }
                 else
                 {
@@ -62,6 +64,7 @@ namespace Library
                 this.Cliente = cliente;
                 this.Tema = tema;
                 this.Contenido = contenido;
+                this.Usuario = usuario;
             }
         }
 
@@ -86,6 +89,14 @@ namespace Library
                 Reunion,
                 Correo,
                 Nada //Solo por necesidad
+            }
+
+            protected virtual void FechaIncorrecta(DateTime fecha)//metodo creado para que no pudan usar fechas futuras (excepto en reuniones)
+            {
+                if (!(fecha < DateTime.Today))
+                {
+                    throw new Excepciones.InvalidDateException("Fecha no valida");
+                }
             }
     }
 }

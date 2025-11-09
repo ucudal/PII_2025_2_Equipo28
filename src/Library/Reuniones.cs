@@ -29,8 +29,8 @@ namespace Library
     // Reunion sin romper la lógica.
     public class Reunion : Interaccion
     {
-        public Reunion(Cliente cliente, string tema, string lugar, string reunion, string cuando) :
-            base(cliente, tema, reunion,cuando)
+        public Reunion(Usuario usuario, Cliente cliente, string tema, string lugar, string reunion, string cuando) :
+            base(usuario, cliente, tema, reunion, cuando)
         {
             if (lugar == null)
             {
@@ -41,11 +41,19 @@ namespace Library
             {
                 throw new Excepciones.EmptyStringException("datos de interaccion vacios");
             }
+
             this.Lugar = lugar;
             this.Tipo = TipoInterracion.Reunion;
-            }
+        }
+
+        protected override void FechaIncorrecta(DateTime fecha) //Alterado para que reuniones pueda resgistar reuniones pasasdas y proximas a realizar
+        {
+            //En blanco a proposito
         }
     }
+}
+        
+    
 
         
     

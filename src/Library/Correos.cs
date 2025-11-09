@@ -28,7 +28,7 @@ namespace Library
 
     public class Correos : Interaccion
     {
-        public Correos(Cliente cliente, string tema, string correo, string cuando) : base(cliente, tema,correo,cuando)
+        public Correos(Usuario usuario, Cliente cliente, string tema, string correo, string cuando) : base(usuario,cliente, tema,correo,cuando)
         {
             this.Tipo = TipoInterracion.Correo;
         }

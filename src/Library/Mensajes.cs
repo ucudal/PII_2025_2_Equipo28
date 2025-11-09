@@ -27,11 +27,11 @@ namespace Library
     // Mensajes sin romper la lógica.
     public class Mensajes : Interaccion
     {
-        public Mensajes(Cliente cliente, string tema, string mensaje, string cuando) : base(cliente,
+        public Mensajes(Usuario usuario, Cliente cliente, string tema, string mensaje, string cuando) : base(usuario,cliente,
             tema, mensaje,cuando)
         {
                 this.Tipo = TipoInterracion.Mensaje;
-            }
+        }
         }
     }
 

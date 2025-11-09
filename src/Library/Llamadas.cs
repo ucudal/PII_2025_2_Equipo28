@@ -29,7 +29,7 @@ namespace Library
     public class Llamadas : Interaccion
     {
         
-        public Llamadas(Cliente cliente, string tema,string llamada,string cuando) : base(cliente, tema,llamada,cuando)
+        public Llamadas(Usuario usuario, Cliente cliente, string tema,string llamada,string cuando) : base(usuario, cliente, tema,llamada,cuando)
         {
                 this.Tipo = TipoInterracion.Llamada;
             }

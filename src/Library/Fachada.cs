@@ -28,7 +28,7 @@ namespace Library
                 usuario = this.Usuarios.BuscarUsuario(usuarioId);
                 cliente = Clientes.BuscarUnCliente(clienteId);
                 // Cliente cliente = Usuarios.BuscarCliente(clienteId); //Hecho comentario por si acaso
-                Mensaje = new Mensajes(cliente, tema, mensaje, cuando);
+                Mensaje = new Mensajes(usuario,cliente, tema, mensaje, cuando);
             }
             catch (ArgumentNullException e)
             {
@@ -59,7 +59,7 @@ namespace Library
                 usuario = this.Usuarios.BuscarUsuario(usuarioId);
                 cliente = Clientes.BuscarUnCliente(clienteId);
                 // Cliente cliente = Usuarios.BuscarCliente(clienteId); //Hecho comentario por si acaso
-                Correo = new Correos(cliente, tema, correo, cuando);
+                Correo = new Correos(usuario,cliente, tema, correo, cuando);
             }
             catch (ArgumentNullException e)
             {
@@ -90,7 +90,7 @@ namespace Library
                 usuario = this.Usuarios.BuscarUsuario(usuarioId);
                 cliente = Clientes.BuscarUnCliente(clienteId);
                 // Cliente cliente = Usuarios.BuscarCliente(clienteId); //Hecho comentario por si acaso
-                LLamada = new Llamadas(cliente, tema, llamada, cuando);
+                LLamada = new Llamadas(usuario,cliente, tema, llamada, cuando);
             }
             catch (ArgumentNullException e)
             {
@@ -121,7 +121,7 @@ namespace Library
                 usuario = this.Usuarios.BuscarUsuario(usuarioId);
                 cliente = Clientes.BuscarUnCliente(clienteId);
                 // Cliente cliente = Usuarios.BuscarCliente(clienteId); //Hecho comentario por si acaso
-                Reunion = new Reunion(cliente, tema, lugar, reunion,cuando);
+                Reunion = new Reunion(usuario,cliente, tema, lugar, reunion,cuando);
             }
             catch (ArgumentNullException e)
             {
@@ -148,7 +148,7 @@ namespace Library
             try
             {
                 usuario = this.Usuarios.BuscarUsuario(usuarioId);
-                interaccion = Interacciones.BuscarInteraccion(tipointeraccion, tema);
+                interaccion = Interacciones.BuscarInteraccion(usuario,tipointeraccion, tema);
             }
             catch (ArgumentNullException e)
             {
@@ -176,7 +176,7 @@ namespace Library
             {
                 usuario = this.Usuarios.BuscarUsuario(usuarioId);
                 cliente = Clientes.BuscarUnCliente(clienteId);
-                interaccionesCliente = Interacciones.BuscarInteraccion(cliente, tipo, fecha);
+                interaccionesCliente = Interacciones.BuscarInteraccion(usuario,cliente, tipo, fecha);
             }
             catch (ArgumentNullException e)
             {
@@ -209,6 +209,87 @@ namespace Library
 
                 return informacion;
             }
+        }
+
+        public string InterraccionClienteAusente(string usuarioId)
+        {
+            Usuario usuario = null;
+            try
+            {
+                usuario=this.Usuarios.BuscarUsuario(usuarioId);
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch (Excepciones.EmptyStringException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            if (usuario == null)
+            {
+                return "No se reconoce el usuario";
+            }
+            Dictionary<Cliente, Interaccion> InteraccionLista = this.Interacciones.UltimasInteraccionesClientes(usuario);
+            string ClientesAusentes=$"Los clientes con los que no interactua hace un mes o mas son:\n";
+            foreach (var dato in InteraccionLista)
+            {
+                if (dato.Value.Fecha.AddMonths(1) <= DateTime.Now)
+                {
+                    ClientesAusentes += $"{dato.Key}";
+                }
+            }
+            return ClientesAusentes;
+        }
+
+        public string Panel(string usuarioId)
+        {
+            Usuario usuario = null;
+            try
+            {
+                usuario=this.Usuarios.BuscarUsuario(usuarioId);
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch (Excepciones.EmptyStringException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            if (usuario == null)
+            {
+                return "No se reconoce el usuario";
+            }
+
+            string Panel = $"Los Clientes totales son los siguientes:\n";
+            foreach (Cliente cliente in this.Clientes.Clientes)
+            {
+                Panel += $"{cliente.Nombre} {cliente.Apellido}\n";
+            }
+
+            Panel += $"Sus interacciones mas recientes son:\n";
+            Dictionary<Cliente,Interaccion> interaccionesRecientes = this.Interacciones.UltimasInteraccionesClientes(usuario);
+            foreach (var dato in interaccionesRecientes)
+            {
+                if (dato.Value.Fecha.AddDays(7) <= DateTime.Now)
+                {
+                    Panel +=
+                        $"{dato.Key.Nombre} {dato.Key.Apellido}. Interaccion de tipo {dato.Value.Tipo}. Tema: {dato.Value.Tema}\n";
+                }
+            }
+            Panel += $"Sus reuniones proximas son:\n";
+            foreach (Interaccion interaccion in this.Interacciones.Interacciones2)
+            {
+                if (interaccion.Tipo == Interaccion.TipoInterracion.Reunion && interaccion.Fecha >= DateTime.Now)
+                {
+                    Panel += $"Tema de la reunion: {interaccion.Tema}. Fecha: {interaccion.Fecha}\n";
+                }
+            }
+
+            return Panel;
+
+
         }
 
         // public void AgregarEtiquetaCliente(string clienteId, string etiqueta, string usuarioId)
@@ -320,7 +401,7 @@ namespace Library
             
 
             Usuario nuevo = new Usuario(id, nombre);
-            Usuarios. AgregarUsuario(nuevo);
+            this.Usuarios.AgregarUsuario(nuevo);
             return $"Usuario '{nombre}' (ID: {id}) creado correctamente.";
         }
 
@@ -436,50 +517,50 @@ namespace Library
 
         //Como usuario quiero ver un panel con clientes totales, interacciones recientes y reuniones próximas, para tener un resumen rápido.
 
-        public void VerPanelResumen(string usuarioId)
-        {
-            Usuario usuario = this.Usuarios.BuscarUsuario(usuarioId);
-            if (usuario != null)
-            {
-                Console.WriteLine("===== PANEL DE RESUMEN =====");
-
-                // Clientes totales
-                Console.WriteLine("Clientes totales: " + Clientes.Clientes.Count);
-
-                // Interacciones recientes (últimos 7 días)
-                DateTime limite = DateTime.Now.AddDays(-7);
-                Console.WriteLine("\nInteracciones recientes (últimos 7 días):");
-                // foreach (Interaccion inter in usuario.Interacciones)
-                // {
-                //     if (inter.Fecha >= limite)
-                //     {
-                //         Console.WriteLine(inter.Cliente.Nombre + " " + inter.Cliente.Apellido +
-                //                           " - " + inter.tipo + " (" + inter.Fecha.ToShortDateString() + ")");
-                //     }
-                // }
-
-                // Reuniones próximas (próximos 7 días)
-                DateTime hoy = DateTime.Now;
-                DateTime futuro = hoy.AddDays(7);
-                Console.WriteLine("\nReuniones próximas (próximos 7 días):");
-                // foreach (Interaccion inter in usuario.Interacciones)
-                // {
-                //     if (inter.tipo == "reunion" && inter.Fecha >= hoy && inter.Fecha <= futuro)
-                //     {
-                //         Console.WriteLine(inter.Cliente.Nombre + " " + inter.Cliente.Apellido +
-                //                           " - " + inter.Tema + " en " +
-                //                           ((Reunion)inter).lugar +
-                //                           " (" + inter.Fecha.ToShortDateString() + ")");
-                //     }
-                // }
-
-                Console.WriteLine("=============================");
-            }
-            else
-            {
-                Console.WriteLine("Usuario no encontrado.");
-            }
-        }
+        // public void VerPanelResumen(string usuarioId)
+        // {
+        //     Usuario usuario = this.Usuarios.BuscarUsuario(usuarioId);
+        //     if (usuario != null)
+        //     {
+        //         Console.WriteLine("===== PANEL DE RESUMEN =====");
+        //
+        //         // Clientes totales
+        //         Console.WriteLine("Clientes totales: " + Clientes.Clientes.Count);
+        //
+        //         // Interacciones recientes (últimos 7 días)
+        //         DateTime limite = DateTime.Now.AddDays(-7);
+        //         Console.WriteLine("\nInteracciones recientes (últimos 7 días):");
+        //         // foreach (Interaccion inter in usuario.Interacciones)
+        //         // {
+        //         //     if (inter.Fecha >= limite)
+        //         //     {
+        //         //         Console.WriteLine(inter.Cliente.Nombre + " " + inter.Cliente.Apellido +
+        //         //                           " - " + inter.tipo + " (" + inter.Fecha.ToShortDateString() + ")");
+        //         //     }
+        //         // }
+        //
+        //         // Reuniones próximas (próximos 7 días)
+        //         DateTime hoy = DateTime.Now;
+        //         DateTime futuro = hoy.AddDays(7);
+        //         Console.WriteLine("\nReuniones próximas (próximos 7 días):");
+        //         // foreach (Interaccion inter in usuario.Interacciones)
+        //         // {
+        //         //     if (inter.tipo == "reunion" && inter.Fecha >= hoy && inter.Fecha <= futuro)
+        //         //     {
+        //         //         Console.WriteLine(inter.Cliente.Nombre + " " + inter.Cliente.Apellido +
+        //         //                           " - " + inter.Tema + " en " +
+        //         //                           ((Reunion)inter).lugar +
+        //         //                           " (" + inter.Fecha.ToShortDateString() + ")");
+        //         //     }
+        //         // }
+        //
+        //         Console.WriteLine("=============================");
+        //     }
+        //     else
+        //     {
+        //         Console.WriteLine("Usuario no encontrado.");
+        //     }
+        // }
 
 
         public List<Llamadas> Llamadas = new List<Llamadas>();
@@ -492,6 +573,7 @@ namespace Library
 
         public Cliente CrearNuevoCliente(string nombre, string apellido, string telefono, string correo)
         {
+            this.Clientes.AgregaCliente(new Cliente(nombre, apellido, telefono, correo));
             return new Cliente(nombre, apellido, telefono, correo);
         }
 

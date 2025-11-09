@@ -6,9 +6,12 @@ namespace Library
 {
     public class RepoInteracciones
     {
-        public List<Interaccion> Interacciones = new List<Interaccion>();
-
-        public Interaccion BuscarInteraccion(string tipo, string tema)
+        private List<Interaccion> Interacciones = new List<Interaccion>();
+        public IEnumerable<Interaccion> Interacciones2
+        {
+            get { return Interacciones; } 
+        }
+        public Interaccion BuscarInteraccion(Usuario usuario, string tipo, string tema)
         {
             tipo = tipo.ToLower();
             Interaccion.TipoInterracion tipo1 = Interaccion.TipoInterracion.Nada; //para inicializarlo
@@ -30,7 +33,7 @@ namespace Library
 
             foreach (Interaccion interaccion in Interacciones)
             {
-                if (interaccion.Tipo == tipo1 && interaccion.Tema == tema)
+                if (interaccion.Tipo == tipo1 && interaccion.Tema == tema && interaccion.Usuario == usuario)
                 {
                     return interaccion;
                 }
@@ -40,11 +43,11 @@ namespace Library
             return null;
         }
 
-        public List<Interaccion> BuscarInteraccion(Cliente cliente, string tipo = "", string fecha1 = "")
+        public List<Interaccion> BuscarInteraccion(Usuario usuario, Cliente cliente, string tipo = "", string fecha1 = "")
         {
-            if (cliente == null)
+            if (cliente == null||usuario==null)
             {
-                throw new ArgumentNullException("el cliente no pude ser null");
+                throw new ArgumentNullException("el cliente o usuario no pude ser null");
             }
 
             if (tipo == null || fecha1 == null)
@@ -90,7 +93,7 @@ namespace Library
                 //     $"las interaccion de {cliente.Nombre} {cliente.Apellido} del tipo {tipo1} de la fecha {fecha} son las siguientes:\n";
                 foreach (Interaccion interaccion in Interacciones)
                 {
-                    if (interaccion.Tipo == tipo1 && interaccion.Fecha == fecha)
+                    if (interaccion.Tipo == tipo1 && interaccion.Fecha == fecha && interaccion.Usuario==usuario)
                     {
                         interaccionesCliente.Add(interaccion);
                         // informacion += $"\n{interaccion.Tema}:\n{interaccion.Contenido}\n";
@@ -103,7 +106,8 @@ namespace Library
                 // string informacion = $"Las interacciones de {cliente.Nombre} {cliente.Apellido} son:\n";
                 foreach (Interaccion interaccion in Interacciones)
                 {
-                    interaccionesCliente.Add(interaccion);
+                    if (interaccion.Usuario==usuario)
+                        interaccionesCliente.Add(interaccion);
                     // informacion +=$"\n{interaccion.Tipo} del {interaccion.Fecha}\n{interaccion.Tema}:\n{interaccion.Contenido}\n"
                 }
             }
@@ -121,6 +125,29 @@ namespace Library
                 usuario.AgregarInteraccion(interaccion);
         }
 
-        
+        public Dictionary<Cliente,Interaccion> UltimasInteraccionesClientes(Usuario usuario)
+        {
+            if (usuario==null)
+            {
+                throw new ArgumentNullException("el usuario no pude ser null");
+            }
+            Dictionary<Cliente, Interaccion> UltimaInterracion = new Dictionary<Cliente, Interaccion>();
+            foreach (Interaccion interaccion in Interacciones)
+            {
+                if (UltimaInterracion.ContainsKey(interaccion.Cliente))
+                {
+                    if (UltimaInterracion[interaccion.Cliente].Fecha <= interaccion.Fecha)
+                    {
+                        UltimaInterracion[interaccion.Cliente] = interaccion;
+                    }
+                }
+                else
+                {
+                    UltimaInterracion[interaccion.Cliente] = interaccion;
+                }
+            }
+
+            return UltimaInterracion;
+        }
     }
 }
