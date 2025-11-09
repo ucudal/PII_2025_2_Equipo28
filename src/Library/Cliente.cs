@@ -69,7 +69,6 @@ namespace Library
             FechaDeNacimiento = nuevaFecha;
         }
         
-
         public override string ToString()
         {
             return $"{Nombre} {Apellido} ({Correo})";

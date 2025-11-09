@@ -13,14 +13,18 @@ namespace Library
     // los datos necesarios de los clientes para esas operaciones.
     public class RepoClientes
     {
-        public List<Cliente> Clientes { get; private set; }
+        private List<Cliente> Clientes = new List<Cliente>();
+        
+        public IEnumerable<Cliente> Clientes2
+        {
+            get { return Clientes; }
+        }
 
         private RepoEtiquetas etiquetas;
         private RepoUsuarios usuarios;
 
         public RepoClientes(RepoEtiquetas etiquetas, RepoUsuarios usuarios)
         {
-            Clientes = new List<Cliente>();
             this.etiquetas = etiquetas;
             this.usuarios = usuarios;
         }
@@ -54,31 +58,21 @@ namespace Library
                 case "nombre":
                     resultados = Clientes.FindAll(c => c.Nombre.Equals(val, StringComparison.OrdinalIgnoreCase));
                     break;
-
                 case "apellido":
                     resultados = Clientes.FindAll(c => c.Apellido.Equals(val, StringComparison.OrdinalIgnoreCase));
                     break;
-
                 case "telefono":
                     resultados = Clientes.FindAll(c => c.Telefono.Equals(val, StringComparison.OrdinalIgnoreCase));
                     break;
-
                 case "correo":
                     resultados = Clientes.FindAll(c => c.Correo.Equals(val, StringComparison.OrdinalIgnoreCase));
                     break;
-
-                // case "etiqueta":
-                //     resultados = Clientes.FindAll(c => c.Etiquetas.Equals(val, StringComparison.OrdinalIgnoreCase));
-                //     break;
-                
                 case "genero":
                     resultados = Clientes.FindAll(c => c.Genero.Equals(val, StringComparison.OrdinalIgnoreCase));
                     break;
-
                 case "fechadenacimiento":
                     resultados = Clientes.FindAll(c => c.FechaDeNacimiento.Equals(val, StringComparison.OrdinalIgnoreCase));
                     break;
-
                 default:
                     break;
             }
@@ -90,21 +84,22 @@ namespace Library
         {
             if (ClienteId == null)
             {
-                throw new ArgumentNullException("datos de cliente null");
+                throw new ArgumentNullException("Datos de cliente null");
             }
 
             if (ClienteId == "")
             {
-                throw new Excepciones.EmptyStringException("datos de cliente vacios");
+                throw new Excepciones.EmptyStringException("Datos de cliente vacios");
             }
+            
             foreach (var cliente in Clientes)
             {
-                if (cliente.Id==ClienteId)
+                if (cliente.Id == ClienteId)
                 {
                     return cliente;
                 }
-               
             }
+            
             return null;
         }
     }
