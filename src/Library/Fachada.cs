@@ -510,8 +510,7 @@ namespace Library
         }
         
 
-// Como vendedor, quiero poder asignar un cliente a otro vendedor para distribuir el trabajo en el equipo.
-
+    // Como vendedor, quiero poder asignar un cliente a otro vendedor para distribuir el trabajo en el equipo.
         public void AsignarClienteAOtroVendedor(string idVendedorActual, string idVendedorNuevo,
             string nombreCliente,
             string apellidoCliente)
@@ -533,7 +532,6 @@ namespace Library
         }
 
         //Como usuario quiero saber el total de ventas de un periodo dado, para analizar en rendimiento de mi negocio.
-
         public void TotalDeVentasEnPeriodo(string usuarioId, string fechaInicioTexto, string fechaFinTexto)
         {
             Usuario usuario = this.Usuarios.BuscarUsuario(usuarioId);
@@ -766,9 +764,88 @@ namespace Library
                 return "Error: ocurrió un problema al registrar la venta.";
             }
         }
+        
+        // ------ YO ------
+        public Vendedor CrearVendedor(string id, string nombre)
+        {
+            try
+            {
+                if (id == null)
+                {
+                    throw new ArgumentNullException(nameof(id), "El ID del vendedor no puede ser nulo");
+                }
+                if (nombre == null)
+                {
+                    throw new ArgumentNullException(nameof(nombre), "El nombre del vendedor no puede ser nulo");
+                }
+                
+                if (string.IsNullOrWhiteSpace(id))
+                {
+                    throw new Excepciones.EmptyStringException("El ID del vendedor no puede estar vacío");
+                }
+                if (string.IsNullOrWhiteSpace(nombre))
+                {
+                    throw new Excepciones.EmptyStringException("El nombre del vendedor no puede estar vacío");
+                }
+                
+                foreach (Vendedor v in Usuarios.Vendedores)
+                {
+                    if (v.Id == id)
+                    {
+                        throw new InvalidOperationException($"Ya existe un vendedor con el ID: {id}");
+                    }
+                }
 
+                Vendedor vendedor = new Vendedor(id, nombre);
+                Usuarios.Vendedores.Add(vendedor);
+                return vendedor;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Error: {e.Message}");
+                throw;
+            }
+        }
 
+        public Administrador CrearAdministrador(string id, string nombre)
+        {
+            try
+            {
+                if (id == null)
+                {
+                    throw new ArgumentNullException(nameof(id), "El ID del administrador no puede ser nulo");
+                }
+                if (nombre == null)
+                {
+                    throw new ArgumentNullException(nameof(nombre), "El nombre del administrador no puede ser nulo");
+                }
+                
+                if (string.IsNullOrWhiteSpace(id))
+                {
+                    throw new Excepciones.EmptyStringException("El ID del administrador no puede estar vacío");
+                }
+                if (string.IsNullOrWhiteSpace(nombre))
+                {
+                    throw new Excepciones.EmptyStringException("El nombre del administrador no puede estar vacío");
+                }
 
+                foreach (Administrador a in Usuarios.Administradores)
+                {
+                    if (a.ID == id)
+                    {
+                        throw new InvalidOperationException($"Ya existe un administrador con el ID: {id}");
+                    }
+                }
 
+                Administrador administrador = new Administrador(id, nombre);
+                Usuarios.Administradores.Add(administrador);
+                return administrador;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Error: {e.Message}");
+                throw;
+            }
+        }
     }
 }
