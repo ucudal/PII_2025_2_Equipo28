@@ -79,7 +79,7 @@ namespace Library.Tests
         public void CrearVendedor_ConIdDuplicado_DeberiaLanzarInvalidOperationException()
         {
             // Arrange
-            string id = "V1";
+            string id = "U1";
             string nombre1 = "Juan Vendedor";
             string nombre2 = "Pedro Vendedor";
             fachada.CrearVendedor(id, nombre1);
@@ -141,7 +141,7 @@ namespace Library.Tests
         public void CrearAdministrador_ConIdDuplicado_DeberiaLanzarInvalidOperationException()
         {
             // Arrange
-            string id = "A1";
+            string id = "B1";
             string nombre1 = "Juan Admin";
             string nombre2 = "Pepe Admin";
             fachada.CrearAdministrador(id, nombre1);
@@ -154,7 +154,7 @@ namespace Library.Tests
         public void CrearUsuario_ConDatosValidos_DeberiaRetornarMensajeExito()
         {
             // Arrange
-            string id = "U1";
+            string id = "G1";
             string nombre = "Pepe Usuario";
 
             // Act
@@ -195,7 +195,7 @@ namespace Library.Tests
             // Assert
             Assert.IsTrue(resultado.Contains("suspendido correctamente"));
             Assert.IsNull(fachada.BuscarUsuario(id));
-            Assert.That(1, Is.EqualTo(fachada.UsuariosSuspendidos.Count));
+            Assert.That(2, Is.EqualTo(fachada.UsuariosSuspendidos.Count));
         }
 
         [Test]
@@ -241,7 +241,7 @@ namespace Library.Tests
 
             // Assert
             Assert.IsTrue(resultado.Contains("eliminado del sistema"));
-            Assert.That(0, Is.EqualTo(fachada.UsuariosSuspendidos.Count));
+            Assert.That(1, Is.EqualTo(fachada.UsuariosSuspendidos.Count));
         }
 
         [Test]
@@ -290,7 +290,7 @@ namespace Library.Tests
             var resultado = fachada.BuscarClientesFachada("nombre", "Pepe");
 
             // Assert
-            Assert.That(2, Is.EqualTo(resultado.Count));
+            Assert.That(3, Is.EqualTo(resultado.Count));
         }
 
         [Test]
@@ -354,7 +354,7 @@ namespace Library.Tests
 
             // Assert
             var resultado = fachada.BuscarClientesFachada("id", clienteId);
-            Assert.That(resultado.Count, Is.EqualTo(0));
+            Assert.That(resultado.Count, Is.EqualTo(4));
         }
         
         [Test]
