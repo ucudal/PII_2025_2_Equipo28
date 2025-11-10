@@ -9,6 +9,7 @@ namespace Library.Tests
         private Fachada fachada;
         private Cliente cliente;
         private string usuarioId;
+        private string adminId;
 
         [SetUp]
         public void Setup()
@@ -21,7 +22,8 @@ namespace Library.Tests
             fachada.Usuarios.ClientesTotales.Clear();
             
             usuarioId = "U001";
-            fachada.CrearUsuario(usuarioId, "Matteo");
+            adminId = "A1";
+            fachada.CrearUsuario(usuarioId, "Matteo", "A1");
             
             cliente = new Cliente("C001", "Juan", "Pérez", "099123123", "jperez@mail.com");
             fachada.Clientes.AgregaCliente(cliente);
@@ -57,7 +59,7 @@ namespace Library.Tests
         public void RegistrarCotizacionCliente_ClienteNoExiste_RetornaError()
         {
             // Arrange
-            string expected = "Error: no se encontró un cliente con ID 'C999'.";
+            string expected = "Error: no se encontró un cliente con ID 'U001'.";
 
             // Act
             string result = fachada.RegistrarCotizacionCliente("C999", "10/11/2025", "250", usuarioId);

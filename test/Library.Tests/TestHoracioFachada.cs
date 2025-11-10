@@ -158,7 +158,7 @@ namespace Library.Tests
             string nombre = "Pepe Usuario";
 
             // Act
-            string resultado = fachada.CrearUsuario(id, nombre);
+            string resultado = fachada.CrearUsuario(id, nombre, "A1");
 
             // Assert
             Assert.IsTrue(resultado.Contains("creado correctamente"));
@@ -172,10 +172,10 @@ namespace Library.Tests
             string id = "U1";
             string nombre1 = "Pepe Usuario";
             string nombre2 = "Manolo Usuario";
-            fachada.CrearUsuario(id, nombre1);
+            fachada.CrearUsuario(id, nombre1, "A1");
 
             // Act
-            string resultado = fachada.CrearUsuario(id, nombre2);
+            string resultado = fachada.CrearUsuario(id, nombre2, "A1");
 
             // Assert
             Assert.IsTrue(resultado.Contains("Ya existe un usuario"));
@@ -187,10 +187,10 @@ namespace Library.Tests
             // Arrange
             string id = "U1";
             string nombre = "Pepe Usuario";
-            fachada.CrearUsuario(id, nombre);
+            fachada.CrearUsuario(id, nombre, "A1");
 
             // Act
-            string resultado = fachada.SuspenderUsuario(id);
+            string resultado = fachada.SuspenderUsuario(id, "A1");
 
             // Assert
             Assert.IsTrue(resultado.Contains("suspendido correctamente"));
@@ -205,7 +205,7 @@ namespace Library.Tests
             string id = "U10";
 
             // Act
-            string resultado = fachada.SuspenderUsuario(id);
+            string resultado = fachada.SuspenderUsuario(id, "A1");
 
             // Assert
             Assert.IsTrue(resultado.Contains("No se encontró"));
@@ -217,10 +217,10 @@ namespace Library.Tests
             // Arrange
             string id = "U1";
             string nombre = "Pepe Usuario";
-            fachada.CrearUsuario(id, nombre);
+            fachada.CrearUsuario(id, nombre, "A1");
 
             // Act
-            string resultado = fachada.EliminarUsuario(id);
+            string resultado = fachada.EliminarUsuario(id, "A1");
 
             // Assert
             Assert.IsTrue(resultado.Contains("eliminado del sistema"));
@@ -233,11 +233,11 @@ namespace Library.Tests
             // Arrange
             string id = "U1";
             string nombre = "Pepe Usuario";
-            fachada.CrearUsuario(id, nombre);
-            fachada.SuspenderUsuario(id);
+            fachada.CrearUsuario(id, nombre, "A1");
+            fachada.SuspenderUsuario(id, "A1");
 
             // Act
-            string resultado = fachada.EliminarUsuario(id);
+            string resultado = fachada.EliminarUsuario(id, "A1");
 
             // Assert
             Assert.IsTrue(resultado.Contains("eliminado del sistema"));
@@ -251,7 +251,7 @@ namespace Library.Tests
             string id = "U100";
 
             // Act
-            string resultado = fachada.EliminarUsuario(id);
+            string resultado = fachada.EliminarUsuario(id, "A1");
 
             // Assert
             Assert.IsTrue(resultado.Contains("No se encontró"));
@@ -363,7 +363,7 @@ namespace Library.Tests
             // Arrange
             string id = "U1";
             string nombre = "Pepe Usuario";
-            fachada.CrearUsuario(id, nombre);
+            fachada.CrearUsuario(id, nombre, "A1");
 
             // Act
             Usuario resultado = fachada.BuscarUsuario(id);
