@@ -102,5 +102,123 @@ namespace Library.Tests
             // Assert
             Assert.That(result, Is.EqualTo(expected));
         }
+       [Test]
+        public void TotalDeVentasEnPeriodo_RangoValido_SumaCorrecta()
+        {
+            // Arrange
+            var fachada = Fachada.Instancia;
+            var usuarioId = "U001";
+            fachada.CrearUsuario(usuarioId, "Matteo");
+
+            // Limpiar ventas previas del mismo usuario (singleton)
+            fachada.BuscarUsuario(usuarioId).TotalVentas.Clear();
+
+            var cliente = new Cliente("C001", "Juan", "Pérez", "099123123", "jperez@mail.com");
+            fachada.Clientes.AgregaCliente(cliente);
+
+            fachada.RegistrarVentaCliente(cliente.Id, "Monitor", "10/11/2025", "250", usuarioId);
+            fachada.RegistrarVentaCliente(cliente.Id, "Mouse",   "11/11/2025", "150", usuarioId);
+            fachada.RegistrarVentaCliente(cliente.Id, "Silla",   "15/11/2025", "300", usuarioId); // fuera de rango
+
+            string expected = "Total de ventas desde 10/11/2025 hasta 12/11/2025: $400";
+
+            // Act
+            string result = fachada.TotalDeVentasEnPeriodo(usuarioId, "10/11/2025", "12/11/2025");
+
+            // Assert
+            Assert.That(result, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void TotalDeVentasEnPeriodo_UsuarioNoExiste_Error()
+        {
+            // Arrange
+            var fachada = Fachada.Instancia;
+            string expected = "Error: no se encontró un usuario con ID 'U999'.";
+
+            // Act
+            string result = fachada.TotalDeVentasEnPeriodo("U999", "10/11/2025", "12/11/2025");
+
+            // Assert
+            Assert.That(result, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void TotalDeVentasEnPeriodo_FechaInvalida_Error()
+        {
+            // Arrange
+            var fachada = Fachada.Instancia;
+            var usuarioId = "U002";
+            fachada.CrearUsuario(usuarioId, "Matteo");
+            fachada.BuscarUsuario(usuarioId).TotalVentas.Clear();
+
+            var cliente = new Cliente("C002", "Juan", "Pérez", "099123123", "jperez@mail.com");
+            fachada.Clientes.AgregaCliente(cliente);
+
+            string expected = "Error: la fecha ingresada no es válida.";
+
+            // Act
+            string result = fachada.TotalDeVentasEnPeriodo(usuarioId, "99/99/9999", "12/11/2025");
+
+            // Assert
+            Assert.That(result, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void TotalDeVentasEnPeriodo_CamposVacios_Error()
+        {
+            // Arrange
+            var fachada = Fachada.Instancia;
+            var usuarioId = "U003";
+            fachada.CrearUsuario(usuarioId, "Matteo");
+            fachada.BuscarUsuario(usuarioId).TotalVentas.Clear();
+
+            string expected = "Error: uno o más campos están vacíos.";
+
+            // Act
+            string result = fachada.TotalDeVentasEnPeriodo(usuarioId, "", "12/11/2025");
+
+            // Assert
+            Assert.That(result, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void TotalDeVentasEnPeriodo_Nulos_Error()
+        {
+            // Arrange
+            var fachada = Fachada.Instancia;
+            string expected = "Error: faltan datos para registrar la venta.";
+
+            // Act
+            string result = fachada.TotalDeVentasEnPeriodo(null, null, null);
+
+            // Assert
+            Assert.That(result, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void TotalDeVentasEnPeriodo_RangoInvertido_TotalCero()
+        {
+            // Arrange 
+            var fachada = Fachada.Instancia;
+            var usuarioId = "U004";
+            fachada.CrearUsuario(usuarioId, "Matteo");
+            fachada.BuscarUsuario(usuarioId).TotalVentas.Clear();
+
+            var cliente = new Cliente("C004", "Juan", "Pérez", "099123123", "jperez@mail.com");
+            fachada.Clientes.AgregaCliente(cliente);
+
+            fachada.RegistrarVentaCliente(cliente.Id, "Monitor", "10/11/2025", "250", usuarioId);
+            fachada.RegistrarVentaCliente(cliente.Id, "Mouse",   "11/11/2025", "150", usuarioId);
+
+            string expected = "Total de ventas desde 12/11/2025 hasta 10/11/2025: $0";
+
+            // Act
+            string result = fachada.TotalDeVentasEnPeriodo(usuarioId, "12/11/2025", "10/11/2025");
+
+            // Assert
+            Assert.That(result, Is.EqualTo(expected));
+        }
     }
 }
+

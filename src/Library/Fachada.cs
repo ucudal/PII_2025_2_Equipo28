@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Globalization;
 
 namespace Library
 {
@@ -542,87 +543,7 @@ namespace Library
             //     Console.WriteLine("Error: vendedor o cliente no encontrado.");
             // }
         }
-
-        //Como usuario quiero saber el total de ventas de un periodo dado, para analizar en rendimiento de mi negocio.
-        public void TotalDeVentasEnPeriodo(string usuarioId, string fechaInicioTexto, string fechaFinTexto)
-        {
-            Usuario usuario = this.Usuarios.BuscarUsuario(usuarioId);
-
-            if (usuario != null)
-            {
-                DateTime fechaInicio = DateTime.Parse(fechaInicioTexto);
-                DateTime fechaFin = DateTime.Parse(fechaFinTexto);
-                double total = 0;
-
-                foreach (Venta venta in usuario.TotalVentas)
-                {
-                    if (venta.Fecha >= fechaInicio && venta.Fecha <= fechaFin)
-                    {
-                        double importe;
-                        if (double.TryParse(venta.Importe, out importe))
-                        {
-                            total = total + importe;
-                        }
-                    }
-                }
-
-                Console.WriteLine("Total de ventas desde " + fechaInicio.ToShortDateString() +
-                                  " hasta " + fechaFin.ToShortDateString() + ": $" + total);
-            }
-            else
-            {
-                Console.WriteLine("Usuario no encontrado.");
-            }
-        }
-
-        //Como usuario quiero ver un panel con clientes totales, interacciones recientes y reuniones próximas, para tener un resumen rápido.
-
-        // public void VerPanelResumen(string usuarioId)
-        // {
-        //     Usuario usuario = this.Usuarios.BuscarUsuario(usuarioId);
-        //     if (usuario != null)
-        //     {
-        //         Console.WriteLine("===== PANEL DE RESUMEN =====");
-        //
-        //         // Clientes totales
-        //         Console.WriteLine("Clientes totales: " + Clientes.Clientes.Count);
-        //
-        //         // Interacciones recientes (últimos 7 días)
-        //         DateTime limite = DateTime.Now.AddDays(-7);
-        //         Console.WriteLine("\nInteracciones recientes (últimos 7 días):");
-        //         // foreach (Interaccion inter in usuario.Interacciones)
-        //         // {
-        //         //     if (inter.Fecha >= limite)
-        //         //     {
-        //         //         Console.WriteLine(inter.Cliente.Nombre + " " + inter.Cliente.Apellido +
-        //         //                           " - " + inter.tipo + " (" + inter.Fecha.ToShortDateString() + ")");
-        //         //     }
-        //         // }
-        //
-        //         // Reuniones próximas (próximos 7 días)
-        //         DateTime hoy = DateTime.Now;
-        //         DateTime futuro = hoy.AddDays(7);
-        //         Console.WriteLine("\nReuniones próximas (próximos 7 días):");
-        //         // foreach (Interaccion inter in usuario.Interacciones)
-        //         // {
-        //         //     if (inter.tipo == "reunion" && inter.Fecha >= hoy && inter.Fecha <= futuro)
-        //         //     {
-        //         //         Console.WriteLine(inter.Cliente.Nombre + " " + inter.Cliente.Apellido +
-        //         //                           " - " + inter.Tema + " en " +
-        //         //                           ((Reunion)inter).lugar +
-        //         //                           " (" + inter.Fecha.ToShortDateString() + ")");
-        //         //     }
-        //         // }
-        //
-        //         Console.WriteLine("=============================");
-        //     }
-        //     else
-        //     {
-        //         Console.WriteLine("Usuario no encontrado.");
-        //     }
-        // }
-
-
+        
         public List<Llamadas> Llamadas = new List<Llamadas>();
         public List<Reunion> Reuniones = new List<Reunion>();
 
@@ -776,6 +697,66 @@ namespace Library
                 return "Error: ocurrió un problema al registrar la venta.";
             }
         }
+        
+        public string TotalDeVentasEnPeriodo(string usuarioId, string fechaInicioTexto, string fechaFinTexto)
+        {
+            // 1) Buscar usuario con manejo de errores estables
+            Usuario usuario;
+            try
+            {
+                usuario = this.Usuarios.BuscarUsuario(usuarioId);
+            }
+            catch (ArgumentNullException)
+            {
+                return "Error: faltan datos para registrar la venta.";
+            }
+            catch (Excepciones.EmptyStringException)
+            {
+                return "Error: uno o más campos están vacíos.";
+            }
+
+            if (usuario == null)
+            {
+                return $"Error: no se encontró un usuario con ID '{usuarioId}'.";
+            }
+
+            // 2) Validar nulos / vacíos en fechas
+            if (fechaInicioTexto == null || fechaFinTexto == null)
+            {
+                return "Error: faltan datos para registrar la venta.";
+            }
+            if (string.IsNullOrWhiteSpace(fechaInicioTexto) || string.IsNullOrWhiteSpace(fechaFinTexto))
+            {
+                return "Error: uno o más campos están vacíos.";
+            }
+
+            // 3) Parsear fechas con dd/MM/yyyy
+            DateTime fechaInicio, fechaFin;
+            if (!DateTime.TryParseExact(fechaInicioTexto, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out fechaInicio) ||
+                !DateTime.TryParseExact(fechaFinTexto, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out fechaFin))
+            {
+                return "Error: la fecha ingresada no es válida.";
+            }
+
+            // 4) Sumar importes en el rango [inicio, fin] 
+            double total = 0.0;
+            foreach (var venta in usuario.TotalVentas)
+            {
+                if (venta.Fecha >= fechaInicio && venta.Fecha <= fechaFin)
+                {
+                    double importe;
+                    if (double.TryParse(venta.Importe, out importe))
+                    {
+                        total += importe;
+                    }
+                }
+            }
+
+            // 5) Respuesta formateada
+            return $"Total de ventas desde {fechaInicio:dd/MM/yyyy} hasta {fechaFin:dd/MM/yyyy}: ${total:0.##}";
+        }
+
+
         //==========================================================================================================
         
         public string RegistrarCotizacionCliente(string clienteId, string fecha, string precio, string usuarioId)

@@ -14,20 +14,15 @@ namespace Library.Tests
         public void Setup()
         {
             fachada = Fachada.Instancia;
-
-            // Opcional: si querés limpiar algo, podés limpiar listas de RepoUsuarios.
-            // Pero NO toques RepoClientes.Clientes porque no existe esa propiedad pública.
+            
             fachada.Usuarios.Usuarios.Clear();
             fachada.Usuarios.Administradores.Clear();
             fachada.Usuarios.Vendedores.Clear();
             fachada.Usuarios.ClientesTotales.Clear();
-            // No limpiar fachada.Clientes aquí (no hay propiedad pública para eso).
-
-            // Usuario válido (si ya existiera con el mismo ID, no rompe el test)
+            
             usuarioId = "U001";
             fachada.CrearUsuario(usuarioId, "Matteo");
-
-            // Cliente válido con constructor de 5 parámetros (incluye ID)
+            
             cliente = new Cliente("C001", "Juan", "Pérez", "099123123", "jperez@mail.com");
             fachada.Clientes.AgregaCliente(cliente);
         }
