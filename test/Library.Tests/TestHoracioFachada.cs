@@ -12,7 +12,7 @@ namespace Library.Tests
         [SetUp]
         public void Setup()
         {
-            fachada = new Fachada();
+            fachada = Fachada.Instancia;
         }
         
         [Test]
