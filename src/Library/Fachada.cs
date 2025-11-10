@@ -13,9 +13,20 @@ namespace Library
         public RepoVentas Ventas = new RepoVentas();
         public RepoUsuarios Usuarios = new RepoUsuarios();
         public List<Usuario> UsuariosSuspendidos = new List<Usuario>();
-        public Fachada()
+        private Fachada()
         {
             this.Clientes = new RepoClientes(this.Etiquetas, this.Usuarios);
+        }
+        private static Fachada instancia;
+
+        public static Fachada Instancia
+        {
+            get
+            {
+                if (instancia == null)
+                    instancia = new Fachada();
+                return instancia;
+            }
         }
 
         public string RegistarMensaje(string clienteId, string mensaje, string tema,
@@ -189,6 +200,7 @@ namespace Library
             {
                 usuario = this.Usuarios.BuscarUsuario(usuarioId);
                 interaccion = Interacciones.BuscarInteraccion(usuario,tipointeraccion, tema);
+                interaccion.AgergarNotas(nota);
             }
             catch (ArgumentNullException e)
             {
@@ -204,7 +216,6 @@ namespace Library
             {
                 if (interaccion != null)
                 {
-                    interaccion.AgergarNotas(nota);
                     return "Nota agregada";
                 }
             }
@@ -326,7 +337,7 @@ namespace Library
             Dictionary<Cliente,Interaccion> interaccionesRecientes = this.Interacciones.UltimasInteraccionesClientes(usuario);
             foreach (var dato in interaccionesRecientes)
             {
-                if (dato.Value.Fecha.AddDays(7) <= DateTime.Now)
+                if (dato.Value.Fecha.AddDays(7) >= DateTime.Now)
                 {
                     Panel +=
                         $"{dato.Key.Nombre} {dato.Key.Apellido}. Interaccion de tipo {dato.Value.Tipo}. Tema: {dato.Value.Tema}\n";

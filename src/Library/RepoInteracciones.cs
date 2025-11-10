@@ -13,6 +13,15 @@ namespace Library
         }
         public Interaccion BuscarInteraccion(Usuario usuario, string tipo, string tema)
         {
+            if (tipo == "" || tema == "")
+            {
+                throw new Excepciones.EmptyStringException("datos vacios");
+            }
+
+            if (usuario == null||tipo==null||tema==null)
+            {
+                throw new ArgumentNullException("el usuario es null");
+            }
             tipo = tipo.ToLower();
             Interaccion.TipoInterracion tipo1 = Interaccion.TipoInterracion.Nada; //para inicializarlo
             switch (tipo)
@@ -50,10 +59,14 @@ namespace Library
                 throw new ArgumentNullException("el cliente o usuario no pude ser null");
             }
 
-            if (tipo == null || fecha1 == null)
+            if (tipo == null)
             {
                 tipo = "";
-                fecha1 = "";
+            }
+
+            if (fecha1 == null||fecha1=="")
+            {
+                fecha1 ="01/01/0001";
             }
 
             DateTime fecha;
@@ -65,7 +78,7 @@ namespace Library
             else
             {
                 Console.WriteLine("Fecha no valida");
-                throw new Excepciones.InvalidDateException();
+                throw new Excepciones.InvalidDateException("Fecha no valida");
             }
 
             tipo = tipo.ToLower();
@@ -87,7 +100,7 @@ namespace Library
             }
 
             List<Interaccion> interaccionesCliente = new List<Interaccion>();
-            if (tipo != "" && fecha1 != "")
+            if (tipo != "" || fecha1 != "01/01/0001")
             {
                 // string informacion =
                 //     $"las interaccion de {cliente.Nombre} {cliente.Apellido} del tipo {tipo1} de la fecha {fecha} son las siguientes:\n";
@@ -136,7 +149,7 @@ namespace Library
             {
                 if (UltimaInterracion.ContainsKey(interaccion.Cliente))
                 {
-                    if (UltimaInterracion[interaccion.Cliente].Fecha <= interaccion.Fecha)
+                    if (UltimaInterracion[interaccion.Cliente].Fecha <= interaccion.Fecha && !(interaccion.Fecha > DateTime.Now))
                     {
                         UltimaInterracion[interaccion.Cliente] = interaccion;
                     }
@@ -148,6 +161,11 @@ namespace Library
             }
 
             return UltimaInterracion;
+        }
+
+        public void eliminarinteraciones()//ciertos test no funcionan sin esto
+        {
+            Interacciones.Clear();
         }
     }
 }

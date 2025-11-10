@@ -13,7 +13,7 @@ namespace Library.Tests
         [SetUp]
         public void Setup()
         {
-            fachada = new Fachada();
+            fachada = Fachada.Instancia;
 
             // Usuario válido
             usuarioId = "U001";
