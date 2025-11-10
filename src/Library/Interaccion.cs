@@ -43,7 +43,7 @@ namespace Library
 
             if (tema == "" || contenido == "" || cuando == "")
             {
-                throw new Excepciones.EmptyStringException("datos de mensaje vacios");
+                throw new Excepciones.EmptyStringException("datos de interaccion vacios");
             }
 
             if (cuando != "00/00/0000")
