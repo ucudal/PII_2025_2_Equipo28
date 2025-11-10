@@ -60,7 +60,7 @@ namespace Library.Tests
             string expected = "Error: no se encontró un cliente con ID 'C999'.";
 
             // Act
-            string result = fachada.RegistrarCotizacionCliente("C999", "10/11/2025", "250", usuarioId);
+            string result = fachada.RegistrarCotizacionCliente("C999", "10/11/2025", "250",usuarioId);
 
             // Assert
             Assert.That(result, Is.EqualTo(expected));
