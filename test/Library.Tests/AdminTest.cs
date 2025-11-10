@@ -6,17 +6,19 @@ namespace Library.Tests
     public class AdminTest
     {
         private Fachada fachada;
+        private string adminId;
 
         [SetUp]
         public void Setup()
         {
             fachada = Fachada.Instancia;
+            adminId = "A1";
+            if (fachada.Usuarios.BuscarAdministrador(adminId) == null)
+            {
+                fachada.CrearAdministrador(adminId, "Pepe");
+            }
         }
-
-        // ===========================================================
-        // TESTS: CREAR USUARIO
-        // ===========================================================
-
+        
         [Test]
         public void CrearUsuario_NuevoUsuario_DevuelveMensajeExito()
         {
@@ -26,7 +28,7 @@ namespace Library.Tests
             string expected = $"Usuario '{nombre}' (ID: {id}) creado correctamente.";
 
             // Act
-            string result = fachada.CrearUsuario(id, nombre);
+            string result = fachada.CrearUsuario(id, nombre, adminId);
 
             // Assert
             Assert.That(result, Is.EqualTo(expected));
@@ -38,19 +40,15 @@ namespace Library.Tests
             // Arrange
             string id = "002";
             string nombre = "Greta";
-            fachada.CrearUsuario(id, nombre);
+            fachada.CrearUsuario(id, nombre, adminId);
             string expected = $"Ya existe un usuario con el ID '{id}'.";
 
             // Act
-            string result = fachada.CrearUsuario(id, nombre);
+            string result = fachada.CrearUsuario(id, nombre, adminId);
 
             // Assert
             Assert.That(result, Is.EqualTo(expected));
         }
-
-        // ===========================================================
-        // TESTS: SUSPENDER USUARIO
-        // ===========================================================
 
         [Test]
         public void SuspenderUsuario_UsuarioExistente_DevuelveMensajeExito()
@@ -58,11 +56,11 @@ namespace Library.Tests
             // Arrange
             string id = "003";
             string nombre = "Luca";
-            fachada.CrearUsuario(id, nombre);
+            fachada.CrearUsuario(id, nombre, adminId);
             string expected = $" El usuario '{nombre}' ha sido suspendido correctamente.";
 
             // Act
-            string result = fachada.SuspenderUsuario(id);
+            string result = fachada.SuspenderUsuario(id, adminId);
 
             // Assert
             Assert.That(result, Is.EqualTo(expected));
@@ -76,15 +74,11 @@ namespace Library.Tests
             string expected = $"No se encontró un usuario con ID '{id}'.";
 
             // Act
-            string result = fachada.SuspenderUsuario(id);
+            string result = fachada.SuspenderUsuario(id, adminId);
 
             // Assert
             Assert.That(result, Is.EqualTo(expected));
         }
-
-        // ===========================================================
-        // TESTS: ELIMINAR USUARIO
-        // ===========================================================
 
         [Test]
         public void EliminarUsuario_Activo_DevuelveMensajeExito()
@@ -92,11 +86,11 @@ namespace Library.Tests
             // Arrange
             string id = "004";
             string nombre = "Carlos";
-            fachada.CrearUsuario(id, nombre);
-            string expected = $"🗑 El usuario '{nombre}' ha sido eliminado del sistema.";
+            fachada.CrearUsuario(id, nombre, adminId);
+            string expected = $"El usuario '{nombre}' ha sido eliminado del sistema.";
 
             // Act
-            string result = fachada.EliminarUsuario(id);
+            string result = fachada.EliminarUsuario(id, adminId);
 
             // Assert
             Assert.That(result, Is.EqualTo(expected));
@@ -108,12 +102,12 @@ namespace Library.Tests
             // Arrange
             string id = "005";
             string nombre = "Nina";
-            fachada.CrearUsuario(id, nombre);
-            fachada.SuspenderUsuario(id);
-            string expected = $"🗑 El usuario '{nombre}' ha sido eliminado del sistema.";
+            fachada.CrearUsuario(id, nombre, adminId);
+            fachada.SuspenderUsuario(id, adminId);
+            string expected = $"El usuario '{nombre}' ha sido eliminado del sistema.";
 
             // Act
-            string result = fachada.EliminarUsuario(id);
+            string result = fachada.EliminarUsuario(id, adminId);
 
             // Assert
             Assert.That(result, Is.EqualTo(expected));
@@ -127,7 +121,7 @@ namespace Library.Tests
             string expected = $"No se encontró un usuario con ID '{id}'.";
 
             // Act
-            string result = fachada.EliminarUsuario(id);
+            string result = fachada.EliminarUsuario(id, adminId);
 
             // Assert
             Assert.That(result, Is.EqualTo(expected));

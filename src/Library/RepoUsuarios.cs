@@ -26,6 +26,11 @@ namespace Library
         {
             this.Usuarios.Remove(usuario);
         }
+        
+        public void EliminarAdministrador(Administrador admin)
+        {
+            this.Usuarios.Remove(admin);
+        }
 
         public Usuario BuscarUsuario(string id)
         {

@@ -355,28 +355,60 @@ namespace Library
             return Panel;
         }
 
-        // public void AgregarEtiquetaCliente(string clienteId, string etiqueta, string usuarioId)
-        // {
-        //     Usuario usuario = Usuarios.BuscarUsuario(usuarioId);
-        //     if (usuario != null)
-        //     {
-        //         Cliente cliente = Usuarios.BuscarCliente(clienteId);
-        //         if (cliente != null)
-        //         {
-        //             if (Etiquetas.BuscarEtiqueta(etiqueta))
-        //             {
-        //                 cliente.Etiquetas.Add(etiqueta);
-        //             }
-        //         }
-        //     }
-        // }
-
-        public void AgregarEtiquetaLista(string etiqueta, string usuarioId)
+        public string CrearEtiqueta(string etiqueta, string idUsuario)
         {
-            Usuario usuario = this.Usuarios.BuscarUsuario(usuarioId);
-            if (usuario != null)
+            Usuario usuario = this.Usuarios.BuscarUsuario(idUsuario);
+            if (Usuarios.Usuarios.Contains(usuario))
             {
+                try
+                {
+                    if (etiqueta == null)
+                    {
+                        throw new ArgumentNullException("La etiqueta no puede ser nula.");
+                    }
+
+                    if (string.IsNullOrWhiteSpace(etiqueta))
+                    {
+                        throw new ArgumentException("La etiqueta no puede estar vacía.");
+                    }
+
+                    Etiquetas.AgregarEtiqueta(etiqueta.Trim());
+                    return "Etiqueta creada correctamente.";
+                }
+                catch (ArgumentNullException ex)
+                {
+                    return $"Error: {ex.Message}";
+                }
+                catch (ArgumentException ex)
+                {
+                    return $"Error: {ex.Message}";
+                }
+                catch (Exception ex)
+                {
+                    return $"Error: {ex.Message}";
+                }
             }
+
+            return "Solo Usuarios pueden crear Etiquetas.";
+        }
+
+        public string AgregarEtiquetaCliente(string clienteId, string etiqueta, string usuarioId)
+        { 
+            Usuario usuario = Usuarios.BuscarUsuario(usuarioId); 
+            if (usuario != null) 
+            {
+               Cliente cliente = Usuarios.BuscarCliente(clienteId);
+                if (cliente != null)
+                {
+                    if (Etiquetas.BuscarEtiqueta(etiqueta))
+                    {
+                        cliente.Etiquetas.Add(etiqueta);
+                        return "Etiqueta agregada";
+                    }
+                }
+            }
+
+            return "Solo Usuarios pueden agregar etiquetas a los clientes";
         }
 
         public void RegistrarVenta(string clienteId, string producto, string fecha,
@@ -455,71 +487,88 @@ namespace Library
         /// <summary>
         /// Crea un nuevo usuario si no existe otro con el mismo ID.
         /// </summary>
-        public string CrearUsuario(string id, string nombre)
+        public string CrearUsuario(string id, string nombre, string idAdmin)
         {
-            if (this.Usuarios.BuscarUsuario(id) != null)
+            Usuario admin = this.Usuarios.BuscarAdministrador(idAdmin);
+            if (Usuarios.Administradores.Contains(admin))
             {
-                return $"Ya existe un usuario con el ID '{id}'.";
+                if (this.Usuarios.BuscarUsuario(id) != null)
+                {
+                    return $"Ya existe un usuario con el ID '{id}'.";
+                }
+                
+                Usuario nuevo = new Usuario(id, nombre);
+                this.Usuarios.AgregarUsuario(nuevo);
+                return $"Usuario '{nombre}' (ID: {id}) creado correctamente.";   
             }
-            
 
-            Usuario nuevo = new Usuario(id, nombre);
-            this.Usuarios.AgregarUsuario(nuevo);
-            return $"Usuario '{nombre}' (ID: {id}) creado correctamente.";
+            return "Solo Administradores pueden crear Usuarios.";
         }
 
         /// <summary>
         /// Suspende a un usuario activo y lo mueve a la lista de suspendidos.
         /// </summary>
-        public string SuspenderUsuario(string id)
+        public string SuspenderUsuario(string idSuspender, string idAdmin)
         {
-            Usuario usuario = this.Usuarios.BuscarUsuario(id);
+            Usuario usuario = this.Usuarios.BuscarUsuario(idSuspender);
             if (usuario == null)
             {
-                return $"No se encontró un usuario con ID '{id}'.";
+                return $"No se encontró un usuario con ID '{idSuspender}'.";
             }
 
-            Usuarios.EliminarUsuario(usuario);
-            UsuariosSuspendidos.Add(usuario);
-            return $" El usuario '{usuario.Nombre}' ha sido suspendido correctamente.";
+            Usuario admin = this.Usuarios.BuscarAdministrador(idAdmin);
+            if (Usuarios.Administradores.Contains(admin))
+            {
+                Usuarios.EliminarUsuario(usuario);
+                UsuariosSuspendidos.Add(usuario);
+                return $" El usuario '{usuario.Nombre}' ha sido suspendido correctamente.";   
+            }
+
+            return "Solo Administradores pueden suspender usuarios.";
         }
 
         /// <summary>
         /// Elimina completamente a un usuario (activo o suspendido).
         /// </summary>
-        public string EliminarUsuario(string id)
+        public string EliminarUsuario(string idEliminar, string idAdmin)
         {
-            Usuario usuario = this.BuscarUsuario(id);
+            Usuario usuario = this.BuscarUsuario(idEliminar);
             bool eliminado = false;
-            
-            if (usuario != null)
-            {
-                Usuarios.EliminarUsuario(usuario);
-                eliminado = true;
-            }
 
-            foreach (Usuario u in UsuariosSuspendidos)
+            Usuario admin = this.Usuarios.BuscarAdministrador(idAdmin);
+            if (Usuarios.Administradores.Contains(admin))
             {
-                if (u.ID == id)
+                if (usuario != null)
                 {
-                    usuario = u;
+                    Usuarios.EliminarUsuario(usuario);
+                    eliminado = true;
+                }
+
+                foreach (Usuario u in UsuariosSuspendidos)
+                {
+                    if (u.ID == idEliminar)
+                    {
+                        usuario = u;
+                    }
+                }
+
+                if (usuario != null)
+                {
+                    UsuariosSuspendidos.Remove(usuario);
+                    eliminado = true;
+                }
+
+                if (eliminado)
+                {
+                    return $"El usuario '{usuario.Nombre}' ha sido eliminado del sistema.";
+                }
+                else
+                {
+                    return $"No se encontró un usuario con ID '{idEliminar}'.";
                 }
             }
 
-            if (usuario != null)
-            {
-                UsuariosSuspendidos.Remove(usuario);
-                eliminado = true;
-            }
-
-            if (eliminado)
-            {
-                return $"🗑 El usuario '{usuario.Nombre}' ha sido eliminado del sistema.";
-            }
-            else
-            {
-                return $"No se encontró un usuario con ID '{id}'.";
-            }
+            return "Solo Adminsitradores pueden eliminar usuarios.";
         }
         
 

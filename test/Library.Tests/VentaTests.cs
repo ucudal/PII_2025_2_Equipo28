@@ -9,6 +9,7 @@ namespace Library.Tests
         private Fachada fachada;
         private Cliente cliente;
         private string usuarioId;
+        private string adminId;
 
         [SetUp]
         public void Setup()
@@ -17,11 +18,16 @@ namespace Library.Tests
 
             // Usuario válido
             usuarioId = "U001";
-            fachada.CrearUsuario(usuarioId, "Matteo");
+            adminId = "A1";
+            if (fachada.Usuarios.BuscarAdministrador(adminId) == null)
+            {
+                fachada.CrearAdministrador(adminId, "Pepe");
+            }
+            fachada.CrearUsuario(usuarioId, "Matteo", "A1");
 
             // Cliente válido con Id asignado 
             cliente = new Cliente("1", "Juan", "Pérez", "099123123", "jperez@mail.com");
-            cliente.Id = "C001";                   // <<< asignar Id
+            cliente.Id = "C001";                
             fachada.Clientes.AgregaCliente(cliente);
         }
 
@@ -108,7 +114,7 @@ namespace Library.Tests
             // Arrange
             var fachada = Fachada.Instancia;
             var usuarioId = "U001";
-            fachada.CrearUsuario(usuarioId, "Matteo");
+            fachada.CrearUsuario(usuarioId, "Matteo", "A1");
 
             // Limpiar ventas previas del mismo usuario (singleton)
             fachada.BuscarUsuario(usuarioId).TotalVentas.Clear();
@@ -149,7 +155,7 @@ namespace Library.Tests
             // Arrange
             var fachada = Fachada.Instancia;
             var usuarioId = "U002";
-            fachada.CrearUsuario(usuarioId, "Matteo");
+            fachada.CrearUsuario(usuarioId, "Matteo", "A1");
             fachada.BuscarUsuario(usuarioId).TotalVentas.Clear();
 
             var cliente = new Cliente("C002", "Juan", "Pérez", "099123123", "jperez@mail.com");
@@ -170,7 +176,7 @@ namespace Library.Tests
             // Arrange
             var fachada = Fachada.Instancia;
             var usuarioId = "U003";
-            fachada.CrearUsuario(usuarioId, "Matteo");
+            fachada.CrearUsuario(usuarioId, "Matteo", "A1");
             fachada.BuscarUsuario(usuarioId).TotalVentas.Clear();
 
             string expected = "Error: uno o más campos están vacíos.";
@@ -202,7 +208,7 @@ namespace Library.Tests
             // Arrange 
             var fachada = Fachada.Instancia;
             var usuarioId = "U004";
-            fachada.CrearUsuario(usuarioId, "Matteo");
+            fachada.CrearUsuario(usuarioId, "Matteo", "A1");
             fachada.BuscarUsuario(usuarioId).TotalVentas.Clear();
 
             var cliente = new Cliente("C004", "Juan", "Pérez", "099123123", "jperez@mail.com");
