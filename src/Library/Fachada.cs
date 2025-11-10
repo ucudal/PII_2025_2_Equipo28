@@ -776,6 +776,76 @@ namespace Library
                 return "Error: ocurrió un problema al registrar la venta.";
             }
         }
+        //==========================================================================================================
+        
+        public string RegistrarCotizacionCliente(string clienteId, string fecha, string precio, string usuarioId)
+        {
+            Usuario usuario;
+            Cliente cliente;
+
+            // 1) Buscar usuario
+            try
+            {
+                usuario = this.Usuarios.BuscarUsuario(usuarioId);
+            }
+            catch (ArgumentNullException)
+            {
+                return "Error: faltan datos para registrar la cotización.";
+            }
+            catch (Excepciones.EmptyStringException)
+            {
+                return "Error: uno o más campos están vacíos.";
+            }
+
+            if (usuario == null)
+            {
+                return $"Error: no se encontró un usuario con ID '{usuarioId}'.";
+            }
+
+            // 2) Buscar cliente
+            try
+            {
+                cliente = this.Clientes.BuscarUnCliente(clienteId);
+            }
+            catch (ArgumentNullException)
+            {
+                return "Error: faltan datos para registrar la cotización.";
+            }
+            catch (Excepciones.EmptyStringException)
+            {
+                return "Error: uno o más campos están vacíos.";
+            }
+
+            if (cliente == null)
+            {
+                return $"Error: no se encontró un cliente con ID '{clienteId}'.";
+            }
+
+            // 3) Registrar cotización
+            try
+            {
+                this.Cotizaciones.AgregarCotizacion(cliente, fecha, precio, usuario);
+                return $"Cotización registrada: se envió a {cliente.Nombre} por ${precio} el {fecha}.";
+            }
+            catch (Excepciones.InvalidDateException)
+            {
+                return "Error: la fecha ingresada no es válida.";
+            }
+            catch (Excepciones.EmptyStringException)
+            {
+                return "Error: uno o más campos están vacíos.";
+            }
+            catch (ArgumentNullException)
+            {
+                return "Error: faltan datos para registrar la cotización.";
+            }
+            catch (Exception)
+            {
+                return "Error: ocurrió un problema al registrar la cotización.";
+            }
+        }
+
+
         
         // ------ YO ------
         public Vendedor CrearVendedor(string id, string nombre)
