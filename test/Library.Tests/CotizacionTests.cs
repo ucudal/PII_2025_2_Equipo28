@@ -15,16 +15,25 @@ namespace Library.Tests
         public void Setup()
         {
             fachada = Fachada.Instancia;
-            
+
+            // Limpiar estado del singleton
             fachada.Usuarios.Usuarios.Clear();
             fachada.Usuarios.Administradores.Clear();
             fachada.Usuarios.Vendedores.Clear();
             fachada.Usuarios.ClientesTotales.Clear();
-            
-            usuarioId = "U001";
+            fachada.UsuariosSuspendidos.Clear();
+
+            // Crear admin y luego crear el usuario con ese admin
             adminId = "A1";
-            fachada.CrearUsuario(usuarioId, "Matteo", "A1");
-            
+            fachada.CrearAdministrador(adminId, "Admin A1");
+
+            usuarioId = "U001";
+            fachada.CrearUsuario(usuarioId, "Matteo", adminId);
+
+            // Asegurar listas del usuario limpias (por si hay residuos de otras pruebas)
+            fachada.BuscarUsuario(usuarioId).CotizacionesUsuario.Clear();
+
+            // Crear cliente y registrarlo en repo
             cliente = new Cliente("C001", "Juan", "Pérez", "099123123", "jperez@mail.com");
             fachada.Clientes.AgregaCliente(cliente);
         }
@@ -59,10 +68,10 @@ namespace Library.Tests
         public void RegistrarCotizacionCliente_ClienteNoExiste_RetornaError()
         {
             // Arrange
-            string expected = "Error: no se encontró un cliente con ID 'U001'.";
+            string expected = "Error: no se encontró un cliente con ID 'C999'.";
 
-            // Act
-            string result = fachada.RegistrarCotizacionCliente("C999", "10/11/2025", "250",usuarioId);
+            // Act  (OJO: usar usuarioId correcto, no cliente.Id)
+            string result = fachada.RegistrarCotizacionCliente("C999", "10/11/2025", "250", usuarioId);
 
             // Assert
             Assert.That(result, Is.EqualTo(expected));
