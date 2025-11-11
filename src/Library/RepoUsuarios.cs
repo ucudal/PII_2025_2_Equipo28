@@ -36,12 +36,12 @@ namespace Library
         {
             if (id == null)
             {
-                throw new ArgumentNullException("datos de usurio null");
+                throw new ArgumentNullException("datos de usuario null");
             }
 
             if (id == "")
             {
-                throw new Excepciones.EmptyStringException("datos de ususario vacios");
+                throw new Excepciones.EmptyStringException("datos de usuario vacios");
             }
             foreach (Usuario usuario in this.Usuarios)
             {

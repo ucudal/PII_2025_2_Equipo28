@@ -59,7 +59,7 @@ namespace Library.Tests
         [TestCase(null, "f", "lol", "1", "10/11/2024", "Value cannot be null. (Parameter 'Datos de cliente null')")]
         [TestCase("0", null, "f", "1", "10/11/2024", "Value cannot be null. (Parameter 'datos de interaccion null')")]
         [TestCase("0", "f", null, "1", "10/11/2024", "Value cannot be null. (Parameter 'datos de interaccion null')")]
-        [TestCase("0", "f", "lol", null, "10/11/2024", "Value cannot be null. (Parameter 'datos de usurio null')")]
+        [TestCase("0", "f", "lol", null, "10/11/2024", "Value cannot be null. (Parameter 'datos de usuario null')")]
         [TestCase("0", "f", "lol", "1", null, "Value cannot be null. (Parameter 'datos de interaccion null')")]
         public void RegistarMensajeIncorrectoContenidoNull(string a, string b, string c, string d, string e,
             string esperado)
@@ -110,7 +110,7 @@ namespace Library.Tests
         [TestCase(null, "f", "lol", "1", "10/11/2024", "Value cannot be null. (Parameter 'Datos de cliente null')")]
         [TestCase("0", null, "f", "1", "10/11/2024", "Value cannot be null. (Parameter 'datos de interaccion null')")]
         [TestCase("0", "f", null, "1", "10/11/2024", "Value cannot be null. (Parameter 'datos de interaccion null')")]
-        [TestCase("0", "f", "lol", null, "10/11/2024", "Value cannot be null. (Parameter 'datos de usurio null')")]
+        [TestCase("0", "f", "lol", null, "10/11/2024", "Value cannot be null. (Parameter 'datos de usuario null')")]
         [TestCase("0", "f", "lol", "1", null, "Value cannot be null. (Parameter 'datos de interaccion null')")]
         public void RegistarLlamadaIncorrectoContenidoNull(string a, string b, string c, string d, string e,
             string esperado)
@@ -161,7 +161,7 @@ namespace Library.Tests
         [TestCase(null, "f", "lol", "1", "10/11/2024", "Value cannot be null. (Parameter 'Datos de cliente null')")]
         [TestCase("0", null, "f", "1", "10/11/2024", "Value cannot be null. (Parameter 'datos de interaccion null')")]
         [TestCase("0", "f", null, "1", "10/11/2024", "Value cannot be null. (Parameter 'datos de interaccion null')")]
-        [TestCase("0", "f", "lol", null, "10/11/2024", "Value cannot be null. (Parameter 'datos de usurio null')")]
+        [TestCase("0", "f", "lol", null, "10/11/2024", "Value cannot be null. (Parameter 'datos de usuario null')")]
         [TestCase("0", "f", "lol", "1", null, "Value cannot be null. (Parameter 'datos de interaccion null')")]
         public void RegistarCorreoIncorrectoContenidoNull(string a, string b, string c, string d, string e,
             string esperado)
@@ -237,7 +237,7 @@ namespace Library.Tests
         [TestCase("0", "f", null, "1", "10/11/2024", "aca",
             "Value cannot be null. (Parameter 'datos de interaccion null')")]
         [TestCase("0", "f", "lol", null, "10/11/2024", "aca",
-            "Value cannot be null. (Parameter 'datos de usurio null')")]
+            "Value cannot be null. (Parameter 'datos de usuario null')")]
         [TestCase("0", "f", "lol", "1", null, "aca", "Value cannot be null. (Parameter 'datos de interaccion null')")]
         [TestCase("0", "f", null, "1", "10/11/2024", null,
             "Value cannot be null. (Parameter 'datos de interaccion null')")]
@@ -272,7 +272,7 @@ namespace Library.Tests
         [TestCase("", "mensaje", "saludo", "1", "el contenido de la nota esta vacio")]
         [TestCase("hi", "", "saludo", "1", "datos vacios")]
         [TestCase("hi", "mensaje", "", "1", "datos vacios")]
-        [TestCase("hi", "mensaje", "saludo", "", "datos de ususario vacios")]
+        [TestCase("hi", "mensaje", "saludo", "", "datos de usuario vacios")]
         public void AgregarNotaStringVacio(string a, string b, string c, string d, string esperado)
         {
             fachada.RegistarMensaje("0", "este.... hola", "saludo", "1", "10/11/2024");
@@ -284,7 +284,7 @@ namespace Library.Tests
             "Value cannot be null. (Parameter 'El contenido de la nota es null')")]
         [TestCase("hi", null, "saludo", "1", "Value cannot be null. (Parameter 'el usuario es null')")]
         [TestCase("hi", "mensaje", null, "1", "Value cannot be null. (Parameter 'el usuario es null')")]
-        [TestCase("hi", "mensaje", "saludo", null, "Value cannot be null. (Parameter 'datos de usurio null')")]
+        [TestCase("hi", "mensaje", "saludo", null, "Value cannot be null. (Parameter 'datos de usuario null')")]
         public void AgregarNotaNull(string a, string b, string c, string d, string esperado)
         {
             fachada.RegistarMensaje("0", "este.... hola", "saludo", "1", "10/11/2024");
@@ -307,7 +307,7 @@ namespace Library.Tests
         }
 
         [TestCase(null, "1", "mensaje", "10/11/2024", "Value cannot be null. (Parameter 'Datos de cliente null')")]
-        [TestCase("0", null, "mensaje", "10/11/2024", "Value cannot be null. (Parameter 'datos de usurio null')")]
+        [TestCase("0", null, "mensaje", "10/11/2024", "Value cannot be null. (Parameter 'datos de usuario null')")]
         public void InteraccionesClienteNull(string a, string b, string c, string d, string esperado)
         {
             string resultado = fachada.InteraccionesCliente(a, b, c, d);
@@ -315,7 +315,7 @@ namespace Library.Tests
         }
 
         [TestCase("", "1", "mensaje", "10/11/2024", "Datos de cliente vacios")]
-        [TestCase("0", "", "mensaje", "10/11/2024", "datos de ususario vacios")]
+        [TestCase("0", "", "mensaje", "10/11/2024", "datos de usuario vacios")]
         public void InteraccionesClienteVacio(string a, string b, string c, string d, string esperado)
         {
             string resultado = fachada.InteraccionesCliente(a, b, c, d);
@@ -343,14 +343,14 @@ namespace Library.Tests
             Assert.That(resultado, Is.EqualTo(esperado));
         }
 
-        [TestCase(null, "Value cannot be null. (Parameter 'datos de usurio null')")]
+        [TestCase(null, "Value cannot be null. (Parameter 'datos de usuario null')")]
         public void InterraccionClienteAusenteNull(string a, string esperado)
         {
             string resultado = fachada.InterraccionClienteAusente(a);
             Assert.That(resultado, Is.EqualTo(esperado));
         }
 
-        [TestCase("", "datos de ususario vacios")]
+        [TestCase("", "datos de usuario vacios")]
         public void InterraccionClienteAusenteVacio(string a, string esperado)
         {
             string resultado = fachada.InterraccionClienteAusente(a);
@@ -369,7 +369,8 @@ namespace Library.Tests
           // //Verifica que el panel muestre correctamente los clientes, interacciones recientes y reuniones próximas.
           // public void PanelCorrectoTest()
           // {
-          //     
+          //     fachada.CrearUsuario("1", "El petizo", "A1");
+          //     usuario = fachada.BuscarUsuario("1");
           //     fachada.RegistrarCorreo("0", "k", "e", "1", "10/12/2000");
           //     fachada.RegistarReunion("0", "k", "e", "1", "12/10/2050", "n");
           //     Interaccion interaccion = fachada.Interacciones.BuscarInteraccion(usuario, "correo", "e");
@@ -394,6 +395,22 @@ namespace Library.Tests
              string esperado = "Los clientes que se pusieron en contacto contigo son:\nSape 099872521\n";
              Assert.That(resultado, Is.EqualTo(esperado));
          }
-         
+
+        [TestCase(null, "0", "Value cannot be null. (Parameter 'datos de usuario null')")]
+        [TestCase("1", null, "Value cannot be null. (Parameter 'Datos de cliente null')")]
+        [TestCase("", "0", "datos de usuario vacios")]
+        [TestCase("1", "", "Datos de cliente vacios")]
+        public void AgregarClienteContactoIncorrectoTest(string usuarioId, string clienteId, string esperado)
+        {
+            string resultado = fachada.AgregarClienteContacto(usuarioId, clienteId);
+            Assert.That(resultado, Is.EqualTo(esperado));
+        }
+        [TestCase(null, "Value cannot be null. (Parameter 'datos de usuario null')")]
+        [TestCase("", "datos de usuario vacios")]
+        public void VerClienteContactoIncorrectoTest(string usuarioId, string esperado)
+        {
+            string resultado = fachada.VerClienteContacto(usuarioId);
+            Assert.That(resultado, Is.EqualTo(esperado));
+        }
     }
 }
