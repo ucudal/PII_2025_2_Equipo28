@@ -22,7 +22,6 @@ namespace Library.Tests
             fachada.CrearNuevoCliente("El peluca", "Sape", "099872521", "099818378172","Peluca@cabezatermo.com");
             List<Cliente> clientes = fachada.BuscarClientesFachada("correo", "Peluca@cabezatermo.com");
             cliente = clientes[0];
-            // fachada.ModificarInfo(); Espero a que lo arreglen
             cliente.Id = "0";
             fachada.Interacciones.eliminarinteraciones();
 
@@ -365,20 +364,36 @@ namespace Library.Tests
             Assert.That(resultado, Is.EqualTo(esperado));
         }
 
-        // [Test]
-        //Conflictos con otros test
-        // //Verifica que el panel muestre correctamente los clientes, interacciones recientes y reuniones próximas.
-        // public void PanelCorrectoTest()
-        // {
-        //
-        //     fachada.RegistrarCorreo("0", "k", "e", "1", "10/12/2000");
-        //     fachada.RegistarReunion("0", "k", "e", "1", "12/10/2050", "n");
-        //     Interaccion interaccion = fachada.Interacciones.BuscarInteraccion(usuario, "correo", "e");
-        //     interaccion.Fecha = DateTime.Now.AddDays(-2);
-        //     string resultado = fachada.Panel("1");
-        //     string esperado =
-        //         "Los Clientes totales son los siguientes:\nEl peluca Sape\nSus interacciones mas recientes son:\nEl peluca Sape. Interaccion de tipo Correo. Tema: e\nSus reuniones proximas son:\nTema de la reunion: e. Fecha: 12/10/2050 0:00:00\n";
-        //     Assert.That(resultado, Is.EqualTo(esperado));
-        // }
+          // [Test]
+          //   // Tiene problemas por el tema singleton, pero solo por el resultado, al cambiar con cada agregado de test:
+          // //Verifica que el panel muestre correctamente los clientes, interacciones recientes y reuniones próximas.
+          // public void PanelCorrectoTest()
+          // {
+          //     
+          //     fachada.RegistrarCorreo("0", "k", "e", "1", "10/12/2000");
+          //     fachada.RegistarReunion("0", "k", "e", "1", "12/10/2050", "n");
+          //     Interaccion interaccion = fachada.Interacciones.BuscarInteraccion(usuario, "correo", "e");
+          //     interaccion.Fecha = DateTime.Now.AddDays(-2);
+          //     string resultado = fachada.Panel("1");
+          //     string esperado =
+          //         "Los Clientes totales son los siguientes:\nSape 099872521\nSus interacciones mas recientes son:\nSape 099872521. Interaccion de tipo Correo. Tema: e\nSus reuniones proximas son:\nTema de la reunion: e. Fecha: 12/10/2050 0:00:00\n";
+          //     Assert.That(resultado, Is.EqualTo(esperado));
+          // }
+
+         [Test]
+         public void AgregarClienteContactoTest()
+         {
+             fachada.AgregarClienteContacto("1", "0");
+             Cliente esperado = fachada.ClientesContacto[usuario][0];
+             Assert.That(cliente,Is.EqualTo(esperado));
+         }
+        [Test]
+         public void VerClienteContactoTest()
+         {
+             string resultado = fachada.VerClienteContacto("1");
+             string esperado = "Los clientes que se pusieron en contacto contigo son:\nSape 099872521\n";
+             Assert.That(resultado, Is.EqualTo(esperado));
+         }
+         
     }
 }

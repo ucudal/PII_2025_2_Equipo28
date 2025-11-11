@@ -7,6 +7,7 @@ namespace Library
 {
     public class Fachada
     {
+        public Dictionary<Usuario, List<Cliente>> ClientesContacto = new Dictionary<Usuario, List<Cliente>>();
         public RepoEtiquetas Etiquetas = new RepoEtiquetas();
         public RepoClientes Clientes;
         public RepoInteracciones Interacciones = new RepoInteracciones();
@@ -240,6 +241,7 @@ namespace Library
         /// Obtiene las interacciones de un cliente, opcionalmente filtradas por tipo y fecha.
         /// Aplica Expert: RepoInteracciones conoce cómo buscar y filtrar interacciones.
         /// </summary>
+        
         public string InteraccionesCliente(string clienteId,string usuarioId,string tipo="",string fecha="")
         {
             Usuario usuario = null;
@@ -370,6 +372,76 @@ namespace Library
             }
             return Panel;
         }
+        //clientes que se pusieron en contacto con usuario
+        public string AgregarClienteContacto(string usuarioId, string clienteId)
+        {
+            Usuario usuario = null;
+            Cliente cliente = null;
+            try
+            {
+                usuario = this.BuscarUsuario(usuarioId);
+                cliente = this.Clientes.BuscarUnCliente(clienteId);
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine(e.Message);
+                return e.Message;
+            }
+            catch (Excepciones.EmptyStringException e)
+            {
+                Console.WriteLine(e.Message);
+                return e.Message;
+            }
+
+            if (usuario != null && cliente != null)
+            {
+                if (!(this.ClientesContacto.ContainsKey(usuario)))
+                {
+                    this.ClientesContacto[usuario] = new List<Cliente>();
+                    this.ClientesContacto[usuario].Add(cliente);
+                }
+                else
+                {
+                    this.ClientesContacto[usuario].Add(cliente);
+                }
+                return "cliente agregado";
+            }
+
+            return "usuario o cliente no puden ser null";
+        }
+
+        public string VerClienteContacto(string usuarioId)
+        {
+            Usuario usuario = null;
+            try
+            {
+                usuario = this.BuscarUsuario(usuarioId);
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine(e.Message);
+                return e.Message;
+            }
+            catch (Excepciones.EmptyStringException e)
+            {
+                Console.WriteLine(e.Message);
+                return e.Message;
+            }
+
+            string clientes = $"Los clientes que se pusieron en contacto contigo son:\n";
+            if (usuario != null)
+            {
+                List<Cliente> lista = ClientesContacto[usuario];
+                foreach (var VARIABLE in lista)
+                {
+                    clientes += $"{VARIABLE.Nombre} {VARIABLE.Apellido}\n";
+                }
+
+                return clientes;
+            }
+
+            return "Usuario null";
+        }
 
         /// <summary>
         /// Crea una nueva etiqueta en el sistema.
@@ -458,48 +530,6 @@ namespace Library
                 }
             }
         }
-
-        //Cómo usuario quiero saber los clientes que hace cierto tiempo que no tengo ninguna interacción con ellos, para no peder contacto con ellos.
-        // public void VerInteraccionesDeCliente(string clienteNombre, string clienteApellido, string usuarioId,
-        //     string tipo = "")
-        //
-        // {
-        //     Usuario usuario = this.Usuarios.BuscarUsuario(usuarioId);
-        //     if (usuario != null)
-        //     {
-        //         // Cliente cliente = Clientes.BuscarUnCliente(idcliente);
-        //         // if (cliente != null)
-        //         // {
-        //         //     Console.WriteLine($"Interacciones con {clienteNombre} {clienteApellido}:");
-        //         //
-        //         //     foreach (Interaccion interaccion in usuario.Interacciones)
-        //         //     {
-        //         //         // Verifica que la interacción sea del cliente buscado
-        //         //         if (interaccion.Cliente == cliente)
-        //         //         {
-        //         //             // Si se pasa un tipo, solo muestra las que coincidan
-        //         //             if (tipo == "" || interaccion.tipo == tipo)
-        //         //             {
-        //         //                 Console.WriteLine("-----------------------------------");
-        //         //                 Console.WriteLine($"Tipo: {interaccion.tipo}");
-        //         //                 Console.WriteLine($"Fecha: {interaccion.Fecha}");
-        //         //                 Console.WriteLine($"Tema: {interaccion.Tema}");
-        //         //                 Console.WriteLine($"Descripción: {interaccion.contenido}");
-        //         //             }
-        //         //         }
-        //         //     }
-        //         // }
-        //         // else
-        //         // {
-        //         //     Console.WriteLine("Cliente no encontrado.");
-        //         // }
-        //     }
-        //     else
-        //     {
-        //         Console.WriteLine("Usuario no encontrado.");
-        //     }
-        // }
-
 
         // Como administrador quiero crear, suspender o eliminar usuarios, para mantener control sobre los accesos.
        
@@ -699,7 +729,7 @@ namespace Library
         {
             return Clientes;
         }
-
+        
         // public void RegistrarLlamada(string id, string tema, string contenido)
         // {
         //     // Cliente cliente = Clientes.BuscarCliente("id", id)[0];
