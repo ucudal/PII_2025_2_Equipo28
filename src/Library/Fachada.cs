@@ -30,6 +30,10 @@ namespace Library
             }
         }
 
+        /// <summary>
+        /// Registra un mensaje de interacción entre un usuario y un cliente.
+        /// Aplica Expert: RepoUsuarios y RepoClientes conocen cómo buscar sus entidades.
+        /// </summary>
         public string RegistarMensaje(string clienteId, string mensaje, string tema,
             string usuarioId, string cuando)
         {
@@ -71,6 +75,10 @@ namespace Library
             return "El usuario o cliente no existen";
         }
 
+        /// <summary>
+        /// Registra un correo electrónico como interacción entre usuario y cliente.
+        /// Aplica Expert: delega la búsqueda a los repositorios correspondientes.
+        /// </summary>
         public string RegistrarCorreo(string clienteId, string correo, string tema,
             string usuarioId, string cuando)
         {
@@ -193,6 +201,10 @@ namespace Library
             return "El usuario o cliente no existen";
         }
 
+        /// <summary>
+        /// Agrega una nota a una interacción existente.
+        /// Aplica Expert: la interacción conoce cómo agregar sus propias notas.
+        /// </summary>
         public string AgregarNota(string nota, string tipointeraccion, string tema, string usuarioId)
         {
             Usuario usuario = null;
@@ -224,6 +236,10 @@ namespace Library
             return "El usuario o interaccion no existen";
         }
 
+        /// <summary>
+        /// Obtiene las interacciones de un cliente, opcionalmente filtradas por tipo y fecha.
+        /// Aplica Expert: RepoInteracciones conoce cómo buscar y filtrar interacciones.
+        /// </summary>
         public string InteraccionesCliente(string clienteId,string usuarioId,string tipo="",string fecha="")
         {
             Usuario usuario = null;
@@ -355,6 +371,10 @@ namespace Library
             return Panel;
         }
 
+        /// <summary>
+        /// Crea una nueva etiqueta en el sistema.
+        /// Aplica Expert: RepoEtiquetas conoce cómo gestionar etiquetas.
+        /// </summary>
         public string CrearEtiqueta(string etiqueta, string idUsuario)
         {
             Usuario usuario = this.Usuarios.BuscarUsuario(idUsuario);
@@ -572,7 +592,9 @@ namespace Library
         }
         
 
-    // Como vendedor, quiero poder asignar un cliente a otro vendedor para distribuir el trabajo en el equipo.
+        /// <summary>
+        /// Asigna un cliente de un vendedor a otro vendedor.
+        /// </summary>
         public void AsignarClienteAOtroVendedor(string idVendedorActual, string idVendedorNuevo,
             string nombreCliente,
             string apellidoCliente)
@@ -596,17 +618,29 @@ namespace Library
         public List<Llamadas> Llamadas = new List<Llamadas>();
         public List<Reunion> Reuniones = new List<Reunion>();
 
+        /// <summary>
+        /// Busca clientes según un atributo y valor específicos.
+        /// Aplica Expert: RepoClientes conoce cómo buscar en su colección.
+        /// </summary>
         public List<Cliente> BuscarClientesFachada(string atributo, string valorBusqueda)
         {
             return Clientes.BuscarCliente(atributo, valorBusqueda);
         }
 
+        /// <summary>
+        /// Crea un nuevo cliente y lo agrega al repositorio.
+        /// Aplica Creator: Fachada coordina la creación y agregación del cliente.
+        /// </summary>
         public Cliente CrearNuevoCliente(string id, string nombre, string apellido, string telefono, string correo)
         {
             this.Clientes.AgregaCliente(new Cliente(id, nombre, apellido, telefono, correo));
             return new Cliente(id, nombre, apellido, telefono, correo);
         }
 
+        /// <summary>
+        /// Modifica un atributo específico de un cliente existente.
+        /// Aplica Expert: Cliente conoce cómo modificar sus propios atributos.
+        /// </summary>
         public void ModificarInfo(string id, string atributo, string nuevoValor)
         {
             Cliente cliente = Clientes.BuscarCliente("id", id)[0];
@@ -648,12 +682,19 @@ namespace Library
             }
         }
 
+        /// <summary>
+        /// Elimina un cliente del repositorio.
+        /// Aplica Expert: RepoClientes conoce cómo eliminar de su colección.
+        /// </summary>
         public void EliminarClienteFachada(string id)
         {
             Cliente cliente = Clientes.BuscarCliente("id", id)[0];
             Clientes.EliminarCliente(cliente);
         }
 
+        /// <summary>
+        /// Retorna el repositorio de clientes.
+        /// </summary>
         public RepoClientes VerClientes()
         {
             return Clientes;
@@ -673,6 +714,10 @@ namespace Library
         //     Reuniones.Add(Reunion);
         // }
 
+        /// <summary>
+        /// Busca un usuario por su ID.
+        /// Aplica Expert: RepoUsuarios conoce cómo buscar usuarios.
+        /// </summary>
         public Usuario BuscarUsuario(string usuarioId)
         {
             return this.Usuarios.BuscarUsuario(usuarioId);
@@ -680,6 +725,10 @@ namespace Library
         //=======================================================================================
         //                          Venta
         //=======================================================================================
+        /// <summary>
+        /// Registra una venta de un cliente con manejo completo de errores.
+        /// Aplica SRP: maneja únicamente el registro de ventas con validaciones.
+        /// </summary>
         public string RegistrarVentaCliente(string clienteId, string producto, string fecha, string precio, string usuarioId)
         {
             Usuario usuario;
@@ -747,6 +796,10 @@ namespace Library
             }
         }
         
+        /// <summary>
+        /// Calcula el total de ventas de un usuario en un período específico.
+        /// Aplica Expert: Usuario conoce su lista de ventas totales.
+        /// </summary>
         public string TotalDeVentasEnPeriodo(string usuarioId, string fechaInicioTexto, string fechaFinTexto)
         {
             // 1) Buscar usuario con manejo de errores estables
@@ -804,10 +857,11 @@ namespace Library
             // 5) Respuesta formateada
             return $"Total de ventas desde {fechaInicio:dd/MM/yyyy} hasta {fechaFin:dd/MM/yyyy}: ${total:0.##}";
         }
-
-
-        //==========================================================================================================
         
+        /// <summary>
+        /// Registra una cotización para un cliente con validaciones.
+        /// Aplica SRP: responsable únicamente del registro de cotizaciones.
+        /// </summary>
         public string RegistrarCotizacionCliente(string clienteId, string fecha, string precio, string usuarioId)
         {
             Usuario usuario;
@@ -874,10 +928,11 @@ namespace Library
                 return "Error: ocurrió un problema al registrar la cotización.";
             }
         }
-
-
         
-        // ------ YO ------
+        /// <summary>
+        /// Crea un nuevo vendedor en el sistema.
+        /// Aplica Creator: crea instancias de Vendedor y las agrega al repositorio.
+        /// </summary>
         public Vendedor CrearVendedor(string id, string nombre)
         {
             try
@@ -919,6 +974,10 @@ namespace Library
             }
         }
 
+        /// <summary>
+        /// Crea un nuevo administrador en el sistema.
+        /// Aplica Creator: crea instancias de Administrador y las agrega al repositorio.
+        /// </summary>
         public Administrador CrearAdministrador(string id, string nombre)
         {
             try
