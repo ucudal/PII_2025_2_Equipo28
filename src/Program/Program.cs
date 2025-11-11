@@ -1,9 +1,39 @@
-﻿namespace Program
+﻿using System;
+
+using Ucu.Poo.DiscordBot.Services;
+
+namespace Ucu.Poo.DiscordBot.Program
 {
-    class Program
+    /// <summary>
+    /// Un programa que implementa un bot de Discord.
+    /// </summary>
+    internal static class Program
     {
-        static void Main(string[] args)
+        /// <summary>
+        /// Punto de entrada al programa.
+        /// </summary>
+        private static void Main(string [] args)
         {
+            // if (args.Length != 0)
+            // {
+            //     DemoFacade(args);
+            // }
+            // else
+            // {
+            DemoBot();
+        }
+
+        // private static void DemoFacade(string [] args)
+        // {
+        //     if (args.Length > 0)
+        //     {
+        //         Console.WriteLine(Fachada.Instance.GetUserInfo(args[0]));
+        //     }
+        // }
+
+        private static void DemoBot()
+        {
+            BotLoader.LoadAsync().GetAwaiter().GetResult();
         }
     }
 }
