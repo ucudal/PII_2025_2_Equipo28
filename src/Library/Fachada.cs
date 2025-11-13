@@ -632,7 +632,7 @@ namespace Library
             Vendedor vendedorActual = this.Usuarios.BuscarVendedor(idVendedorActual);
             Vendedor vendedorNuevo = this.Usuarios.BuscarVendedor(idVendedorNuevo);
             // Cliente cliente = Clientes.BuscarUnCliente(nombreCliente, apellidoCliente);
-
+        
             // if (vendedorActual != null && vendedorNuevo != null && cliente != null)
             // {
             //     vendedorActual.Clientes.Remove(cliente);
