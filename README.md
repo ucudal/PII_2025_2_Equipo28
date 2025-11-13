@@ -279,7 +279,7 @@ direction TB
 
 ```
 
-## Comandos e historias
+## 💻 Comandos e historias
 
 | Historias | Comandos |
 | --------- | -------- |
