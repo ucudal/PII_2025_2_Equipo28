@@ -13,11 +13,11 @@ namespace Library
     // los datos necesarios de los clientes para esas operaciones.
     public class RepoClientes
     {
-        private List<Cliente> Clientes = new List<Cliente>();
+        private List<Cliente> clientes = new List<Cliente>();
         
-        public IEnumerable<Cliente> Clientes2
+        public IEnumerable<Cliente> Clientes
         {
-            get { return Clientes; }
+            get { return clientes; }
         }
 
         private RepoEtiquetas etiquetas;
@@ -33,14 +33,14 @@ namespace Library
         {
             if (cliente != null)
             {
-                Clientes.Add(cliente);
+                clientes.Add(cliente);
                 usuarios.ClientesTotales.Add(cliente);
             }
         }
 
         public void EliminarCliente(Cliente cliente)
         {
-            bool removed = Clientes.Remove(cliente);
+            bool removed = clientes.Remove(cliente);
         }
 
         public List<Cliente> BuscarCliente(string atributo, string valorBusqueda)
@@ -53,25 +53,25 @@ namespace Library
             switch (attr)
             {
                 case "id": 
-                    resultados = Clientes.FindAll(c => c.Id.Equals(val, StringComparison.OrdinalIgnoreCase));
+                    resultados = clientes.FindAll(c => c.Id.Equals(val, StringComparison.OrdinalIgnoreCase));
                     break;
                 case "nombre":
-                    resultados = Clientes.FindAll(c => c.Nombre.Equals(val, StringComparison.OrdinalIgnoreCase));
+                    resultados = clientes.FindAll(c => c.Nombre.Equals(val, StringComparison.OrdinalIgnoreCase));
                     break;
                 case "apellido":
-                    resultados = Clientes.FindAll(c => c.Apellido.Equals(val, StringComparison.OrdinalIgnoreCase));
+                    resultados = clientes.FindAll(c => c.Apellido.Equals(val, StringComparison.OrdinalIgnoreCase));
                     break;
                 case "telefono":
-                    resultados = Clientes.FindAll(c => c.Telefono.Equals(val, StringComparison.OrdinalIgnoreCase));
+                    resultados = clientes.FindAll(c => c.Telefono.Equals(val, StringComparison.OrdinalIgnoreCase));
                     break;
                 case "correo":
-                    resultados = Clientes.FindAll(c => c.Correo.Equals(val, StringComparison.OrdinalIgnoreCase));
+                    resultados = clientes.FindAll(c => c.Correo.Equals(val, StringComparison.OrdinalIgnoreCase));
                     break;
                 case "genero":
-                    resultados = Clientes.FindAll(c => c.Genero.Equals(val, StringComparison.OrdinalIgnoreCase));
+                    resultados = clientes.FindAll(c => c.Genero.Equals(val, StringComparison.OrdinalIgnoreCase));
                     break;
                 case "fechadenacimiento":
-                    resultados = Clientes.FindAll(c => c.FechaDeNacimiento.Equals(val, StringComparison.OrdinalIgnoreCase));
+                    resultados = clientes.FindAll(c => c.FechaDeNacimiento.Equals(val, StringComparison.OrdinalIgnoreCase));
                     break;
                 default:
                     break;
@@ -92,7 +92,7 @@ namespace Library
                 throw new Excepciones.EmptyStringException("Datos de cliente vacios");
             }
             
-            foreach (var cliente in Clientes)
+            foreach (var cliente in clientes)
             {
                 if (cliente.Id == ClienteId)
                 {
