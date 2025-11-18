@@ -43,7 +43,7 @@ namespace Library
 
             if (tema == "" || contenido == "" || cuando == "")
             {
-                throw new Excepciones.EmptyStringException("datos de interaccion vacios");
+                throw new ArgumentException("datos de interaccion vacios");
             }
 
             if (cuando != "00/00/0000")
@@ -58,7 +58,7 @@ namespace Library
                 else
                 {
                     Console.WriteLine("Fecha no valida");
-                    throw new Excepciones.InvalidDateException("Fecha no valida");
+                    throw new InvalidDateException("Fecha no valida");
                 }
 
                 this.Cliente = cliente;
@@ -77,7 +77,7 @@ namespace Library
 
                 if (notas == "")
                 {
-                    throw new Excepciones.EmptyStringException("el contenido de la nota esta vacio");
+                    throw new ArgumentException("el contenido de la nota esta vacio");
                 }
                 this.Notas = notas;
             }
@@ -95,7 +95,7 @@ namespace Library
             {
                 if (!(fecha < DateTime.Today))
                 {
-                    throw new Excepciones.InvalidDateException("Fecha no valida");
+                    throw new InvalidDateException("Fecha no valida");
                 }
             }
     }

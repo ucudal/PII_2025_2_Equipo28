@@ -15,7 +15,7 @@ namespace Library
         {
             if (tipo == "" || tema == "")
             {
-                throw new Excepciones.EmptyStringException("datos vacios");
+                throw new ArgumentException("datos vacios");
             }
 
             if (usuario == null||tipo==null||tema==null)
@@ -78,7 +78,7 @@ namespace Library
             else
             {
                 Console.WriteLine("Fecha no valida");
-                throw new Excepciones.InvalidDateException("Fecha no valida");
+                throw new InvalidDateException("Fecha no valida");
             }
 
             tipo = tipo.ToLower();

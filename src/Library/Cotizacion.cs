@@ -26,7 +26,7 @@ namespace Library
 
             if (importe == "")
             {
-                throw new Excepciones.EmptyStringException();
+                throw new ArgumentException();
             }
             Cliente = cliente;
             Fecha = fecha;

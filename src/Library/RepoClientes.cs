@@ -131,7 +131,7 @@ namespace Library
 
             if (ClienteId == "")
             {
-                throw new Excepciones.EmptyStringException("Datos de cliente vacios");
+                throw new ArgumentException("Datos de cliente vacios");
             }
             
             foreach (var cliente in clientes)
