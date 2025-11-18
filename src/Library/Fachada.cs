@@ -503,7 +503,7 @@ namespace Library
             return "Solo Usuarios pueden agregar etiquetas a los clientes";
         }
 
-        public void RegistrarVenta(string clienteId, string producto, string fecha,
+        /*public void RegistrarVenta(string clienteId, string producto, string fecha,
             string precio, string usuarioId)
         {
             Usuario usuario = this.Usuarios.BuscarUsuario(usuarioId);
@@ -515,8 +515,9 @@ namespace Library
                     Ventas.AgregarVenta(cliente, fecha, precio, producto, usuario);
                 }
             }
-        }
+        }*/
 
+        /*
         public void RegistarCotizacion(string clienteId, string fecha,
             string precio, string usuarioId)
         {
@@ -530,6 +531,7 @@ namespace Library
                 }
             }
         }
+        */
 
         // Como administrador quiero crear, suspender o eliminar usuarios, para mantener control sobre los accesos.
        
