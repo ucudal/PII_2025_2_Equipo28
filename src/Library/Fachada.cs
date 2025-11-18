@@ -347,7 +347,7 @@ namespace Library
             }
 
             string Panel = $"Los Clientes totales son los siguientes:\n";
-            foreach (Cliente cliente in this.Clientes.Clientes2)
+            foreach (Cliente cliente in this.Clientes.Clientes)
             {
                 Panel += $"{cliente.Nombre} {cliente.Apellido}\n";
             }
