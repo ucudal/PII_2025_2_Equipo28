@@ -39,7 +39,7 @@ namespace Library
 
             if (lugar == "")
             {
-                throw new Excepciones.EmptyStringException("datos de interaccion vacios");
+                throw new ArgumentException("datos de interaccion vacios");
             }
 
             this.Lugar = lugar;

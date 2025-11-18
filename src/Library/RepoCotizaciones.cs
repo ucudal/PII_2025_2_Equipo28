@@ -16,7 +16,7 @@ namespace Library
             }
             if (cuando==""||precio=="")
             {
-                throw new Excepciones.EmptyStringException();
+                throw new AggregateException();
             }
             DateTime fecha;
             if (DateTime.TryParseExact(cuando, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None,
@@ -28,7 +28,7 @@ namespace Library
             else
             {
                 Console.WriteLine("Fecha no valida");
-                throw new Excepciones.InvalidDateException();
+                throw new InvalidDateException();
             }
         }
     }

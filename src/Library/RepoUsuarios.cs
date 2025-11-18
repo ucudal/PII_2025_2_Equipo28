@@ -41,7 +41,7 @@ namespace Library
 
             if (id == "")
             {
-                throw new Excepciones.EmptyStringException("datos de usuario vacios");
+                throw new ArgumentException("datos de usuario vacios");
             }
             foreach (Usuario usuario in this.Usuarios)
             {

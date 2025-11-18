@@ -53,12 +53,12 @@ namespace Library
                 Console.WriteLine(e.Message);
                 return e.Message;
             }
-            catch (Excepciones.EmptyStringException e)
+            catch (ArgumentException e)
             {
                 Console.WriteLine(e.Message);
                 return e.Message;
             }
-            catch (Excepciones.InvalidDateException e)
+            catch (InvalidDateException e)
             {
                 Console.WriteLine(e.Message);
                 return e.Message;
@@ -98,12 +98,12 @@ namespace Library
                 Console.WriteLine(e.Message);
                 return e.Message;
             }
-            catch (Excepciones.EmptyStringException e)
+            catch (ArgumentException e)
             {
                 Console.WriteLine(e.Message);
                 return e.Message;
             }
-            catch (Excepciones.InvalidDateException e)
+            catch (InvalidDateException e)
             {
                 Console.WriteLine(e.Message);
                 return e.Message;
@@ -138,12 +138,12 @@ namespace Library
                 Console.WriteLine(e.Message);
                 return e.Message;
             }
-            catch (Excepciones.EmptyStringException e)
+            catch (ArgumentException e)
             {
                 Console.WriteLine(e.Message);
                 return e.Message;
             }
-            catch (Excepciones.InvalidDateException e)
+            catch (InvalidDateException e)
             {
                 Console.WriteLine(e.Message);
                 return e.Message;
@@ -179,12 +179,12 @@ namespace Library
                 Console.WriteLine(e.Message);
                 return e.Message;
             }
-            catch (Excepciones.EmptyStringException e)
+            catch (ArgumentException e)
             {
                 Console.WriteLine(e.Message);
                 return e.Message;
             }
-            catch (Excepciones.InvalidDateException e)
+            catch (InvalidDateException e)
             {
                 Console.WriteLine(e.Message);
                 return e.Message;
@@ -221,7 +221,7 @@ namespace Library
                 Console.WriteLine(e.Message);
                 return e.Message;
             }
-            catch (Excepciones.EmptyStringException e)
+            catch (ArgumentException e)
             {
                 Console.WriteLine(e.Message);
                 return e.Message;
@@ -258,12 +258,12 @@ namespace Library
                 Console.WriteLine(e.Message);
                 return e.Message;
             }
-            catch (Excepciones.EmptyStringException e)
+            catch (ArgumentException e)
             {
                 Console.WriteLine(e.Message);
                 return e.Message;
             }
-            catch (Excepciones.InvalidDateException e)
+            catch (InvalidDateException e)
             {
                 Console.WriteLine(e.Message);
                 return e.Message;
@@ -305,7 +305,7 @@ namespace Library
                 Console.WriteLine(e.Message);
                 return e.Message;
             }
-            catch (Excepciones.EmptyStringException e)
+            catch (ArgumentException e)
             {
                 Console.WriteLine(e.Message);
                 return e.Message;
@@ -337,7 +337,7 @@ namespace Library
             {
                 Console.WriteLine(e.Message);
             }
-            catch (Excepciones.EmptyStringException e)
+            catch (ArgumentException e)
             {
                 Console.WriteLine(e.Message);
             }
@@ -387,7 +387,7 @@ namespace Library
                 Console.WriteLine(e.Message);
                 return e.Message;
             }
-            catch (Excepciones.EmptyStringException e)
+            catch (ArgumentException e)
             {
                 Console.WriteLine(e.Message);
                 return e.Message;
@@ -422,7 +422,7 @@ namespace Library
                 Console.WriteLine(e.Message);
                 return e.Message;
             }
-            catch (Excepciones.EmptyStringException e)
+            catch (ArgumentException e)
             {
                 Console.WriteLine(e.Message);
                 return e.Message;
@@ -773,7 +773,7 @@ namespace Library
             {
                 return "Error: faltan datos para registrar la venta.";
             }
-            catch (Excepciones.EmptyStringException)
+            catch (ArgumentException)
             {
                 return "Error: uno o más campos están vacíos.";
             }
@@ -792,7 +792,7 @@ namespace Library
             {
                 return "Error: faltan datos para registrar la venta.";
             }
-            catch (Excepciones.EmptyStringException)
+            catch (ArgumentException)
             {
                 return "Error: uno o más campos están vacíos.";
             }
@@ -808,15 +808,15 @@ namespace Library
                 this.Ventas.AgregarVenta(cliente, fecha, precio, producto, usuario);
                 return $"Venta registrada: {cliente.Nombre} compró '{producto}' por ${precio} el {fecha}.";
             }
-            catch (Excepciones.InvalidDateException)
+            catch (InvalidDateException)
             {
                 return "Error: la fecha ingresada no es válida.";
             }
-            catch (Excepciones.EmptyStringException)
+            catch (ArgumentNullException)
             {
                 return "Error: uno o más campos están vacíos.";
             }
-            catch (ArgumentNullException)
+            catch (ArgumentException)
             {
                 return "Error: faltan datos para registrar la venta.";
             }
@@ -842,7 +842,7 @@ namespace Library
             {
                 return "Error: faltan datos para registrar la venta.";
             }
-            catch (Excepciones.EmptyStringException)
+            catch (ArgumentException)
             {
                 return "Error: uno o más campos están vacíos.";
             }
@@ -906,7 +906,7 @@ namespace Library
             {
                 return "Error: faltan datos para registrar la cotización.";
             }
-            catch (Excepciones.EmptyStringException)
+            catch (ArgumentException)
             {
                 return "Error: uno o más campos están vacíos.";
             }
@@ -925,7 +925,7 @@ namespace Library
             {
                 return "Error: faltan datos para registrar la cotización.";
             }
-            catch (Excepciones.EmptyStringException)
+            catch (ArgumentException)
             {
                 return "Error: uno o más campos están vacíos.";
             }
@@ -941,15 +941,15 @@ namespace Library
                 this.Cotizaciones.AgregarCotizacion(cliente, fecha, precio, usuario);
                 return $"Cotización registrada: se envió a {cliente.Nombre} por ${precio} el {fecha}.";
             }
-            catch (Excepciones.InvalidDateException)
+            catch (InvalidDateException)
             {
                 return "Error: la fecha ingresada no es válida.";
             }
-            catch (Excepciones.EmptyStringException)
+            catch (ArgumentNullException)
             {
                 return "Error: uno o más campos están vacíos.";
             }
-            catch (ArgumentNullException)
+            catch (ArgumentException)
             {
                 return "Error: faltan datos para registrar la cotización.";
             }
@@ -978,11 +978,11 @@ namespace Library
                 
                 if (string.IsNullOrWhiteSpace(id))
                 {
-                    throw new Excepciones.EmptyStringException("El ID del vendedor no puede estar vacío");
+                    throw new ArgumentException("El ID del vendedor no puede estar vacío");
                 }
                 if (string.IsNullOrWhiteSpace(nombre))
                 {
-                    throw new Excepciones.EmptyStringException("El nombre del vendedor no puede estar vacío");
+                    throw new ArgumentException("El nombre del vendedor no puede estar vacío");
                 }
                 
                 foreach (Vendedor v in Usuarios.Vendedores)
@@ -1023,11 +1023,11 @@ namespace Library
                 
                 if (string.IsNullOrWhiteSpace(id))
                 {
-                    throw new Excepciones.EmptyStringException("El ID del administrador no puede estar vacío");
+                    throw new ArgumentException("El ID del administrador no puede estar vacío");
                 }
                 if (string.IsNullOrWhiteSpace(nombre))
                 {
-                    throw new Excepciones.EmptyStringException("El nombre del administrador no puede estar vacío");
+                    throw new ArgumentException("El nombre del administrador no puede estar vacío");
                 }
 
                 foreach (Administrador a in Usuarios.Administradores)
