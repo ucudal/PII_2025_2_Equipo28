@@ -35,18 +35,143 @@ namespace Library
         /// Registra un mensaje de interacción entre un usuario y un cliente.
         /// Aplica Expert: RepoUsuarios y RepoClientes conocen cómo buscar sus entidades.
         /// </summary>
+        // public string RegistarMensaje(string clienteId, string mensaje, string tema,
+        //     string usuarioId, string cuando)
+        // {
+        //     Usuario usuario = null;
+        //     Mensajes Mensaje = null; //Inicializando larailala
+        //     Cliente cliente = null;
+        //     try
+        //     {
+        //         usuario = this.Usuarios.BuscarUsuario(usuarioId);
+        //         cliente = Clientes.BuscarUnCliente(clienteId);
+        //         // Cliente cliente = Usuarios.BuscarCliente(clienteId); //Hecho comentario por si acaso
+        //         Mensaje = new Mensajes(usuario, cliente, tema, mensaje, cuando);
+        //     }
+        //     catch (ArgumentNullException e)
+        //     {
+        //         Console.WriteLine(e.Message);
+        //         return e.Message;
+        //     }
+        //     catch (ArgumentException e)
+        //     {
+        //         Console.WriteLine(e.Message);
+        //         return e.Message;
+        //     }
+        //     catch (InvalidDateException e)
+        //     {
+        //         Console.WriteLine(e.Message);
+        //         return e.Message;
+        //     }
+        //
+        //     if (usuario != null)
+        //     {
+        //         if (cliente != null)
+        //         {
+        //             Interacciones.AgregarInteraccion(Mensaje, usuario);
+        //             return "Mensaje registrado";
+        //         }
+        //     }
+        //
+        //     return "El usuario o cliente no existen";
+        // }
+        //
+        // /// <summary>
+        // /// Registra un correo electrónico como interacción entre usuario y cliente.
+        // /// Aplica Expert: delega la búsqueda a los repositorios correspondientes.
+        // /// </summary>
+        // public string RegistrarCorreo(string clienteId, string correo, string tema,
+        //     string usuarioId, string cuando)
+        // {
+        //     Usuario usuario = null;
+        //     Correos Correo = null; //Inicializando larailala
+        //     Cliente cliente = null;
+        //     try
+        //     {
+        //         usuario = this.Usuarios.BuscarUsuario(usuarioId);
+        //         cliente = Clientes.BuscarUnCliente(clienteId);
+        //         // Cliente cliente = Usuarios.BuscarCliente(clienteId); //Hecho comentario por si acaso
+        //         Correo = new Correos(usuario,cliente, tema, correo, cuando);
+        //     }
+        //     catch (ArgumentNullException e)
+        //     {
+        //         Console.WriteLine(e.Message);
+        //         return e.Message;
+        //     }
+        //     catch (ArgumentException e)
+        //     {
+        //         Console.WriteLine(e.Message);
+        //         return e.Message;
+        //     }
+        //     catch (InvalidDateException e)
+        //     {
+        //         Console.WriteLine(e.Message);
+        //         return e.Message;
+        //     }
+        //
+        //     if (usuario != null)
+        //     {
+        //         if (cliente != null)
+        //         {
+        //             Interacciones.AgregarInteraccion(Correo, usuario);
+        //             return "Correo registrado";
+        //         }
+        //     }
+        //     return "El usuario o cliente no existen";
+        // }
+        //
+        // public string RegistarLlamada(string clienteId, string llamada, string tema,
+        //     string usuarioId, string cuando)
+        // {
+        //     Usuario usuario = null;
+        //     Llamadas LLamada = null; //Inicializando larailala
+        //     Cliente cliente = null;
+        //     try
+        //     {
+        //         usuario = this.Usuarios.BuscarUsuario(usuarioId);
+        //         cliente = Clientes.BuscarUnCliente(clienteId);
+        //         // Cliente cliente = Usuarios.BuscarCliente(clienteId); //Hecho comentario por si acaso
+        //         LLamada = new Llamadas(usuario,cliente, tema, llamada, cuando);
+        //     }
+        //     catch (ArgumentNullException e)
+        //     {
+        //         Console.WriteLine(e.Message);
+        //         return e.Message;
+        //     }
+        //     catch (ArgumentException e)
+        //     {
+        //         Console.WriteLine(e.Message);
+        //         return e.Message;
+        //     }
+        //     catch (InvalidDateException e)
+        //     {
+        //         Console.WriteLine(e.Message);
+        //         return e.Message;
+        //     }
+        //
+        //     if (usuario != null)
+        //     {
+        //         if (cliente != null)
+        //         {
+        //             Interacciones.AgregarInteraccion(LLamada, usuario);
+        //             return "llamada registrada";
+        //
+        //         }
+        //     }
+        //     return "El usuario o cliente no existen";
+        // }
         public string RegistarMensaje(string clienteId, string mensaje, string tema,
             string usuarioId, string cuando)
         {
             Usuario usuario = null;
-            Mensajes Mensaje = null; //Inicializando larailala
+            Interaccion Mensaje = null; //Inicializando larailala
             Cliente cliente = null;
             try
             {
                 usuario = this.Usuarios.BuscarUsuario(usuarioId);
                 cliente = Clientes.BuscarUnCliente(clienteId);
                 // Cliente cliente = Usuarios.BuscarCliente(clienteId); //Hecho comentario por si acaso
-                Mensaje = new Mensajes(usuario, cliente, tema, mensaje, cuando);
+                Mensaje = new Interaccion(usuario, cliente, Interaccion.TipoInterracion.Mensaje, tema, mensaje, cuando);
             }
             catch (ArgumentNullException e)
             {
@@ -73,65 +198,20 @@ namespace Library
                 }
             }
 
-            return "El usuario o cliente no existen";
+            return "El usuario o el cliente es null";
         }
-
-        /// <summary>
-        /// Registra un correo electrónico como interacción entre usuario y cliente.
-        /// Aplica Expert: delega la búsqueda a los repositorios correspondientes.
-        /// </summary>
-        public string RegistrarCorreo(string clienteId, string correo, string tema,
-            string usuarioId, string cuando)
-        {
-            Usuario usuario = null;
-            Correos Correo = null; //Inicializando larailala
-            Cliente cliente = null;
-            try
-            {
-                usuario = this.Usuarios.BuscarUsuario(usuarioId);
-                cliente = Clientes.BuscarUnCliente(clienteId);
-                // Cliente cliente = Usuarios.BuscarCliente(clienteId); //Hecho comentario por si acaso
-                Correo = new Correos(usuario,cliente, tema, correo, cuando);
-            }
-            catch (ArgumentNullException e)
-            {
-                Console.WriteLine(e.Message);
-                return e.Message;
-            }
-            catch (ArgumentException e)
-            {
-                Console.WriteLine(e.Message);
-                return e.Message;
-            }
-            catch (InvalidDateException e)
-            {
-                Console.WriteLine(e.Message);
-                return e.Message;
-            }
-
-            if (usuario != null)
-            {
-                if (cliente != null)
-                {
-                    Interacciones.AgregarInteraccion(Correo, usuario);
-                    return "Correo registrado";
-                }
-            }
-            return "El usuario o cliente no existen";
-        }
-
         public string RegistarLlamada(string clienteId, string llamada, string tema,
             string usuarioId, string cuando)
         {
             Usuario usuario = null;
-            Llamadas LLamada = null; //Inicializando larailala
+            Interaccion LLamada = null; //Inicializando larailala
             Cliente cliente = null;
             try
             {
                 usuario = this.Usuarios.BuscarUsuario(usuarioId);
                 cliente = Clientes.BuscarUnCliente(clienteId);
                 // Cliente cliente = Usuarios.BuscarCliente(clienteId); //Hecho comentario por si acaso
-                LLamada = new Llamadas(usuario,cliente, tema, llamada, cuando);
+                LLamada = new Interaccion(usuario, cliente, Interaccion.TipoInterracion.Llamada, tema, llamada, cuando);
             }
             catch (ArgumentNullException e)
             {
@@ -154,14 +234,54 @@ namespace Library
                 if (cliente != null)
                 {
                     Interacciones.AgregarInteraccion(LLamada, usuario);
-                    return "llamada registrada";
-
+                    return "Mensaje registrado";
                 }
             }
-            return "El usuario o cliente no existen";
+
+            return "El usuario o el cliente es null";
+        }
+        public string RegistarCorreo(string clienteId, string mensaje, string tema,
+            string usuarioId, string cuando)
+        {
+            Usuario usuario = null;
+            Interaccion Correo = null; //Inicializando larailala
+            Cliente cliente = null;
+            try
+            {
+                usuario = this.Usuarios.BuscarUsuario(usuarioId);
+                cliente = Clientes.BuscarUnCliente(clienteId);
+                // Cliente cliente = Usuarios.BuscarCliente(clienteId); //Hecho comentario por si acaso
+                Correo = new Interaccion(usuario, cliente, Interaccion.TipoInterracion.Correo, tema, mensaje, cuando);
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine(e.Message);
+                return e.Message;
+            }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine(e.Message);
+                return e.Message;
+            }
+            catch (InvalidDateException e)
+            {
+                Console.WriteLine(e.Message);
+                return e.Message;
+            }
+
+            if (usuario != null)
+            {
+                if (cliente != null)
+                {
+                    Interacciones.AgregarInteraccion(Correo, usuario);
+                    return "Mensaje registrado";
+                }
+            }
+
+            return "El usuario o el cliente es null";
         }
 
-        public string RegistarReunion(string clienteId, string reunion, string tema,
+        public string RegistarReunion(string clienteId, string contenido, string tema,
             string usuarioId, string cuando, string lugar)
         {
             Usuario usuario = null;
@@ -172,7 +292,7 @@ namespace Library
                 usuario = this.Usuarios.BuscarUsuario(usuarioId);
                 cliente = Clientes.BuscarUnCliente(clienteId);
                 // Cliente cliente = Usuarios.BuscarCliente(clienteId); //Hecho comentario por si acaso
-                Reunion = new Reunion(usuario,cliente, tema, lugar, reunion,cuando);
+                Reunion = new Reunion(usuario,cliente, tema, lugar, contenido,cuando);
             }
             catch (ArgumentNullException e)
             {
@@ -195,7 +315,7 @@ namespace Library
                 if (cliente != null)
                 {
                     Interacciones.AgregarInteraccion(Reunion, usuario);
-                    return "Reuion registrada";
+                    return "Reunion registrada";
 
                 }
             }
@@ -647,7 +767,7 @@ namespace Library
             // }
         }
         
-        public List<Llamadas> Llamadas = new List<Llamadas>();
+        // public List<Llamadas> Llamadas = new List<Llamadas>();
         public List<Reunion> Reuniones = new List<Reunion>();
 
         /// <summary>
