@@ -52,26 +52,68 @@ namespace Library
 
             switch (attr)
             {
-                case "id": 
-                    resultados = clientes.FindAll(c => c.Id.Equals(val, StringComparison.OrdinalIgnoreCase));
+                case "id":
+                    foreach (Cliente cliente in Clientes)
+                    {
+                        if (cliente.Id == val)
+                        {
+                            resultados.Add(cliente);
+                        }
+                    }
                     break;
                 case "nombre":
-                    resultados = clientes.FindAll(c => c.Nombre.Equals(val, StringComparison.OrdinalIgnoreCase));
+                    foreach (Cliente cliente in Clientes)
+                    {
+                        if (cliente.Nombre == val)
+                        {
+                            resultados.Add(cliente);
+                        }
+                    }
                     break;
                 case "apellido":
-                    resultados = clientes.FindAll(c => c.Apellido.Equals(val, StringComparison.OrdinalIgnoreCase));
+                    foreach (Cliente cliente in Clientes)
+                    {
+                        if (cliente.Apellido == val)
+                        {
+                            resultados.Add(cliente);
+                        }
+                    }
                     break;
                 case "telefono":
-                    resultados = clientes.FindAll(c => c.Telefono.Equals(val, StringComparison.OrdinalIgnoreCase));
+                    foreach (Cliente cliente in Clientes)
+                    {
+                        if (cliente.Telefono == val)
+                        {
+                            resultados.Add(cliente);
+                        }
+                    }
                     break;
                 case "correo":
-                    resultados = clientes.FindAll(c => c.Correo.Equals(val, StringComparison.OrdinalIgnoreCase));
+                    foreach (Cliente cliente in Clientes)
+                    {
+                        if (cliente.Correo == val)
+                        {
+                            resultados.Add(cliente);
+                        }
+                    }
                     break;
                 case "genero":
-                    resultados = clientes.FindAll(c => c.Genero.Equals(val, StringComparison.OrdinalIgnoreCase));
+                    foreach (Cliente cliente in Clientes)
+                    {
+                        if (cliente.Genero == val)
+                        {
+                            resultados.Add(cliente);
+                        }
+                    }
                     break;
                 case "fechadenacimiento":
-                    resultados = clientes.FindAll(c => c.FechaDeNacimiento.Equals(val, StringComparison.OrdinalIgnoreCase));
+                    foreach (Cliente cliente in Clientes)
+                    {
+                        if (cliente.FechaDeNacimiento == val)
+                        {
+                            resultados.Add(cliente);
+                        }
+                    } 
                     break;
                 default:
                     break;

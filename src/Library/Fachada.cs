@@ -212,6 +212,45 @@ namespace Library
         /// <summary>
         /// La explicacion del metodo se encuentra mas arriba
         /// </summary>
+        public string RegistrarCorreo(string clienteId, string correo, string tema,
+            string usuarioId, string cuando)
+        {
+            Usuario usuario = null;
+            Interaccion Correo = null; //Inicializando larailala
+            Cliente cliente = null;
+            try
+            {
+                usuario = this.Usuarios.BuscarUsuario(usuarioId);
+                cliente = Clientes.BuscarUnCliente(clienteId);
+                // Cliente cliente = Usuarios.BuscarCliente(clienteId); //Hecho comentario por si acaso
+                Correo = Interacciones.CrearCorreo(usuario,cliente, tema, correo, cuando);
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine(e.Message);
+                return e.Message;
+            }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine(e.Message);
+                return e.Message;
+            }
+            catch (InvalidDateException e)
+            {
+                Console.WriteLine(e.Message);
+                return e.Message;
+            }
+
+            if (usuario != null)
+            {
+                if (cliente != null)
+                {
+                    Interacciones.AgregarInteraccion(Correo, usuario);
+                    return "Correo registrado";
+                }
+            }
+            return "El usuario o cliente no existen";
+        }
         public string RegistarLlamada(string clienteId, string llamada, string tema,
             string usuarioId, string cuando)
         {
@@ -222,7 +261,9 @@ namespace Library
             {
                 usuario = this.Usuarios.BuscarUsuario(usuarioId);
                 cliente = Clientes.BuscarUnCliente(clienteId);
+
                 LLamada = Interacciones.CrearLlamada(usuario, cliente, tema, llamada, cuando);
+
             }
             catch (ArgumentNullException e)
             {
@@ -783,6 +824,8 @@ namespace Library
         }
         
         // public List<Llamadas> Llamadas = new List<Llamadas>();
+
+
         public List<Reunion> Reuniones = new List<Reunion>();
 
         /// <summary>
@@ -870,8 +913,8 @@ namespace Library
         // public void RegistrarLlamada(string id, string tema, string contenido)
         // {
         //     // Cliente cliente = Clientes.BuscarCliente("id", id)[0];
-        //     // Llamadas llamada = new Llamadas(cliente, tema, contenido);
-        //     // Llamadas.Add(llamada);
+        //     // Llamada llamada = new Llamada(cliente, tema, contenido);
+        //     // Llamada.Add(llamada);
         // }
 
         // public void RegistrarReunion(string id, string tema, string ubicacion, string reunion, string cuando)
