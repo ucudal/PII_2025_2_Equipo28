@@ -160,6 +160,16 @@ namespace Library
         //     }
         //     return "El usuario o cliente no existen";
         // }
+        /// <summary>
+        /// Los metodos RegistrarMensaje, RegistarCorreo, RegistarLlamada y RegistrarReunion, crean el tipo de interracion y lo agregar a su propio repositorio de interacciones.
+        /// </summary>
+        /// <param name="clienteId">El id del cliente al cual asociar la interacion, para buscarlo</param>
+        /// <param name="contenido (mensaje,llamada,correo,reunion)">El contenido o descipcion de la interaccion</param>
+        /// <param name="tema">El tema de la interaccion</param>
+        /// <param name="usuarioId">El id del usuario al cual asociar la interaccion, para busarlo y verficar que sea valido</param>
+        /// <param name="cuando">La fecha en la cual se realizo la interracion (o realizara, para Reunion)</param>
+        /// /// <param name="lugar">Lugar de la interracion (usado unicamnete por RegistrarReunion)</param>
+        /// <returns>Devuelve un mensaje confirmado que el registro fue un exito, o comentado que hubo un error, cual fue y donde fue</returns>
         public string RegistarMensaje(string clienteId, string mensaje, string tema,
             string usuarioId, string cuando)
         {
@@ -170,8 +180,7 @@ namespace Library
             {
                 usuario = this.Usuarios.BuscarUsuario(usuarioId);
                 cliente = Clientes.BuscarUnCliente(clienteId);
-                // Cliente cliente = Usuarios.BuscarCliente(clienteId); //Hecho comentario por si acaso
-                Mensaje = new Interaccion(usuario, cliente, Interaccion.TipoInterracion.Mensaje, tema, mensaje, cuando);
+                Mensaje = Interacciones.CrearMensaje(usuario, cliente, tema, mensaje, cuando);
             }
             catch (ArgumentNullException e)
             {
@@ -200,6 +209,9 @@ namespace Library
 
             return "El usuario o el cliente es null";
         }
+        /// <summary>
+        /// La explicacion del metodo se encuentra mas arriba
+        /// </summary>
         public string RegistarLlamada(string clienteId, string llamada, string tema,
             string usuarioId, string cuando)
         {
@@ -210,8 +222,7 @@ namespace Library
             {
                 usuario = this.Usuarios.BuscarUsuario(usuarioId);
                 cliente = Clientes.BuscarUnCliente(clienteId);
-                // Cliente cliente = Usuarios.BuscarCliente(clienteId); //Hecho comentario por si acaso
-                LLamada = new Interaccion(usuario, cliente, Interaccion.TipoInterracion.Llamada, tema, llamada, cuando);
+                LLamada = Interacciones.CrearLlamada(usuario, cliente, tema, llamada, cuando);
             }
             catch (ArgumentNullException e)
             {
@@ -240,7 +251,10 @@ namespace Library
 
             return "El usuario o el cliente es null";
         }
-        public string RegistarCorreo(string clienteId, string mensaje, string tema,
+        /// <summary>
+        /// La explicacion del metodo se encuentra mas arriba
+        /// </summary>
+        public string RegistarCorreo(string clienteId, string correo, string tema,
             string usuarioId, string cuando)
         {
             Usuario usuario = null;
@@ -250,8 +264,7 @@ namespace Library
             {
                 usuario = this.Usuarios.BuscarUsuario(usuarioId);
                 cliente = Clientes.BuscarUnCliente(clienteId);
-                // Cliente cliente = Usuarios.BuscarCliente(clienteId); //Hecho comentario por si acaso
-                Correo = new Interaccion(usuario, cliente, Interaccion.TipoInterracion.Correo, tema, mensaje, cuando);
+                Correo = Interacciones.CrearCorreo(usuario, cliente, tema, correo, cuando);
             }
             catch (ArgumentNullException e)
             {
@@ -280,19 +293,21 @@ namespace Library
 
             return "El usuario o el cliente es null";
         }
-
-        public string RegistarReunion(string clienteId, string contenido, string tema,
+        /// <summary>
+        /// La explicacion del metodo se encuentra mas arriba
+        /// </summary>
+        public string RegistarReunion(string clienteId, string reunion, string tema,
             string usuarioId, string cuando, string lugar)
         {
             Usuario usuario = null;
-            Reunion Reunion = null; //Inicializando larailala
+            Interaccion Reunion = null; //Inicializando larailala
             Cliente cliente = null;
             try
             {
                 usuario = this.Usuarios.BuscarUsuario(usuarioId);
                 cliente = Clientes.BuscarUnCliente(clienteId);
-                // Cliente cliente = Usuarios.BuscarCliente(clienteId); //Hecho comentario por si acaso
-                Reunion = new Reunion(usuario,cliente, tema, lugar, contenido,cuando);
+                Reunion = Interacciones.CrearReunion(usuario, cliente, tema, reunion, cuando,lugar);
+
             }
             catch (ArgumentNullException e)
             {
@@ -483,7 +498,7 @@ namespace Library
                 }
             }
             Panel += $"Sus reuniones proximas son:\n";
-            foreach (Interaccion interaccion in this.Interacciones.Interacciones2)
+            foreach (Interaccion interaccion in this.Interacciones.InteraccionesLectura)
             {
                 if (interaccion.Tipo == Interaccion.TipoInterracion.Reunion && interaccion.Fecha >= DateTime.Now)
                 {
