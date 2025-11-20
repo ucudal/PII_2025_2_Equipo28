@@ -33,26 +33,6 @@ namespace Library
             FechaDeNacimiento = string.Empty;
         }
         
-        public void CambiarNombre(string nuevoNombre)
-        {
-            Nombre = nuevoNombre;
-        }
-
-        public void CambiarApellido(string nuevoApellido)
-        {
-            Apellido = nuevoApellido;
-        }
-
-        public void CambiarTelefono(string nuevoTelefono)
-        {
-            Telefono = nuevoTelefono;
-        }
-
-        public void CambiarCorreo(string nuevoCorreo)
-        {
-            Correo = nuevoCorreo;
-        }
-
         public void AsignarGenero(string nuevoGenero)
         {
             Genero = nuevoGenero;

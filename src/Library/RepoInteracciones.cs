@@ -235,7 +235,7 @@ namespace Library
                 throw new ArgumentNullException(nameof(usuario), "El usuario no puede ser null.");
             }
             Interacciones.Add(interaccion);
-            usuario.AgregarInteraccion(interaccion);
+            // usuario.AgregarInteraccion(interaccion);
         }
         /// <summary>
         /// Metodo que devuelve las ultimas interraciones de los clientes de un usuario.

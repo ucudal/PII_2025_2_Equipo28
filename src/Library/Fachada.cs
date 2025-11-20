@@ -859,19 +859,19 @@ namespace Library
             switch (atributoNormalizado)
             {
                 case "nombre":
-                    cliente.CambiarNombre(nuevoValor);
+                    cliente.Nombre=nuevoValor;
                     break;
 
                 case "apellido":
-                    cliente.CambiarApellido(nuevoValor);
+                    cliente.Apellido=nuevoValor;
                     break;
 
                 case "telefono":
-                    cliente.CambiarTelefono(nuevoValor);
+                    cliente.Telefono=nuevoValor;
                     break;
 
                 case "correo":
-                    cliente.CambiarCorreo(nuevoValor);
+                    cliente.Correo=nuevoValor;
                     break;
 
                 case "genero":
@@ -1052,7 +1052,7 @@ namespace Library
 
             // 4) Sumar importes en el rango [inicio, fin] 
             double total = 0.0;
-            foreach (var venta in usuario.TotalVentas)
+            foreach (var venta in usuario.VentasUsuario)
             {
                 if (venta.Fecha >= fechaInicio && venta.Fecha <= fechaFin)
                 {

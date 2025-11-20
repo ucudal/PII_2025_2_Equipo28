@@ -23,7 +23,7 @@ namespace Library
                     out fecha))
             {
                 this.Cotizaciones.Add(new Cotizacion(cliente, fecha, precio));
-                usuario.AgregarCotizacion(new Cotizacion(cliente,fecha,precio));
+                // usuario.AgregarCotizacion(new Cotizacion(cliente,fecha,precio));
             }
             else
             {
