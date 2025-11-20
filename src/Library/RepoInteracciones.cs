@@ -270,7 +270,7 @@ namespace Library
         /// <summary>
         /// Metodo creado para limpiar la lista de interracion. Creado para los test
         /// </summary>
-        public void eliminarinteraciones()//ciertos test no funcionan sin esto
+        public void EliminarDatos()//ciertos test no funcionan sin esto
         {
             interacciones.Clear();
         }

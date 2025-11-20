@@ -34,7 +34,7 @@ namespace Library
             if (cliente != null)
             {
                 clientes.Add(cliente);
-                usuarios.ClientesTotales.Add(cliente);
+                // usuarios.clientesTotales.Add(cliente);
             }
         }
 
@@ -143,6 +143,11 @@ namespace Library
             }
             
             return null;
+        }
+
+        public void EliminarDatos()
+        {
+            this.clientes.Clear();
         }
     }
 }

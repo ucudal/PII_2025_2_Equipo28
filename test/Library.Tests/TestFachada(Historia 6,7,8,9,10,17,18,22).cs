@@ -13,19 +13,13 @@
 //         private Cliente cliente;
 //         private Administrador administrador;
 //         
-//         [SetUp]
-//         public void Setup()
-//         {
-//             fachada = Fachada.Instancia;
-//             fachada.CrearUsuario("1", "El petizo", "A1");
-//             usuario = fachada.BuscarUsuario("1");
-//             fachada.CrearNuevoCliente("El peluca", "Sape", "099872521", "099818378172","Peluca@cabezatermo.com");
-//             List<Cliente> clientes = fachada.BuscarClientesFachada("correo", "Peluca@cabezatermo.com");
-//             cliente = clientes[0];
-//             cliente.Id = "0";
-//             fachada.Interacciones.eliminarinteraciones();
-//
-//         }
+        
+        // [SetUp]
+        // public void Setup()
+        // {
+        //    fa
+        //
+        // }
 //
 //         [Test]
 //         //Verifica que el mensaje que se encuentra en el repointeraccion de fachada sea el mismo que registro.

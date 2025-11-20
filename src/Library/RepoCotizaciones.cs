@@ -6,7 +6,12 @@ namespace Library
 {
     public class RepoCotizaciones
     {
-        private List<Cotizacion> Cotizaciones = new List<Cotizacion>();
+        private List<Cotizacion> cotizaciones = new List<Cotizacion>();
+
+        public IEnumerable<Cotizacion> Cotizaciones
+        {
+            get { return cotizaciones; }
+        }
 
         public void AgregarCotizacion(Cliente cliente, string cuando, string precio, Usuario usuario)
         {
@@ -22,7 +27,7 @@ namespace Library
             if (DateTime.TryParseExact(cuando, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None,
                     out fecha))
             {
-                this.Cotizaciones.Add(new Cotizacion(cliente, fecha, precio));
+                this.cotizaciones.Add(new Cotizacion(cliente, fecha, precio));
                 // usuario.AgregarCotizacion(new Cotizacion(cliente,fecha,precio));
             }
             else
@@ -30,6 +35,14 @@ namespace Library
                 Console.WriteLine("Fecha no valida");
                 throw new InvalidDateException();
             }
+            
+        }
+        /// <summary>
+        /// para los test
+        /// </summary>
+        public void EliminarDatos()
+        {
+            this.cotizaciones.Clear();
         }
     }
 }

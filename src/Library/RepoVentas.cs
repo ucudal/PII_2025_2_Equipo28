@@ -36,5 +36,12 @@ namespace Library
                 throw new InvalidDateException();
             }
         }
+        /// <summary>
+        /// Metodo creado para los test
+        /// </summary>
+        public void EliminarDatos()
+        {
+            this.ventas.Clear();
+        }
     }
 }

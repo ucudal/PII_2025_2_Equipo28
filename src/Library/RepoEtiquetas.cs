@@ -31,5 +31,10 @@ namespace Library
                 return false;
             }
         }
+
+        public void EliminarDatos()
+        {
+            this.etiquetas.Clear();
+        }
     }
 }

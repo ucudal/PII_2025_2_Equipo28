@@ -1196,7 +1196,7 @@ namespace Library
                 }
 
                 Vendedor vendedor = new Vendedor(id, nombre);
-                Usuarios.Vendedores.Add(vendedor);
+                Usuarios.AgregarVnededor(vendedor);
                 return vendedor;
             }
             catch (Exception e)
@@ -1241,7 +1241,7 @@ namespace Library
                 }
 
                 Administrador administrador = new Administrador(id, nombre);
-                Usuarios.Administradores.Add(administrador);
+                Usuarios.AgregarAdministraodr(administrador);
                 return administrador;
             }
             catch (Exception e)
