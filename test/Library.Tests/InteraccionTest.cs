@@ -20,7 +20,7 @@
 //         [Test]
 //         public void TestLlamada()
 //         {
-//             Llamadas llamada = new Llamadas(usuario, cliente, "Albondigas", "Albondiga al plato o al pan?",
+//             Llamada llamada = new Llamada(usuario, cliente, "Albondigas", "Albondiga al plato o al pan?",
 //                 "10/11/2000");
 //             List<object> esperado = new List<object>(){usuario, cliente, "Albondigas", "Albondiga al plato o al pan?",
 //                 new DateTime(2000, 11, 10),Interaccion.TipoInterracion.Llamada};
@@ -32,7 +32,7 @@
 //         [Test]
 //         public void TestMensaje()
 //         {
-//             Mensajes mensaje = new Mensajes(usuario, cliente, "Pedido", "Confirmación de pedido pendiente",
+//             Mensaje mensaje = new Mensaje(usuario, cliente, "Pedido", "Confirmación de pedido pendiente",
 //                 "15/03/2021");
 //             List<object> esperado = new List<object>(){usuario, cliente, "Pedido", "Confirmación de pedido pendiente",
 //                 new DateTime(2021, 3, 15),Interaccion.TipoInterracion.Mensaje};
@@ -43,7 +43,7 @@
 //         [Test]
 //         public void TestCorreo()
 //         {
-//             Correos correo = new Correos(usuario, cliente, "Factura", "Envío de factura electrónica",
+//             Correo correo = new Correo(usuario, cliente, "Factura", "Envío de factura electrónica",
 //                 "20/07/2022");
 //             List<object> esperado = new List<object>(){usuario, cliente, "Factura", "Envío de factura electrónica",
 //                 new DateTime(2022, 7, 20),Interaccion.TipoInterracion.Correo};
@@ -66,11 +66,11 @@
 //         [Test]
 //         public void AgregarNota()
 //         {
-//             Llamadas llamada = new Llamadas(usuario, cliente, "Albondigas", "Albondiga al plato o al pan?",
+//             Llamada llamada = new Llamada(usuario, cliente, "Albondigas", "Albondiga al plato o al pan?",
 //                 "10/11/2000");
-//             Mensajes mensaje = new Mensajes(usuario, cliente, "Pedido", "Confirmación de pedido pendiente",
+//             Mensaje mensaje = new Mensaje(usuario, cliente, "Pedido", "Confirmación de pedido pendiente",
 //                 "15/03/2021");
-//             Correos correo = new Correos(usuario, cliente, "Factura", "Envío de factura electrónica",
+//             Correo correo = new Correo(usuario, cliente, "Factura", "Envío de factura electrónica",
 //                 "20/07/2022");
 //             Reunion reunion = new Reunion(usuario, cliente, "Proyecto X", "La esquina del McDonals","Revisión de avances",
 //                 "05/09/2023");
@@ -92,11 +92,11 @@
 //         {
 //             Assert.Multiple(() =>
 //             {
-//                 Assert.Throws<ArgumentNullException>(() => new Llamadas(usuario,null, "hello", "xd", "10/10/2023"));
-//                 Assert.Throws<ArgumentNullException>(() => new Llamadas(usuario,cliente, null, "xd", "10/10/2023"));
-//                 Assert.Throws<ArgumentNullException>(() => new Llamadas(usuario,cliente, "hello", null, "10/10/2023"));
-//                 Assert.Throws<ArgumentNullException>(() => new Llamadas(usuario,cliente, "null", "xd", null));
-//                 Assert.Throws<ArgumentNullException>(() => new Llamadas(null,cliente, "null", "xd", "10/10/2023"));
+//                 Assert.Throws<ArgumentNullException>(() => new Llamada(usuario,null, "hello", "xd", "10/10/2023"));
+//                 Assert.Throws<ArgumentNullException>(() => new Llamada(usuario,cliente, null, "xd", "10/10/2023"));
+//                 Assert.Throws<ArgumentNullException>(() => new Llamada(usuario,cliente, "hello", null, "10/10/2023"));
+//                 Assert.Throws<ArgumentNullException>(() => new Llamada(usuario,cliente, "null", "xd", null));
+//                 Assert.Throws<ArgumentNullException>(() => new Llamada(null,cliente, "null", "xd", "10/10/2023"));
 //             });
 //         }
 //         [Test]
@@ -104,9 +104,9 @@
 //         {
 //             Assert.Multiple(() =>
 //             {
-//                 Assert.Throws<Excepciones.EmptyStringException>(() => new Llamadas(usuario,cliente, "", "xd", "10/10/2023"));
-//                 Assert.Throws<Excepciones.EmptyStringException>(() => new Llamadas(usuario,cliente, "null", "", "10/10/2023"));
-//                 Assert.Throws<Excepciones.EmptyStringException>(() => new Llamadas(usuario,cliente, "hello", "null", ""));
+//                 Assert.Throws<Excepciones.EmptyStringException>(() => new Llamada(usuario,cliente, "", "xd", "10/10/2023"));
+//                 Assert.Throws<Excepciones.EmptyStringException>(() => new Llamada(usuario,cliente, "null", "", "10/10/2023"));
+//                 Assert.Throws<Excepciones.EmptyStringException>(() => new Llamada(usuario,cliente, "hello", "null", ""));
 //             });
 //         }
 //     [Test]
@@ -114,9 +114,9 @@
 //     {
 //         Assert.Multiple(() =>
 //         {
-//             Assert.Throws<Excepciones.InvalidDateException>(() => new Llamadas(usuario,cliente, "hi", "xd", "50/10/2020"));
-//             Assert.Throws<Excepciones.InvalidDateException>(() => new Llamadas(usuario,cliente, "null", "nel", "10/50/2020"));
-//             Assert.Throws<Excepciones.InvalidDateException>(() => new Llamadas(usuario,cliente, "null", "nel", "10/10/2070"));
+//             Assert.Throws<Excepciones.InvalidDateException>(() => new Llamada(usuario,cliente, "hi", "xd", "50/10/2020"));
+//             Assert.Throws<Excepciones.InvalidDateException>(() => new Llamada(usuario,cliente, "null", "nel", "10/50/2020"));
+//             Assert.Throws<Excepciones.InvalidDateException>(() => new Llamada(usuario,cliente, "null", "nel", "10/10/2070"));
 //         });
 //     }
 //     [Test]
@@ -124,11 +124,11 @@
 //     {
 //         Assert.Multiple(() =>
 //         {
-//             Assert.Throws<ArgumentNullException>(() => new Mensajes(usuario,null, "hello", "xd", "10/10/2023"));
-//             Assert.Throws<ArgumentNullException>(() => new Mensajes(usuario,cliente, null, "xd", "10/10/2023"));
-//             Assert.Throws<ArgumentNullException>(() => new Mensajes(usuario,cliente, "hello", null, "10/10/2023"));
-//             Assert.Throws<ArgumentNullException>(() => new Mensajes(usuario,cliente, "null", "xd", null));
-//             Assert.Throws<ArgumentNullException>(() => new Mensajes(null,cliente, "null", "xd", "10/10/2023"));
+//             Assert.Throws<ArgumentNullException>(() => new Mensaje(usuario,null, "hello", "xd", "10/10/2023"));
+//             Assert.Throws<ArgumentNullException>(() => new Mensaje(usuario,cliente, null, "xd", "10/10/2023"));
+//             Assert.Throws<ArgumentNullException>(() => new Mensaje(usuario,cliente, "hello", null, "10/10/2023"));
+//             Assert.Throws<ArgumentNullException>(() => new Mensaje(usuario,cliente, "null", "xd", null));
+//             Assert.Throws<ArgumentNullException>(() => new Mensaje(null,cliente, "null", "xd", "10/10/2023"));
 //         });
 //     }
 //
@@ -137,9 +137,9 @@
 //     {
 //         Assert.Multiple(() =>
 //         {
-//             Assert.Throws<Excepciones.EmptyStringException>(() => new Mensajes(usuario,cliente, "", "xd", "10/10/2023"));
-//             Assert.Throws<Excepciones.EmptyStringException>(() => new Mensajes(usuario,cliente, "null", "", "10/10/2023"));
-//             Assert.Throws<Excepciones.EmptyStringException>(() => new Mensajes(usuario,cliente, "hello", "null", ""));
+//             Assert.Throws<Excepciones.EmptyStringException>(() => new Mensaje(usuario,cliente, "", "xd", "10/10/2023"));
+//             Assert.Throws<Excepciones.EmptyStringException>(() => new Mensaje(usuario,cliente, "null", "", "10/10/2023"));
+//             Assert.Throws<Excepciones.EmptyStringException>(() => new Mensaje(usuario,cliente, "hello", "null", ""));
 //         });
 //     }
 //
@@ -148,9 +148,9 @@
 //     {
 //         Assert.Multiple(() =>
 //         {
-//             Assert.Throws<Excepciones.InvalidDateException>(() => new Mensajes(usuario,cliente, "hi", "xd", "50/10/2020"));
-//             Assert.Throws<Excepciones.InvalidDateException>(() => new Mensajes(usuario,cliente, "null", "nel", "10/50/2020"));
-//             Assert.Throws<Excepciones.InvalidDateException>(() => new Mensajes(usuario,cliente, "null", "nel", "10/08/2050"));
+//             Assert.Throws<Excepciones.InvalidDateException>(() => new Mensaje(usuario,cliente, "hi", "xd", "50/10/2020"));
+//             Assert.Throws<Excepciones.InvalidDateException>(() => new Mensaje(usuario,cliente, "null", "nel", "10/50/2020"));
+//             Assert.Throws<Excepciones.InvalidDateException>(() => new Mensaje(usuario,cliente, "null", "nel", "10/08/2050"));
 //         });
 //     }
 //     [Test]
@@ -158,11 +158,11 @@
 //     {
 //         Assert.Multiple(() =>
 //         {
-//             Assert.Throws<ArgumentNullException>(() => new Correos(usuario,null, "hello", "xd", "10/10/2021"));
-//             Assert.Throws<ArgumentNullException>(() => new Correos(usuario,cliente, null, "xd", "05/05/2022"));
-//             Assert.Throws<ArgumentNullException>(() => new Correos(usuario,cliente, "hello", null, "01/01/2023"));
-//             Assert.Throws<ArgumentNullException>(() => new Correos(usuario,cliente, "null", "xd", null));
-//             Assert.Throws<ArgumentNullException>(() => new Correos(null,cliente, "null", "xd", "10/10/2010"));
+//             Assert.Throws<ArgumentNullException>(() => new Correo(usuario,null, "hello", "xd", "10/10/2021"));
+//             Assert.Throws<ArgumentNullException>(() => new Correo(usuario,cliente, null, "xd", "05/05/2022"));
+//             Assert.Throws<ArgumentNullException>(() => new Correo(usuario,cliente, "hello", null, "01/01/2023"));
+//             Assert.Throws<ArgumentNullException>(() => new Correo(usuario,cliente, "null", "xd", null));
+//             Assert.Throws<ArgumentNullException>(() => new Correo(null,cliente, "null", "xd", "10/10/2010"));
 //         });
 //     }
 //
@@ -171,9 +171,9 @@
 //     {
 //         Assert.Multiple(() =>
 //         {
-//             Assert.Throws<Excepciones.EmptyStringException>(() => new Correos(usuario,cliente, "", "xd", "10/10/2021"));
-//             Assert.Throws<Excepciones.EmptyStringException>(() => new Correos(usuario,cliente, "null", "", "05/05/2022"));
-//             Assert.Throws<Excepciones.EmptyStringException>(() => new Correos(usuario,cliente, "hello", "null", ""));
+//             Assert.Throws<Excepciones.EmptyStringException>(() => new Correo(usuario,cliente, "", "xd", "10/10/2021"));
+//             Assert.Throws<Excepciones.EmptyStringException>(() => new Correo(usuario,cliente, "null", "", "05/05/2022"));
+//             Assert.Throws<Excepciones.EmptyStringException>(() => new Correo(usuario,cliente, "hello", "null", ""));
 //         });
 //     }
 //
@@ -182,9 +182,9 @@
 //     {
 //         Assert.Multiple(() =>
 //         {
-//             Assert.Throws<Excepciones.InvalidDateException>(() => new Correos(usuario,cliente, "hi", "xd", "50/10/2020"));
-//             Assert.Throws<Excepciones.InvalidDateException>(() => new Correos(usuario,cliente, "null", "nel", "10/50/2020"));
-//             Assert.Throws<Excepciones.InvalidDateException>(() => new Correos(usuario,cliente, "null", "nel", "10/10/2050"));
+//             Assert.Throws<Excepciones.InvalidDateException>(() => new Correo(usuario,cliente, "hi", "xd", "50/10/2020"));
+//             Assert.Throws<Excepciones.InvalidDateException>(() => new Correo(usuario,cliente, "null", "nel", "10/50/2020"));
+//             Assert.Throws<Excepciones.InvalidDateException>(() => new Correo(usuario,cliente, "null", "nel", "10/10/2050"));
 //         });
 //     }
 //     [Test]

@@ -10,7 +10,7 @@ namespace Library
     // y características específicas de una interacción que es mensaje.
     // 
     // Herencia y Polimorfismo 
-    // Llamadas hereda de Interaccion, usando sus atributos
+    // Llamada hereda de Interaccion, usando sus atributos
     // comunes y comportamientos básicos.
     // Gracias al polimorfismo, puede tratarse como una interaccion
     // en contextos donde se manejen distintos tipos de interacciones.
@@ -24,10 +24,10 @@ namespace Library
     // Cumple con el principio de sustitución de Liskov ya que puede reemplazar
     // a su clase base sin alterar el comportamiento
     // esperado del sistema. Donde se use una Interaccion, se puede usar un
-    // Mensajes sin romper la lógica.
-    public class Mensajes : Interaccion
+    // Mensaje sin romper la lógica.
+    public class Mensaje : Interaccion
     {
-        public Mensajes(Usuario usuario, Cliente cliente, string tema, string mensaje, string cuando) : base(usuario,cliente,
+        public Mensaje(Usuario usuario, Cliente cliente, string tema, string mensaje, string cuando) : base(usuario,cliente,
             tema, mensaje,cuando)
         {
                 this.Tipo = TipoInterracion.Mensaje;

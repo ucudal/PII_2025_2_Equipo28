@@ -10,7 +10,7 @@ namespace Library
     /// y características específicas de una interacción que es correo.
     /// 
     /// Herencia y Polimorfismo 
-    /// Llamadas hereda de Interaccion, usando sus atributos
+    /// Llamada hereda de Interaccion, usando sus atributos
     /// comunes y comportamientos básicos.
     /// Gracias al polimorfismo, puede tratarse como una interaccion
     /// en contextos donde se manejen distintos tipos de interacciones.
@@ -24,11 +24,11 @@ namespace Library
     /// Cumple con el principio de sustitución de Liskov ya que puede reemplazar
     /// a su clase base sin alterar el comportamiento
     /// esperado del sistema. Donde se use una Interaccion, se puede usar un
-    /// Correos sin romper la lógica.
+    /// Correo sin romper la lógica.
 
-    public class Correos : Interaccion
+    public class Correo : Interaccion
     {
-        public Correos(Usuario usuario, Cliente cliente, string tema, string correo, string cuando) : base(usuario,cliente, tema,correo,cuando)
+        public Correo(Usuario usuario, Cliente cliente, string tema, string correo, string cuando) : base(usuario,cliente, tema,correo,cuando)
         {
             this.Tipo = TipoInterracion.Correo;
         }

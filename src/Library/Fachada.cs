@@ -39,14 +39,14 @@ namespace Library
             string usuarioId, string cuando)
         {
             Usuario usuario = null;
-            Mensajes Mensaje = null; //Inicializando larailala
+            Mensaje Mensaje = null; //Inicializando larailala
             Cliente cliente = null;
             try
             {
                 usuario = this.Usuarios.BuscarUsuario(usuarioId);
                 cliente = Clientes.BuscarUnCliente(clienteId);
                 // Cliente cliente = Usuarios.BuscarCliente(clienteId); //Hecho comentario por si acaso
-                Mensaje = new Mensajes(usuario, cliente, tema, mensaje, cuando);
+                Mensaje = new Mensaje(usuario, cliente, tema, mensaje, cuando);
             }
             catch (ArgumentNullException e)
             {
@@ -84,14 +84,14 @@ namespace Library
             string usuarioId, string cuando)
         {
             Usuario usuario = null;
-            Correos Correo = null; //Inicializando larailala
+            Correo Correo = null; //Inicializando larailala
             Cliente cliente = null;
             try
             {
                 usuario = this.Usuarios.BuscarUsuario(usuarioId);
                 cliente = Clientes.BuscarUnCliente(clienteId);
                 // Cliente cliente = Usuarios.BuscarCliente(clienteId); //Hecho comentario por si acaso
-                Correo = new Correos(usuario,cliente, tema, correo, cuando);
+                Correo = new Correo(usuario,cliente, tema, correo, cuando);
             }
             catch (ArgumentNullException e)
             {
@@ -124,14 +124,14 @@ namespace Library
             string usuarioId, string cuando)
         {
             Usuario usuario = null;
-            Llamadas LLamada = null; //Inicializando larailala
+            Llamada LLamada = null; //Inicializando larailala
             Cliente cliente = null;
             try
             {
                 usuario = this.Usuarios.BuscarUsuario(usuarioId);
                 cliente = Clientes.BuscarUnCliente(clienteId);
                 // Cliente cliente = Usuarios.BuscarCliente(clienteId); //Hecho comentario por si acaso
-                LLamada = new Llamadas(usuario,cliente, tema, llamada, cuando);
+                LLamada = new Llamada(usuario,cliente, tema, llamada, cuando);
             }
             catch (ArgumentNullException e)
             {
@@ -647,7 +647,7 @@ namespace Library
             // }
         }
         
-        public List<Llamadas> Llamadas = new List<Llamadas>();
+        public List<Llamada> Llamadas = new List<Llamada>();
         public List<Reunion> Reuniones = new List<Reunion>();
 
         /// <summary>
@@ -735,8 +735,8 @@ namespace Library
         // public void RegistrarLlamada(string id, string tema, string contenido)
         // {
         //     // Cliente cliente = Clientes.BuscarCliente("id", id)[0];
-        //     // Llamadas llamada = new Llamadas(cliente, tema, contenido);
-        //     // Llamadas.Add(llamada);
+        //     // Llamada llamada = new Llamada(cliente, tema, contenido);
+        //     // Llamada.Add(llamada);
         // }
 
         // public void RegistrarReunion(string id, string tema, string ubicacion, string reunion, string cuando)
