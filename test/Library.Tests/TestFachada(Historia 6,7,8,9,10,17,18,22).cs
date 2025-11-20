@@ -40,9 +40,9 @@ namespace Library.Tests
             fachada.RegistrarLlamada("C1", "Este hi", "saludo", "U1", "19/11/2025");
             fachada.RegistrarCorreo("C1", "Este hi", "saludo", "U1", "19/08/2025");
             fachada.RegistrarLlamada("C1", "Este hi", "saludo", "U1", "19/10/2025");
-            fachada.RegistrarMensaje("C1", "Este hi", "saludo", "U1", "19/08/2025");
-            fachada.RegistrarReunion("C1", "Este hi", "saludo", "U1", "19/11/2027", "nowhere");
-            string reslut = fachada.InteraccionesCliente("C1","U1","mensaje","19/08/2025");
+            fachada.RegistrarMensaje("C2", "Este hi", "saludo", "U1", "19/08/2025");
+            fachada.RegistrarReunion("C2", "Este hi", "saludo", "U1", "19/11/2027", "nowhere");
+            string reslut = fachada.Panel("U1");
             Assert.AreEqual(1,1);
 
 
