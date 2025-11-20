@@ -17,13 +17,13 @@ namespace Library
         /// <summary>
         /// Lista que almacena las interacciones.
         /// </summary>
-        private List<Interaccion> Interacciones = new List<Interaccion>();
+        private List<Interaccion> interacciones = new List<Interaccion>();
         /// <summary>
         /// Lista de interaciiones de solo lectura.
         /// </summary>
-        public IEnumerable<Interaccion> InteraccionesLectura
+        public IEnumerable<Interaccion> Interacciones
         {
-            get { return Interacciones; } 
+            get { return interacciones; } 
         }
         /// <summary>
         /// Métodos responsables de crear e inicializar diferentes tipos de Interaccion.
@@ -104,7 +104,7 @@ namespace Library
                     break;
             }
 
-            foreach (Interaccion interaccion in Interacciones)
+            foreach (Interaccion interaccion in interacciones)
             {
                 if (interaccion.Tipo == tipoFinal && interaccion.Tema == tema && interaccion.Usuario == usuario)
                 {
@@ -178,7 +178,7 @@ namespace Library
             List<Interaccion> interaccionesCliente = new List<Interaccion>();
             if (tipo != "" && fecha != "01/01/0001")
             {
-                foreach (Interaccion interaccion in Interacciones)
+                foreach (Interaccion interaccion in interacciones)
                 {
                     if (interaccion.Tipo == tipoFinal && interaccion.Fecha == FechaFinal && interaccion.Usuario==usuario)
                     {
@@ -189,7 +189,7 @@ namespace Library
             }
             else if (tipo != "" && fecha == "01/01/0001")
             {
-                foreach (Interaccion interaccion in Interacciones)
+                foreach (Interaccion interaccion in interacciones)
                 {
                     if (interaccion.Tipo == tipoFinal && interaccion.Usuario==usuario)
                     {
@@ -199,7 +199,7 @@ namespace Library
             }
             else if (tipo == "" && fecha != "01/01/0001")
             {
-                foreach (Interaccion interaccion in Interacciones)
+                foreach (Interaccion interaccion in interacciones)
                 {
                     if (interaccion.Fecha == FechaFinal && interaccion.Usuario==usuario)
                     {
@@ -209,7 +209,7 @@ namespace Library
             }
             else 
             {
-                foreach (Interaccion interaccion in Interacciones)
+                foreach (Interaccion interaccion in interacciones)
                 {
                     if (interaccion.Usuario==usuario)
                         interaccionesCliente.Add(interaccion);
@@ -234,7 +234,7 @@ namespace Library
             {
                 throw new ArgumentNullException(nameof(usuario), "El usuario no puede ser null.");
             }
-            Interacciones.Add(interaccion);
+            interacciones.Add(interaccion);
             // usuario.AgregarInteraccion(interaccion);
         }
         /// <summary>
@@ -250,7 +250,7 @@ namespace Library
                 
             }
             Dictionary<Cliente, Interaccion> UltimaInterracion = new Dictionary<Cliente, Interaccion>();
-            foreach (Interaccion interaccion in Interacciones)
+            foreach (Interaccion interaccion in interacciones)
             {
                 if (UltimaInterracion.ContainsKey(interaccion.Cliente))
                 {
@@ -272,7 +272,7 @@ namespace Library
         /// </summary>
         public void eliminarinteraciones()//ciertos test no funcionan sin esto
         {
-            Interacciones.Clear();
+            interacciones.Clear();
         }
         /// <summary>
         /// Metodo con las excepciones para los metodos CrearMensaje, CrearCorreo...

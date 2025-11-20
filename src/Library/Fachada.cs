@@ -456,6 +456,28 @@ namespace Library
 
                 return informacion;
             }
+            else if (tipo=="" && fecha !="")
+            {
+                string informacion =
+                    $"las interaccion de {cliente.Nombre} {cliente.Apellido} del tipo {tipo} son las siguientes:\n";
+                foreach (Interaccion interaccion in interaccionesCliente)
+                {
+                    informacion += $"\n{interaccion.Tema}:\n{interaccion.Contenido}\n";
+                }
+
+                return informacion;
+            }
+            else if (tipo!="" && fecha =="")
+            {
+                string informacion =
+                    $"las interaccion de {cliente.Nombre} {cliente.Apellido} de la fecha {fecha} son las siguientes:\n";
+                foreach (Interaccion interaccion in interaccionesCliente)
+                {
+                    informacion += $"\n{interaccion.Tema}:\n{interaccion.Contenido}\n";
+                }
+
+                return informacion;
+            }
             else 
             {
                 string informacion = $"Las interacciones de {cliente.Nombre} {cliente.Apellido} son:\n";
@@ -539,7 +561,7 @@ namespace Library
                 }
             }
             Panel += $"Sus reuniones proximas son:\n";
-            foreach (Interaccion interaccion in this.Interacciones.InteraccionesLectura)
+            foreach (Interaccion interaccion in this.Interacciones.Interacciones)
             {
                 if (interaccion.Tipo == Interaccion.TipoInterracion.Reunion && interaccion.Fecha >= DateTime.Now)
                 {

@@ -5,18 +5,24 @@ namespace Library
 {
     public class RepoEtiquetas
     {
-        private List<string> Etiquetas = new List<string>();
+        private List<string> etiquetas = new List<string>();
+
+        public IEnumerable<string> Etiquetas
+        {
+            get { return etiquetas; }
+        }
+        
         public void AgregarEtiqueta(string etiqueta)
         {
-            if (!(Etiquetas.Contains(etiqueta)))
+            if (!(etiquetas.Contains(etiqueta)))
             {
-                Etiquetas.Add(etiqueta);
+                etiquetas.Add(etiqueta);
             }
         }
 
         public bool BuscarEtiqueta(string etiqueta)
         {
-            if (Etiquetas.Contains(etiqueta))
+            if (etiquetas.Contains(etiqueta))
             {
                 return true;
             }
