@@ -170,7 +170,7 @@ namespace Library
         /// <param name="cuando">La fecha en la cual se realizo la interracion (o realizara, para Reunion)</param>
         /// /// <param name="lugar">Lugar de la interracion (usado unicamnete por RegistrarReunion)</param>
         /// <returns>Devuelve un mensaje confirmado que el registro fue un exito, o comentado que hubo un error, cual fue y donde fue</returns>
-        public string RegistarMensaje(string clienteId, string mensaje, string tema,
+        public string RegistrarMensaje(string clienteId, string mensaje, string tema,
             string usuarioId, string cuando)
         {
             Usuario usuario = null;
@@ -251,7 +251,7 @@ namespace Library
             }
             return "El usuario o cliente no existen";
         }
-        public string RegistarLlamada(string clienteId, string llamada, string tema,
+        public string RegistrarLlamada(string clienteId, string llamada, string tema,
             string usuarioId, string cuando)
         {
             Usuario usuario = null;
@@ -295,49 +295,49 @@ namespace Library
         /// <summary>
         /// La explicacion del metodo se encuentra mas arriba
         /// </summary>
-        public string RegistarCorreo(string clienteId, string correo, string tema,
-            string usuarioId, string cuando)
-        {
-            Usuario usuario = null;
-            Interaccion Correo = null; //Inicializando larailala
-            Cliente cliente = null;
-            try
-            {
-                usuario = this.Usuarios.BuscarUsuario(usuarioId);
-                cliente = Clientes.BuscarUnCliente(clienteId);
-                Correo = Interacciones.CrearCorreo(usuario, cliente, tema, correo, cuando);
-            }
-            catch (ArgumentNullException e)
-            {
-                Console.WriteLine(e.Message);
-                return e.Message;
-            }
-            catch (ArgumentException e)
-            {
-                Console.WriteLine(e.Message);
-                return e.Message;
-            }
-            catch (InvalidDateException e)
-            {
-                Console.WriteLine(e.Message);
-                return e.Message;
-            }
-
-            if (usuario != null)
-            {
-                if (cliente != null)
-                {
-                    Interacciones.AgregarInteraccion(Correo, usuario);
-                    return "Mensaje registrado";
-                }
-            }
-
-            return "El usuario o el cliente es null";
-        }
+        // public string RegistarCorreo(string clienteId, string correo, string tema,
+        //     string usuarioId, string cuando)
+        // {
+        //     Usuario usuario = null;
+        //     Interaccion Correo = null; //Inicializando larailala
+        //     Cliente cliente = null;
+        //     try
+        //     {
+        //         usuario = this.Usuarios.BuscarUsuario(usuarioId);
+        //         cliente = Clientes.BuscarUnCliente(clienteId);
+        //         Correo = Interacciones.CrearCorreo(usuario, cliente, tema, correo, cuando);
+        //     }
+        //     catch (ArgumentNullException e)
+        //     {
+        //         Console.WriteLine(e.Message);
+        //         return e.Message;
+        //     }
+        //     catch (ArgumentException e)
+        //     {
+        //         Console.WriteLine(e.Message);
+        //         return e.Message;
+        //     }
+        //     catch (InvalidDateException e)
+        //     {
+        //         Console.WriteLine(e.Message);
+        //         return e.Message;
+        //     }
+        //
+        //     if (usuario != null)
+        //     {
+        //         if (cliente != null)
+        //         {
+        //             Interacciones.AgregarInteraccion(Correo, usuario);
+        //             return "Mensaje registrado";
+        //         }
+        //     }
+        //
+        //     return "El usuario o el cliente es null";
+        // }
         /// <summary>
         /// La explicacion del metodo se encuentra mas arriba
         /// </summary>
-        public string RegistarReunion(string clienteId, string reunion, string tema,
+        public string RegistrarReunion(string clienteId, string reunion, string tema,
             string usuarioId, string cuando, string lugar)
         {
             Usuario usuario = null;
@@ -459,10 +459,10 @@ namespace Library
             else if (tipo=="" && fecha !="")
             {
                 string informacion =
-                    $"las interaccion de {cliente.Nombre} {cliente.Apellido} del tipo {tipo} son las siguientes:\n";
+                    $"las interaccion de {cliente.Nombre} {cliente.Apellido} de la fecha {fecha} son las siguientes:\n";
                 foreach (Interaccion interaccion in interaccionesCliente)
                 {
-                    informacion += $"\n{interaccion.Tema}:\n{interaccion.Contenido}\n";
+                    informacion += $"Tipo{interaccion.Tipo}\n{interaccion.Tema}:\n{interaccion.Contenido}\n";
                 }
 
                 return informacion;
@@ -470,10 +470,10 @@ namespace Library
             else if (tipo!="" && fecha =="")
             {
                 string informacion =
-                    $"las interaccion de {cliente.Nombre} {cliente.Apellido} de la fecha {fecha} son las siguientes:\n";
+                    $"las interaccion de {cliente.Nombre} {cliente.Apellido} del tipo {tipo} son las siguientes:\n";
                 foreach (Interaccion interaccion in interaccionesCliente)
                 {
-                    informacion += $"\n{interaccion.Tema}:\n{interaccion.Contenido}\n";
+                    informacion += $"Fecha{interaccion.Fecha}\n{interaccion.Tema}:\n{interaccion.Contenido}\n";
                 }
 
                 return informacion;

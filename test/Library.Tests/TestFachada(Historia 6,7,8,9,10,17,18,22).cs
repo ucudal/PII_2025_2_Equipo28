@@ -1,26 +1,55 @@
-// using System;
-// using System.Collections.Generic;
-// using System.Runtime.InteropServices;
-// using System.Text;
-// using NUnit.Framework;
-//
-// namespace Library.Tests
-// {
-//     public class TestFachada_Historia_8_15_
-//     {
-//         private Fachada fachada;
-//         private Usuario usuario;
-//         private Cliente cliente;
-//         private Administrador administrador;
-//         
-        
-        // [SetUp]
-        // public void Setup()
-        // {
-        //    fa
-        //
-        // }
-//
+using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Text;
+using NUnit.Framework;
+
+namespace Library.Tests
+{
+    public class TestFachada_Historia_8_15_
+    {
+        private Fachada fachada;
+        private Usuario usuario;
+        private Cliente cliente;
+        private Administrador administrador;
+
+
+        [SetUp]
+        public void Setup()
+        {
+            fachada = Fachada.Instancia;
+            fachada.UsuariosSuspendidos.Clear();
+            fachada.Usuarios.EliminarDatos();
+            fachada.Cotizaciones.EliminarDatos();
+            fachada.Interacciones.EliminarDatos();
+            fachada.Etiquetas.EliminarDatos();
+            fachada.Clientes.EliminarDatos();
+            fachada.ClientesContacto.Clear();
+            fachada.CrearAdministrador("A1", "Lansaguisantes");
+            fachada.CrearUsuario("U1", "Petaseta", "A1");
+            fachada.CrearNuevoCliente("C1", "Harry", "ElSucioPotter", "099786435", "Harringy@cabezatermo.com");
+            fachada.CrearNuevoCliente("C2", "Hermione", "Granger", "46872390", "Hermy@cabezatermo.com");
+
+
+        }
+
+        [Test]
+        public void todo()
+        {
+            fachada.RegistrarMensaje("C1", "Este hi", "saludo", "U1", "19/11/2025");
+            fachada.RegistrarLlamada("C1", "Este hi", "saludo", "U1", "19/11/2025");
+            fachada.RegistrarCorreo("C1", "Este hi", "saludo", "U1", "19/08/2025");
+            fachada.RegistrarLlamada("C1", "Este hi", "saludo", "U1", "19/10/2025");
+            fachada.RegistrarMensaje("C1", "Este hi", "saludo", "U1", "19/08/2025");
+            fachada.RegistrarReunion("C1", "Este hi", "saludo", "U1", "19/11/2027", "nowhere");
+            string reslut = fachada.InteraccionesCliente("C1","U1","mensaje","19/08/2025");
+            Assert.AreEqual(1,1);
+
+
+        }
+    }
+}
+
 //         [Test]
 //         //Verifica que el mensaje que se encuentra en el repointeraccion de fachada sea el mismo que registro.
 //         public void RegistarMensajeCorrectoTest()
@@ -408,3 +437,5 @@
 //         }
 //     }
 // }
+
+

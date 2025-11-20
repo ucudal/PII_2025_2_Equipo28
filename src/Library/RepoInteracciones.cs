@@ -41,19 +41,19 @@ namespace Library
         public Interaccion CrearMensaje(Usuario usuario, Cliente cliente, string tema, string contenido, string fecha)
         {
             this.GneradordeExcepcionesParaMetodosCrearInteraccion(usuario,  cliente,  tema,  contenido,  fecha);
-            return new Interaccion(usuario, cliente, Interaccion.TipoInterracion.Mensaje, tema, contenido, contenido);
+            return new Interaccion(usuario, cliente, Interaccion.TipoInterracion.Mensaje, tema, contenido, fecha);
         }
         public Interaccion CrearLlamada(Usuario usuario, Cliente cliente, string tema, string contenido, string fecha)
         {
             this.GneradordeExcepcionesParaMetodosCrearInteraccion(usuario,  cliente,  tema,  contenido,  fecha);
 
-            return new Interaccion(usuario, cliente, Interaccion.TipoInterracion.Llamada, tema, contenido, contenido);
+            return new Interaccion(usuario, cliente, Interaccion.TipoInterracion.Llamada, tema, contenido, fecha);
         }
         public Interaccion CrearCorreo(Usuario usuario, Cliente cliente, string tema, string contenido, string fecha)
         {
             this.GneradordeExcepcionesParaMetodosCrearInteraccion(usuario,  cliente,  tema,  contenido,  fecha);
 
-            return new Interaccion(usuario, cliente, Interaccion.TipoInterracion.Correo, tema, contenido, contenido);
+            return new Interaccion(usuario, cliente, Interaccion.TipoInterracion.Correo, tema, contenido, fecha);
         }
         public Interaccion CrearReunion(Usuario usuario, Cliente cliente, string tema, string contenido, string fecha, string lugar)
         {
@@ -66,7 +66,7 @@ namespace Library
             {
                 throw new ArgumentException("El lugar no puede estar vacio.", nameof(lugar));
             }
-            return new Reunion(usuario, cliente, tema, lugar, contenido, contenido);
+            return new Reunion(usuario, cliente, tema, lugar, contenido, fecha);
         }
         /// <summary>
         /// Busca una interracion por el usuario, tipo y tema.
@@ -140,7 +140,7 @@ namespace Library
                 tipo = "";
             }
 
-            if (fecha == null)
+            if (fecha == null || fecha=="")
             {
                 fecha ="01/01/0001";
             }
@@ -254,7 +254,7 @@ namespace Library
             {
                 if (UltimaInterracion.ContainsKey(interaccion.Cliente))
                 {
-                    if (UltimaInterracion[interaccion.Cliente].Fecha <= interaccion.Fecha && !(interaccion.Fecha > DateTime.Now))
+                    if (UltimaInterracion[interaccion.Cliente].Fecha >= interaccion.Fecha && !(interaccion.Fecha > DateTime.Now))
                     {
                         UltimaInterracion[interaccion.Cliente] = interaccion;
                     }
