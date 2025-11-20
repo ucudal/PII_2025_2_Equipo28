@@ -279,7 +279,7 @@ namespace Library
         /// </summary>
         /// <exception cref="ArgumentNullException">Tira un mensaje de que el valor revisado no pude ser null, y muestra el valor</exception>
         /// <exception cref="ArgumentException">Tira un mensaje de que el valor revisado no pude estar vacio, y muestra el valor</exception>
-        public void GneradordeExcepcionesParaMetodosCrearInteraccion(Usuario usuario, Cliente cliente, string tema, string contenido, string fecha)
+        private void GneradordeExcepcionesParaMetodosCrearInteraccion(Usuario usuario, Cliente cliente, string tema, string contenido, string fecha)
         {
             if (usuario == null)
             {
