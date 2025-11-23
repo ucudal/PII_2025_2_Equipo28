@@ -8,19 +8,19 @@ namespace Ucu.Poo.DiscordBot.Commands
 {
 
     /// <summary>
-    /// Esta clase registra un mensaje.
+    /// Esta clase registra un correo.
     /// Devuele la confirmacion de si se creo o no.
     /// </summary>
 // ReSharper disable once UnusedType.Global
-    public class RegistrarMensaje : ModuleBase<SocketCommandContext>
+    public class RegistrarCorreo : ModuleBase<SocketCommandContext>
     {
         private Fachada fachada = Fachada.Instancia;
         /// <summary>
-        /// Implementa el comando 'RegistraMensaje' que registra un mensaje. Este comando es para la historia 6.
+        /// Implementa el comando 'RegistraCorreo' que registra un correo. Este comando es para la historia 8.
         /// </summary>
-        [Command("registrarMensaje")]
+        [Command("registrarCorreo")]
         [Summary(
-            "Registra el mensaje y devuelve una confirmacion del mensaje creado en caso de que asi sea, en caso opuesto devuelve un error y su explicacion")]
+            "Registra el correo y devuelve una confirmacion del correo creado en caso de que asi sea, en caso opuesto devuelve un error y su explicacion")]
         // ReSharper disable once UnusedMember.Global
         public async Task ExecuteAsync([Remainder][Summary("xxx")]string parametros)
         {
@@ -32,7 +32,7 @@ namespace Ucu.Poo.DiscordBot.Commands
             }
             else
             {
-                string mensaje = fachada.RegistrarMensaje(parte[0], parte[1], parte[2], parte[3], parte[4]);
+                string mensaje = fachada.RegistrarCorreo(parte[0], parte[1], parte[2], parte[3], parte[4]);
                 await ReplyAsync($"{mensaje}");
 
             }

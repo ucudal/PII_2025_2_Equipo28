@@ -2,9 +2,9 @@ using System;
 
 namespace Library
 {
-        public class InvalidDateException : Exception
+        public class InvalidDateException : ArgumentException
         {
-            public InvalidDateException(string mensaje=null,string parametro=null): base(mensaje){}
+            public InvalidDateException(string message=null,string paraName=null): base(message,paraName){}
         }
 
 }

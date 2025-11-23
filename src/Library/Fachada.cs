@@ -184,19 +184,19 @@ namespace Library
             }
             catch (ArgumentNullException e)
             {
-                Console.WriteLine(e.Message);
-                return e.Message;
-            }
-            catch (ArgumentException e)
-            {
-                Console.WriteLine(e.Message);
-                return e.Message;
+                return $"{e.Message} {e.ParamName}";
             }
             catch (InvalidDateException e)
             {
-                Console.WriteLine(e.Message);
-                return e.Message;
+                return $"{e.Message} {e.ParamName}";
+
             }
+            catch (ArgumentException e)
+            {
+                return $"{e.Message} {e.ParamName}";
+
+            }
+            
 
             if (usuario != null)
             {
@@ -230,15 +230,15 @@ namespace Library
                 Console.WriteLine(e.Message);
                 return e.Message;
             }
-            catch (ArgumentException e)
-            {
-                Console.WriteLine(e.Message);
-                return e.Message;
-            }
             catch (InvalidDateException e)
             {
-                Console.WriteLine(e.Message);
-                return e.Message;
+                return $"{e.Message} {e.ParamName}";
+
+            }
+            catch (ArgumentException e)
+            {
+                return $"{e.Message} {e.ParamName}";
+
             }
 
             if (usuario != null)
@@ -270,15 +270,15 @@ namespace Library
                 Console.WriteLine(e.Message);
                 return e.Message;
             }
-            catch (ArgumentException e)
-            {
-                Console.WriteLine(e.Message);
-                return e.Message;
-            }
             catch (InvalidDateException e)
             {
-                Console.WriteLine(e.Message);
-                return e.Message;
+                return $"{e.Message} {e.ParamName}";
+
+            }
+            catch (ArgumentException e)
+            {
+                return $"{e.Message} {e.ParamName}";
+
             }
 
             if (usuario != null)
@@ -355,15 +355,15 @@ namespace Library
                 Console.WriteLine(e.Message);
                 return e.Message;
             }
-            catch (ArgumentException e)
-            {
-                Console.WriteLine(e.Message);
-                return e.Message;
-            }
             catch (InvalidDateException e)
             {
-                Console.WriteLine(e.Message);
-                return e.Message;
+                return $"{e.Message} {e.ParamName}";
+
+            }
+            catch (ArgumentException e)
+            {
+                return $"{e.Message} {e.ParamName}";
+
             }
 
             if (usuario != null)
@@ -434,15 +434,15 @@ namespace Library
                 Console.WriteLine(e.Message);
                 return e.Message;
             }
-            catch (ArgumentException e)
-            {
-                Console.WriteLine(e.Message);
-                return e.Message;
-            }
             catch (InvalidDateException e)
             {
-                Console.WriteLine(e.Message);
-                return e.Message;
+                return $"{e.Message} {e.ParamName}";
+
+            }
+            catch (ArgumentException e)
+            {
+                return $"{e.Message} {e.ParamName}";
+
             }
             
             if (tipo != "" && fecha != "")
