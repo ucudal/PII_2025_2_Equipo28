@@ -3,27 +3,21 @@ using System.Globalization;
 
 namespace Library
 {
-    //SRP 
-    // Esta clase cumple el principio de responsabilidad única ya que
-    // su única función es modelar la información y comportamiento
-    // relacionado a una interacción específica (como un mensaje, llamada o reunión)
-    // entre un cliente y un usuario.
-    // 
-    // Expert
-    // Siguiendo el patrón Expert, la clase Interaccion es la experta en
-    // manejar sus propios datos, ya que contiene toda la información necesaria
-    // sobre la interacción (cliente, tema, fecha, contenido, notas, etc.)
-    // y contiene un método para modificar sus notas.
-    // 
-    // Polimorfismo
-    // Esta clase puede actua como clase base para diferentes tipos de interacciones
-    // (por ejemplo, llamadas, mensajes, reuniones), permitiendo que clases derivadas
-    // usen sus atributos y metodos sin modificar esta clase directamente.
-    // 
-    // LSP
-    // Al crear subclases de Interaccion (por ejemplo, Llamada o Mensaje),
-    // estas reemplazan a Interaccion sin alterar el funcionamiento del sistema,
-    // ya que todas compartirían los mismos atributos y comportamientos básicos.
+    /// <summary>
+    /// <para><b>SRP:</b> Esta clase cumple el principio de responsabilidad única ya que su única función es modelar la información
+    /// y el comportamiento relacionado a una interacción específica (mensaje, llamada o reunión) entre un cliente y un usuario.</para>
+    /// 
+    /// <para><b>Expert:</b> Siguiendo el patrón Expert, la clase Interaccion es experta en manejar sus propios datos,
+    /// ya que contiene toda la información necesaria sobre la interacción (cliente, tema, fecha, contenido, notas, etc.) y provee un método para modificar sus notas.</para>
+    /// 
+    /// <para><b>Polimorfismo:</b> Esta clase actua como clase base para el tipo de interacción de reunión,
+    /// permitiendo que la clase derivada utilice sus atributos y métodos sin modificar la clase original.</para>
+    /// 
+    /// <para><b>LSP:</b> Al crear la subclase de Interaccion (Reunion),
+    /// esta pueden reemplazar a Interaccion sin alterar el funcionamiento del sistema, dado que comparten los mismos atributos y comportamientos básicos,
+    /// excepto las extensiones propias.</para>
+    /// </summary>
+
     public class Interaccion
     {
         public string Notas { get; protected set; }
@@ -139,7 +133,7 @@ namespace Library
                 throw new ArgumentNullException(nameof(nota),"El contenido de la nota es null");
             }
 
-            if (string.IsNullOrEmpty(""))
+            if (string.IsNullOrEmpty(nota))
             {
                 throw new ArgumentException("el contenido de la nota esta vacio",nameof(nota));
             }

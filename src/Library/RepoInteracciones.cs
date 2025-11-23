@@ -19,42 +19,71 @@ namespace Library
         /// </summary>
         private List<Interaccion> interacciones = new List<Interaccion>();
         /// <summary>
-        /// Lista de interaciiones de solo lectura.
+        /// Lista de interacciones de solo lectura.
         /// </summary>
         public IEnumerable<Interaccion> Interacciones
         {
             get { return interacciones; } 
         }
         /// <summary>
-        /// Métodos responsables de crear e inicializar diferentes tipos de Interaccion.
-        /// (Mensaje, Llamada, Correo y Reunión).  
-        /// Cada método valida los datos recibidos y devuelve una instancia creada.
+        /// Métodos responsables de crear e inicializar una interaccion de tipo mensaje.
+        /// Valida los datos recibidos y devuelve una instancia creada.
         /// </summary>
         /// <param name="usuario">Usuario que realiza la interacción.</param>
         /// <param name="cliente">Cliente asociado a la interacción.</param>
         /// <param name="tema">Tema de la interacción.</param>
         /// <param name="contenido">Contenido o descripción de la interacción.</param>
-        /// <param name="fecha">Fecha de la interacción, formato dd/MM/yyyy (posibilidad de ser futura para Reunion).</param>
-        /// <param name="lugar">Lugar de la interacion(Usado unicamente por Reunion).</param>
+        /// <param name="fecha">Fecha de la interacción, formato dd/MM/yyyy.</param>
         /// <returns>Una nueva instancia de Interaccion del tipo correspondiente.</returns>
-
         public Interaccion CrearMensaje(Usuario usuario, Cliente cliente, string tema, string contenido, string fecha)
         {
             this.GneradordeExcepcionesParaMetodosCrearInteraccion(usuario,  cliente,  tema,  contenido,  fecha);
             return new Interaccion(usuario, cliente, Interaccion.TipoInterracion.Mensaje, tema, contenido, fecha);
         }
+        /// <summary>
+        /// Métodos responsables de crear e inicializar una interaccion de tipo llamada.
+        /// Valida los datos recibidos y devuelve una instancia creada.
+        /// </summary>
+        /// <param name="usuario">Usuario que realiza la interacción.</param>
+        /// <param name="cliente">Cliente asociado a la interacción.</param>
+        /// <param name="tema">Tema de la interacción.</param>
+        /// <param name="contenido">Contenido o descripción de la interacción.</param>
+        /// <param name="fecha">Fecha de la interacción, formato dd/MM/yyyy.</param>
+        /// <returns>Una nueva instancia de Interaccion del tipo correspondiente.</returns>
         public Interaccion CrearLlamada(Usuario usuario, Cliente cliente, string tema, string contenido, string fecha)
         {
             this.GneradordeExcepcionesParaMetodosCrearInteraccion(usuario,  cliente,  tema,  contenido,  fecha);
 
             return new Interaccion(usuario, cliente, Interaccion.TipoInterracion.Llamada, tema, contenido, fecha);
         }
+        /// <summary>
+        /// Métodos responsables de crear e inicializar una interaccion de tipo correo.
+        /// Valida los datos recibidos y devuelve una instancia creada.
+        /// </summary>
+        /// <param name="usuario">Usuario que realiza la interacción.</param>
+        /// <param name="cliente">Cliente asociado a la interacción.</param>
+        /// <param name="tema">Tema de la interacción.</param>
+        /// <param name="contenido">Contenido o descripción de la interacción.</param>
+        /// <param name="fecha">Fecha de la interacción, formato dd/MM/yyyy.</param>
+        /// <returns>Una nueva instancia de Interaccion del tipo correspondiente.</returns>
         public Interaccion CrearCorreo(Usuario usuario, Cliente cliente, string tema, string contenido, string fecha)
         {
             this.GneradordeExcepcionesParaMetodosCrearInteraccion(usuario,  cliente,  tema,  contenido,  fecha);
 
             return new Interaccion(usuario, cliente, Interaccion.TipoInterracion.Correo, tema, contenido, fecha);
         }
+        /// <summary>
+        /// Métodos responsables de crear e inicializar una interaccion de tipo reunion.
+        /// Valida los datos recibidos y devuelve una instancia creada.
+        /// </summary>
+        /// <param name="usuario">Usuario que realiza la interacción.</param>
+        /// <param name="cliente">Cliente asociado a la interacción.</param>
+        /// <param name="tema">Tema de la interacción.</param>
+        /// <param name="contenido">Contenido o descripción de la interacción.</param>
+        /// <param name="fecha">Fecha de la interacción, formato dd/MM/yyyy. Pude ser una fecha futura.</param>
+        /// <returns>Una nueva instancia de Interaccion del tipo correspondiente.</returns>>
+        /// <param name="lugar">Lugar de la interaccion</param>
+        /// <returns>Una nueva instancia de Reunion, subtipo de Interaccion, del tipo correspondiente.</returns>
         public Interaccion CrearReunion(Usuario usuario, Cliente cliente, string tema, string contenido, string fecha, string lugar)
         {
             this.GneradordeExcepcionesParaMetodosCrearInteraccion(usuario,  cliente,  tema,  contenido,  fecha);
@@ -77,15 +106,31 @@ namespace Library
         /// <returns>Devuelve la interracion que contenga y coinsida los paramtetros dados</returns>
         public Interaccion BuscarInteraccion(Usuario usuario, string tipo, string tema)
         {
-            if (tipo == "" || tema == "")
+            if (usuario == null)
             {
-                throw new ArgumentException("datos vacios");
+                throw new ArgumentNullException(nameof(usuario), "El usuario no puede ser null");
             }
 
-            if (usuario == null||tipo==null||tema==null)
+            if (tipo == null)
             {
-                throw new ArgumentNullException("el usuario es null");
+                throw new ArgumentNullException(nameof(tipo), "El tipo no puede ser null");
             }
+
+            if (tema == null)
+            {
+                throw new ArgumentNullException(nameof(tema), "El tema no puede ser null");
+            }
+
+            if (string.IsNullOrWhiteSpace(tipo))
+            {
+                throw new ArgumentException("El tipo no puede estar vacío", nameof(tipo));
+            }
+
+            if (string.IsNullOrWhiteSpace(tema))
+            {
+                throw new ArgumentException("El tema no puede estar vacío", nameof(tema));
+            }
+
             tipo = tipo.ToLower();
             Interaccion.TipoInterracion tipoFinal = Interaccion.TipoInterracion.Nada; //para inicializarlo
             switch (tipo)
@@ -102,6 +147,8 @@ namespace Library
                 case "correo":
                     tipoFinal = Interaccion.TipoInterracion.Correo;
                     break;
+                default:
+                    throw new ArgumentException("el tipo de interaccion no es valido",nameof(tipo));
             }
 
             foreach (Interaccion interaccion in interacciones)
@@ -173,6 +220,11 @@ namespace Library
                 case "correo":
                     tipoFinal = Interaccion.TipoInterracion.Correo;
                     break;
+                case "":
+                    break;
+                default:
+                    throw new ArgumentException("tipo de interacción no es válido",nameof(tipo));
+
             }
 
             List<Interaccion> interaccionesCliente = new List<Interaccion>();

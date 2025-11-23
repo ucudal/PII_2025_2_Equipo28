@@ -196,8 +196,6 @@ namespace Library
                 return $"{e.Message} {e.ParamName}";
 
             }
-            
-
             if (usuario != null)
             {
                 if (cliente != null)
@@ -205,9 +203,11 @@ namespace Library
                     Interacciones.AgregarInteraccion(Mensaje, usuario);
                     return "Mensaje registrado";
                 }
+
+                return "no se encontro al cliente";
             }
 
-            return "El usuario o el cliente es null";
+            return "No se encontro al usuario";
         }
         /// <summary>
         /// La explicacion del metodo se encuentra mas arriba
@@ -227,8 +227,7 @@ namespace Library
             }
             catch (ArgumentNullException e)
             {
-                Console.WriteLine(e.Message);
-                return e.Message;
+                return $"{e.Message} {e.ParamName}";
             }
             catch (InvalidDateException e)
             {
@@ -248,8 +247,11 @@ namespace Library
                     Interacciones.AgregarInteraccion(Correo, usuario);
                     return "Correo registrado";
                 }
+           
+                return "no se encontro al cliente";
             }
-            return "El usuario o cliente no existen";
+
+            return "No se encontro al usuario";
         }
         public string RegistrarLlamada(string clienteId, string llamada, string tema,
             string usuarioId, string cuando)
@@ -267,8 +269,7 @@ namespace Library
             }
             catch (ArgumentNullException e)
             {
-                Console.WriteLine(e.Message);
-                return e.Message;
+                return $"{e.Message} {e.ParamName}";
             }
             catch (InvalidDateException e)
             {
@@ -288,9 +289,11 @@ namespace Library
                     Interacciones.AgregarInteraccion(LLamada, usuario);
                     return "Mensaje registrado";
                 }
+            
+                return "no se encontro al cliente";
             }
 
-            return "El usuario o el cliente es null";
+            return "No se encontro al usuario";
         }
         /// <summary>
         /// La explicacion del metodo se encuentra mas arriba
@@ -352,8 +355,8 @@ namespace Library
             }
             catch (ArgumentNullException e)
             {
-                Console.WriteLine(e.Message);
-                return e.Message;
+                return $"{e.Message} {e.ParamName}";
+
             }
             catch (InvalidDateException e)
             {
@@ -374,8 +377,11 @@ namespace Library
                     return "Reunion registrada";
 
                 }
+          
+                return "no se encontro al cliente";
             }
-            return "El usuario o cliente no existen";
+
+            return "No se encontro al usuario";
         }
 
         /// <summary>
@@ -394,13 +400,12 @@ namespace Library
             }
             catch (ArgumentNullException e)
             {
-                Console.WriteLine(e.Message);
-                return e.Message;
+                return $"{e.Message} {e.ParamName}";
             }
             catch (ArgumentException e)
             {
-                Console.WriteLine(e.Message);
-                return e.Message;
+                return $"{e.Message} {e.ParamName}";
+
             }
             if (usuario != null)
             {
@@ -408,9 +413,11 @@ namespace Library
                 {
                     return "Nota agregada";
                 }
+           
+                return "no se encontro la interaccion";
             }
 
-            return "El usuario o interaccion no existen";
+            return "No se encontro al usuario";
         }
 
         /// <summary>
@@ -431,8 +438,8 @@ namespace Library
             }
             catch (ArgumentNullException e)
             {
-                Console.WriteLine(e.Message);
-                return e.Message;
+                return $"{e.Message} {e.ParamName}";
+
             }
             catch (InvalidDateException e)
             {
@@ -500,13 +507,13 @@ namespace Library
             }
             catch (ArgumentNullException e)
             {
-                Console.WriteLine(e.Message);
-                return e.Message;
+                return $"{e.Message} {e.ParamName}";
+
             }
             catch (ArgumentException e)
             {
-                Console.WriteLine(e.Message);
-                return e.Message;
+                return $"{e.Message} {e.ParamName}";
+
             }
             if (usuario == null)
             {
@@ -533,11 +540,13 @@ namespace Library
             }
             catch (ArgumentNullException e)
             {
-                Console.WriteLine(e.Message);
+                return $"{e.Message} {e.ParamName}";
+
             }
             catch (ArgumentException e)
             {
-                Console.WriteLine(e.Message);
+                return $"{e.Message} {e.ParamName}";
+
             }
             if (usuario == null)
             {
@@ -582,13 +591,13 @@ namespace Library
             }
             catch (ArgumentNullException e)
             {
-                Console.WriteLine(e.Message);
-                return e.Message;
+                return $"{e.Message} {e.ParamName}";
+
             }
             catch (ArgumentException e)
             {
-                Console.WriteLine(e.Message);
-                return e.Message;
+                return $"{e.Message} {e.ParamName}";
+
             }
 
             if (usuario != null && cliente != null)
@@ -617,13 +626,13 @@ namespace Library
             }
             catch (ArgumentNullException e)
             {
-                Console.WriteLine(e.Message);
-                return e.Message;
+                return $"{e.Message} {e.ParamName}";
+
             }
             catch (ArgumentException e)
             {
-                Console.WriteLine(e.Message);
-                return e.Message;
+                return $"{e.Message} {e.ParamName}";
+
             }
 
             string clientes = $"Los clientes que se pusieron en contacto contigo son:\n";
