@@ -22,7 +22,7 @@ namespace Ucu.Poo.DiscordBot.Commands
             string[] parte = parametros.Split(',');
             if (parte.Length != 1)
             {
-                await ReplyAsync($"Se nececita 1 parametro. Recurda separar los parametros por ','");
+                await ReplyAsync($"Se nececita 1 parametro: el usuarioId.");
 
             }
             else

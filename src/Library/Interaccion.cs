@@ -16,6 +16,11 @@ namespace Library
     /// <para><b>LSP:</b> Al crear la subclase de Interaccion (Reunion),
     /// esta pueden reemplazar a Interaccion sin alterar el funcionamiento del sistema, dado que comparten los mismos atributos y comportamientos básicos,
     /// excepto las extensiones propias.</para>
+    ///
+    /// <para><b>Alta cohesion:</b>Esta clase tiene alta cohesión porque todos sus atributos y
+    /// métodos están directamente relacionados con la ideac de representar una interacción entre un cliente y un usuario. </para>
+    ///
+    ///<para><b>Bajo acoplamiento:</b>Esta clase depende unicamnete de usuario y cliente, por lo que tiene una baja dependencia. </para>
     /// </summary>
 
     public class Interaccion

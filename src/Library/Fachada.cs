@@ -30,148 +30,17 @@ namespace Library
                 return instancia;
             }
         }
-
         /// <summary>
-        /// Registra un mensaje de interacción entre un usuario y un cliente.
-        /// Aplica Expert: RepoUsuarios y RepoClientes conocen cómo buscar sus entidades.
+        /// El metodos RegistrarMensaje crea una instancia de interaccion de tipo mensaje y la guarda en repoInteracciones
         /// </summary>
-        // public string RegistarMensaje(string clienteId, string mensaje, string tema,
-        //     string usuarioId, string cuando)
-        // {
-        //     Usuario usuario = null;
-        //     Mensajes Mensaje = null; //Inicializando larailala
-        //     Cliente cliente = null;
-        //     try
-        //     {
-        //         usuario = this.Usuarios.BuscarUsuario(usuarioId);
-        //         cliente = Clientes.BuscarUnCliente(clienteId);
-        //         // Cliente cliente = Usuarios.BuscarCliente(clienteId); //Hecho comentario por si acaso
-        //         Mensaje = new Mensajes(usuario, cliente, tema, mensaje, cuando);
-        //     }
-        //     catch (ArgumentNullException e)
-        //     {
-        //         Console.WriteLine(e.Message);
-        //         return e.Message;
-        //     }
-        //     catch (ArgumentException e)
-        //     {
-        //         Console.WriteLine(e.Message);
-        //         return e.Message;
-        //     }
-        //     catch (InvalidDateException e)
-        //     {
-        //         Console.WriteLine(e.Message);
-        //         return e.Message;
-        //     }
-        //
-        //     if (usuario != null)
-        //     {
-        //         if (cliente != null)
-        //         {
-        //             Interacciones.AgregarInteraccion(Mensaje, usuario);
-        //             return "Mensaje registrado";
-        //         }
-        //     }
-        //
-        //     return "El usuario o cliente no existen";
-        // }
-        //
-        // /// <summary>
-        // /// Registra un correo electrónico como interacción entre usuario y cliente.
-        // /// Aplica Expert: delega la búsqueda a los repositorios correspondientes.
-        // /// </summary>
-        // public string RegistrarCorreo(string clienteId, string correo, string tema,
-        //     string usuarioId, string cuando)
-        // {
-        //     Usuario usuario = null;
-        //     Correos Correo = null; //Inicializando larailala
-        //     Cliente cliente = null;
-        //     try
-        //     {
-        //         usuario = this.Usuarios.BuscarUsuario(usuarioId);
-        //         cliente = Clientes.BuscarUnCliente(clienteId);
-        //         // Cliente cliente = Usuarios.BuscarCliente(clienteId); //Hecho comentario por si acaso
-        //         Correo = new Correos(usuario,cliente, tema, correo, cuando);
-        //     }
-        //     catch (ArgumentNullException e)
-        //     {
-        //         Console.WriteLine(e.Message);
-        //         return e.Message;
-        //     }
-        //     catch (ArgumentException e)
-        //     {
-        //         Console.WriteLine(e.Message);
-        //         return e.Message;
-        //     }
-        //     catch (InvalidDateException e)
-        //     {
-        //         Console.WriteLine(e.Message);
-        //         return e.Message;
-        //     }
-        //
-        //     if (usuario != null)
-        //     {
-        //         if (cliente != null)
-        //         {
-        //             Interacciones.AgregarInteraccion(Correo, usuario);
-        //             return "Correo registrado";
-        //         }
-        //     }
-        //     return "El usuario o cliente no existen";
-        // }
-        //
-        // public string RegistarLlamada(string clienteId, string llamada, string tema,
-        //     string usuarioId, string cuando)
-        // {
-        //     Usuario usuario = null;
-        //     Llamadas LLamada = null; //Inicializando larailala
-        //     Cliente cliente = null;
-        //     try
-        //     {
-        //         usuario = this.Usuarios.BuscarUsuario(usuarioId);
-        //         cliente = Clientes.BuscarUnCliente(clienteId);
-        //         // Cliente cliente = Usuarios.BuscarCliente(clienteId); //Hecho comentario por si acaso
-        //         LLamada = new Llamadas(usuario,cliente, tema, llamada, cuando);
-        //     }
-        //     catch (ArgumentNullException e)
-        //     {
-        //         Console.WriteLine(e.Message);
-        //         return e.Message;
-        //     }
-        //     catch (ArgumentException e)
-        //     {
-        //         Console.WriteLine(e.Message);
-        //         return e.Message;
-        //     }
-        //     catch (InvalidDateException e)
-        //     {
-        //         Console.WriteLine(e.Message);
-        //         return e.Message;
-        //     }
-        //
-        //     if (usuario != null)
-        //     {
-        //         if (cliente != null)
-        //         {
-        //             Interacciones.AgregarInteraccion(LLamada, usuario);
-        //             return "llamada registrada";
-        //
-        //         }
-        //     }
-        //     return "El usuario o cliente no existen";
-        // }
-        /// <summary>
-        /// Los metodos RegistrarMensaje, RegistarCorreo, RegistarLlamada y RegistrarReunion, crean el tipo de interracion y lo agregar a su propio repositorio de interacciones.
-        /// </summary>
-        /// <param name="clienteId">El id del cliente al cual asociar la interacion, para buscarlo</param>
+        /// <param name="clienteId">El id del cliente al cual asociar la interaccion, para buscarlo</param>
         /// <param name="contenido (mensaje,llamada,correo,reunion)">El contenido o descipcion de la interaccion</param>
         /// <param name="tema">El tema de la interaccion</param>
         /// <param name="usuarioId">El id del usuario al cual asociar la interaccion, para busarlo y verficar que sea valido</param>
-        /// <param name="cuando">La fecha en la cual se realizo la interracion (o realizara, para Reunion)</param>
-        /// /// <param name="lugar">Lugar de la interracion (usado unicamnete por RegistrarReunion)</param>
+        /// <param name="fecha">La fecha en la cual se realizo la interracion</param>
         /// <returns>Devuelve un mensaje confirmado que el registro fue un exito, o comentado que hubo un error, cual fue y donde fue</returns>
-        public string RegistrarMensaje(string clienteId, string mensaje, string tema,
-            string usuarioId, string cuando)
+        public string RegistrarMensaje(string clienteId, string contenido, string tema,
+            string usuarioId, string fecha)
         {
             Usuario usuario = null;
             Interaccion Mensaje = null; //Inicializando larailala
@@ -180,7 +49,7 @@ namespace Library
             {
                 usuario = this.Usuarios.BuscarUsuario(usuarioId);
                 cliente = Clientes.BuscarUnCliente(clienteId);
-                Mensaje = Interacciones.CrearMensaje(usuario, cliente, tema, mensaje, cuando);
+                Mensaje = Interacciones.CrearMensaje(usuario, cliente, tema, contenido, fecha);
             }
             catch (ArgumentNullException e)
             {
@@ -210,10 +79,16 @@ namespace Library
             return "No se encontro al usuario";
         }
         /// <summary>
-        /// La explicacion del metodo se encuentra mas arriba
+        /// El metodos RegistrarCorreo crea una instancia de interaccion de tipo correo y la guarda en repoInteracciones
         /// </summary>
-        public string RegistrarCorreo(string clienteId, string correo, string tema,
-            string usuarioId, string cuando)
+        /// <param name="clienteId">El id del cliente al cual asociar la interaccion, para buscarlo</param>
+        /// <param name="contenido (mensaje,llamada,correo,reunion)">El contenido o descipcion de la interaccion</param>
+        /// <param name="tema">El tema de la interaccion</param>
+        /// <param name="usuarioId">El id del usuario al cual asociar la interaccion, para busarlo y verficar que sea valido</param>
+        /// <param name="fecha">La fecha en la cual se realizo la interracion</param>
+        /// <returns>Devuelve un mensaje confirmado que el registro fue un exito, o comentado que hubo un error, cual fue y donde fue</returns>
+        public string RegistrarCorreo(string clienteId, string contenido, string tema,
+            string usuarioId, string fecha)
         {
             Usuario usuario = null;
             Interaccion Correo = null; //Inicializando larailala
@@ -222,8 +97,7 @@ namespace Library
             {
                 usuario = this.Usuarios.BuscarUsuario(usuarioId);
                 cliente = Clientes.BuscarUnCliente(clienteId);
-                // Cliente cliente = Usuarios.BuscarCliente(clienteId); //Hecho comentario por si acaso
-                Correo = Interacciones.CrearCorreo(usuario,cliente, tema, correo, cuando);
+                Correo = Interacciones.CrearCorreo(usuario,cliente, tema, contenido, fecha);
             }
             catch (ArgumentNullException e)
             {
@@ -253,8 +127,17 @@ namespace Library
 
             return "No se encontro al usuario";
         }
-        public string RegistrarLlamada(string clienteId, string llamada, string tema,
-            string usuarioId, string cuando)
+        /// <summary>
+        /// El metodos RegistrarLlamada crea una instancia de interaccion de tipo llamada y la guarda en repoInteracciones
+        /// </summary>
+        /// <param name="clienteId">El id del cliente al cual asociar la interaccion, para buscarlo</param>
+        /// <param name="contenido (mensaje,llamada,correo,reunion)">El contenido o descipcion de la interaccion</param>
+        /// <param name="tema">El tema de la interaccion</param>
+        /// <param name="usuarioId">El id del usuario al cual asociar la interaccion, para busarlo y verficar que sea valido</param>
+        /// <param name="fecha">La fecha en la cual se realizo la interracion</param>
+        /// <returns>Devuelve un mensaje confirmado que el registro fue un exito, o comentado que hubo un error, cual fue y donde fue</returns>
+        public string RegistrarLlamada(string clienteId, string contenido, string tema,
+            string usuarioId, string fecha)
         {
             Usuario usuario = null;
             Interaccion LLamada = null; //Inicializando larailala
@@ -264,7 +147,7 @@ namespace Library
                 usuario = this.Usuarios.BuscarUsuario(usuarioId);
                 cliente = Clientes.BuscarUnCliente(clienteId);
 
-                LLamada = Interacciones.CrearLlamada(usuario, cliente, tema, llamada, cuando);
+                LLamada = Interacciones.CrearLlamada(usuario, cliente, tema, contenido, fecha);
 
             }
             catch (ArgumentNullException e)
@@ -296,52 +179,17 @@ namespace Library
             return "No se encontro al usuario";
         }
         /// <summary>
-        /// La explicacion del metodo se encuentra mas arriba
+        /// El metodos RegistrarReunion crea una instancia de Reunion, subtipo de Interaccion, y la guarda en repoInteracciones
         /// </summary>
-        // public string RegistarCorreo(string clienteId, string correo, string tema,
-        //     string usuarioId, string cuando)
-        // {
-        //     Usuario usuario = null;
-        //     Interaccion Correo = null; //Inicializando larailala
-        //     Cliente cliente = null;
-        //     try
-        //     {
-        //         usuario = this.Usuarios.BuscarUsuario(usuarioId);
-        //         cliente = Clientes.BuscarUnCliente(clienteId);
-        //         Correo = Interacciones.CrearCorreo(usuario, cliente, tema, correo, cuando);
-        //     }
-        //     catch (ArgumentNullException e)
-        //     {
-        //         Console.WriteLine(e.Message);
-        //         return e.Message;
-        //     }
-        //     catch (ArgumentException e)
-        //     {
-        //         Console.WriteLine(e.Message);
-        //         return e.Message;
-        //     }
-        //     catch (InvalidDateException e)
-        //     {
-        //         Console.WriteLine(e.Message);
-        //         return e.Message;
-        //     }
-        //
-        //     if (usuario != null)
-        //     {
-        //         if (cliente != null)
-        //         {
-        //             Interacciones.AgregarInteraccion(Correo, usuario);
-        //             return "Mensaje registrado";
-        //         }
-        //     }
-        //
-        //     return "El usuario o el cliente es null";
-        // }
-        /// <summary>
-        /// La explicacion del metodo se encuentra mas arriba
-        /// </summary>
-        public string RegistrarReunion(string clienteId, string reunion, string tema,
-            string usuarioId, string cuando, string lugar)
+        /// <param name="clienteId">El id del cliente al cual asociar la interaccion, para buscarlo</param>
+        /// <param name="contenido (mensaje,llamada,correo,reunion)">El contenido o descipcion de la interaccion</param>
+        /// <param name="tema">El tema de la interaccion</param>
+        /// <param name="usuarioId">El id del usuario al cual asociar la interaccion, para busarlo y verficar que sea valido</param>
+        /// <param name="fecha">La fecha en la cual se realizo la interracion</param>
+        /// /// <param name="lugar">El lugar en el cual se realizo la interracion</param>
+        /// <returns>Devuelve un mensaje confirmado que el registro fue un exito, o comentado que hubo un error, cual fue y donde fue</returns>
+        public string RegistrarReunion(string clienteId, string contenido, string tema,
+            string usuarioId, string fecha, string lugar)
         {
             Usuario usuario = null;
             Interaccion Reunion = null; //Inicializando larailala
@@ -350,7 +198,7 @@ namespace Library
             {
                 usuario = this.Usuarios.BuscarUsuario(usuarioId);
                 cliente = Clientes.BuscarUnCliente(clienteId);
-                Reunion = Interacciones.CrearReunion(usuario, cliente, tema, reunion, cuando,lugar);
+                Reunion = Interacciones.CrearReunion(usuario, cliente, tema, contenido, fecha,lugar);
 
             }
             catch (ArgumentNullException e)
@@ -385,9 +233,13 @@ namespace Library
         }
 
         /// <summary>
-        /// Agrega una nota a una interacción existente.
-        /// Aplica Expert: la interacción conoce cómo agregar sus propias notas.
+        /// Agrega una nota a una interaccion ya existente.
         /// </summary>
+        /// <param name="nota">la nota a ser agregada</param>
+        /// <param name="tipointeraccion">recibe un tipo de interaccion, para identificar la interaccion</param>
+        /// <param name="tema">recibe el tema de la interaccion para identificar la interaccion</param>
+        /// <param name="usuarioId">recibe el id del usuario asociado a la interaccion</param>
+        /// <returns>debuelve la confirmacion de que se agrego la nota. de lo contrario devuelbe un error./returns>
         public string AgregarNota(string nota, string tipointeraccion, string tema, string usuarioId)
         {
             Usuario usuario = null;
@@ -413,7 +265,6 @@ namespace Library
                 {
                     return "Nota agregada";
                 }
-           
                 return "no se encontro la interaccion";
             }
 
@@ -421,10 +272,13 @@ namespace Library
         }
 
         /// <summary>
-        /// Obtiene las interacciones de un cliente, opcionalmente filtradas por tipo y fecha.
-        /// Aplica Expert: RepoInteracciones conoce cómo buscar y filtrar interacciones.
+        /// Muestra todas las interaccion de los clientes en base a los paramtros de tipo y fehca, que puden o no brindarse.
         /// </summary>
-        
+        /// <param name="clienteId">El cliente cuyas interacciones ver.</param>
+        /// <param name="usuarioId">El usuarioid para verificar que es un usuario valido</param>
+        /// <param name="tipo">el tipo de interaccion, parametro opcional para buscar en base a el</param>
+        /// <param name="fecha">la fecha de la interaccion, parametro opcional para buscar en base a el.</param>
+        /// <returns>Devuelbe un string de las interacciones del cliente en base a los datos brindados</returns>
         public string InteraccionesCliente(string clienteId,string usuarioId,string tipo="",string fecha="")
         {
             Usuario usuario = null;
@@ -469,7 +323,7 @@ namespace Library
                     $"las interaccion de {cliente.Nombre} {cliente.Apellido} de la fecha {fecha} son las siguientes:\n";
                 foreach (Interaccion interaccion in interaccionesCliente)
                 {
-                    informacion += $"Tipo{interaccion.Tipo}\n{interaccion.Tema}:\n{interaccion.Contenido}\n";
+                    informacion += $"\nTipo: {interaccion.Tipo}\n{interaccion.Tema}:\n{interaccion.Contenido}\n";
                 }
 
                 return informacion;
@@ -480,7 +334,7 @@ namespace Library
                     $"las interaccion de {cliente.Nombre} {cliente.Apellido} del tipo {tipo} son las siguientes:\n";
                 foreach (Interaccion interaccion in interaccionesCliente)
                 {
-                    informacion += $"Fecha{interaccion.Fecha}\n{interaccion.Tema}:\n{interaccion.Contenido}\n";
+                    informacion += $"\nFecha: {interaccion.Fecha}\n{interaccion.Tema}:\n{interaccion.Contenido}\n";
                 }
 
                 return informacion;
@@ -497,7 +351,11 @@ namespace Library
                 return informacion;
             }
         }
-
+        /// <summary>
+        /// Muestra los clientes cuya utlima interaccion fue hace mas de un mes.
+        /// </summary>
+        /// <param name="usuarioId">Para ver los clientes del usuario, y verificar si es un usuario valido</param>
+        /// <returns>devuelbe un string con los nombres de los clientes con los cuales el usuario no interacta hace mas de un mes</returns>
         public string InterraccionClienteAusente(string usuarioId)
         {
             Usuario usuario = null;
@@ -530,7 +388,11 @@ namespace Library
             }
             return ClientesAusentes;
         }
-
+        /// <summary>
+        /// Muetra un panel con el nombre de todos los clientes, las interacciones recientes del usuario, y las reuniones proximas
+        /// </summary>
+        /// <param name="usuarioId">Para verificar las interacciones del usuario, y validar si existe.</param>
+        /// <returns>debuelve un string con los nombres de todos los clientes, las interacciones del usuario de hace una semana, y sus reuniones que se encuentren registradas para una fecha posterior a la fecha actual.</returns>
         public string Panel(string usuarioId)
         {
             Usuario usuario = null;
@@ -579,7 +441,12 @@ namespace Library
             }
             return Panel;
         }
-        //clientes que se pusieron en contacto con usuario
+        /// <summary>
+        /// Agrega los clientes que se pusieron en contacto con el usuario y que aun no les ha respondido.
+        /// </summary>
+        /// <param name="usuarioId">El id apra verificar si el usuario exite.</param>
+        /// <param name="clienteId">El id del cliente para ver si el cliente existe.</param>
+        /// <returns>debuelve una confirmacion en caso de que se haya agregado correctamente, en caso opuesto, devolbera un error y su explicacion.</returns>
         public string AgregarClienteContacto(string usuarioId, string clienteId)
         {
             Usuario usuario = null;
@@ -616,7 +483,11 @@ namespace Library
 
             return "usuario o cliente no puden ser null";
         }
-
+        /// <summary>
+        /// Permite ver los cleintes que se pusieron en contacto con el usuario y que este aun no les haya respondido.
+        /// </summary>
+        /// <param name="usuarioId">Para verificar el si el usuario es valido.</param>
+        /// <returns>Devuelbe un string con el nombre de los clientes que se pusieron en contacto.</returns>
         public string VerClienteContacto(string usuarioId)
         {
             Usuario usuario = null;
@@ -648,6 +519,45 @@ namespace Library
             }
 
             return "Usuario null";
+        }
+        public string EliminarClienteContacto(string usuarioId, string clienteId)
+        {
+            Usuario usuario = null;
+            Cliente cliente = null;
+            try
+            {
+                usuario = this.BuscarUsuario(usuarioId);
+                cliente = this.Clientes.BuscarUnCliente(clienteId);
+            }
+            catch (ArgumentNullException e)
+            {
+                return $"{e.Message} {e.ParamName}";
+
+            }
+            catch (ArgumentException e)
+            {
+                return $"{e.Message} {e.ParamName}";
+
+            }
+
+            if (usuario != null && cliente != null)
+            {
+                if (this.ClientesContacto.ContainsKey(usuario))
+                {
+                    if (this.ClientesContacto[usuario].Contains(cliente))
+                    {
+                        this.ClientesContacto[usuario].Remove(cliente);
+                        return "cliente eliminado de la lista";
+                    }
+
+                    return "la lisat actual no contiene el cliente que desea eliminar";
+                }
+
+                return "el usuario aun no ah agregado ningun cliente a la lista";
+
+            }
+
+            return "usuario o cliente no puden ser null";
         }
 
         /// <summary>

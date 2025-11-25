@@ -16,7 +16,7 @@ namespace Ucu.Poo.DiscordBot.Commands
     {
         private Fachada fachada = Fachada.Instancia;
         /// <summary>
-        /// Implementa el comando 'RegistraLlamada' que registra una llamada. Este comando es para la historia 7.
+        /// Implementa el comando 'RegistraLlamada' que registra una llamada. Este comando es para la historia 6.
         /// </summary>
         [Command("registrarLlamada")]
         [Summary(
@@ -27,7 +27,7 @@ namespace Ucu.Poo.DiscordBot.Commands
             string[] parte = parametros.Split(',');
             if (parte.Length != 5)
             {
-                await ReplyAsync($"Se nececitan 5 parametros. Recurda separar los parametros por ','");
+                await ReplyAsync($"Se nececitan 5 parametros y en el siguiente orden: ClienteId, contenido, tema, usuarioid, fecha. Recurda separar los parametros por ','");
 
             }
             else
