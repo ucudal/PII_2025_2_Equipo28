@@ -882,21 +882,38 @@ namespace Library
         /// Modifica un atributo específico de un cliente existente.
         /// Aplica Expert: Cliente conoce cómo modificar sus propios atributos.
         /// </summary>
-        public void ModificarInfo(string id, string atributo, string nuevoValor)
+        public string ModificarInfo(string id, string atributo, string nuevoValor)
         {
-            Cliente cliente = Clientes.BuscarCliente("id", id)[0];
-            
-            cliente.ModificarInformacion(atributo, nuevoValor);
+            try
+            {
+                Cliente cliente = Clientes.BuscarCliente("id", id)[0];
+                cliente.ModificarInformacion(atributo, nuevoValor);
+                
+                return $"Se modificó la información del cliente {cliente.ToString()}. Su {atributo} ahora es {nuevoValor}";
+            }
+            catch (NullReferenceException ex)
+            {
+                return "No se encontró o no existe el cliente";
+            }
         }
 
         /// <summary>
         /// Elimina un cliente del repositorio.
         /// Aplica Expert: RepoClientes conoce cómo eliminar de su colección.
         /// </summary>
-        public void EliminarClienteFachada(string id)
+        public string EliminarCliente(string id)
         {
-            Cliente cliente = Clientes.BuscarCliente("id", id)[0];
-            Clientes.EliminarCliente(cliente);
+            try
+            {
+                Cliente cliente = Clientes.BuscarCliente("id", id)[0];
+                Clientes.EliminarCliente(cliente);
+
+                return $"Se eliminó el cliente {cliente.ToString()}";
+            }
+            catch (NullReferenceException err)
+            {
+                return "No se encontró o no existe el cliente";
+            }
         }
 
         /// <summary>
