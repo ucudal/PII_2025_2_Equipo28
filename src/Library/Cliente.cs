@@ -32,25 +32,44 @@ namespace Library
             Genero = string.Empty;
             FechaDeNacimiento = string.Empty;
         }
-        
-        public void CambiarNombre(string nuevoNombre)
-        {
-            Nombre = nuevoNombre;
-        }
 
-        public void CambiarApellido(string nuevoApellido)
+        public void ModificarInformacion(string atributo, string nuevoValor)
         {
-            Apellido = nuevoApellido;
-        }
+            string atributoNormalizado = atributo.Trim().ToLower();
+            switch (atributoNormalizado)
+            {
+                case "nombre":
+                    this.Nombre = nuevoValor;
+                    break;
 
-        public void CambiarTelefono(string nuevoTelefono)
-        {
-            Telefono = nuevoTelefono;
-        }
+                case "apellido":
+                    this.Apellido = nuevoValor;
+                    break;
 
-        public void CambiarCorreo(string nuevoCorreo)
-        {
-            Correo = nuevoCorreo;
+                case "telefono":
+                    this.Telefono = nuevoValor;
+                    break;
+
+                case "correo":
+                    this.Correo = nuevoValor;
+                    break;
+
+                case "genero":
+                    this.Genero = nuevoValor;
+                    break;
+
+                case "etiqueta":
+                    this.AsignarEtiqueta(nuevoValor);
+                    break;
+
+                case "fechadenacimiento":
+                    this.FechaDeNacimiento = nuevoValor;
+                    break;
+
+                default:
+                    Console.WriteLine($"Atributo '{atributo}' no reconocido.");
+                    break;
+            }
         }
 
         public void AsignarGenero(string nuevoGenero)

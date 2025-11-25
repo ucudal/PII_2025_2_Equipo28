@@ -13,12 +13,11 @@ namespace Library
     // conoce sus interacciones, cotizaciones, ventas y etiquetas, y puede agregarlas.
     public class Usuario
     {
-        public string ID { get; set; }
-        public string Nombre { get; set; }
-        public List<Interaccion> InteraccionesUsuario { get; private set; } = new List<Interaccion>();
-        public List<Venta> TotalVentas { get; private set; } = new List<Venta>();
-        public List<Venta> VentaCliente { get; private set; } = new List<Venta>();
-        public List<Cotizacion> CotizacionesUsuario { get; private set; } = new List<Cotizacion>();
+        public string ID { get; protected set; }
+        public string Nombre { get; protected set; }
+        private List<Interaccion> InteraccionesUsuario { get; set; } = new List<Interaccion>();
+        private List<Venta> VentasUsuario { get; set; } = new List<Venta>();
+        private List<Cotizacion> CotizacionesUsuario { get; set; } = new List<Cotizacion>();
 
         // Métodos del diagrama
         public Usuario(string id,string nombre)
@@ -30,19 +29,38 @@ namespace Library
         {
             Console.WriteLine($"Recordatorio creado: {que}, para {cuando}");
         }
-        public void VentaClienteAdd(Venta venta)
-        {
-            TotalVentas.Add(venta);
-        }
 
         public void AgregarCotizacion(Cotizacion cotizacion)
         {
-            CotizacionesUsuario.Add(cotizacion);
+            this.CotizacionesUsuario.Add(cotizacion);
         }
         public void AgregarInteraccion(Interaccion interaccion)
         {
-            InteraccionesUsuario.Add(interaccion);
+            this.InteraccionesUsuario.Add(interaccion);
         }
-        
+
+        public void AgregarVenta(Venta venta)
+        {
+            this.VentasUsuario.Add(venta);
+        }
+
+        public double SumarImportes(DateTime fechaInicio, DateTime fechaFin)
+        {
+            //Suma importes en el rango [inicio, fin] 
+            double total = 0.0;
+            foreach (Venta venta in this.VentasUsuario)
+            {
+                if (venta.Fecha >= fechaInicio && venta.Fecha <= fechaFin)
+                {
+                    double importe;
+                    if (double.TryParse(venta.Importe, out importe))
+                    {
+                        total += importe;
+                    }
+                }
+            }
+
+            return total;
+        }
     }
 }
