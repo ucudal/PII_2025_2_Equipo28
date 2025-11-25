@@ -885,42 +885,8 @@ namespace Library
         public void ModificarInfo(string id, string atributo, string nuevoValor)
         {
             Cliente cliente = Clientes.BuscarCliente("id", id)[0];
-
-            string atributoNormalizado = atributo.Trim().ToLower();
-            switch (atributoNormalizado)
-            {
-                case "nombre":
-                    cliente.Nombre=nuevoValor;
-                    break;
-
-                case "apellido":
-                    cliente.Apellido=nuevoValor;
-                    break;
-
-                case "telefono":
-                    cliente.Telefono=nuevoValor;
-                    break;
-
-                case "correo":
-                    cliente.Correo=nuevoValor;
-                    break;
-
-                case "genero":
-                    cliente.AsignarGenero(nuevoValor);
-                    break;
-
-                case "etiqueta":
-                    cliente.AsignarEtiqueta(nuevoValor);
-                    break;
-
-                case "fechadenacimiento":
-                    cliente.AsignarFechaDeNacimiento(nuevoValor);
-                    break;
-
-                default:
-                    Console.WriteLine($"Atributo '{atributo}' no reconocido.");
-                    break;
-            }
+            
+            cliente.ModificarInformacion(atributo, nuevoValor);
         }
 
         /// <summary>
@@ -1082,7 +1048,8 @@ namespace Library
             }
 
             // 4) Sumar importes en el rango [inicio, fin] 
-            double total = 0.0;
+            /*double total = 0.0;
+>>>>>>> Horacio
             foreach (var venta in usuario.VentasUsuario)
             {
                 if (venta.Fecha >= fechaInicio && venta.Fecha <= fechaFin)
@@ -1093,7 +1060,8 @@ namespace Library
                         total += importe;
                     }
                 }
-            }
+            }*/
+            double total = usuario.SumarImportes(fechaInicio, fechaFin);
 
             // 5) Respuesta formateada
             return $"Total de ventas desde {fechaInicio:dd/MM/yyyy} hasta {fechaFin:dd/MM/yyyy}: ${total:0.##}";

@@ -28,7 +28,7 @@ namespace Library
                     out fecha))
             {
                 this.ventas.Add(new Venta(cliente,producto, fecha, precio));
-                usuario.VentasUsuario.Add(new Venta(cliente,producto,fecha,precio));
+                usuario.AgregarVenta(new Venta(cliente,producto,fecha,precio));
             }
             else
             {

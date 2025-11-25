@@ -32,22 +32,50 @@ namespace Library
             Genero = string.Empty;
             FechaDeNacimiento = string.Empty;
         }
-        
-        public void AsignarGenero(string nuevoGenero)
+
+        public void ModificarInformacion(string atributo, string nuevoValor)
         {
-            Genero = nuevoGenero;
+            string atributoNormalizado = atributo.Trim().ToLower();
+            switch (atributoNormalizado)
+            {
+                case "nombre":
+                    this.Nombre = nuevoValor;
+                    break;
+
+                case "apellido":
+                    this.Apellido = nuevoValor;
+                    break;
+
+                case "telefono":
+                    this.Telefono = nuevoValor;
+                    break;
+
+                case "correo":
+                    this.Correo = nuevoValor;
+                    break;
+
+                case "genero":
+                    this.Genero = nuevoValor;
+                    break;
+
+                case "etiqueta":
+                    this.AsignarEtiqueta(nuevoValor);
+                    break;
+
+                case "fechadenacimiento":
+                    this.FechaDeNacimiento = nuevoValor;
+                    break;
+
+                default:
+                    Console.WriteLine($"Atributo '{atributo}' no reconocido.");
+                    break;
+            }
         }
         
         public void AsignarEtiqueta(string nuevaEtiqueta)
         {
             Etiquetas.Add(nuevaEtiqueta);
             Console.WriteLine($"Se asignó la etiqueta '{nuevaEtiqueta}' a {Nombre}");
-        }
-
-        
-        public void AsignarFechaDeNacimiento(string nuevaFecha)
-        {
-            FechaDeNacimiento = nuevaFecha;
         }
         
         public override string ToString()
