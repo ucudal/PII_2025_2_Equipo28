@@ -22,12 +22,12 @@ namespace Library
             NombreCompleto = nombre;
         }
 
-        public void AsignarCliente(Cliente cliente, Vendedor vendedor)
+        public void AsignarCliente(Cliente cliente)
         {
             if (cliente != null)
             {
-                vendedor.Clientes.Add(cliente);
-                Console.WriteLine($"Al cliente {cliente.Nombre} {cliente.Apellido} se le asignó: {vendedor.NombreCompleto}");
+                this.Clientes.Add(cliente);
+                Console.WriteLine($"Al cliente {cliente.Nombre} {cliente.Apellido} se le asignó: {this.NombreCompleto}");
             }
         }
     }
