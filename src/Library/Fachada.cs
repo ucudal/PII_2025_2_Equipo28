@@ -953,7 +953,7 @@ namespace Library
         /// Registra una venta de un cliente con manejo completo de errores.
         /// Aplica SRP: maneja únicamente el registro de ventas con validaciones.
         /// </summary>
-        public string RegistrarVentaCliente(string clienteId, string producto, string fecha, string precio, string usuarioId)
+        /*public string RegistrarVentaCliente(string clienteId, string producto, string fecha, string precio, string usuarioId)
         {
             Usuario usuario;
             Cliente cliente;
@@ -975,6 +975,48 @@ namespace Library
             {
                 return "Error: uno o más campos están vacíos.";
             }
+        }*/
+        
+        public string RegistrarVentaCliente(string clienteId, string producto, string fecha, string precio, string usuarioId)
+        {
+            Usuario usuario = null;
+            Cliente cliente = null;
+
+            try
+            {
+                // Buscar usuario y cliente
+                usuario = this.Usuarios.BuscarUsuario(usuarioId);
+                cliente = this.Clientes.BuscarUnCliente(clienteId);
+
+                
+                this.Ventas.AgregarVenta(cliente, fecha, precio, producto, usuario);
+            }
+            catch (ArgumentNullException e)
+            {
+                return $"{e.Message} {e.ParamName}";
+            }
+            catch (InvalidDateException e)
+            {
+                // Ej: "La fecha es inválida fecha"
+                return $"{e.Message} {e.ParamName}";
+            }
+            catch (ArgumentException e)
+            {
+                return $"{e.Message} {e.ParamName}";
+            }
+
+            // Si no hubo excepciones, validamos nulls igual que en RegistrarReunion
+            if (usuario != null)
+            {
+                if (cliente != null)
+                {
+                    return $"Venta registrada: {cliente.Nombre} compró '{producto}' por ${precio} el {fecha}.";
+                }
+
+                return "no se encontro al cliente";
+            }
+
+            return "No se encontro al usuario";
         }
         
         /// <summary>
