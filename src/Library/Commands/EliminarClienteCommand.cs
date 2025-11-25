@@ -8,33 +8,32 @@ namespace Ucu.Poo.DiscordBot.Commands
 {
 
     /// <summary>
-    /// Esta clase registra una llamada.
+    /// Esta clase registra un mensaje.
     /// Devuele la confirmacion de si se creo o no.
     /// </summary>
 // ReSharper disable once UnusedType.Global
-    public class RegistrarVenta : ModuleBase<SocketCommandContext>
+    public class EliminarClienteCommand : ModuleBase<SocketCommandContext>
     {
         private Fachada fachada = Fachada.Instancia;
         /// <summary>
-        /// Implementa el comando 'RegistraLlamada' que registra una llamada. Este comando es para la historia 7.
+        /// Implementa el comando 'RegistraMensaje' que registra un mensaje. Este comando es para la historia 6.
         /// </summary>
-        [Command("registrarVenta")]
+        [Command("eliminarCliente")]
         [Summary(
-            "Registra la venta y devuelve una confirmacion de la venta creada en caso de que asi sea, en caso opuesto devuelve un error y su explicacion")]
+            "Elimina un cliente")]
         // ReSharper disable once UnusedMember.Global
         public async Task ExecuteAsync([Remainder][Summary("xxx")]string parametros)
         {
             string[] parte = parametros.Split(',');
-            if (parte.Length != 5)
+            if (parte.Length != 1)
             {
-                await ReplyAsync($"Se nececitan 5 parametros. Recurda separar los parametros por ','");
+                await ReplyAsync($"Se nececita 1 parametro: id. Recurda separar los parametros por ','");
 
             }
             else
             {
-                string mensaje = fachada.RegistrarVentaCliente(parte[0], parte[1], parte[2], parte[3], parte[4]);
+                string mensaje = fachada.EliminarCliente(parte[0]);
                 await ReplyAsync($"{mensaje}");
-
             }
         }
     }

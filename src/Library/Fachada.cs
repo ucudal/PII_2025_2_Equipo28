@@ -872,7 +872,7 @@ namespace Library
         /// Crea un nuevo cliente y lo agrega al repositorio.
         /// Aplica Creator: Fachada coordina la creación y agregación del cliente.
         /// </summary>
-        public Cliente CrearNuevoCliente(string id, string nombre, string apellido, string telefono, string correo)
+        public Cliente CrearCliente(string id, string nombre, string apellido, string telefono, string correo)
         {
             this.Clientes.AgregaCliente(new Cliente(id, nombre, apellido, telefono, correo));
             return new Cliente(id, nombre, apellido, telefono, correo);
@@ -882,21 +882,38 @@ namespace Library
         /// Modifica un atributo específico de un cliente existente.
         /// Aplica Expert: Cliente conoce cómo modificar sus propios atributos.
         /// </summary>
-        public void ModificarInfo(string id, string atributo, string nuevoValor)
+        public string ModificarInfo(string id, string atributo, string nuevoValor)
         {
-            Cliente cliente = Clientes.BuscarCliente("id", id)[0];
-            
-            cliente.ModificarInformacion(atributo, nuevoValor);
+            try
+            {
+                Cliente cliente = Clientes.BuscarCliente("id", id)[0];
+                cliente.ModificarInformacion(atributo, nuevoValor);
+                
+                return $"Se modificó la información del cliente {cliente.ToString()}. Su {atributo} ahora es {nuevoValor}";
+            }
+            catch (NullReferenceException ex)
+            {
+                return "No se encontró o no existe el cliente";
+            }
         }
 
         /// <summary>
         /// Elimina un cliente del repositorio.
         /// Aplica Expert: RepoClientes conoce cómo eliminar de su colección.
         /// </summary>
-        public void EliminarClienteFachada(string id)
+        public string EliminarCliente(string id)
         {
-            Cliente cliente = Clientes.BuscarCliente("id", id)[0];
-            Clientes.EliminarCliente(cliente);
+            try
+            {
+                Cliente cliente = Clientes.BuscarCliente("id", id)[0];
+                Clientes.EliminarCliente(cliente);
+
+                return $"Se eliminó el cliente {cliente.ToString()}";
+            }
+            catch (NullReferenceException err)
+            {
+                return "No se encontró o no existe el cliente";
+            }
         }
 
         /// <summary>
@@ -945,61 +962,18 @@ namespace Library
             try
             {
                 usuario = this.Usuarios.BuscarUsuario(usuarioId);
-            }
-            catch (ArgumentNullException)
-            {
-                return "Error: faltan datos para registrar la venta.";
-            }
-            catch (ArgumentException)
-            {
-                return "Error: uno o más campos están vacíos.";
-            }
-
-            if (usuario == null)
-            {
-                return $"Error: no se encontró un usuario con ID '{usuarioId}'.";
-            }
-
-            // 2) Buscar cliente con manejo de errores propios
-            try
-            {
                 cliente = this.Clientes.BuscarUnCliente(clienteId);
-            }
-            catch (ArgumentNullException)
-            {
-                return "Error: faltan datos para registrar la venta.";
-            }
-            catch (ArgumentException)
-            {
-                return "Error: uno o más campos están vacíos.";
-            }
-
-            if (cliente == null)
-            {
-                return $"Error: no se encontró un cliente con ID '{clienteId}'.";
-            }
-
-            // 3) Registrar venta con manejo de validaciones del repo
-            try
-            {
+                
                 this.Ventas.AgregarVenta(cliente, fecha, precio, producto, usuario);
                 return $"Venta registrada: {cliente.Nombre} compró '{producto}' por ${precio} el {fecha}.";
             }
-            catch (InvalidDateException)
-            {
-                return "Error: la fecha ingresada no es válida.";
-            }
             catch (ArgumentNullException)
-            {
-                return "Error: uno o más campos están vacíos.";
-            }
-            catch (ArgumentException)
             {
                 return "Error: faltan datos para registrar la venta.";
             }
-            catch (Exception)
+            catch (ArgumentException)
             {
-                return "Error: ocurrió un problema al registrar la venta.";
+                return "Error: uno o más campos están vacíos.";
             }
         }
         
