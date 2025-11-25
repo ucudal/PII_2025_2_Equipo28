@@ -28,8 +28,8 @@ namespace Library.Tests
             fachada.ClientesContacto.Clear();
             fachada.CrearAdministrador("A1", "Lansaguisantes");
             fachada.CrearUsuario("U1", "Petaseta", "A1");
-            fachada.CrearNuevoCliente("C1", "Harry", "ElSucioPotter", "099786435", "Harringy@cabezatermo.com");
-            fachada.CrearNuevoCliente("C2", "Hermione", "Granger", "46872390", "Hermy@cabezatermo.com");
+            fachada.CrearCliente("C1", "Harry", "ElSucioPotter", "099786435", "Harringy@cabezatermo.com");
+            fachada.CrearCliente("C2", "Hermione", "Granger", "46872390", "Hermy@cabezatermo.com");
             usuario = fachada.Usuarios.BuscarUsuario("U1");
             cliente1 = fachada.Clientes.BuscarUnCliente("C1");
             cliente2 = fachada.Clientes.BuscarUnCliente("C2");

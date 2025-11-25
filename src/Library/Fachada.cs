@@ -872,7 +872,7 @@ namespace Library
         /// Crea un nuevo cliente y lo agrega al repositorio.
         /// Aplica Creator: Fachada coordina la creación y agregación del cliente.
         /// </summary>
-        public Cliente CrearNuevoCliente(string id, string nombre, string apellido, string telefono, string correo)
+        public Cliente CrearCliente(string id, string nombre, string apellido, string telefono, string correo)
         {
             this.Clientes.AgregaCliente(new Cliente(id, nombre, apellido, telefono, correo));
             return new Cliente(id, nombre, apellido, telefono, correo);
