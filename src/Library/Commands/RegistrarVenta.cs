@@ -18,7 +18,7 @@ namespace Ucu.Poo.DiscordBot.Commands
         /// <summary>
         /// Implementa el comando 'RegistraLlamada' que registra una llamada. Este comando es para la historia 7.
         /// </summary>
-        [Command("registrarventa")]
+        [Command("registrarVenta")]
         [Summary(
             "Registra la venta y devuelve una confirmacion de la venta creada en caso de que asi sea, en caso opuesto devuelve un error y su explicacion")]
         // ReSharper disable once UnusedMember.Global
