@@ -8,7 +8,7 @@ namespace Ucu.Poo.DiscordBot.Commands
 {
 
     /// <summary>
-    /// Esta clase permite veruna lista de cleintes que se pusieron en conmtacto con el usuario y este aun no les haya respondio.
+    /// Esta clase permite ver una lista de cleintes que se pusieron en conmtacto con el usuario y este aun no les haya respondio.
     /// Devuele la lista de nombres.
     /// </summary>
 // ReSharper disable once UnusedType.Global
@@ -16,7 +16,7 @@ namespace Ucu.Poo.DiscordBot.Commands
     {
         private Fachada fachada = Fachada.Instancia;
         /// <summary>
-        /// Implementa el comando 'clienteContactoVer' que permite ver los clientes que se psuieron en contacto. Este comando es para la historia ??.
+        /// Implementa el comando 'clienteContactoVer' que permite ver los clientes que se pusieron en contacto. Este comando es para la historia ??.
         /// </summary>
         [Command("clienteContactoVer")]
         [Summary(

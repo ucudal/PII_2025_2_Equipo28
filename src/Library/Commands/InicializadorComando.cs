@@ -27,8 +27,11 @@ namespace Ucu.Poo.DiscordBot.Commands
             fachada.CrearAdministrador("A1", "Pepe");
             fachada.CrearUsuario("U1", "Juan", "A1");
             fachada.CrearCliente("C1", "Andres", "Pérez", "099 298 626", "andres@mail.com");
+
+            string respuesta =
+                "Inicializado correctamente. \n\nEste comando creo: \nEl Administrador Pepe con el ID: A1\nEl Usuario Juan con el ID: U1\nEl Cliente Andres con el ID: C1";
             
-            await ReplyAsync("Inicializado correctamente");
+            await ReplyAsync(respuesta);
         }
     }
 }

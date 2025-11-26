@@ -42,9 +42,14 @@ namespace Library
         {
             this.administradores.Add(admin);
         }
-        public void AgregarVnededor(Vendedor vendedor)
+        public void AgregarVendedor(Vendedor vendedor)
         {
             this.vendedores.Add(vendedor);
+        }
+
+        public void AgregarCliente(Cliente cliente)
+        {
+            this.clientesTotales.Add(cliente);
         }
 
         public void EliminarUsuario(Usuario usuario)
@@ -68,6 +73,7 @@ namespace Library
             {
                 throw new ArgumentException("datos de usuario vacios");
             }
+            
             foreach (Usuario usuario in this.usuarios)
             {
                 if (usuario.ID == id)

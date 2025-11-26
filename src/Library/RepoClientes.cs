@@ -34,7 +34,7 @@ namespace Library
             if (cliente != null)
             {
                 clientes.Add(cliente);
-                // usuarios.clientesTotales.Add(cliente);
+                usuarios.AgregarCliente(cliente);
             }
         }
 

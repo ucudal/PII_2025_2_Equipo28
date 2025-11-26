@@ -604,9 +604,9 @@ namespace Library
         public string AgregarEtiquetaCliente(string clienteId, string etiqueta, string usuarioId)
         { 
             Usuario usuario = Usuarios.BuscarUsuario(usuarioId); 
-            if (usuario != null) 
+            if (usuario != null)
             {
-               Cliente cliente = Usuarios.BuscarCliente(clienteId);
+                Cliente cliente = Usuarios.BuscarCliente(clienteId);
                 if (cliente != null)
                 {
                     if (Etiquetas.BuscarEtiqueta(etiqueta))
@@ -616,8 +616,12 @@ namespace Library
                     }
                 }
             }
+            else
+            {
+                return "Solo Usuarios pueden agregar etiquetas a los clientes";
+            }
 
-            return "Solo Usuarios pueden agregar etiquetas a los clientes";
+            return usuario.Nombre;
         }
 
         /*public void RegistrarVenta(string clienteId, string producto, string fecha,
@@ -756,11 +760,9 @@ namespace Library
             // {
             //     vendedorActual.Clientes.Remove(cliente);
             //     vendedorNuevo.Clientes.Add(cliente);
-            //     Console.WriteLine("Cliente reasignado correctamente.");
             // }
             // else
             // {
-            //     Console.WriteLine("Error: vendedor o cliente no encontrado.");
             // }
         }
         
@@ -796,6 +798,7 @@ namespace Library
             {
                 Cliente nuevo = new Cliente(id, nombre, apellido, telefono, correo);
                 this.Clientes.AgregaCliente(nuevo);
+                
                 return $"Cliente {nuevo} creado correctamente";
             }
             catch (Exception err)
@@ -1122,7 +1125,7 @@ namespace Library
                 }
 
                 Vendedor vendedor = new Vendedor(id, nombre);
-                Usuarios.AgregarVnededor(vendedor);
+                Usuarios.AgregarVendedor(vendedor);
                 return vendedor;
             }
             catch (Exception e)

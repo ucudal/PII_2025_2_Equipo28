@@ -8,8 +8,8 @@ namespace Ucu.Poo.DiscordBot.Commands
 {
 
     /// <summary>
-    /// Esta clase crea un nuevo cliente.
-    /// Devuele la confirmacion de si se creo o no.
+    /// Esta clase busca clientes.
+    /// Devuele una lista con todos los resultados de la busqueda.
     /// </summary>
 // ReSharper disable once UnusedType.Global
     public class BuscarClienteComando : ModuleBase<SocketCommandContext>
