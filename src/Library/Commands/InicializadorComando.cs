@@ -8,11 +8,11 @@ namespace Ucu.Poo.DiscordBot.Commands
 {
 
     /// <summary>
-    /// Esta clase implementa el comando 'ping' del bot.
-    /// Este comando retorna 'pong'.
+    /// Esta clase implementa el comando 'init' del bot.
+    /// Este comando crea una fachada con un administrador, un usuario y un cliente. Esto para facilitar probar el resto de comandos.
     /// </summary>
 // ReSharper disable once UnusedType.Global
-    public class Inicializador : ModuleBase<SocketCommandContext>
+    public class InicializadorComando : ModuleBase<SocketCommandContext>
     {
         private Fachada fachada = Fachada.Instancia;
         /// <summary>
@@ -28,7 +28,7 @@ namespace Ucu.Poo.DiscordBot.Commands
             fachada.CrearUsuario("U1", "Juan", "A1");
             fachada.CrearCliente("C1", "Andres", "Pérez", "099 298 626", "andres@mail.com");
             
-            await ReplyAsync("Inicializado");
+            await ReplyAsync("Inicializado correctamente");
         }
     }
 }

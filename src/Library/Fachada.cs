@@ -773,19 +773,35 @@ namespace Library
         /// Busca clientes según un atributo y valor específicos.
         /// Aplica Expert: RepoClientes conoce cómo buscar en su colección.
         /// </summary>
-        public List<Cliente> BuscarClientesFachada(string atributo, string valorBusqueda)
+        public string BuscarCliente(string atributo, string valorBusqueda)
         {
-            return Clientes.BuscarCliente(atributo, valorBusqueda);
+            List<Cliente> resultadoBusqueda = Clientes.BuscarCliente(atributo, valorBusqueda);
+            string resultado = "";
+            
+            foreach (Cliente cliente in resultadoBusqueda)
+            {
+                resultado += $"{cliente.ToString()},";
+            }
+            
+            return resultado;
         }
 
         /// <summary>
         /// Crea un nuevo cliente y lo agrega al repositorio.
         /// Aplica Creator: Fachada coordina la creación y agregación del cliente.
         /// </summary>
-        public Cliente CrearCliente(string id, string nombre, string apellido, string telefono, string correo)
+        public string CrearCliente(string id, string nombre, string apellido, string telefono, string correo)
         {
-            this.Clientes.AgregaCliente(new Cliente(id, nombre, apellido, telefono, correo));
-            return new Cliente(id, nombre, apellido, telefono, correo);
+            try
+            {
+                Cliente nuevo = new Cliente(id, nombre, apellido, telefono, correo);
+                this.Clientes.AgregaCliente(nuevo);
+                return $"Cliente {nuevo} creado correctamente";
+            }
+            catch (Exception err)
+            {
+                return "No se pudo crear el cliente";
+            }
         }
 
         /// <summary>
@@ -829,9 +845,16 @@ namespace Library
         /// <summary>
         /// Retorna el repositorio de clientes.
         /// </summary>
-        public RepoClientes VerClientes()
+        public string VerClientes()
         {
-            return Clientes;
+            IEnumerable<Cliente> clientes = Clientes.Clientes;
+            string resultado = "";
+            foreach (Cliente cliente in clientes)
+            {
+                resultado += $"{cliente.ToString()},";
+            }
+
+            return resultado;
         }
         
         // public void RegistrarLlamada(string id, string tema, string contenido)

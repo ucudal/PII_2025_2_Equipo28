@@ -8,31 +8,31 @@ namespace Ucu.Poo.DiscordBot.Commands
 {
 
     /// <summary>
-    /// Esta clase registra un mensaje.
-    /// Devuele la confirmacion de si se creo o no.
+    /// Esta clase elimina un cliente.
+    /// Devuele la confirmacion de si se eliminó o no.
     /// </summary>
 // ReSharper disable once UnusedType.Global
-    public class ModificarInfoCommand : ModuleBase<SocketCommandContext>
+    public class EliminarClienteComando : ModuleBase<SocketCommandContext>
     {
         private Fachada fachada = Fachada.Instancia;
         /// <summary>
-        /// Implementa el comando 'RegistraMensaje' que registra un mensaje. Este comando es para la historia 6.
+        /// Implementa el comando 'eliminarCliente' que elimina un cliente. Este comando es para la historia 3.
         /// </summary>
-        [Command("modfInfo")]
+        [Command("eliminarCliente")]
         [Summary(
-            "Modifica la información de un cliente")]
+            "Elimina un cliente")]
         // ReSharper disable once UnusedMember.Global
-        // !modfInfo id atributo nuevoValor
         public async Task ExecuteAsync([Remainder][Summary("xxx")]string parametros)
         {
             string[] parte = parametros.Split(',');
-            if (parte.Length != 3)
+            if (parte.Length != 1)
             {
-                await ReplyAsync($"Se nececitan 3 parametros: id, atributo y nuevoValor. Recurda separar los parametros por ','");
+                await ReplyAsync($"Se nececita 1 parametro: id. Recurda separar los parametros por ','");
+
             }
             else
             {
-                string mensaje = fachada.ModificarInfo(parte[0], parte[1], parte[2]);
+                string mensaje = fachada.EliminarCliente(parte[0]);
                 await ReplyAsync($"{mensaje}");
             }
         }

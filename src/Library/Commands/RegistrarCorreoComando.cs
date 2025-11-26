@@ -8,31 +8,31 @@ namespace Ucu.Poo.DiscordBot.Commands
 {
 
     /// <summary>
-    /// Esta clase registra una llamada.
+    /// Esta clase registra un correo.
     /// Devuele la confirmacion de si se creo o no.
     /// </summary>
 // ReSharper disable once UnusedType.Global
-    public class RegistrarVenta : ModuleBase<SocketCommandContext>
+    public class RegistrarCorreoComando : ModuleBase<SocketCommandContext>
     {
         private Fachada fachada = Fachada.Instancia;
         /// <summary>
-        /// Implementa el comando 'RegistraLlamada' que registra una llamada. Este comando es para la historia 7.
+        /// Implementa el comando 'RegistraCorreo' que registra un correo. Este comando es para la historia 8.
         /// </summary>
-        [Command("registrarVenta")]
+        [Command("registrarCorreo")]
         [Summary(
-            "Registra la venta y devuelve una confirmacion de la venta creada en caso de que asi sea, en caso opuesto devuelve un error y su explicacion")]
+            "Registra el correo y devuelve una confirmacion del correo creado en caso de que asi sea, en caso opuesto devuelve un error y su explicacion")]
         // ReSharper disable once UnusedMember.Global
         public async Task ExecuteAsync([Remainder][Summary("xxx")]string parametros)
         {
             string[] parte = parametros.Split(',');
             if (parte.Length != 5)
             {
-                await ReplyAsync($"Se nececitan 5 parametros. Recurda separar los parametros por ','");
+                await ReplyAsync($"Se nececitan 5 parametros y en el siguiente orden: ClienteId, contenido, tema, usuarioid, fecha. Recurda separar los parametros por ','");
 
             }
             else
             {
-                string mensaje = fachada.RegistrarVentaCliente(parte[0], parte[1], parte[2], parte[3], parte[4]);
+                string mensaje = fachada.RegistrarCorreo(parte[0], parte[1], parte[2], parte[3], parte[4]);
                 await ReplyAsync($"{mensaje}");
 
             }
