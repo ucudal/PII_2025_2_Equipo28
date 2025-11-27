@@ -12,13 +12,13 @@ namespace Ucu.Poo.DiscordBot.Commands
     /// Devuele la confirmacion de si se creo o no.
     /// </summary>
 // ReSharper disable once UnusedType.Global
-    public class NuevoClienteComando : ModuleBase<SocketCommandContext>
+    public class CrearClienteComando : ModuleBase<SocketCommandContext>
     {
         private Fachada fachada = Fachada.Instancia;
         /// <summary>
-        /// Implementa el comando 'nuevoCliente' que crea un nuevo cliente. Este comando es para la historia 1.
+        /// Implementa el comando 'crearCliente' que crea un nuevo cliente. Este comando es para la historia 1.
         /// </summary>
-        [Command("nuevoCliente")]
+        [Command("crearCliente")]
         [Summary(
             "Crea un nuevo cliente")]
         // ReSharper disable once UnusedMember.Global
@@ -27,7 +27,7 @@ namespace Ucu.Poo.DiscordBot.Commands
             string[] parte = parametros.Split(',');
             if (parte.Length != 5)
             {
-                await ReplyAsync($"Se nececitan 5 parametros. Recurda separar los parametros por ','");
+                await ReplyAsync($"Se nececitan 5 parametros: clienteId, nombre, apellido, telefono y correo. Recurda separar los parametros por ','");
 
             }
             else

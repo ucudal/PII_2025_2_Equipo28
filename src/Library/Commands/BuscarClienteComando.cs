@@ -11,7 +11,7 @@ namespace Ucu.Poo.DiscordBot.Commands
     /// Esta clase busca clientes.
     /// Devuele una lista con todos los resultados de la busqueda.
     /// </summary>
-// ReSharper disable once UnusedType.Global
+    // ReSharper disable once UnusedType.Global
     public class BuscarClienteComando : ModuleBase<SocketCommandContext>
     {
         private Fachada fachada = Fachada.Instancia;
