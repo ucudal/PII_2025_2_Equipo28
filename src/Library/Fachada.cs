@@ -5,6 +5,9 @@ using System.Globalization;
 
 namespace Library
 {
+    /// <summary>
+    /// Fachada de la aplicacion
+    /// </summary>
     public class Fachada
     {
         public Dictionary<Usuario, List<Cliente>> ClientesContacto = new Dictionary<Usuario, List<Cliente>>();
@@ -15,6 +18,8 @@ namespace Library
         public RepoVentas Ventas = new RepoVentas();
         public RepoUsuarios Usuarios = new RepoUsuarios();
         public List<Usuario> UsuariosSuspendidos = new List<Usuario>();
+        public List<Reunion> Reuniones = new List<Reunion>();
+
         private Fachada()
         {
             this.Clientes = new RepoClientes(this.Etiquetas, this.Usuarios);
@@ -30,6 +35,7 @@ namespace Library
                 return instancia;
             }
         }
+
         /// <summary>
         /// El metodos RegistrarMensaje crea una instancia de interaccion de tipo mensaje y la guarda en repoInteracciones
         /// </summary>
@@ -78,6 +84,7 @@ namespace Library
 
             return "No se encontro al usuario";
         }
+
         /// <summary>
         /// El metodos RegistrarCorreo crea una instancia de interaccion de tipo correo y la guarda en repoInteracciones
         /// </summary>
@@ -127,6 +134,7 @@ namespace Library
 
             return "No se encontro al usuario";
         }
+
         /// <summary>
         /// El metodos RegistrarLlamada crea una instancia de interaccion de tipo llamada y la guarda en repoInteracciones
         /// </summary>
@@ -351,6 +359,7 @@ namespace Library
                 return informacion;
             }
         }
+
         /// <summary>
         /// Muestra los clientes cuya utlima interaccion fue hace mas de un mes.
         /// </summary>
@@ -388,6 +397,7 @@ namespace Library
             }
             return ClientesAusentes;
         }
+
         /// <summary>
         /// Muetra un panel con el nombre de todos los clientes, las interacciones recientes del usuario, y las reuniones proximas
         /// </summary>
@@ -441,6 +451,7 @@ namespace Library
             }
             return Panel;
         }
+
         /// <summary>
         /// Agrega los clientes que se pusieron en contacto con el usuario y que aun no les ha respondido.
         /// </summary>
@@ -483,6 +494,7 @@ namespace Library
 
             return "usuario o cliente no puden ser null";
         }
+
         /// <summary>
         /// Permite ver los cleintes que se pusieron en contacto con el usuario y que este aun no les haya respondido.
         /// </summary>
@@ -520,6 +532,7 @@ namespace Library
 
             return "Usuario null";
         }
+
         public string EliminarClienteContacto(string usuarioId, string clienteId)
         {
             Usuario usuario = null;
@@ -601,6 +614,9 @@ namespace Library
             return "Solo Usuarios pueden crear Etiquetas.";
         }
 
+        /// <summary>
+        /// Agrega una etiqueta a un cliente.
+        /// </summary>
         public string AgregarEtiquetaCliente(string clienteId, string etiqueta, string usuarioId)
         { 
             Usuario usuario = Usuarios.BuscarUsuario(usuarioId); 
@@ -765,11 +781,6 @@ namespace Library
             // {
             // }
         }
-        
-        // public List<Llamadas> Llamadas = new List<Llamadas>();
-
-
-        public List<Reunion> Reuniones = new List<Reunion>();
 
         /// <summary>
         /// Busca clientes según un atributo y valor específicos.
@@ -859,20 +870,6 @@ namespace Library
 
             return resultado;
         }
-        
-        // public void RegistrarLlamada(string id, string tema, string contenido)
-        // {
-        //     // Cliente cliente = Clientes.BuscarCliente("id", id)[0];
-        //     // Llamada llamada = new Llamada(cliente, tema, contenido);
-        //     // Llamada.Add(llamada);
-        // }
-
-        // public void RegistrarReunion(string id, string tema, string ubicacion, string reunion, string cuando)
-        // {
-        //     Cliente cliente = Clientes.BuscarCliente("id", id)[0];
-        //     Reunion Reunion = new Reunion(cliente, tema, ubicacion, reunion, cuando);
-        //     Reuniones.Add(Reunion);
-        // }
 
         /// <summary>
         /// Busca un usuario por su ID.
@@ -882,36 +879,6 @@ namespace Library
         {
             return this.Usuarios.BuscarUsuario(usuarioId);
         }
-        //=======================================================================================
-        //                          Venta
-        //=======================================================================================
-        /// <summary>
-        /// Registra una venta de un cliente con manejo completo de errores.
-        /// Aplica SRP: maneja únicamente el registro de ventas con validaciones.
-        /// </summary>
-        /*public string RegistrarVentaCliente(string clienteId, string producto, string fecha, string precio, string usuarioId)
-        {
-            Usuario usuario;
-            Cliente cliente;
-
-            // 1) Buscar usuario con manejo de errores propios
-            try
-            {
-                usuario = this.Usuarios.BuscarUsuario(usuarioId);
-                cliente = this.Clientes.BuscarUnCliente(clienteId);
-                
-                this.Ventas.AgregarVenta(cliente, fecha, precio, producto, usuario);
-                return $"Venta registrada: {cliente.Nombre} compró '{producto}' por ${precio} el {fecha}.";
-            }
-            catch (ArgumentNullException)
-            {
-                return "Error: faltan datos para registrar la venta.";
-            }
-            catch (ArgumentException)
-            {
-                return "Error: uno o más campos están vacíos.";
-            }
-        }*/
         
         public string RegistrarVentaCliente(string clienteId, string producto, string fecha, string precio, string usuarioId)
         {
@@ -998,21 +965,6 @@ namespace Library
             {
                 return "Error: la fecha ingresada no es válida.";
             }
-
-            // 4) Sumar importes en el rango [inicio, fin] 
-            /*double total = 0.0;
->>>>>>> Horacio
-            foreach (var venta in usuario.VentasUsuario)
-            {
-                if (venta.Fecha >= fechaInicio && venta.Fecha <= fechaFin)
-                {
-                    double importe;
-                    if (double.TryParse(venta.Importe, out importe))
-                    {
-                        total += importe;
-                    }
-                }
-            }*/
             double total = usuario.SumarImportes(fechaInicio, fechaFin);
 
             // 5) Respuesta formateada

@@ -3,6 +3,11 @@ using System.Reflection.Metadata;
 
 namespace Library
 {
+    /// <summary>
+    /// - Expert: porque es responsable de gestionar la lista de etiquetas.
+    /// - SRP: tiene una única responsabilidad: gestionar etiquetas en el sistema.
+    /// - Alta Cohesión: todos sus métodos y atributos pertenecen al propósito de gestionar etiquetas.
+    /// </summary>
     public class RepoEtiquetas
     {
         private List<string> etiquetas = new List<string>();
@@ -12,6 +17,10 @@ namespace Library
             get { return etiquetas; }
         }
         
+        /// <summary>
+        /// Agrega una etiqueta a la lista de etiquetas
+        /// </summary>
+        /// <param name="etiqueta">Etiqueta a agregar</param>
         public void AgregarEtiqueta(string etiqueta)
         {
             if (!(etiquetas.Contains(etiqueta)))
@@ -20,6 +29,10 @@ namespace Library
             }
         }
 
+        /// <summary>
+        /// Busca una etiqueta en la lista de etiquetas
+        /// </summary>
+        /// <param name="etiqueta">Etiqueta a buscar</param>
         public bool BuscarEtiqueta(string etiqueta)
         {
             if (etiquetas.Contains(etiqueta))
@@ -32,6 +45,9 @@ namespace Library
             }
         }
 
+        /// <summary>
+        /// Elimina todoas las etiquetas del repo de etiquetas
+        /// </summary>
         public void EliminarDatos()
         {
             this.etiquetas.Clear();
