@@ -15,14 +15,32 @@ namespace Library
 
         public void AgregarVenta(Cliente cliente, string cuando, string precio, string producto, Usuario usuario)
         {
-            if (cliente == null || cuando == null || precio == null||producto==null||usuario==null)
+            if (cliente == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(nameof(cliente), "El cliente no puede ser null.");
             }
-            if (cuando==""||precio==""||precio=="")
+
+            if (usuario == null)
             {
-                throw new ArgumentException();
+                throw new ArgumentNullException(nameof(usuario), "El usuario no puede ser null.");
             }
+            
+            if (string.IsNullOrEmpty(cuando))
+            {
+                throw new ArgumentException("El tema no puede estar vacío o nulo.", nameof(cuando));
+            }
+            
+            if (string.IsNullOrEmpty(precio))
+            {
+                throw new ArgumentException("El tema no puede estar vacío o nulo.", nameof(precio));
+            }
+            
+            if (string.IsNullOrEmpty(producto))
+            {
+                throw new ArgumentException("El tema no puede estar vacío o nulo.", nameof(producto));
+            }
+            
+            
             DateTime fecha;
             if (DateTime.TryParseExact(cuando, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None,
                     out fecha))
@@ -32,8 +50,8 @@ namespace Library
             }
             else
             {
-                Console.WriteLine("Fecha no valida");
-                throw new InvalidDateException();
+                
+                throw new InvalidDateException("la fecha no es valida. Recuerda usar el formato dd/mm/yyyy");
             }
         }
         /// <summary>
