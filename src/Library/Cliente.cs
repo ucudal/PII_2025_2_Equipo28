@@ -80,7 +80,7 @@ namespace Library
         
         public override string ToString()
         {
-            return $"{Nombre} {Apellido} ({Correo})";
+            return $"{Nombre} {Apellido}. Correo: {Correo}, Id: {Id}, Telefono: {Telefono} ";
         }
     }
 }
