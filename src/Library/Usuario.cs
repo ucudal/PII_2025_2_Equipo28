@@ -76,5 +76,10 @@ namespace Library
 
             return total;
         }
+        
+        public override string ToString()
+        {
+            return $"{Nombre} - Id: {ID}";
+        }
     }
 }

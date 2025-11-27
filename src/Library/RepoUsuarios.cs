@@ -132,5 +132,10 @@ namespace Library
             this.clientesTotales.Clear();
             this.vendedores.Clear();
         }
+
+        public List<Usuario> VerUsuarios()
+        {
+            return usuarios;
+        }
     }
 }
