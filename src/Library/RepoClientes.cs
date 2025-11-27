@@ -3,14 +3,11 @@ using System.Collections.Generic;
 
 namespace Library
 {
-    // SRP 
-    // Esta clase cumple SRP porque su única responsabilidad es gestionar una lista de clientes:
-    // agregar, eliminar y buscar clientes dentro de la lista.
-    //
-    // Expert 
-    // ClienteLista es la experta en gestionar la colección de clientes, ya que conoce todas
-    // las operaciones posibles sobre la lista (agregar, eliminar, buscar) y tiene acceso a todos
-    // los datos necesarios de los clientes para esas operaciones.
+    /// <summary>
+    /// - Expert: porque es responsable de gestionar la lista de clientes.
+    /// - SRP: tiene una única responsabilidad: gestionar clientes en el sistema.
+    /// - Alta Cohesión: todos sus métodos y atributos pertenecen al propósito de gestionar clientes.
+    /// </summary>
     public class RepoClientes
     {
         private List<Cliente> clientes = new List<Cliente>();
@@ -23,26 +20,44 @@ namespace Library
         private RepoEtiquetas etiquetas;
         private RepoUsuarios usuarios;
 
+        /// <summary>
+        /// Constructor de la clase RepoClientes
+        /// </summary>
+        /// <param name="etiquetas">Repositorio de etiquetas</param>
+        /// <param name="usuarios">Repositorio de usuarios</param>
         public RepoClientes(RepoEtiquetas etiquetas, RepoUsuarios usuarios)
         {
             this.etiquetas = etiquetas;
             this.usuarios = usuarios;
         }
 
+        /// <summary>
+        /// Agrega un cliente a la lista de clientes y lo registra en el repositorio de usuarios
+        /// </summary>
+        /// <param name="cliente">Cliente a agregar</param>
         public void AgregaCliente(Cliente cliente)
         {
             if (cliente != null)
             {
-                clientes.Add(cliente);
-                usuarios.AgregarCliente(cliente);
+                this.clientes.Add(cliente);
+                this.usuarios.AgregarCliente(cliente);
             }
         }
 
+        /// <summary>
+        /// Elimina un cliente de la lista de clientes
+        /// </summary>
+        /// <param name="cliente">Cliente a eliminar</param>
         public void EliminarCliente(Cliente cliente)
         {
-            bool removed = clientes.Remove(cliente);
+            bool removed = this.clientes.Remove(cliente);
         }
 
+        /// <summary>
+        /// Busca clientes por atributo y valor de busqueda
+        /// </summary>
+        /// <param name="atributo">Atributo a buscar</param>
+        /// <param name="valorBusqueda">Valor de busqueda</param>
         public List<Cliente> BuscarCliente(string atributo, string valorBusqueda)
         {
             string attr = atributo.Trim().ToLower();
@@ -53,7 +68,7 @@ namespace Library
             switch (attr)
             {
                 case "id":
-                    foreach (Cliente cliente in Clientes)
+                    foreach (Cliente cliente in this.clientes)
                     {
                         if (cliente.Id == val)
                         {
@@ -62,7 +77,7 @@ namespace Library
                     }
                     break;
                 case "nombre":
-                    foreach (Cliente cliente in Clientes)
+                    foreach (Cliente cliente in this.clientes)
                     {
                         if (cliente.Nombre == val)
                         {
@@ -71,7 +86,7 @@ namespace Library
                     }
                     break;
                 case "apellido":
-                    foreach (Cliente cliente in Clientes)
+                    foreach (Cliente cliente in this.clientes)
                     {
                         if (cliente.Apellido == val)
                         {
@@ -80,7 +95,7 @@ namespace Library
                     }
                     break;
                 case "telefono":
-                    foreach (Cliente cliente in Clientes)
+                    foreach (Cliente cliente in this.clientes)
                     {
                         if (cliente.Telefono == val)
                         {
@@ -89,7 +104,7 @@ namespace Library
                     }
                     break;
                 case "correo":
-                    foreach (Cliente cliente in Clientes)
+                    foreach (Cliente cliente in this.clientes)
                     {
                         if (cliente.Correo == val)
                         {
@@ -98,7 +113,7 @@ namespace Library
                     }
                     break;
                 case "genero":
-                    foreach (Cliente cliente in Clientes)
+                    foreach (Cliente cliente in this.clientes)
                     {
                         if (cliente.Genero == val)
                         {
@@ -107,7 +122,7 @@ namespace Library
                     }
                     break;
                 case "fechadenacimiento":
-                    foreach (Cliente cliente in Clientes)
+                    foreach (Cliente cliente in this.clientes)
                     {
                         if (cliente.FechaDeNacimiento == val)
                         {
@@ -122,6 +137,10 @@ namespace Library
             return resultados;
         }
 
+        /// <summary>
+        /// Busca un cliente por su ID
+        /// </summary>
+        /// <param name="ClienteId">ID del cliente a buscar</param>
         public Cliente BuscarUnCliente(string ClienteId)
         {
             if (ClienteId == null)
@@ -134,7 +153,7 @@ namespace Library
                 throw new ArgumentException("Datos de cliente vacios");
             }
             
-            foreach (var cliente in clientes)
+            foreach (Cliente cliente in this.clientes)
             {
                 if (cliente.Id == ClienteId)
                 {
@@ -145,6 +164,9 @@ namespace Library
             return null;
         }
 
+        /// <summary>
+        /// Elimina todos los clientes del repositorio
+        /// </summary>
         public void EliminarDatos()
         {
             this.clientes.Clear();
