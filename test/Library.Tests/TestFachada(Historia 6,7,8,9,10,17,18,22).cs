@@ -334,8 +334,20 @@ namespace Library.Tests
              fachada.RegistrarMensaje("C1", "chau", "despedida", "U1", "10/11/2024");
              fachada.RegistrarMensaje("C1", "este.... hola", "saludo", "U1", "10/09/2024");
              string resultado = fachada.InteraccionesCliente(a, b, c, d);
-             DateTime fecha = new DateTime(2024, 11, 10);
-             DateTime fecha1 = new DateTime(2024, 9, 10);
+             DateTime fecha = new DateTime();
+             DateTime fecha1 = new DateTime();
+             string f = "10/11/2024";
+             string f1 = "10/09/2024";
+             if (DateTime.TryParseExact(f, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None,
+                     out fecha));
+             {
+                 
+             }
+             if (DateTime.TryParseExact(f1, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None,
+                     out fecha1));
+             {
+                 
+             }
              string esperado = e;
              if (c == "mensaje" && d == "10/11/2024")
              {
@@ -403,7 +415,7 @@ namespace Library.Tests
 
             string resultado = fachada.InterraccionClienteAusente("U1");
 
-            string esperado = "Los clientes con los que no interactua hace un mes o mas son:\nHarry ElSucioPotter (Harringy@cabezatermo.com)";
+            string esperado = "Los clientes con los que no interactua hace un mes o mas son:\nHarry ElSucioPotter (Harringy@cabezatermo.com) - Id: C1";
             Assert.That(resultado, Is.EqualTo(esperado));
         }
         [TestCase ("","datos de usuario vacios ")]
