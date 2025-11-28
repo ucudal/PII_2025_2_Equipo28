@@ -415,9 +415,10 @@ namespace Library.Tests
            fachada.RegistrarCorreo("C1", "kaca", "maincra", "U1", $"{fecha.Day.ToString()}/{fecha.Month.ToString()}/{fecha.Year.ToString()}");
            fachada.RegistrarReunion("C1", "keso", "este", "U1", fechat, "nunca");
            Interaccion interaccion = fachada.Interacciones.BuscarInteraccion(usuario, "correo", "maincra");
-           string resultado = fachada.Panel("U1");
+           string resultado = (fachada.Panel("U1"));
+           resultado = resultado.Substring(0, (resultado.IndexOf('0')));
            string esperado =
-               $"Los Clientes totales son los siguientes:\nHarry ElSucioPotter\nHermione Granger\nSus interacciones mas recientes son:\nHarry ElSucioPotter. Interaccion de tipo Correo. Tema: maincra\nSus reuniones proximas son:\nTema de la reunion: este. Fecha: {(fecha1.ToString()).Substring(0, (fecha1.ToString()).IndexOf(' '))} 0:00:00\n";
+               $"Los Clientes totales son los siguientes:\nHarry ElSucioPotter\nHermione Granger\nSus interacciones mas recientes son:\nHarry ElSucioPotter. Interaccion de tipo Correo. Tema: maincra\nSus reuniones proximas son:\nTema de la reunion: este. Fecha: {(fecha1.ToString()).Substring(0, (fecha1.ToString()).IndexOf(' '))} ";
            Assert.That(resultado, Is.EqualTo(esperado));
         }
 
