@@ -435,7 +435,7 @@ namespace Library
             Dictionary<Cliente,Interaccion> interaccionesRecientes = this.Interacciones.UltimasInteraccionesClientes(usuario);
             foreach (var dato in interaccionesRecientes)
             {
-                if (dato.Value.Fecha.AddDays(7) >= DateTime.Now)
+                if (dato.Value.Fecha.AddDays(7) >= DateTime.Now && dato.Value.Fecha<=DateTime.Now)
                 {
                     Panel +=
                         $"{dato.Key.Nombre} {dato.Key.Apellido}. Interaccion de tipo {dato.Value.Tipo}. Tema: {dato.Value.Tema}\n";
