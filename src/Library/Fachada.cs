@@ -1087,7 +1087,7 @@ namespace Library
         /// Registra una cotización para un cliente con validaciones.
         /// Aplica SRP: responsable únicamente del registro de cotizaciones.
         /// </summary>
-        public string RegistrarCotizacionCliente(string clienteId, string fecha, string precio, string usuarioId)
+        /*public string RegistrarCotizacionCliente(string clienteId, string fecha, string precio, string usuarioId)
         {
             Usuario usuario;
             Cliente cliente;
@@ -1152,6 +1152,52 @@ namespace Library
             {
                 return "Error: ocurrió un problema al registrar la cotización.";
             }
+        }*/
+        
+        public string RegistrarCotizacionCliente(string clienteId, string fecha, string precio, string usuarioId)
+        {
+            Usuario usuario = null;
+            Cliente cliente = null;
+
+            try
+            {
+                // Buscar usuario y cliente
+                usuario = this.Usuarios.BuscarUsuario(usuarioId);
+                cliente = this.Clientes.BuscarUnCliente(clienteId);
+
+                // Registrar cotización
+                // Acá adentro AgregarCotizacion debería:
+                // - validar fecha y lanzar InvalidDateException
+                // - validar datos null/vacíos y lanzar ArgumentNullException / ArgumentException
+                this.Cotizaciones.AgregarCotizacion(cliente, fecha, precio, usuario);
+            }
+            catch (ArgumentNullException e)
+            {
+                // Mismo estilo que RegistrarReunion
+                return $"{e.Message} {e.ParamName}";
+            }
+            catch (InvalidDateException e)
+            {
+                // Si la fecha está mal, el bot va a mostrar exactamente este mensaje
+                return $"{e.Message} {e.ParamName}";
+            }
+            catch (ArgumentException e)
+            {
+                return $"{e.Message} {e.ParamName}";
+            }
+
+            // Si no hubo excepciones, validamos igual que en RegistrarReunion
+            if (usuario != null)
+            {
+                if (cliente != null)
+                {
+                    return $"Cotización registrada: se envió a {cliente.Nombre} por ${precio} el {fecha}.";
+                }
+
+                return "no se encontro al cliente";
+            }
+
+            return "No se encontro al usuario";
         }
         
         /// <summary>
