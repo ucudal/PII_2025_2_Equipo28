@@ -34,7 +34,6 @@ namespace Library.Tests
             usuario = fachada.Usuarios.BuscarUsuario("U1");
             cliente1 = fachada.Clientes.BuscarUnCliente("C1");
             cliente2 = fachada.Clientes.BuscarUnCliente("C2");
-            
         }
 
          [Test]
@@ -322,32 +321,54 @@ namespace Library.Tests
              string resultado = fachada.AgregarNota(nota, tipo, tema, usuarioId);
              Assert.That(resultado, Is.EqualTo(esperado));
          }
-         // [TestCase ("C1","U1","mensaje","10/11/2024","las interaccion de Harry ElSucioPotter del tipo mensaje de la fecha 10/11/2024 son las siguientes:\n\ndespedida:\nchau\n")]
-         // [TestCase ("C1","U1","mensaje","","las interaccion de Harry ElSucioPotter del tipo mensaje son las siguientes:\nFecha10/11/2024 0:00:00\ndespedida:\nchau\nFecha10/9/2024 0:00:00\nsaludo:\neste.... hola\n")]
-         // [TestCase ("C1","U1","","10/11/2024","las interaccion de Harry ElSucioPotter de la fecha 10/11/2024 son las siguientes:\nTipoCorreo\ncorreando:\ngta6\nTipoMensaje\ndespedida:\nchau\n")]
-         // [TestCase ("C1","U1","","","Las interacciones de Harry ElSucioPotter son:\n\nCorreo del 10/11/2024 0:00:00\ncorreando:\ngta6\n\nMensaje del 10/11/2024 0:00:00\ndespedida:\nchau\n\nMensaje del 10/9/2024 0:00:00\nsaludo:\neste.... hola\n")]
-         //
-         //
-         // //Verifica que devuelva correctamente las interacciones de un cliente con tipo y fecha especificados.
-         // public void InteraccionesClienteCorrectoTest(string a,string b,string c,string d,string e)
-         // {
-         //     fachada.RegistrarCorreo("C1", "gta6", "correando", "U1", "10/11/2024");
-         //     fachada.RegistrarMensaje("C1", "chau", "despedida", "U1", "10/11/2024");
-         //     fachada.RegistrarMensaje("C1", "este.... hola", "saludo", "U1", "10/09/2024");
-         //     string resultado = fachada.InteraccionesCliente(a, b, c, d);
-         //     if (d != "")
-         //     {
-         //         DateTime fecha;
-         //         if (DateTime.TryParseExact(d, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None,
-         //                 out fecha));
-         //     
-         //         e = e.Replace(d, fecha.ToShortDateString());
-         //
-         //     }
-         //     string esperado = e;
-         //
-         //     Assert.That(resultado, Is.EqualTo(esperado));
-         // }
+         [TestCase ("C1","U1","mensaje","10/11/2024","las interaccion de Harry ElSucioPotter del tipo mensaje de la fecha fe son las siguientes:\n\ndespedida:\nchau\n")]
+         [TestCase ("C1","U1","mensaje","","las interaccion de Harry ElSucioPotter del tipo mensaje son las siguientes:\nFecha10/11/2024 0:00:00\ndespedida:\nchau\nFecha10/9/2024 0:00:00\nsaludo:\neste.... hola\n")]
+         [TestCase ("C1","U1","","10/11/2024","las interaccion de Harry ElSucioPotter de la fecha 10/11/2024 son las siguientes:\nTipoCorreo\ncorreando:\ngta6\nTipoMensaje\ndespedida:\nchau\n")]
+         [TestCase ("C1","U1","","","Las interacciones de Harry ElSucioPotter son:\n\nCorreo del 10/11/2024 0:00:00\ncorreando:\ngta6\n\nMensaje del 10/11/2024 0:00:00\ndespedida:\nchau\n\nMensaje del 10/9/2024 0:00:00\nsaludo:\neste.... hola\n")]
+         
+         
+         //Verifica que devuelva correctamente las interacciones de un cliente con tipo y fecha especificados.
+         public void InteraccionesClienteCorrectoTest(string a,string b,string c,string d,string e)
+         {
+             fachada.RegistrarCorreo("C1", "gta6", "correando", "U1", "10/11/2024");
+             fachada.RegistrarMensaje("C1", "chau", "despedida", "U1", "10/11/2024");
+             fachada.RegistrarMensaje("C1", "este.... hola", "saludo", "U1", "10/09/2024");
+             string resultado = fachada.InteraccionesCliente(a, b, c, d);
+             DateTime fecha = new DateTime(2024, 11, 10);
+             DateTime fecha1 = new DateTime(2024, 9, 10);
+             string esperado = e;
+             if (c == "mensaje" && d == "10/11/2024")
+             {
+                 esperado =
+                     $"las interaccion de Harry ElSucioPotter del tipo mensaje de la fecha {fecha.ToString("dd/MM/yyyy")} son las siguientes:\n\ndespedida:\nchau\n";
+             }
+             else if (c == "" && d == "10/11/2024")
+             {
+                 esperado =
+                     $"las interaccion de Harry ElSucioPotter de la fecha {fecha.ToString("dd/MM/yyyy")} son las siguientes:\n\nTipo: Correo\ncorreando:\ngta6\n\nTipo: Mensaje\ndespedida:\nchau\n";
+             }
+             else if (c == "mensaje" && d == "")
+             {
+                 esperado =
+                     $"las interaccion de Harry ElSucioPotter del tipo mensaje son las siguientes:\n\nFecha: {fecha}\ndespedida:\nchau\n\nFecha: {fecha1}\nsaludo:\neste.... hola\n";
+             }
+             else
+             {
+                 esperado =
+                     $"Las interacciones de Harry ElSucioPotter son:\n\nCorreo del {fecha}\ncorreando:\ngta6\n\nMensaje del {fecha}\ndespedida:\nchau\n\nMensaje del {fecha1}\nsaludo:\neste.... hola\n";
+             }
+             // if (d != "")
+             // {
+             //     DateTime fecha;
+             //     if (DateTime.TryParseExact(d, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None,
+             //             out fecha));
+             //
+             //     d = d.Replace(d, fecha.ToShortDateString());
+             //
+             // }
+             Assert.AreEqual(esperado,resultado);
+
+         }
 
          // [TestCase(null, "1", "mensaje", "10/11/2024", "Value cannot be null. (Parameter 'Datos de cliente null')")]
          // [TestCase("0", null, "mensaje", "10/11/2024", "Value cannot be null. (Parameter 'datos de usuario null')")]
@@ -373,19 +394,40 @@ namespace Library.Tests
 //             Assert.That(resultado, Is.EqualTo(esperado));
 //         }
 //
-//         [Test]
-// //Verifica que el método devuelva correctamente los clientes con los que no se interactúa hace un mes o más.
-//         public void InterraccionClienteAusenteCorrectoTest()
-//         {
-//             fachada.RegistarMensaje("0", "mensaje viejo", "seguimiento", "1", "10/09/2024");
-//             fachada.RegistarMensaje("0", "mensaje reciente", "seguimiento", "1", "05/11/2024");
-//
-//             string resultado = fachada.InterraccionClienteAusente("1");
-//
-//             string esperado = "Los clientes con los que no interactua hace un mes o mas son:\n" + cliente.ToString();
-//             Assert.That(resultado, Is.EqualTo(esperado));
-//         }
-//
+        [Test]
+//Verifica que el método devuelva correctamente los clientes con los que no se interactúa hace un mes o más.
+        public void InterraccionClienteAusenteCorrectoTest()
+        {
+            fachada.RegistrarMensaje("C1", "mensaje viejo", "seguimiento", "U1", "10/09/2024");
+            fachada.RegistrarMensaje("C1", "mensaje reciente", "seguimiento", "U1", "05/11/2024");
+
+            string resultado = fachada.InterraccionClienteAusente("U1");
+
+            string esperado = "Los clientes con los que no interactua hace un mes o mas son:\nHarry ElSucioPotter (Harringy@cabezatermo.com)";
+            Assert.That(resultado, Is.EqualTo(esperado));
+        }
+        [TestCase ("","datos de usuario vacios ")]
+        [TestCase (null,"Value cannot be null. (Parameter 'datos de usuario null') datos de usuario null")]
+        //Verifica que el método devuelva correctamente los clientes con los que no se interactúa hace un mes o más.
+        public void InterraccionClienteAusenteIncorrectoTest(string a,string b)
+        {
+            string resultado = fachada.InterraccionClienteAusente(a);
+
+            Assert.AreEqual(resultado,b);
+        }
+
+        [Test]
+        public void PanelCorrectoTest()
+        {
+           fachada.RegistrarCorreo("C1", "kaca", "maincra", "U1", DateTime.Now.AddDays(-2).ToString("dd/MM/yyyy"));
+           fachada.RegistrarReunion("C1", "keso", "este", "U1", "12/10/2050", "nunca");
+           Interaccion interaccion = fachada.Interacciones.BuscarInteraccion(usuario, "correo", "maincra");
+           string resultado = fachada.Panel("U1");
+           string esperado =
+               "Los Clientes totales son los siguientes:\nHarry ElSucioPotter\nHermione Granger\nSus interacciones mas recientes son:\nHarry ElSucioPotter. Interaccion de tipo Correo. Tema: maincra\nSus reuniones proximas son:\nTema de la reunion: este. Fecha: 12/10/2050 0:00:00\n";
+           Assert.That(resultado, Is.EqualTo(esperado));
+        }
+
 //         [TestCase(null, "Value cannot be null. (Parameter 'datos de usuario null')")]
 //         public void InterraccionClienteAusenteNull(string a, string esperado)
 //         {
@@ -424,40 +466,50 @@ namespace Library.Tests
 //           //     Assert.That(resultado, Is.EqualTo(esperado));
 //           // }
 //
-//          [Test]
-//          public void AgregarClienteContactoTest()
-//          {
-//              fachada.AgregarClienteContacto("1", "0");
-//              Cliente esperado = fachada.ClientesContacto[usuario][0];
-//              Assert.That(cliente,Is.EqualTo(esperado));
-//          }
-//         [Test]
-//          public void VerClienteContactoTest()
-//          {
-//              string resultado = fachada.VerClienteContacto("1");
-//              string esperado = "Los clientes que se pusieron en contacto contigo son:\nSape 099872521\n";
-//              Assert.That(resultado, Is.EqualTo(esperado));
-//          }
-//
-//         [TestCase(null, "0", "Value cannot be null. (Parameter 'datos de usuario null')")]
-//         [TestCase("1", null, "Value cannot be null. (Parameter 'Datos de cliente null')")]
-//         [TestCase("", "0", "datos de usuario vacios")]
-//         [TestCase("1", "", "Datos de cliente vacios")]
-//         public void AgregarClienteContactoIncorrectoTest(string usuarioId, string clienteId, string esperado)
-//         {
-//             string resultado = fachada.AgregarClienteContacto(usuarioId, clienteId);
-//             Assert.That(resultado, Is.EqualTo(esperado));
-//         }
-//         [TestCase(null, "Value cannot be null. (Parameter 'datos de usuario null')")]
-//         [TestCase("", "datos de usuario vacios")]
-//         public void VerClienteContactoIncorrectoTest(string usuarioId, string esperado)
-//         {
-//             string resultado = fachada.VerClienteContacto(usuarioId);
-//             Assert.That(resultado, Is.EqualTo(esperado));
-//         }
-//     }
-// }
+          [Test]
+          public void AgregarClienteContactoTest()
+          {
+              fachada.AgregarClienteContacto("U1", "C1");
+              Cliente esperado = fachada.ClientesContacto[usuario][0];
+              Assert.That(cliente1,Is.EqualTo(esperado));
+          }
+         [Test]
+          public void VerClienteContactoTest()
+          {
+              fachada.AgregarClienteContacto("U1", "C1");
+              fachada.AgregarClienteContacto("U1", "C2");
+              string resultado = fachada.VerClienteContacto("U1");
+              string esperado = "Los clientes que se pusieron en contacto contigo son:\nHarry ElSucioPotter\nHermione Granger\n";
+              Assert.That(resultado, Is.EqualTo(esperado));
+          }
 
-}
+          [Test]
+          public void EliminarClienteCorrectoTest()
+          {
+              fachada.AgregarClienteContacto("U1", "C1");
+              fachada.AgregarClienteContacto("U1", "C2");
+              fachada.EliminarClienteContacto("U1", "C1");
+              int resultado = fachada.ClientesContacto[usuario].Count;
+              Assert.That(resultado, Is.EqualTo(1));
+          }
+//
+         [TestCase(null, "C1", "Value cannot be null. (Parameter 'datos de usuario null') datos de usuario null")]
+         [TestCase("1", null, "Value cannot be null. (Parameter 'Datos de cliente null') Datos de cliente null")]
+         [TestCase("", "C1", "datos de usuario vacios ")]
+         [TestCase("U1", "", "Datos de cliente vacios ")]
+         public void AgregarClienteContactoIncorrectoTest(string usuarioId, string clienteId, string esperado)
+         {
+             string resultado = fachada.AgregarClienteContacto(usuarioId, clienteId);
+             Assert.That(resultado, Is.EqualTo(esperado));
+         }
+
+         [TestCase(null, "Value cannot be null. (Parameter 'datos de usuario null') datos de usuario null")]
+         [TestCase("", "datos de usuario vacios ")]
+         public void VerClienteContactoIncorrectoTest(string usuarioId, string esperado)
+         {
+             string resultado = fachada.VerClienteContacto(usuarioId);
+             Assert.That(resultado, Is.EqualTo(esperado));
+         }
+    }
 }
 
