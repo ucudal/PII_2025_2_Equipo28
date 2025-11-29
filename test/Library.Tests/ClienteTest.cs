@@ -1,5 +1,4 @@
-/*
-using NUnit.Framework;
+/*  using NUnit.Framework;
 
 namespace Library.Tests
 {
@@ -68,14 +67,6 @@ namespace Library.Tests
             Assert.That(cliente.Genero, Is.EqualTo("Masculino"));
         }
 
-        // [Test]
-        // public void ActualizarEtiqueta()
-        // {
-        //     var cliente = new Cliente("Juan", "Pérez", "099", "correo");
-        //     cliente.AsignarEtiqueta("VIP");
-        //     Assert.That(cliente.Etiqueta, Is.EqualTo("VIP"));
-        // }
-
         [Test]
         public void ActualizarFecha()
         {
@@ -93,4 +84,4 @@ namespace Library.Tests
         }
     }
 }
-*/
+ */
