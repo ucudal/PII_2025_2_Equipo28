@@ -34,7 +34,6 @@ namespace Library.Tests
             usuario = fachada.Usuarios.BuscarUsuario("U1");
             cliente1 = fachada.Clientes.BuscarUnCliente("C1");
             cliente2 = fachada.Clientes.BuscarUnCliente("C2");
-            
         }
 
          [Test]
