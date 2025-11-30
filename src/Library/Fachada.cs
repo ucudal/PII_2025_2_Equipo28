@@ -821,17 +821,10 @@ namespace Library
         /// - Controller: recibe la solicitud de búsqueda y coordina la obtención de datos para devolverlos a la UI.
         /// - Bajo acoplamiento: depende de la abstracción del repositorio para realizar la búsqueda.
         /// </summary>
-        public string BuscarCliente(string atributo, string valorBusqueda)
+        public List<Cliente> BuscarCliente(string atributo, string valorBusqueda)
         {
             List<Cliente> resultadoBusqueda = Clientes.BuscarCliente(atributo, valorBusqueda);
-            string resultado = "";
-            
-            foreach (Cliente cliente in resultadoBusqueda)
-            {
-                resultado += $"{cliente.ToString()},";
-            }
-            
-            return resultado;
+            return resultadoBusqueda;
         }
 
         /// <summary>

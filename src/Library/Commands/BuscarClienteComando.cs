@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Discord.Commands;
 using Discord.WebSocket;
@@ -31,11 +32,11 @@ namespace Ucu.Poo.DiscordBot.Commands
             }
             else
             {
-                string[] clientes = fachada.BuscarCliente(parte[0], parte[1]).Split(',');
+                List<Cliente> clientes = fachada.BuscarCliente(parte[0], parte[1]);
                 bool hayClientes = false; 
                 string resultado = "Resultados de la búsqueda: \n";
                 
-                foreach (string cliente in clientes)
+                foreach (Cliente cliente in clientes)
                 {
                     hayClientes = true;
                     resultado += cliente.ToString() + "\n";

@@ -1,110 +1,111 @@
-// using NUnit.Framework;
-// using System.Collections.Generic;
-// using Library;
-//
-// namespace Library.Tests
-// {
-//     [TestFixture]
-//     public class RepoClientesTest
-//     {
-//         private RepoClientes lista;
-//         private Cliente cliente1;
-//         private Cliente cliente2;
-//
-//         [SetUp]
-//         public void Setup()
-//         {
-//             lista = new RepoClientes();
-//             cliente1 = new Cliente("Juan", "Pérez", "099123456", "juan@example.com");
-//             cliente2 = new Cliente("María", "García", "098765432", "maria@example.com");
-//             cliente1.Id = "1";
-//             cliente2.Id = "2";
-//         }
-//
-//         [Test]
-//         public void InicializarListaVacia()
-//         {
-//             Assert.That(lista.Clientes, Is.Empty);
-//         }
-//
-//         [Test]
-//         public void AgregarClienteALaLista()
-//         {
-//             lista.AgregaCliente(cliente1);
-//             Assert.That(lista.Clientes.Count, Is.EqualTo(1));
-//             Assert.That(lista.Clientes[0], Is.EqualTo(cliente1));
-//         }
-//
-//         [Test]
-//         public void NoDeberiaAgregarNada()
-//         {
-//             lista.AgregaCliente(null);
-//             Assert.That(lista.Clientes, Is.Empty);
-//         }
-//
-//         [Test]
-//         public void EliminarClienteExistente()
-//         {
-//             lista.AgregaCliente(cliente1);
-//             lista.EliminarCliente(cliente1);
-//             Assert.That(lista.Clientes, Is.Empty);
-//         }
-//
-//         [Test]
-//         public void EliminarClienteNoExistenteNoDeberiaEliminarNada()
-//         {
-//             lista.AgregaCliente(cliente1);
-//             lista.EliminarCliente(cliente2);
-//             Assert.That(lista.Clientes.Count, Is.EqualTo(1));
-//         }
-//
-//         [Test]
-//         public void BuscarClientePorNombreDeberiaRetornarCoincidencias()
-//         {
-//             lista.AgregaCliente(cliente1);
-//             lista.AgregaCliente(cliente2);
-//
-//             var resultados = lista.BuscarCliente("nombre", "Juan");
-//
-//             Assert.That(resultados.Count, Is.EqualTo(1));
-//             Assert.That(resultados[0].Nombre, Is.EqualTo("Juan"));
-//         }
-//
-//         [Test]
-//         public void BuscarCliente_PorCorreo_DeberiaRetornarCoincidencias()
-//         {
-//             lista.AgregaCliente(cliente1);
-//             var resultados = lista.BuscarCliente("correo", "juan@example.com");
-//
-//             Assert.That(resultados.Count, Is.EqualTo(1));
-//             Assert.That(resultados[0], Is.EqualTo(cliente1));
-//         }
-//
-//         [Test]
-//         public void BuscarCliente_AtributoInvalido_DeberiaRetornarListaVacia()
-//         {
-//             lista.AgregaCliente(cliente1);
-//             var resultados = lista.BuscarCliente("color", "rojo");
-//             Assert.That(resultados, Is.Empty);
-//         }
-//
-//         [Test]
-//         public void BuscarUnCliente_DeberiaRetornarClienteCorrecto()
-//         {
-//             lista.AgregaCliente(cliente1);
-//             var encontrado = lista.BuscarUnCliente("1");
-//
-//             Assert.That(encontrado, Is.Not.Null);
-//             Assert.That(encontrado.Nombre, Is.EqualTo("Juan"));
-//             Assert.That(encontrado.Apellido, Is.EqualTo("Pérez"));
-//         }
-//
-//         [Test]
-//         public void BuscarUnCliente_NoExistente_DeberiaRetornarNull()
-//         {
-//             lista.AgregaCliente(cliente1);
-//             var resultado = lista.BuscarUnCliente("3");
-//             Assert.That(resultado, Is.Null);
-//         }
-//     }
-// }
+using NUnit.Framework;
+using System.Collections.Generic;
+using System.Linq;
+using Library;
+
+namespace Library.Tests
+{
+    [TestFixture]
+    public class RepoClientesTest
+    {
+        private Fachada fachada;
+        private RepoClientes clientes;
+        private Cliente cliente1;
+        private Cliente cliente2;
+
+        [SetUp]
+        public void Setup()
+        {
+            fachada = Fachada.Instancia;
+            clientes = new RepoClientes(fachada.Etiquetas, fachada.Usuarios);
+            cliente1 = new Cliente("C1","Juan", "Pérez", "099123456", "juan@example.com");
+            cliente2 = new Cliente("C1","María", "García", "098765432", "maria@example.com");
+        }
+
+        [Test]
+        public void InicializarListaVacia()
+        {
+            Assert.That(clientes.Clientes, Is.Empty);
+        }
+
+        [Test]
+        public void AgregarClienteALaLista()
+        {
+            clientes.AgregaCliente(cliente1);
+            Assert.That(clientes.Clientes.Count(), Is.EqualTo(1));
+            Assert.That(clientes.Clientes.ElementAt(0), Is.EqualTo(cliente1));
+        }
+
+        [Test]
+        public void NoDeberiaAgregarNada()
+        {
+            clientes.AgregaCliente(null);
+            Assert.That(clientes.Clientes, Is.Empty);
+        }
+
+        [Test]
+        public void EliminarClienteExistente()
+        {
+            clientes.AgregaCliente(cliente1);
+            clientes.EliminarCliente(cliente1);
+            Assert.That(clientes.Clientes, Is.Empty);
+        }
+
+        [Test]
+        public void EliminarClienteNoExistenteNoDeberiaEliminarNada()
+        {
+            clientes.AgregaCliente(cliente1);
+            clientes.EliminarCliente(cliente2);
+            Assert.That(clientes.Clientes.Count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void BuscarClientePorNombreDeberiaRetornarCoincidencias()
+        {
+            clientes.AgregaCliente(cliente1);
+            clientes.AgregaCliente(cliente2);
+
+            var resultados = clientes.BuscarCliente("nombre", "Juan");
+
+            Assert.That(resultados.Count, Is.EqualTo(1));
+            Assert.That(resultados[0].Nombre, Is.EqualTo("Juan"));
+        }
+
+        [Test]
+        public void BuscarCliente_PorCorreo_DeberiaRetornarCoincidencias()
+        {
+            clientes.AgregaCliente(cliente1);
+            var resultados = clientes.BuscarCliente("correo", "juan@example.com");
+
+            Assert.That(resultados.Count, Is.EqualTo(1));
+            Assert.That(resultados[0], Is.EqualTo(cliente1));
+        }
+
+        [Test]
+        public void BuscarCliente_AtributoInvalido_DeberiaRetornarListaVacia()
+        {
+            clientes.AgregaCliente(cliente1);
+            var resultados = clientes.BuscarCliente("color", "rojo");
+            Assert.That(resultados, Is.Empty);
+        }
+
+        [Test]
+        public void BuscarUnCliente_DeberiaRetornarClienteCorrecto()
+        {
+            clientes.AgregaCliente(cliente1);
+            var encontrado = clientes.BuscarUnCliente("C1");
+
+            Assert.That(encontrado, Is.Not.Null);
+            Assert.That(encontrado.Nombre, Is.EqualTo("Juan"));
+            Assert.That(encontrado.Apellido, Is.EqualTo("Pérez"));
+        }
+
+        [Test]
+        public void BuscarUnCliente_NoExistente_DeberiaRetornarNull()
+        {
+            clientes.AgregaCliente(cliente1);
+            var resultado = clientes.BuscarUnCliente("3");
+            Assert.That(resultado, Is.Null);
+        }
+    }
+}

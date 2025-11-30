@@ -1,87 +1,79 @@
-/*  using NUnit.Framework;
+ using NUnit.Framework;
 
 namespace Library.Tests
 {
     [TestFixture]
     public class ClienteTests
     {
+        private Cliente cliente;
+
+        [SetUp]
+        public void Setup()
+        {
+            cliente = new Cliente("1", "Juan", "Pérez", "099123456", "juan@example.com");
+        }
+
         [Test]
         public void InicializarCamposCorrectamente()
         {
-            // Arrange
-            string nombre = "Juan";
-            string apellido = "Pérez";
-            string telefono = "099123456";
-            string correo = "juan@example.com";
-
-            // Act
-            Cliente cliente = new Cliente("1", nombre, apellido, telefono, correo);
-
-            // Assert
-            Assert.That(cliente.Nombre, Is.EqualTo(nombre));
-            Assert.That(cliente.Apellido, Is.EqualTo(apellido));
-            Assert.That(cliente.Telefono, Is.EqualTo(telefono));
-            Assert.That(cliente.Correo, Is.EqualTo(correo));
+            Assert.That(cliente.Id, Is.EqualTo("1"));
+            Assert.That(cliente.Nombre, Is.EqualTo("Juan"));
+            Assert.That(cliente.Apellido, Is.EqualTo("Pérez"));
+            Assert.That(cliente.Telefono, Is.EqualTo("099123456"));
+            Assert.That(cliente.Correo, Is.EqualTo("juan@example.com"));
             Assert.That(cliente.Genero, Is.EqualTo(string.Empty));
-            // Assert.That(cliente.Etiqueta, Is.EqualTo(string.Empty));
             Assert.That(cliente.FechaDeNacimiento, Is.EqualTo(string.Empty));
+            Assert.That(cliente.Etiquetas, Is.Empty);
+        }
+
+        [TestCase("nombre", "Carlos", "Carlos")]
+        [TestCase("apellido", "García", "García")]
+        [TestCase("telefono", "098765432", "098765432")]
+        [TestCase("correo", "nuevo@correo.com", "nuevo@correo.com")]
+        [TestCase("genero", "Masculino", "Masculino")]
+        [TestCase("fechadenacimiento", "01/01/2000", "01/01/2000")]
+        public void ModificarInformacion_ActualizaAtributoCorrectamente(string atributo, string valor, string esperado)
+        {
+            cliente.ModificarInformacion(atributo, valor);
+            
+            string valorActual = "";
+            switch (atributo.ToLower())
+            {
+                case "nombre":
+                    valorActual = cliente.Nombre;
+                    break;
+                case "apellido":
+                    valorActual = cliente.Apellido;
+                    break;
+                case "telefono":
+                    valorActual = cliente.Telefono;
+                    break;
+                case "correo":
+                    valorActual = cliente.Correo;
+                    break;
+                case "genero":
+                    valorActual = cliente.Genero;
+                    break;
+                case "fechadenacimiento":
+                    valorActual = cliente.FechaDeNacimiento;
+                    break;
+            }
+
+            Assert.That(valorActual, Is.EqualTo(esperado));
         }
 
         [Test]
-        public void ActualizarElNombre()
+        public void AsignarEtiqueta_AgregaEtiquetaDirectamente()
         {
-            var cliente = new Cliente("1", "Juan", "Pérez", "099", "correo");
-            cliente.CambiarNombre("Carlos");
-            Assert.That(cliente.Nombre, Is.EqualTo("Carlos"));
+            cliente.AsignarEtiqueta("etiquetaDePrueba");
+            Assert.That(cliente.Etiquetas.Contains("etiquetaDePrueba"));
         }
 
         [Test]
-        public void ActualizarElApellido()
+        public void ToString_DevuelveFormatoCorrecto()
         {
-            var cliente = new Cliente("1", "Juan", "Pérez", "099", "correo");
-            cliente.CambiarApellido("García");
-            Assert.That(cliente.Apellido, Is.EqualTo("García"));
-        }
-
-        [Test]
-        public void ActualizarElTelefono()
-        {
-            var cliente = new Cliente("1","Juan", "Pérez", "099", "correo");
-            cliente.CambiarTelefono("098765432");
-            Assert.That(cliente.Telefono, Is.EqualTo("098765432"));
-        }
-
-        [Test]
-        public void ActualizarElCorreo()
-        {
-            var cliente = new Cliente("1", "Juan", "Pérez", "099", "correo@old.com");
-            cliente.CambiarCorreo("nuevo@correo.com");
-            Assert.That(cliente.Correo, Is.EqualTo("nuevo@correo.com"));
-        }
-
-        [Test]
-        public void ActualizarGenero()
-        {
-            var cliente = new Cliente("1", "Juan", "Pérez", "099", "correo");
-            cliente.AsignarGenero("Masculino");
-            Assert.That(cliente.Genero, Is.EqualTo("Masculino"));
-        }
-
-        [Test]
-        public void ActualizarFecha()
-        {
-            var cliente = new Cliente("1","Juan", "Pérez", "099", "correo");
-            cliente.AsignarFechaDeNacimiento("01/01/2000");
-            Assert.That(cliente.FechaDeNacimiento, Is.EqualTo("01/01/2000"));
-        }
-
-        [Test]
-        public void DevolverFormatoCorrecto()
-        {
-            var cliente = new Cliente("1", "Juan", "Pérez", "099", "juan@example.com");
-            string esperado = "Juan Pérez (juan@example.com)";
+            string esperado = "Juan Pérez (juan@example.com) - Id: 1";
             Assert.That(cliente.ToString(), Is.EqualTo(esperado));
         }
     }
 }
- */
