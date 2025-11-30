@@ -12,7 +12,7 @@ namespace Ucu.Poo.DiscordBot.Commands
     /// Devuele la confirmacion de si se creo o no.
     /// </summary>
 // ReSharper disable once UnusedType.Global
-    public class TotalVentas: ModuleBase<SocketCommandContext>
+    public class TotalVentasComando: ModuleBase<SocketCommandContext>
     {
         private Fachada fachada = Fachada.Instancia;
         /// <summary>

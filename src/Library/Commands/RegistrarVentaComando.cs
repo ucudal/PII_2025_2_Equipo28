@@ -8,7 +8,7 @@ namespace Ucu.Poo.DiscordBot.Commands
 {
 
     /// <summary>
-    /// Esta clase registra una llamada.
+    /// Esta clase registra una venta.
     /// Devuele la confirmacion de si se creo o no.
     /// </summary>
 // ReSharper disable once UnusedType.Global
@@ -16,7 +16,7 @@ namespace Ucu.Poo.DiscordBot.Commands
     {
         private Fachada fachada = Fachada.Instancia;
         /// <summary>
-        /// Implementa el comando 'RegistraLlamada' que registra una llamada. Este comando es para la historia 7.
+        /// Implementa el comando 'RegistrarVentaCliente' que registra una llamada.
         /// </summary>
         [Command("registrarVenta")]
         [Summary(

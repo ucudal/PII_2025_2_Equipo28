@@ -118,7 +118,7 @@ namespace Library.Tests
             fachada.CrearUsuario(usuarioId, "Matteo", "A1");
 
             // Limpiar ventas previas del mismo usuario (singleton)
-            fachada.BuscarUsuario(usuarioId).TotalVentas.Clear();
+            fachada.BuscarUsuario(usuarioId).TotalVentasComando.Clear();
 
             var cliente = new Cliente("C001", "Juan", "Pérez", "099123123", "jperez@mail.com");
             fachada.Clientes.AgregaCliente(cliente);
@@ -157,7 +157,7 @@ namespace Library.Tests
             var fachada = Fachada.Instancia;
             var usuarioId = "U002";
             fachada.CrearUsuario(usuarioId, "Matteo", "A1");
-            fachada.BuscarUsuario(usuarioId).TotalVentas.Clear();
+            fachada.BuscarUsuario(usuarioId).TotalVentasComando.Clear();
 
             var cliente = new Cliente("C002", "Juan", "Pérez", "099123123", "jperez@mail.com");
             fachada.Clientes.AgregaCliente(cliente);
@@ -178,7 +178,7 @@ namespace Library.Tests
             var fachada = Fachada.Instancia;
             var usuarioId = "U003";
             fachada.CrearUsuario(usuarioId, "Matteo", "A1");
-            fachada.BuscarUsuario(usuarioId).TotalVentas.Clear();
+            fachada.BuscarUsuario(usuarioId).TotalVentasComando.Clear();
 
             string expected = "Error: uno o más campos están vacíos.";
 
@@ -210,7 +210,7 @@ namespace Library.Tests
             var fachada = Fachada.Instancia;
             var usuarioId = "U004";
             fachada.CrearUsuario(usuarioId, "Matteo", "A1");
-            fachada.BuscarUsuario(usuarioId).TotalVentas.Clear();
+            fachada.BuscarUsuario(usuarioId).TotalVentasComando.Clear();
 
             var cliente = new Cliente("C004", "Juan", "Pérez", "099123123", "jperez@mail.com");
             fachada.Clientes.AgregaCliente(cliente);

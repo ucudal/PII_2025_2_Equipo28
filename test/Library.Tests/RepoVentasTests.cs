@@ -32,8 +32,8 @@ namespace Library.Tests
             repo.AgregarVenta(cliente, fecha, precio, producto, usuario);
 
             // Assert
-            Assert.That(usuario.TotalVentas.Count, Is.EqualTo(1));
-            var v = usuario.TotalVentas[0];
+            Assert.That(usuario.TotalVentasComando.Count, Is.EqualTo(1));
+            var v = usuario.TotalVentasComando[0];
             Assert.That(v.Cliente, Is.EqualTo(cliente));
             Assert.That(v.Producto, Is.EqualTo(producto));
             Assert.That(v.Importe, Is.EqualTo(precio));

@@ -862,7 +862,7 @@ namespace Library
         
 
         
-        public void AsignarClienteAOtroVendedor(string idVendedorActual, string idVendedorNuevo,
+        /*public void AsignarClienteAOtroVendedor(string idVendedorActual, string idVendedorNuevo,
             string nombreCliente,
             string apellidoCliente)
         {
@@ -878,9 +878,41 @@ namespace Library
             // else
             // {
             // }
-        }
+        }*/
 
-        
+        public string AsignarClienteAVendedor(string clienteId, string vendedorId)
+        {
+            Usuario vendedor = null;
+            Cliente cliente = null;
+
+            // 1) Buscar vendedor y cliente con manejo de errores "a lo fachada"
+            try
+            {
+                vendedor = this.Usuarios.BuscarUsuario(vendedorId);
+                cliente = this.Clientes.BuscarUnCliente(clienteId);
+            }
+            catch (ArgumentNullException e)
+            {
+                return $"{e.Message} {e.ParamName}";
+            }
+            catch (ArgumentException e)
+            {
+                return $"{e.Message} {e.ParamName}";
+            }
+
+            if (vendedor == null)
+            {
+                return $"No se encontro un vendedor con ID '{vendedorId}'.";
+            }
+
+            if (cliente == null)
+            {
+                return $"No se encontro un cliente con ID '{clienteId}'.";
+            }
+            
+            
+            return $"El cliente {cliente.Nombre} {cliente.Apellido} fue asignado al vendedor con ID '{vendedorId}'.";
+        }
         /// <summary>
         /// Busca clientes en el sistema según un criterio específico.
         /// - SRP: delega la responsabilidad de búsqueda al repositorio de clientes, encargándose solo de formatear la respuesta.
@@ -1018,42 +1050,7 @@ namespace Library
             return "No se encontro al usuario";
         }
         
-        /// <summary>
-        /// Calcula el total de ventas de un usuario en un período específico.
-        /// Aplica Expert: Usuario conoce su lista de ventas totales.
-        /// </summary>
-        /*
-        public string TotalDeVentasEnPeriodo(string usuarioId, string fechaInicioTexto, string fechaFinTexto)
-        {
-            // 1) Buscar usuario con manejo de errores estables
-            Usuario usuario;
-            try
-            {
-                usuario = this.Usuarios.BuscarUsuario(usuarioId);
-            }
-            catch (ArgumentNullException e)
-            {
-                return $"{e.Message} {e.ParamName}";
-            }
-            catch (ArgumentException e)
-            {
-                return $"{e.Message} {e.ParamName}";
-            }
-            
-
-            // 3) Parsear fechas con dd/MM/yyyy
-            DateTime fechaInicio, fechaFin;
-            if (!DateTime.TryParseExact(fechaInicioTexto, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out fechaInicio) ||
-                !DateTime.TryParseExact(fechaFinTexto, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out fechaFin))
-            {
-                return "Error: la fecha ingresada no es válida.";
-            }
-            double total = usuario.SumarImportes(fechaInicio, fechaFin);
-
-            // 5) Respuesta formateada
-            return $"Total de ventas desde {fechaInicio:dd/MM/yyyy} hasta {fechaFin:dd/MM/yyyy}: ${total:0.##}";
-        }
-        */
+        
         public string TotalDeVentasEnPeriodo(string usuarioId, string fechaInicioTexto, string fechaFinTexto)
         {
             Usuario usuario = null;
@@ -1077,7 +1074,7 @@ namespace Library
                 return $"No se encontró un usuario con ID '{usuarioId}'.";
             }
 
-            // 2) Validar que los textos de fecha no estén vacíos
+            
             if (string.IsNullOrWhiteSpace(fechaInicioTexto))
             {
                 return "La fecha de inicio no puede estar vacía.";
@@ -1088,7 +1085,7 @@ namespace Library
                 return "La fecha de fin no puede estar vacía.";
             }
 
-            // 3) Parsear fechas con dd/MM/yyyy
+            //  Parsear fechas con dd/MM/yyyy
             DateTime fechaInicio;
             DateTime fechaFin;
 
@@ -1104,88 +1101,18 @@ namespace Library
                 return "Error: la fecha de fin no es válida. Usa el formato dd/MM/yyyy.";
             }
 
-            // 4) Validar rango lógico
+            
             if (fechaInicio > fechaFin)
             {
                 return "Error: la fecha de inicio no puede ser posterior a la fecha de fin.";
             }
 
-            // 5) Calcular total
+          // Calcular total
             double total = usuario.SumarImportes(fechaInicio, fechaFin);
 
-            // 6) Respuesta formateada
+         
             return $"Total de ventas desde {fechaInicio:dd/MM/yyyy} hasta {fechaFin:dd/MM/yyyy}: ${total:0.##}";
         }
-        /// <summary>
-        /// Registra una cotización para un cliente con validaciones.
-        /// Aplica SRP: responsable únicamente del registro de cotizaciones.
-        /// </summary>
-        /*public string RegistrarCotizacionCliente(string clienteId, string fecha, string precio, string usuarioId)
-        {
-            Usuario usuario;
-            Cliente cliente;
-
-            // 1) Buscar usuario
-            try
-            {
-                usuario = this.Usuarios.BuscarUsuario(usuarioId);
-            }
-            catch (ArgumentNullException)
-            {
-                return "Error: faltan datos para registrar la cotización.";
-            }
-            catch (ArgumentException)
-            {
-                return "Error: uno o más campos están vacíos.";
-            }
-
-            if (usuario == null)
-            {
-                return $"Error: no se encontró un usuario con ID '{usuarioId}'.";
-            }
-
-            // 2) Buscar cliente
-            try
-            {
-                cliente = this.Clientes.BuscarUnCliente(clienteId);
-            }
-            catch (ArgumentNullException)
-            {
-                return "Error: faltan datos para registrar la cotización.";
-            }
-            catch (ArgumentException)
-            {
-                return "Error: uno o más campos están vacíos.";
-            }
-
-            if (cliente == null)
-            {
-                return $"Error: no se encontró un cliente con ID '{clienteId}'.";
-            }
-
-            // 3) Registrar cotización
-            try
-            {
-                this.Cotizaciones.AgregarCotizacion(cliente, fecha, precio, usuario);
-                return $"Cotización registrada: se envió a {cliente.Nombre} por ${precio} el {fecha}.";
-            }
-            catch (InvalidDateException)
-            {
-                return "Error: la fecha ingresada no es válida.";
-            }
-            catch (ArgumentNullException)
-            {
-                return "Error: uno o más campos están vacíos.";
-            }
-            catch (ArgumentException)
-            {
-                return "Error: faltan datos para registrar la cotización.";
-            }
-            catch (Exception)
-            {
-                return "Error: ocurrió un problema al registrar la cotización.";
-            }
-        }*/
         
         public string RegistrarCotizacionCliente(string clienteId, string fecha, string precio, string usuarioId)
         {

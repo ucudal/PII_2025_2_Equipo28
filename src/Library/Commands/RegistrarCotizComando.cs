@@ -8,15 +8,15 @@ namespace Ucu.Poo.DiscordBot.Commands
 {
 
     /// <summary>
-    /// Esta clase registra una llamada.
+    /// Esta clase registra una cotizacion.
     /// Devuele la confirmacion de si se creo o no.
     /// </summary>
 // ReSharper disable once UnusedType.Global
-    public class RegistrarCotiz : ModuleBase<SocketCommandContext>
+    public class RegistrarCotizComando : ModuleBase<SocketCommandContext>
     {
         private Fachada fachada = Fachada.Instancia;
         /// <summary>
-        /// Implementa el comando 'RegistraLlamada' que registra una llamada. Este comando es para la historia 7.
+        /// Implementa el comando 'RegistrarCotizacionCliente' que registra una cotizacion.
         /// </summary>
         [Command("registrarCotiz")]
         [Summary(
@@ -27,7 +27,7 @@ namespace Ucu.Poo.DiscordBot.Commands
             string[] parte = parametros.Split(',');
             if (parte.Length != 4)
             {
-                await ReplyAsync($"Se nececitan 5 parametros. Recurda separar los parametros por ','");
+                await ReplyAsync($"Se nececitan 4parametros. Recurda separar los parametros por ','");
 
             }
             else
