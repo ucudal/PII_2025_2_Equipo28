@@ -882,7 +882,7 @@ namespace Library
         /// </summary>
         public string VerClientes()
         {
-            IEnumerable<Cliente> clientes = thisClientes.Clientes;
+            IEnumerable<Cliente> clientes = this.Clientes.Clientes;
             string resultado = "";
             foreach (Cliente cliente in clientes)
             {
