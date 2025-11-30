@@ -17,12 +17,13 @@ namespace Library.Tests
         {
             fachada = Fachada.Instancia;
 
-            // Limpiar estado del singleton
+            /#1#/ Limpiar estado del singleton
             fachada.Usuarios.Usuarios.Clear();
             fachada.Usuarios.Administradores.Clear();
             fachada.Usuarios.Vendedores.Clear();
             fachada.Usuarios.ClientesTotales.Clear();
             fachada.UsuariosSuspendidos.Clear();
+            #1#
 
             // Crear admin y luego crear el usuario con ese admin
             adminId = "A1";

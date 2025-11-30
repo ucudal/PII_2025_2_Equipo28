@@ -1022,6 +1022,7 @@ namespace Library
         /// Calcula el total de ventas de un usuario en un período específico.
         /// Aplica Expert: Usuario conoce su lista de ventas totales.
         /// </summary>
+        /*
         public string TotalDeVentasEnPeriodo(string usuarioId, string fechaInicioTexto, string fechaFinTexto)
         {
             // 1) Buscar usuario con manejo de errores estables
@@ -1030,29 +1031,15 @@ namespace Library
             {
                 usuario = this.Usuarios.BuscarUsuario(usuarioId);
             }
-            catch (ArgumentNullException)
+            catch (ArgumentNullException e)
             {
-                return "Error: faltan datos para registrar la venta.";
+                return $"{e.Message} {e.ParamName}";
             }
-            catch (ArgumentException)
+            catch (ArgumentException e)
             {
-                return "Error: uno o más campos están vacíos.";
+                return $"{e.Message} {e.ParamName}";
             }
-
-            if (usuario == null)
-            {
-                return $"Error: no se encontró un usuario con ID '{usuarioId}'.";
-            }
-
-            // 2) Validar nulos / vacíos en fechas
-            if (fechaInicioTexto == null || fechaFinTexto == null)
-            {
-                return "Error: faltan datos para registrar la venta.";
-            }
-            if (string.IsNullOrWhiteSpace(fechaInicioTexto) || string.IsNullOrWhiteSpace(fechaFinTexto))
-            {
-                return "Error: uno o más campos están vacíos.";
-            }
+            
 
             // 3) Parsear fechas con dd/MM/yyyy
             DateTime fechaInicio, fechaFin;
@@ -1066,7 +1053,69 @@ namespace Library
             // 5) Respuesta formateada
             return $"Total de ventas desde {fechaInicio:dd/MM/yyyy} hasta {fechaFin:dd/MM/yyyy}: ${total:0.##}";
         }
-        
+        */
+        public string TotalDeVentasEnPeriodo(string usuarioId, string fechaInicioTexto, string fechaFinTexto)
+        {
+            Usuario usuario = null;
+
+            // 1) Buscar usuario con manejo de errores
+            try
+            {
+                usuario = this.Usuarios.BuscarUsuario(usuarioId);
+            }
+            catch (ArgumentNullException e)
+            {
+                return $"{e.Message} {e.ParamName}";
+            }
+            catch (ArgumentException e)
+            {
+                return $"{e.Message} {e.ParamName}";
+            }
+
+            if (usuario == null)
+            {
+                return $"No se encontró un usuario con ID '{usuarioId}'.";
+            }
+
+            // 2) Validar que los textos de fecha no estén vacíos
+            if (string.IsNullOrWhiteSpace(fechaInicioTexto))
+            {
+                return "La fecha de inicio no puede estar vacía.";
+            }
+
+            if (string.IsNullOrWhiteSpace(fechaFinTexto))
+            {
+                return "La fecha de fin no puede estar vacía.";
+            }
+
+            // 3) Parsear fechas con dd/MM/yyyy
+            DateTime fechaInicio;
+            DateTime fechaFin;
+
+            if (!DateTime.TryParseExact(fechaInicioTexto, "dd/MM/yyyy",
+                    CultureInfo.InvariantCulture, DateTimeStyles.None, out fechaInicio))
+            {
+                return "Error: la fecha de inicio no es válida. Usa el formato dd/MM/yyyy.";
+            }
+
+            if (!DateTime.TryParseExact(fechaFinTexto, "dd/MM/yyyy",
+                    CultureInfo.InvariantCulture, DateTimeStyles.None, out fechaFin))
+            {
+                return "Error: la fecha de fin no es válida. Usa el formato dd/MM/yyyy.";
+            }
+
+            // 4) Validar rango lógico
+            if (fechaInicio > fechaFin)
+            {
+                return "Error: la fecha de inicio no puede ser posterior a la fecha de fin.";
+            }
+
+            // 5) Calcular total
+            double total = usuario.SumarImportes(fechaInicio, fechaFin);
+
+            // 6) Respuesta formateada
+            return $"Total de ventas desde {fechaInicio:dd/MM/yyyy} hasta {fechaFin:dd/MM/yyyy}: ${total:0.##}";
+        }
         /// <summary>
         /// Registra una cotización para un cliente con validaciones.
         /// Aplica SRP: responsable únicamente del registro de cotizaciones.
