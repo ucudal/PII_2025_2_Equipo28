@@ -9,7 +9,7 @@ namespace Ucu.Poo.DiscordBot.Commands
 
     /// <summary>
     /// Esta clase registra una llamada.
-    /// Devuele la confirmacion de si se creo o no.
+    /// Devuelve la confirmacion de si se creo o no.
     /// </summary>
 // ReSharper disable once UnusedType.Global
     public class RegistrarLlamada : ModuleBase<SocketCommandContext>

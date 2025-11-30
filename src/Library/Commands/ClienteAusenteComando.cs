@@ -16,7 +16,7 @@ namespace Ucu.Poo.DiscordBot.Commands
     {
         private Fachada fachada = Fachada.Instancia;
         /// <summary>
-        /// Implementa el comando 'clienteAusente' que devuelbe los nombres de los clientes con los que no interactua hace mas de un mes.
+        /// Implementa el comando 'clienteAusente' que devuelbe los nombres de los clientes con los que no interactua hace mas de un mes. Este comando es para la historia 18.
         /// </summary>
         [Command("clienteAusente")]
         [Summary(

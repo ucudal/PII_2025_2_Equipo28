@@ -35,7 +35,6 @@ namespace Library
                 return instancia;
             }
         }
-
         /// <summary>
         /// El metodos RegistrarMensaje crea una instancia de interaccion de tipo mensaje y la guarda en repoInteracciones
         /// </summary>
@@ -321,6 +320,10 @@ namespace Library
                 foreach (Interaccion interaccion in interaccionesCliente)
                 {
                     informacion += $"\n{interaccion.Tema}:\n{interaccion.Contenido}\n";
+                    if (interaccion.Notas != null)
+                    {
+                        informacion += $"Notas: {interaccion.Notas}\n";
+                    }
                 }
 
                 return informacion;
@@ -332,6 +335,10 @@ namespace Library
                 foreach (Interaccion interaccion in interaccionesCliente)
                 {
                     informacion += $"\nTipo: {interaccion.Tipo}\n{interaccion.Tema}:\n{interaccion.Contenido}\n";
+                    if (interaccion.Notas != null)
+                    {
+                        informacion += $"Notas: {interaccion.Notas}\n";
+                    }
                 }
 
                 return informacion;
@@ -343,6 +350,10 @@ namespace Library
                 foreach (Interaccion interaccion in interaccionesCliente)
                 {
                     informacion += $"\nFecha: {interaccion.Fecha}\n{interaccion.Tema}:\n{interaccion.Contenido}\n";
+                    if (interaccion.Notas != null)
+                    {
+                        informacion += $"Notas: {interaccion.Notas}\n";
+                    }
                 }
 
                 return informacion;
@@ -354,6 +365,10 @@ namespace Library
                 {
                     informacion +=
                         $"\n{interaccion.Tipo} del {interaccion.Fecha}\n{interaccion.Tema}:\n{interaccion.Contenido}\n";
+                    if (interaccion.Notas != null)
+                    {
+                        informacion += $"Notas: {interaccion.Notas}\n";
+                    }
                 }
 
                 return informacion;

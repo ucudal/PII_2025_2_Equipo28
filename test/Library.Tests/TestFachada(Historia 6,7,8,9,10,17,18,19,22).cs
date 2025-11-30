@@ -7,7 +7,7 @@ using NUnit.Framework;
 
 namespace Library.Tests
 {
-    public class TestFachada_Historia_8_15_
+    public class TestFachada_Historia_6_7_8_9_10_17_18_19_22
     {
         private Fachada fachada;
         private Usuario usuario;

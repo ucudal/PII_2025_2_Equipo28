@@ -16,7 +16,7 @@ namespace Ucu.Poo.DiscordBot.Commands
     {
         private Fachada fachada = Fachada.Instancia;
         /// <summary>
-        /// Implementa el comando 'RegistraCorreo' que registra un correo. Este comando es para la historia 8.
+        /// Implementa el comando 'RegistraCorreo' que registra un correo. Este comando es para la historia 9.
         /// </summary>
         [Command("registrarCorreo")]
         [Summary(

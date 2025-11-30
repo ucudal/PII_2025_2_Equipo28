@@ -16,7 +16,7 @@ namespace Ucu.Poo.DiscordBot.Commands
     {
         private Fachada fachada = Fachada.Instancia;
         /// <summary>
-        /// Implementa el comando 'RegistraReunion' que registra una reunion. Este comando es para la historia 9.
+        /// Implementa el comando 'RegistraReunion' que registra una reunion. Este comando es para la historia 7.
         /// </summary>
         [Command("registrarReunion")]
         [Summary(

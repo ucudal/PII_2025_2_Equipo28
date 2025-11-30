@@ -16,7 +16,7 @@ namespace Ucu.Poo.DiscordBot.Commands
     {
         private Fachada fachada = Fachada.Instancia;
         /// <summary>
-        /// Implementa el comando 'InteraccionesCliente' que muestra las interacciones de un cliente, en base al tipo, la fecha, ambos o ninguno. Este comando es para la historia ??.
+        /// Implementa el comando 'InteraccionesCliente' que muestra las interacciones de un cliente, en base al tipo, la fecha, ambos o ninguno. Este comando es para la historia 17.
         /// </summary>
         [Command("interaccionCliente")]
         [Summary(

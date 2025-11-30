@@ -12,13 +12,13 @@ namespace Ucu.Poo.DiscordBot.Commands
     /// Devuele la lista de nombres.
     /// </summary>
 // ReSharper disable once UnusedType.Global
-    public class ClienteContactoVerComando : ModuleBase<SocketCommandContext>
+    public class ClienteContactaVerComando : ModuleBase<SocketCommandContext>
     {
         private Fachada fachada = Fachada.Instancia;
         /// <summary>
-        /// Implementa el comando 'clienteContactoVer' que permite ver los clientes que se pusieron en contacto. Este comando es para la historia ??.
+        /// Implementa el comando 'clienteContactaVer' que permite ver los clientes que se pusieron en contacto. Este comando es para la historia 19.
         /// </summary>
-        [Command("clienteContactoVer")]
+        [Command("clienteContactaVer")]
         [Summary(
             "muetsra una lista de los nombres de los clientes que se pusieron en contacto con el usuario y este aun no le responde. En caso opuesto devuelve un error y su explicacion")]
         // ReSharper disable once UnusedMember.Global
