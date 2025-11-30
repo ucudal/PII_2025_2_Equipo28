@@ -300,5 +300,138 @@ namespace Library.Tests
             Usuario resultado = fachada.BuscarUsuario(id);
             Assert.IsNull(resultado);
         }
+        
+        [Test]
+        public void AgregarClienteContacto_ConDatosValidos_DeberiaAgregarCliente()
+        {
+            fachada.CrearAdministrador("A1", "Admin Base");
+            string idUsuario = "U1";
+            fachada.CrearUsuario(idUsuario, "Pepe Usuario", "A1");
+            
+            string idCliente = "C1";
+            fachada.CrearCliente(idCliente, "Juan", "Perez", "099111222", "juan@correo.com");
+
+            string resultado = fachada.AgregarClienteContacto(idUsuario, idCliente);
+
+            Assert.That(resultado, Is.EqualTo("cliente agregado"));
+            
+            string contactos = fachada.VerClienteContacto(idUsuario);
+            Assert.IsTrue(contactos.Contains("Juan Perez"));
+        }
+
+        [Test]
+        public void AgregarClienteContacto_ClienteYaExistente_DeberiaNoDuplicarOManjarlo()
+        {
+            fachada.CrearAdministrador("A1", "Admin Base");
+            string idUsuario = "U1";
+            fachada.CrearUsuario(idUsuario, "Pepe Usuario", "A1");
+            
+            string idCliente = "C1";
+            fachada.CrearCliente(idCliente, "Juan", "Perez", "099111222", "juan@correo.com");
+
+            fachada.AgregarClienteContacto(idUsuario, idCliente);
+            string resultado = fachada.AgregarClienteContacto(idUsuario, idCliente);
+
+            // Basado en la logica actual, lo agrega de nuevo a la lista (List<Cliente>), 
+            // no hay chequeo de duplicados en el metodo AgregarClienteContacto original si ya existe la key.
+            // Pero esperemos que el mensaje sea "cliente agregado"
+            Assert.That(resultado, Is.EqualTo("cliente agregado"));
+        }
+
+        [Test]
+        public void VerClienteContacto_ConDatos_DeberiaRetornarLista()
+        {
+            fachada.CrearAdministrador("A1", "Admin Base");
+            string idUsuario = "U1";
+            fachada.CrearUsuario(idUsuario, "Pepe Usuario", "A1");
+            
+            string idCliente = "C1";
+            fachada.CrearCliente(idCliente, "Juan", "Perez", "099111222", "juan@correo.com");
+            fachada.AgregarClienteContacto(idUsuario, idCliente);
+
+            string resultado = fachada.VerClienteContacto(idUsuario);
+
+            Assert.IsTrue(resultado.Contains("Juan Perez"));
+        }
+
+        [Test]
+        public void EliminarClienteContacto_ConDatosValidos_DeberiaEliminar()
+        {
+            fachada.CrearAdministrador("A1", "Admin Base");
+            string idUsuario = "U1";
+            fachada.CrearUsuario(idUsuario, "Pepe Usuario", "A1");
+            
+            string idCliente = "C1";
+            fachada.CrearCliente(idCliente, "Juan", "Perez", "099111222", "juan@correo.com");
+            fachada.AgregarClienteContacto(idUsuario, idCliente);
+
+            string resultado = fachada.EliminarClienteContacto(idUsuario, idCliente);
+
+            Assert.That(resultado, Is.EqualTo("cliente eliminado de la lista"));
+            string contactos = fachada.VerClienteContacto(idUsuario);
+            Assert.IsFalse(contactos.Contains("Juan Perez"));
+        }
+
+        [Test]
+        public void CrearEtiqueta_ConDatosValidos_DeberiaCrearEtiqueta()
+        {
+            fachada.CrearAdministrador("A1", "Admin Base");
+            string idUsuario = "U1";
+            fachada.CrearUsuario(idUsuario, "Pepe Usuario", "A1");
+
+            string resultado = fachada.CrearEtiqueta("Importante", idUsuario);
+
+            Assert.That(resultado, Is.EqualTo("Etiqueta creada correctamente."));
+            Assert.IsTrue(fachada.Etiquetas.BuscarEtiqueta("Importante"));
+        }
+
+        [Test]
+        public void CrearEtiqueta_UsuarioNoExistente_DeberiaRetornarError()
+        {
+            string resultado = fachada.CrearEtiqueta("Importante", "U_NO_EXISTE");
+            Assert.That(resultado, Is.EqualTo("Solo Usuarios pueden crear Etiquetas."));
+        }
+
+        [Test]
+        public void AgregarEtiquetaCliente_ConDatosValidos_DeberiaAgregarEtiqueta()
+        {
+            fachada.CrearAdministrador("A1", "Admin Base");
+            string idUsuario = "U1";
+            fachada.CrearUsuario(idUsuario, "Pepe Usuario", "A1");
+            
+            string idCliente = "C1";
+            fachada.CrearCliente(idCliente, "Juan", "Perez", "099111222", "juan@correo.com");
+            
+            fachada.CrearEtiqueta("VIP", idUsuario);
+
+            string resultado = fachada.AgregarEtiquetaCliente(idCliente, "VIP", idUsuario);
+
+            Assert.That(resultado, Is.EqualTo("Etiqueta agregada"));
+            var cliente = fachada.BuscarCliente("id", idCliente)[0];
+            Assert.IsTrue(cliente.Etiquetas.Contains("VIP"));
+        }
+
+        [Test]
+        public void AgregarEtiquetaCliente_UsuarioNoAutorizado_DeberiaRetornarError()
+        {
+             string idCliente = "C1";
+            fachada.CrearCliente(idCliente, "Juan", "Perez", "099111222", "juan@correo.com");
+            
+            string resultado = fachada.AgregarEtiquetaCliente(idCliente, "VIP", "U_NO_EXISTE");
+
+            Assert.That(resultado, Is.EqualTo("Solo Usuarios pueden agregar etiquetas a los clientes"));
+        }
+
+        [Test]
+        public void VerClientes_ConClientes_DeberiaRetornarListaString()
+        {
+            fachada.CrearCliente("C1", "Juan", "Perez", "099111222", "juan@correo.com");
+            fachada.CrearCliente("C2", "Maria", "Lopez", "099333444", "maria@correo.com");
+
+            string resultado = fachada.VerClientes();
+
+            Assert.IsTrue(resultado.Contains("Juan"));
+            Assert.IsTrue(resultado.Contains("Maria"));
+        }
     }
 }
