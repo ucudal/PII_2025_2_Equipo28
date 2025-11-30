@@ -5,13 +5,44 @@ using System.Globalization;
 namespace Library
 {
     /// <summary>
-    /// - Creator: porque contiene, agrega y utiliza instancias de Interaccion, por lo que es responsable de crearlas.
-    /// - Expert: porque posee la información necesaria (la lista de interacciones) para buscarlas y filtrarlas.
-    /// - Polimorfismo: almacena Interaccion y su subtipo (Reunion), tratándolos de forma igual.
-    /// - SRP: tiene una única responsabilidad: gestionar interacciones (crear, almacenar y buscar).
-    /// - Alta Cohesión: todos sus métodos pertenecen al propósito de administrar interacciones.
-    /// - Bajo Acoplamiento: depende unicamente de Usuario, Cliente e Interaccion.
-    /// </summary>
+/// Repositorio encargado de almacenar, administrar y recuperar
+/// objetos de tipo <c>Interaccion</c>.
+/// 
+/// <para><b>SRP:</b>
+/// Tiene una única responsabilidad: gestionar el conjunto de interacciones
+/// (búsqueda y listado).</para>
+///
+/// <para><b>LSP:</b>
+/// Puede trabajar con cualquier subclase de <c>Interaccion</c>
+/// (Reunion). Todas cumplen los contratos
+/// esperados, por lo que el repositorio nunca se rompe al recibir
+/// nuevos tipos derivados.</para>
+///
+/// <para><b>ISP:</b>
+/// No obliga a las interacciones a implementar interfaces innecesarias.
+/// Solo requiere que sean <c>Interaccion</c>, manteniendo la interfaz nula.</para>
+///
+/// <para><b>DIP:</b>
+/// Depende de la abstracción <c>Interaccion</c> en vez de depender
+/// de tipos concretos. No crea interacciones internamente, solo recibe
+/// objetos ya construidos.</para>
+///
+/// <para><b>Expert:</b>
+/// Es el experto natural en manejar colecciones de interacciones.
+/// Tiene toda la información necesaria para almacenarlas y buscarlas.</para>
+///
+/// <para><b>Bajo Acoplamiento:</b>
+/// Mantiene acoplamiento bajo: solo conoce la colección interna
+/// y el tipo base <c>Interaccion</c>.</para>
+///
+/// <para><b>Alta Cohesion:</b>
+/// Todas sus operaciones están enfocadas en la gestión de interacciones.
+/// No maneja lógica adicional como validación o UI.</para>
+///
+/// <para><b>Creator:</b>
+/// Es el encargado de crear las interacciones.
+/// Por ende es el encargado de almacenarlas.</para>
+///
     public class RepoInteracciones
     {
         /// <summary>

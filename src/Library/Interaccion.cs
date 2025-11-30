@@ -4,26 +4,31 @@ using System.Globalization;
 namespace Library
 {
     /// <summary>
-    /// <para><b>SRP:</b> Esta clase cumple el principio de responsabilidad única ya que su única función es modelar la información
-    /// y el comportamiento relacionado a una interacción específica (mensaje, llamada o reunión) entre un cliente y un usuario.</para>
-    /// 
-    /// <para><b>Expert:</b> Siguiendo el patrón Expert, la clase Interaccion es experta en manejar sus propios datos,
-    /// ya que contiene toda la información necesaria sobre la interacción (cliente, tema, fecha, contenido, notas, etc.) y provee un método para modificar sus notas.</para>
-    /// 
-    /// <para><b>Polimorfismo:</b> Esta clase actua como clase base para el tipo de interacción de reunión,
-    /// permitiendo que la clase derivada utilice sus atributos y métodos sin modificar la clase original.</para>
-    /// 
-    /// <para><b>LSP:</b> Al crear la subclase de Interaccion (Reunion),
-    /// esta pueden reemplazar a Interaccion sin alterar el funcionamiento del sistema, dado que comparten los mismos atributos y comportamientos básicos,
-    /// excepto las extensiones propias.</para>
+    /// Representa una interacción entre un cliente y un usuario.
     ///
-    /// <para><b>Alta cohesion:</b>Esta clase tiene alta cohesión porque todos sus atributos y
-    /// métodos están directamente relacionados con la ideac de representar una interacción entre un cliente y un usuario. </para>
+    /// <para><b>SRP:</b> La clase se ocupa exclusivamente de cambiar y validar una interacción.</para>
     ///
-    ///<para><b>Bajo acoplamiento:</b>Esta clase depende unicamnete de usuario y cliente, por lo que tiene una baja dependencia. </para>
+    /// <para><b>OCP:</b> Está diseñada para extenderse (por ejemplo, en <c>Reunion</c>)
+    /// sin modificar su estructura base.</para>
+    ///
+    /// <para><b>LSP:</b> Las subclases pueden reemplazar a <c>Interaccion</c>
+    /// sin alterar el funcionamiento previsto.</para>
+    ///
+    /// <para><b>DIP:</b> Depende de abstracciones externas (<c>Usuario</c>, <c>Cliente</c>)
+    /// en lugar de crearlas internamente.</para>
+    ///
+    /// <para><b>Expert (GRASP):</b> La clase contiene toda la información necesaria
+    /// para gestionarse a sí misma.</para>
+    /// 
+    /// <para><b>Bajo acomplamiento:</b> Sus dependencias externas son mínimas.</para>
+    ///
+    /// <para><b>Alta Cohesion:</b> Todos los atributos y métodos están directamente
+    /// relacionados con el concepto de interacción.</para>
+    ///
+    /// <para><b>Polymorphism (GRASP):</b> Utiliza métodos virtuales para permitir comportamientos
+    /// distintos en subclases.</para>
     /// </summary>
-
-    public class Interaccion
+public class Interaccion
     {
         public string Notas { get; protected set; }
         public Cliente Cliente { get; protected set; }
@@ -33,8 +38,20 @@ namespace Library
         public TipoInterracion Tipo { get; protected set; }
         public string Contenido { get; protected set; }
         public string Lugar { get; protected set; }
-        /// <summary>
-        /// Es el creador de Interaccion.
+        /// /// <summary>
+        /// Crea una nueva interacción.
+        /// <para><b>SRP:</b> El constructor tiene una única responsabilidad:
+        /// validar y asignar el estado inicial de la interacción.</para>
+        /// <para><b>OCP:</b> La validación de fechas está delegada al método virtual
+        /// <c>FechaIncorrecta</c>, permitiendo modificar el comportamiento sin modificar este código.</para>
+        /// <para><b>LSP:</b> Las subclase <c>Reunion</c> puede reemplazar este comportamiento
+        /// sin modificando la funcionalidad esperada.</para>
+        /// <para><b>Expert:</b> La clase valida y usa su propia información (fecha, contenido,
+        /// tema, usuario, cliente).</para>
+        /// <para><b>Alta Cohesion:</b> Todas las validaciones pertenecen al proceso coherente de
+        /// construir una interacción.</para>
+        /// <para><b>Bajo Acoplamiento:</b> Solo depende de <c>Usuario</c>, <c>Cliente</c>
+        /// y excepciones necesarias.</para>
         /// </summary>
         /// <param name="usuario">Recibe un usuario</param>
         /// <param name="cliente">Recibe un cliente</param>
@@ -128,7 +145,13 @@ namespace Library
         }
 
         /// <summary>
-        /// Agrega una nota a la interaccion
+        /// Agrega o modifica la nota de la interacción.
+        /// <para><b>SRP:</b> Su única responsabilidad es validar y asignar la nota.</para>
+        /// <para><b>LSP:</b> La subclase pueden definir cómo manejan notas sin romper la compatibilidad.</para>
+        /// <para><b>Information Expert:</b> Interacción administra sus propias notas porque
+        /// tiene toda la información necesaria.</para>
+        /// <para><b>Alta Cohesion:</b> Manejar notas es parte integral de la interacción.</para>
+        /// <para><b>Bajo Acoplamiento:</b> No depende de otras clases para su funcionamiento.</para>
         /// </summary>
         /// <param name="nota">La nota en cuestion</param>
         public void AgergarNotas(string nota)
@@ -146,8 +169,12 @@ namespace Library
             this.Notas = nota;
         }
         /// <summary>
-        /// Define los tipo de interaccion posibles
+        /// Define los tipos posibles de interacción.
+        /// <para><b>SRP:</b> Su única responsabilidad es representar los valores permitidos.</para>
+        /// <para><b>Polymorphism:</b> Permite que la subclase <c>Reunion</c>
+        /// redefinan comportamientos según el tipo sin modificar <c>Interaccion</c>.</para>
         /// </summary>
+
         public enum TipoInterracion
         {
             Mensaje,
@@ -157,7 +184,13 @@ namespace Library
             Nada //Solo para inicializar el tipo en un metodo
         }
         /// <summary>
-        /// Sirve para identificar si una fecha es valida al ser anterior o igual al dia actual
+        /// Valida que la fecha no sea posterior a la actual.
+        /// <para><b>OCP:</b> Es <c>virtual</c>, permitiendo que las subclases redefinan la validación
+        /// sin modificar la clase base.</para>
+        /// <para><b>LSP:</b> La Subclase <c>Reunion</c> puede reemplazar este método
+        /// manteniendo el contrato esperado por la clase base.</para>
+        /// <para><b>Polymorphism:</b> Se redefine según el tipo de interacción
+        /// evitando condicionales como <c>if(tipo == Reunion)</c>.</para>
         /// </summary>
         /// <param name="fecha">la fecha a revisar</param>
         /// <exception cref="InvalidDateException">Tira una excepxion si la fecha es posterior a la actual</exception>
