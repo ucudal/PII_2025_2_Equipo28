@@ -588,9 +588,12 @@ namespace Library
             return "usuario o cliente no puden ser null";
         }
 
+        
         /// <summary>
         /// Crea una nueva etiqueta en el sistema.
-        /// Aplica Expert: RepoEtiquetas conoce cómo gestionar etiquetas.
+        /// - SRP: delega la validación y persistencia a las clases expertas (Usuarios, Etiquetas), coordinando solo el flujo.
+        /// - Expert: utiliza a RepoUsuarios y RepoEtiquetas para buscar y guardar información, ya que son los expertos en sus dominios.
+        /// - Bajo acoplamiento: mantiene bajo acoplamiento al depender de las operaciones públicas de los repositorios sin conocer su implementación interna.
         /// </summary>
         public string CrearEtiqueta(string etiqueta, string idUsuario)
         {
@@ -629,8 +632,12 @@ namespace Library
             return "Solo Usuarios pueden crear Etiquetas.";
         }
 
+        
         /// <summary>
-        /// Agrega una etiqueta a un cliente.
+        /// Agrega una etiqueta existente a un cliente.
+        /// - SRP: coordina la asignación delegando la búsqueda y validación a los expertos (Usuarios, Etiquetas).
+        /// - Expert: utiliza RepoUsuarios y RepoEtiquetas para obtener las instancias necesarias, respetando su responsabilidad.
+        /// - Bajo acoplamiento: interactúa con los objetos a través de sus interfaces públicas sin conocer detalles de persistencia.
         /// </summary>
         public string AgregarEtiquetaCliente(string clienteId, string etiqueta, string usuarioId)
         { 
@@ -688,8 +695,12 @@ namespace Library
         // Como administrador quiero crear, suspender o eliminar usuarios, para mantener control sobre los accesos.
        
 
+        
         /// <summary>
-        /// Crea un nuevo usuario si no existe otro con el mismo ID.
+        /// Crea un nuevo usuario en el sistema verificando permisos de administrador.
+        /// - SRP: coordina la creación delegando la validación de permisos y persistencia a RepoUsuarios.
+        /// - Expert: utiliza RepoUsuarios para verificar permisos de administrador y unicidad del ID.
+        /// - Creator: asume la responsabilidad de instanciar el nuevo Usuario para luego agregarlo al repositorio.
         /// </summary>
         public string CrearUsuario(string id, string nombre, string idAdmin)
         {
@@ -709,8 +720,12 @@ namespace Library
             return "Solo Administradores pueden crear Usuarios.";
         }
 
+        
         /// <summary>
         /// Suspende a un usuario activo y lo mueve a la lista de suspendidos.
+        /// - SRP: coordina la suspensión delegando la validación de permisos y persistencia a RepoUsuarios.
+        /// - Expert: utiliza RepoUsuarios para verificar permisos de administrador y obtener el usuario a suspender.
+        /// - Bajo acoplamiento: interactúa con los objetos a través de sus interfaces públicas sin conocer detalles de persistencia.
         /// </summary>
         public string SuspenderUsuario(string idSuspender, string idAdmin)
         {
@@ -733,6 +748,9 @@ namespace Library
 
         /// <summary>
         /// Elimina completamente a un usuario (activo o suspendido).
+        /// - SRP: coordina la eliminación delegando la validación de permisos y persistencia a RepoUsuarios.
+        /// - Expert: utiliza RepoUsuarios para verificar permisos de administrador y obtener el usuario a eliminar.
+        /// - Bajo acoplamiento: interactúa con los objetos a través de sus interfaces públicas sin conocer detalles de persistencia.
         /// </summary>
         public string EliminarUsuario(string idEliminar, string idAdmin)
         {
@@ -776,9 +794,7 @@ namespace Library
         }
         
 
-        /// <summary>
-        /// Asigna un cliente de un vendedor a otro vendedor.
-        /// </summary>
+        
         public void AsignarClienteAOtroVendedor(string idVendedorActual, string idVendedorNuevo,
             string nombreCliente,
             string apellidoCliente)
@@ -797,9 +813,13 @@ namespace Library
             // }
         }
 
+        
         /// <summary>
-        /// Busca clientes según un atributo y valor específicos.
-        /// Aplica Expert: RepoClientes conoce cómo buscar en su colección.
+        /// Busca clientes en el sistema según un criterio específico.
+        /// - SRP: delega la responsabilidad de búsqueda al repositorio de clientes, encargándose solo de formatear la respuesta.
+        /// - Expert: utiliza RepoClientes para realizar la búsqueda, ya que es el experto en la colección de clientes.
+        /// - Controller: recibe la solicitud de búsqueda y coordina la obtención de datos para devolverlos a la UI.
+        /// - Bajo acoplamiento: depende de la abstracción del repositorio para realizar la búsqueda.
         /// </summary>
         public string BuscarCliente(string atributo, string valorBusqueda)
         {
@@ -816,7 +836,7 @@ namespace Library
 
         /// <summary>
         /// Crea un nuevo cliente y lo agrega al repositorio.
-        /// Aplica Creator: Fachada coordina la creación y agregación del cliente.
+        /// - Creator: Fachada coordina la creación y agregación del cliente.
         /// </summary>
         public string CrearCliente(string id, string nombre, string apellido, string telefono, string correo)
         {
@@ -835,7 +855,7 @@ namespace Library
 
         /// <summary>
         /// Modifica un atributo específico de un cliente existente.
-        /// Aplica Expert: Cliente conoce cómo modificar sus propios atributos.
+        /// - Expert: Cliente conoce cómo modificar sus propios atributos.
         /// </summary>
         public string ModificarInfo(string id, string atributo, string nuevoValor)
         {
@@ -854,7 +874,7 @@ namespace Library
 
         /// <summary>
         /// Elimina un cliente del repositorio.
-        /// Aplica Expert: RepoClientes conoce cómo eliminar de su colección.
+        /// - Expert: RepoClientes conoce cómo eliminar de su colección.
         /// </summary>
         public string EliminarCliente(string id)
         {
@@ -873,10 +893,11 @@ namespace Library
 
         /// <summary>
         /// Retorna el repositorio de clientes.
+        /// - Expert: RepoClientes conoce cómo obtener su colección.
         /// </summary>
         public string VerClientes()
         {
-            IEnumerable<Cliente> clientes = Clientes.Clientes;
+            IEnumerable<Cliente> clientes = this.Clientes.Clientes;
             string resultado = "";
             foreach (Cliente cliente in clientes)
             {
@@ -887,8 +908,8 @@ namespace Library
         }
 
         /// <summary>
-        /// Busca un usuario por su ID.
-        /// Aplica Expert: RepoUsuarios conoce cómo buscar usuarios.
+        /// Busca un usuario por su Id.
+        /// - Expert: RepoUsuarios conoce cómo buscar usuarios.
         /// </summary>
         public Usuario BuscarUsuario(string usuarioId)
         {
@@ -1150,7 +1171,7 @@ namespace Library
 
         /// <summary>
         /// Crea un nuevo administrador en el sistema.
-        /// Aplica Creator: crea instancias de Administrador y las agrega al repositorio.
+        /// Creator: crea instancias de Administrador y las agrega al repositorio.
         /// </summary>
         public Administrador CrearAdministrador(string id, string nombre)
         {
