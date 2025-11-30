@@ -36,7 +36,12 @@ namespace Library
             }
         }
         /// <summary>
-        /// El metodos RegistrarMensaje crea una instancia de interaccion de tipo mensaje y la guarda en repoInteracciones
+        /// El metodos RegistrarMensaje crea una instancia de interaccion de tipo mensaje y la guarda en repoInteracciones.
+        /// Principios que cumple:
+        /// - SRP: Se encarga únicamente de registrar mensajes.
+        /// - EXPERT: Maneja la información necesaria para validar y crear la interacción.
+        /// - Bajo acoplamiento: Mantiene dependencias mínimas fuera del método.
+        /// - Alta cohesion: Cada línea del método contribuye al registro del mensaje.
         /// </summary>
         /// <param name="clienteId">El id del cliente al cual asociar la interaccion, para buscarlo</param>
         /// <param name="contenido (mensaje,llamada,correo,reunion)">El contenido o descipcion de la interaccion</param>
@@ -85,7 +90,12 @@ namespace Library
         }
 
         /// <summary>
-        /// El metodos RegistrarCorreo crea una instancia de interaccion de tipo correo y la guarda en repoInteracciones
+        /// El metodos RegistrarCorreo crea una instancia de interaccion de tipo correo y la guarda en repoInteracciones.
+        /// Principios que cumple:
+        /// - SRP: Se encarga únicamente de registrar correo.
+        /// - EXPERT: Maneja la información necesaria para validar y crear la interacción.
+        /// - Bajo acoplamiento: Mantiene dependencias mínimas fuera del método.
+        /// - Alta cohesion: Cada línea del método contribuye al registro del correo.
         /// </summary>
         /// <param name="clienteId">El id del cliente al cual asociar la interaccion, para buscarlo</param>
         /// <param name="contenido (mensaje,llamada,correo,reunion)">El contenido o descipcion de la interaccion</param>
@@ -135,7 +145,12 @@ namespace Library
         }
 
         /// <summary>
-        /// El metodos RegistrarLlamada crea una instancia de interaccion de tipo llamada y la guarda en repoInteracciones
+        /// El metodos RegistrarLlamada crea una instancia de interaccion de tipo llamada y la guarda en repoInteracciones.
+        /// Principios que cumple:
+        /// - SRP: Se encarga únicamente de registrar una llamdada.
+        /// - EXPERT: Maneja la información necesaria para validar y crear la interacción.
+        /// - Bajo acoplamiento: Mantiene dependencias mínimas fuera del método.
+        /// - Alta cohesion: Cada línea del método contribuye al registro de la llamada.
         /// </summary>
         /// <param name="clienteId">El id del cliente al cual asociar la interaccion, para buscarlo</param>
         /// <param name="contenido (mensaje,llamada,correo,reunion)">El contenido o descipcion de la interaccion</param>
@@ -186,7 +201,12 @@ namespace Library
             return "No se encontro al usuario";
         }
         /// <summary>
-        /// El metodos RegistrarReunion crea una instancia de Reunion, subtipo de Interaccion, y la guarda en repoInteracciones
+        /// El metodos RegistrarReunion crea una instancia de Reunion, subtipo de Interaccion, y la guarda en repoInteracciones.
+        /// Principios que cumple:
+        /// - SRP: Se encarga únicamente de registrar reuniones.
+        /// - EXPERT: Maneja la información necesaria para validar y crear la interacción.
+        /// - Bajo acoplamiento: Mantiene dependencias mínimas fuera del método.
+        /// - Alta cohesion: Cada línea del método contribuye al registro del reuniones.
         /// </summary>
         /// <param name="clienteId">El id del cliente al cual asociar la interaccion, para buscarlo</param>
         /// <param name="contenido (mensaje,llamada,correo,reunion)">El contenido o descipcion de la interaccion</param>
@@ -241,6 +261,13 @@ namespace Library
 
         /// <summary>
         /// Agrega una nota a una interaccion ya existente.
+        /// Principios que cumple:
+        /// - SRP: Solo agrega una nota a una interacción.
+        /// - EXPERT: La clase conoce cómo ubicar la interacción según tipo/tema y modificarla.
+        /// - Bajo acoplamiento: No asume detalles internos de las interacciones más allá de lo público.
+        /// - Alta cohesion: Todo el método sirve a la intencion de agregar una nota.
+        /// </summary>
+
         /// </summary>
         /// <param name="nota">la nota a ser agregada</param>
         /// <param name="tipointeraccion">recibe un tipo de interaccion, para identificar la interaccion</param>
@@ -280,6 +307,11 @@ namespace Library
 
         /// <summary>
         /// Muestra todas las interaccion de los clientes en base a los paramtros de tipo y fehca, que puden o no brindarse.
+        /// Principios que cumple:
+        /// - SRP: Solo muetrsa interacciones según filtros.
+        /// - EXPERT: Esta clase posee acceso a los repositorios necesarios para encontrar y usar los datos.
+        /// - POLIMORFISMO: Las interacciones se tratan sin conocer su implementación exacta.
+        /// - Alta cohesion: Todo el método se centra en generar el informe de interacciones del cliente.
         /// </summary>
         /// <param name="clienteId">El cliente cuyas interacciones ver.</param>
         /// <param name="usuarioId">El usuarioid para verificar que es un usuario valido</param>
@@ -377,6 +409,11 @@ namespace Library
 
         /// <summary>
         /// Muestra los clientes cuya utlima interaccion fue hace mas de un mes.
+        /// Principios que cumple:
+        /// - SRP: Solo identifica clientes con más de 1 mes sin interacciones.
+        /// - EXPERT: Maneja los datos para conocer la última interacción de cada cliente.
+        /// - Bajo acoplamiento: Debe saber unicamente si usario exite.
+        /// - Alta cohesion: Su unico proposito es dar la informacion que debe obtener.
         /// </summary>
         /// <param name="usuarioId">Para ver los clientes del usuario, y verificar si es un usuario valido</param>
         /// <returns>devuelbe un string con los nombres de los clientes con los cuales el usuario no interacta hace mas de un mes</returns>
@@ -414,7 +451,12 @@ namespace Library
         }
 
         /// <summary>
-        /// Muetra un panel con el nombre de todos los clientes, las interacciones recientes del usuario, y las reuniones proximas
+        /// Muetra un panel con el nombre de todos los clientes, las interacciones recientes del usuario, y las reuniones proximas.
+        /// Principios que cumple:
+        /// - SRP: Solo construye el panel del usuario.
+        /// - EXPERT: Accede a la información para mostrar clientes, interacciones recientes y reuniones.
+        /// - Bajo acoplamiento: Usa repositorios sin conocer detalles internos.
+        /// - Alta cohesion: todoo el método se dedica a hacer un panel con los datos deseados.
         /// </summary>
         /// <param name="usuarioId">Para verificar las interacciones del usuario, y validar si existe.</param>
         /// <returns>debuelve un string con los nombres de todos los clientes, las interacciones del usuario de hace una semana, y sus reuniones que se encuentren registradas para una fecha posterior a la fecha actual.</returns>
@@ -469,10 +511,16 @@ namespace Library
 
         /// <summary>
         /// Agrega los clientes que se pusieron en contacto con el usuario y que aun no les ha respondido.
-        /// </summary>
+        /// /// Principios que cumple:
+        /// - SRP: Cumple SRP porque solo se encarga de agregar un cliente que se contacto,
+        /// sin mezclarse con otras tareas.
+        /// - Bajo acoplamiento: Usa métodos públicos para obtener usuario y cliente,
+        /// sin depender de detalles internos
+        /// - Alta cohesion: La lógica se mantiene centrada en agregar
+        /// a la lista de contactos que se pusieron en contacto.
         /// <param name="usuarioId">El id apra verificar si el usuario exite.</param>
         /// <param name="clienteId">El id del cliente para ver si el cliente existe.</param>
-        /// <returns>debuelve una confirmacion en caso de que se haya agregado correctamente, en caso opuesto, devolbera un error y su explicacion.</returns>
+        /// <returns>devuelve una confirmacion en caso de que se haya agregado correctamente, en caso opuesto, devolbera un error y su explicacion.</returns>
         public string AgregarClienteContacto(string usuarioId, string clienteId)
         {
             Usuario usuario = null;
@@ -512,6 +560,13 @@ namespace Library
 
         /// <summary>
         /// Permite ver los cleintes que se pusieron en contacto con el usuario y que este aun no les haya respondido.
+        /// Principios que cumple:
+        /// - SRP: Cumple SRP porque solo muestra la lista de clientes pendientes.
+        /// No modifica datos ni hace validaciones externas.
+        /// - Bajo acoplamiento: Solo usa propiedades públicas de Usuario y Cliente
+        /// como Nombre y Apellido.
+        /// - Alta cohesion: Toda la lógica se enfoca en obtener y mostrar
+        /// información de contactos pendientes.
         /// </summary>
         /// <param name="usuarioId">Para verificar el si el usuario es valido.</param>
         /// <returns>Devuelbe un string con el nombre de los clientes que se pusieron en contacto.</returns>
@@ -547,7 +602,19 @@ namespace Library
 
             return "Usuario null";
         }
-
+        /// <summary>
+        /// Permite eliminar clientes de la lista de clientesContacta.
+        ///  /// Principios que cumple:
+        /// - SRP: CCumple SRP porque su única responsabilidad es remover
+        /// un cliente de la lista
+        /// - Bajo acoplamiento: Solo usa propiedades públicas de Usuario y Cliente
+        /// como Nombre y Apellido.
+        /// - Alta cohesion:  todoo el método está relacionado con eliminar
+        /// de la lista de cleitnes que se contactaron.
+        /// </summary>
+        /// <param name="usuarioId">id de usuario para verficar si exite y ver sus clientes asociados</param>
+        /// <param name="clienteId">id del cliente a eliminar</param>
+        /// <returns>devuelve la confirmacion si se hizo o no, y cual el problema</returns>
         public string EliminarClienteContacto(string usuarioId, string clienteId)
         {
             Usuario usuario = null;
