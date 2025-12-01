@@ -310,10 +310,11 @@ direction TB
 
 ### Comandos no requeridos por las historias de usuario
 
-| Comando   | Descripción |
-|-----------| --- |
-| <b>!init</b> | Este comando crea un administrador, un usuario, un cliente y un vendedor. Esto para facilitar probar y/o utilizar el resto de comandos. |
-| <b>!verUsuarios</b> | Muestra los usuarios existentes |
+| Comando                                 | Descripción |
+|-----------------------------------------| --- |
+| <b>!init</b>                            | Este comando crea un administrador, un usuario, un cliente y un vendedor. Esto para facilitar probar y/o utilizar el resto de comandos. |
+| <b>!verUsuarios</b>                     | Muestra los usuarios existentes |
+| <b>!crearVendedor</b> vendedorId nombre | Este comando crea un vendedor | 
 
 ## 📜 Notas
 
