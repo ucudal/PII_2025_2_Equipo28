@@ -50,5 +50,6 @@ namespace Library.Tests
             // Assert
             Assert.That(repo.Ventas.Count(), Is.EqualTo(0));
         }
+        
     }
 }
