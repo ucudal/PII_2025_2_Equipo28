@@ -17,8 +17,7 @@ namespace Library.Tests
 
             var cotizacion = new Cotizacion(cliente, fecha, importe);
 
-            string expected =
-                $"Cotización a {cliente.Nombre} {cliente.Apellido}: importe: {importe}, Fecha: {fecha.ToShortDateString()}";
+            string expected = $"Cotización a {cliente.Nombre} {cliente.Apellido}: importe: {importe}, Fecha: {fecha.ToShortDateString()}";
 
             // Act
             string result = cotizacion.Resumen();
