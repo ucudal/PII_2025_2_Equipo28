@@ -144,5 +144,19 @@ namespace Library.Tests
             // Assert
             Assert.That(result, Does.Contain("Ya existe un usuario con el ID: V3"));
         }
+        [Test]
+        public void AsignarCliente_ClienteValido_SeAgregaALaListaDeClientes()
+        {
+            // Arrange
+            var vendedor = new Vendedor("V1", "Apu");
+            var cliente = new Cliente("C1", "Andres", "Pérez", "099 000 000", "andres@mail.com");
+
+            // Act
+            vendedor.AsignarCliente(cliente);
+
+            // Assert
+            Assert.That(vendedor.Clientes.Count, Is.EqualTo(1));
+            Assert.That(vendedor.Clientes[0], Is.EqualTo(cliente));
+        }
     }
 }

@@ -1008,7 +1008,7 @@ namespace Library
             {
                 if (cliente != null)
                 {
-                    return $"Venta registrada: {cliente.Nombre} compró '{producto}' por ${precio} el {fecha}.";
+                    return $"VentaFachada registrada: {cliente.Nombre} compró '{producto}' por ${precio} el {fecha}.";
                 }
 
                 return "no se encontro al cliente";
