@@ -13,9 +13,10 @@ namespace Library
     {
         public string ID { get; protected set; }
         public string Nombre { get; protected set; }
-        private List<Interaccion> InteraccionesUsuario { get; set; } = new List<Interaccion>();
-        private List<Venta> VentasUsuario { get; set; } = new List<Venta>();
-        private List<Cotizacion> CotizacionesUsuario { get; set; } = new List<Cotizacion>();
+        private List<Interaccion> interaccionesUsuario { get; set; } = new List<Interaccion>();
+        private List<Venta> ventasUsuario { get; set; } = new List<Venta>();
+        private List<Cotizacion> cotizacionesUsuario { get; set; } = new List<Cotizacion>();
+        private List<string> recordatorios = new List<string>();
 
         /// <summary>
         /// Constructor de Usuario
@@ -33,9 +34,10 @@ namespace Library
         /// </summary>
         /// <param name="recordatorio">Qué recordatorio es</param>
         /// <param name="fecha">Cuándo es el recordatorio</param>
-        public void Recordatorio(string recordatorio, string fecha)
+        public string Recordatorio(string recordatorio, string fecha)
         {
-            Console.WriteLine($"Recordatorio creado: {recordatorio}, para {fecha}");
+            recordatorios.Add($"{recordatorio} - {fecha}");
+            return $"Recordatorio creado: {recordatorio}, para {fecha}";
         }
 
         /// <summary>
@@ -44,7 +46,7 @@ namespace Library
         /// <param name="venta">Venta a agregar</param>
         public void VentaClienteAdd(Venta venta)
         {
-            VentasUsuario.Add(venta);
+            ventasUsuario.Add(venta);
         }
 
         /// <summary>
@@ -53,7 +55,7 @@ namespace Library
         /// <param name="cotizacion">Cotizacion a agregar</param>
         public void AgregarCotizacion(Cotizacion cotizacion)
         {
-            this.CotizacionesUsuario.Add(cotizacion);
+            this.cotizacionesUsuario.Add(cotizacion);
         }
 
         /// <summary>
@@ -62,7 +64,7 @@ namespace Library
         /// <param name="interaccion">Interaccion a agregar</param>
         public void AgregarInteraccion(Interaccion interaccion)
         {
-            this.InteraccionesUsuario.Add(interaccion);
+            this.interaccionesUsuario.Add(interaccion);
         }
 
         /// <summary>
@@ -71,7 +73,7 @@ namespace Library
         /// <param name="venta">Venta a agregar</param>
         public void AgregarVenta(Venta venta)
         {
-            this.VentasUsuario.Add(venta);
+            this.ventasUsuario.Add(venta);
         }
 
         /// <summary>
@@ -83,7 +85,7 @@ namespace Library
         {
             //Suma importes en el rango [inicio, fin] 
             double total = 0.0;
-            foreach (Venta venta in this.VentasUsuario)
+            foreach (Venta venta in this.ventasUsuario)
             {
                 if (venta.Fecha >= fechaInicio && venta.Fecha <= fechaFin)
                 {
