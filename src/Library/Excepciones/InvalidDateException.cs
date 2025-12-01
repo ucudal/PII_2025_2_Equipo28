@@ -6,5 +6,4 @@ namespace Library
         {
             public InvalidDateException(string message=null,string paraName=null): base(message,paraName){}
         }
-
 }
