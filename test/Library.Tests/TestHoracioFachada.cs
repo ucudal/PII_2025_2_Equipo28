@@ -433,5 +433,52 @@ namespace Library.Tests
             Assert.IsTrue(resultado.Contains("Juan"));
             Assert.IsTrue(resultado.Contains("Maria"));
         }
+
+        [Test]
+        public void ModificarInfo_AgregarEtiqueta_DeberiaAgregarEtiqueta()
+        {
+            fachada.CrearCliente("C1", "Juan", "Perez", "099111222", "juan@correo.com");
+            
+            // "etiqueta" case in ModificarInfo calls AsignarEtiqueta
+            string resultado = fachada.ModificarInfo("C1", "etiqueta", "VIP");
+
+            Assert.IsTrue(resultado.Contains("Se modificó la información")); 
+            
+            var cliente = fachada.BuscarCliente("id", "C1")[0];
+            Assert.IsTrue(cliente.Etiquetas.Contains("VIP"));
+        }
+
+        [Test]
+        public void Cliente_ToString_DeberiaRetornarFormatoCorrecto()
+        {
+            fachada.CrearCliente("C1", "Juan", "Perez", "099111222", "juan@correo.com");
+            var cliente = fachada.BuscarCliente("id", "C1")[0];
+
+            string resultado = cliente.ToString();
+
+            Assert.That(resultado, Is.EqualTo("Juan Perez (juan@correo.com) - Id: C1"));
+        }
+
+        [Test]
+        public void Usuario_Recordatorio_DeberiaImprimirEnConsola()
+        {
+            fachada.CrearAdministrador("A1", "Admin");
+            fachada.CrearUsuario("U1", "User", "A1");
+            Usuario usuario = fachada.BuscarUsuario("U1");
+            
+            Assert.DoesNotThrow(() => usuario.Recordatorio("Reunion", "01/01/2025"));
+        }
+
+        [Test]
+        public void Usuario_ToString_DeberiaRetornarFormatoCorrecto()
+        {
+            fachada.CrearAdministrador("A1", "Admin");
+            fachada.CrearUsuario("U1", "User", "A1");
+            Usuario usuario = fachada.BuscarUsuario("U1");
+
+            string resultado = usuario.ToString();
+
+            Assert.That(resultado, Is.EqualTo("User - Id: U1"));
+        }
     }
 }
