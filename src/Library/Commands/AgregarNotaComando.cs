@@ -18,7 +18,7 @@ namespace Ucu.Poo.DiscordBot.Commands
         /// <summary>
         /// Implementa el comando 'AgregarNota' que agrega una nota a una interaccion. Este comando es para la historia 10.
         /// </summary>
-        [Command("AgregarNota")]
+        [Command("agregarNota")]
         [Summary(
             "Agrega una nota a una interaccion y devuelve una confirmacion de si se hizo en caso de que asi sea, en caso opuesto devuelve un error y su explicacion")]
         // ReSharper disable once UnusedMember.Global
