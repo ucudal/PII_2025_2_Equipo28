@@ -18,7 +18,7 @@ namespace Library
         public string Genero { get; set; }
         public List<string> Etiquetas { get; set; } = new List<string>();
         public string FechaDeNacimiento { get; set; }
-        public Usuario VendedorAsignado { get; private set; }
+        
 
         /// <summary>
         /// Constructor de la clase Cliente
@@ -108,7 +108,7 @@ namespace Library
         /// </summary>
         /// <param name="vendedor">Vendedor que se quiere asignar.</param>
         /// <exception cref="ArgumentNullException">Si el vendedor es null.</exception>
-        public void AsignarVendedor(Usuario vendedor)
+        /*public void AsignarVendedor(Usuario vendedor)
         {
             if (vendedor == null)
             {
@@ -116,7 +116,7 @@ namespace Library
             }
 
             this.VendedorAsignado = vendedor;
-        }
+        }*/
     }
 }
     

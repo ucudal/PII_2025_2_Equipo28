@@ -729,39 +729,7 @@ namespace Library
             return usuario.Nombre;
         }
 
-        /*public void RegistrarVenta(string clienteId, string producto, string fecha,
-            string precio, string usuarioId)
-        {
-            Usuario usuario = this.Usuarios.BuscarUsuario(usuarioId);
-            if (usuario != null)
-            {
-                Cliente cliente = Clientes.BuscarUnCliente(clienteId);
-                if (cliente != null)
-                {
-                    Ventas.AgregarVenta(cliente, fecha, precio, producto, usuario);
-                }
-            }
-        }*/
-
-        /*
-        public void RegistarCotizacion(string clienteId, string fecha,
-            string precio, string usuarioId)
-        {
-            Usuario usuario = this.Usuarios.BuscarUsuario(usuarioId);
-            if (usuario != null)
-            {
-                Cliente cliente = Clientes.BuscarUnCliente(clienteId);
-                if (cliente != null)
-                {
-                    Cotizaciones.AgregarCotizacion(cliente, fecha, precio, usuario);
-                }
-            }
-        }
-        */
-
-        // Como administrador quiero crear, suspender o eliminar usuarios, para mantener control sobre los accesos.
-       
-
+      
         
         /// <summary>
         /// Crea un nuevo usuario en el sistema verificando permisos de administrador.
@@ -862,34 +830,35 @@ namespace Library
         
 
         
-        /*public void AsignarClienteAOtroVendedor(string idVendedorActual, string idVendedorNuevo,
-            string nombreCliente,
-            string apellidoCliente)
-        {
-            Vendedor vendedorActual = this.Usuarios.BuscarVendedor(idVendedorActual);
-            Vendedor vendedorNuevo = this.Usuarios.BuscarVendedor(idVendedorNuevo);
-            // Cliente cliente = Clientes.BuscarUnCliente(nombreCliente, apellidoCliente);
-        
-            // if (vendedorActual != null && vendedorNuevo != null && cliente != null)
-            // {
-            //     vendedorActual.Clientes.Remove(cliente);
-            //     vendedorNuevo.Clientes.Add(cliente);
-            // }
-            // else
-            // {
-            // }
-        }*/
-
+      
         public string AsignarClienteAVendedor(string clienteId, string vendedorId)
         {
-            Usuario vendedor = null;
+            Usuario usuario = null;
             Cliente cliente = null;
+            Vendedor vendedor = null;
 
-            // 1) Buscar vendedor y cliente con manejo de errores "a lo fachada"
             try
             {
-                vendedor = this.Usuarios.BuscarUsuario(vendedorId);
+                // Buscar usuario (que debería ser un vendedor) y cliente
+                usuario = this.Usuarios.BuscarUsuario(vendedorId);
                 cliente = this.Clientes.BuscarUnCliente(clienteId);
+
+                // Si no existe el vendedor, devolvemos mensaje y chau
+                if (usuario == null)
+                {
+                    return $"No se encontro un vendedor con ID '{vendedorId}'.";
+                }
+
+                // Si no existe el cliente, devolvemos mensaje y chau
+                if (cliente == null)
+                {
+                    return $"No se encontro un cliente con ID '{clienteId}'.";
+                }
+
+                // En este punto usuario y cliente NO son null,
+                // ahora sí casteamos y asignamos
+                vendedor = (Vendedor)usuario;
+                vendedor.AsignarCliente(cliente);
             }
             catch (ArgumentNullException e)
             {
@@ -899,20 +868,18 @@ namespace Library
             {
                 return $"{e.Message} {e.ParamName}";
             }
-
-            if (vendedor == null)
+            catch (InvalidCastException)
             {
-                return $"No se encontro un vendedor con ID '{vendedorId}'.";
+                // El objeto existe, pero no es un Vendedor
+                return $"El usuario con ID '{vendedorId}' no es un vendedor.";
             }
 
-            if (cliente == null)
-            {
-                return $"No se encontro un cliente con ID '{clienteId}'.";
-            }
-            
-            
-            return $"El cliente {cliente.Nombre} {cliente.Apellido} fue asignado al vendedor con ID '{vendedorId}'.";
+            // Si llegamos hasta acá, salió todo bien
+            return $"El cliente {cliente.Nombre} {cliente.Apellido} fue asignado al vendedor {vendedor.NombreCompleto} (ID '{vendedor.Id}').";
         }
+
+        
+        
         /// <summary>
         /// Busca clientes en el sistema según un criterio específico.
         /// - SRP: delega la responsabilidad de búsqueda al repositorio de clientes, encargándose solo de formatear la respuesta.
@@ -1125,10 +1092,7 @@ namespace Library
                 usuario = this.Usuarios.BuscarUsuario(usuarioId);
                 cliente = this.Clientes.BuscarUnCliente(clienteId);
 
-                // Registrar cotización
-                // Acá adentro AgregarCotizacion debería:
-                // - validar fecha y lanzar InvalidDateException
-                // - validar datos null/vacíos y lanzar ArgumentNullException / ArgumentException
+                
                 this.Cotizaciones.AgregarCotizacion(cliente, fecha, precio, usuario);
             }
             catch (ArgumentNullException e)
@@ -1160,50 +1124,71 @@ namespace Library
             return "No se encontro al usuario";
         }
         
-        /// <summary>
-        /// Crea un nuevo vendedor en el sistema.
-        /// Aplica Creator: crea instancias de Vendedor y las agrega al repositorio.
-        /// </summary>
-        public Vendedor CrearVendedor(string id, string nombre)
+        
+        public string CrearVendedor(string id, string nombre)
         {
             try
             {
+                // Validaciones de null
                 if (id == null)
                 {
-                    throw new ArgumentNullException(nameof(id), "El ID del vendedor no puede ser nulo");
+                    throw new ArgumentNullException(nameof(id), "El ID del vendedor no puede ser nulo.");
                 }
+
                 if (nombre == null)
                 {
-                    throw new ArgumentNullException(nameof(nombre), "El nombre del vendedor no puede ser nulo");
+                    throw new ArgumentNullException(nameof(nombre), "El nombre del vendedor no puede ser nulo.");
                 }
-                
+
+                // Validaciones de vacío / espacios
                 if (string.IsNullOrWhiteSpace(id))
                 {
-                    throw new ArgumentException("El ID del vendedor no puede estar vacío");
+                    throw new ArgumentException("El ID del vendedor no puede estar vacío.", nameof(id));
                 }
+
                 if (string.IsNullOrWhiteSpace(nombre))
                 {
-                    throw new ArgumentException("El nombre del vendedor no puede estar vacío");
-                }
-                
-                foreach (Vendedor v in Usuarios.Vendedores)
-                {
-                    if (v.Id == id)
-                    {
-                        throw new InvalidOperationException($"Ya existe un vendedor con el ID: {id}");
-                    }
+                    throw new ArgumentException("El nombre del vendedor no puede estar vacío.", nameof(nombre));
                 }
 
+                // Evitar IDs duplicados (en cualquier usuario o vendedor)
+                if (this.Usuarios.BuscarUsuario(id) != null)
+                {
+                    throw new InvalidOperationException($"Ya existe un usuario con el ID: {id}");
+                }
+
+                if (this.Usuarios.BuscarVendedor(id) != null)
+                {
+                    throw new InvalidOperationException($"Ya existe un vendedor con el ID: {id}");
+                }
+
+                // Crear el vendedor
                 Vendedor vendedor = new Vendedor(id, nombre);
-                Usuarios.AgregarVendedor(vendedor);
-                return vendedor;
+
+                // Guardarlo en el repo como vendedor y como usuario
+                this.Usuarios.AgregarVendedor(vendedor);
+                this.Usuarios.AgregarUsuario(vendedor);
+
+                // ✅ Mensaje de éxito para el bot
+                return $"Vendedor {vendedor.NombreCompleto} con ID {vendedor.Id} creado correctamente.";
             }
-            catch (Exception e)
+            catch (ArgumentNullException e)
             {
-                throw;
+                return $"{e.Message} {e.ParamName}";
+            }
+            catch (ArgumentException e)
+            {
+                return e.Message;
+            }
+            catch (InvalidOperationException e)
+            {
+                return e.Message;
+            }
+            catch (Exception)
+            {
+                return "Ocurrió un error inesperado al crear el vendedor.";
             }
         }
-
         /// <summary>
         /// Crea un nuevo administrador en el sistema.
         /// Creator: crea instancias de Administrador y las agrega al repositorio.
@@ -1244,6 +1229,7 @@ namespace Library
             }
             catch (Exception e)
             {
+                Console.WriteLine($"Error: {e.Message}");
                 throw;
             }
         }

@@ -32,7 +32,7 @@ namespace Ucu.Poo.DiscordBot.Commands
             }
             else
             {
-                string mensaje = fachada.AsignarClienteAVendedor( parte[0], parte[1]);
+                string mensaje = fachada.AsignarClienteAVendedor( parte[0],parte[1]);
                 await ReplyAsync($"{mensaje}");
 
             }

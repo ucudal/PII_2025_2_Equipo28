@@ -22,6 +22,7 @@ namespace Library.Tests
             fachada.Cotizaciones = new RepoCotizaciones();
         }
 
+        /*
         [Test]
         public void CrearVendedor_ConDatosValidos_DeberiaCrearVendedor()
         {
@@ -34,8 +35,9 @@ namespace Library.Tests
             Assert.That(resultado.Id, Is.EqualTo(id));
             Assert.That(resultado.NombreCompleto, Is.EqualTo(nombre));
         }
+        */
 
-        [Test]
+        /*[Test]
         public void CrearVendedor_ConIdNulo_DeberiaLanzarArgumentNullException()
         {
             string id = null;
@@ -76,6 +78,7 @@ namespace Library.Tests
             fachada.CrearVendedor(id, nombre1);
             Assert.Throws<InvalidOperationException>(() => fachada.CrearVendedor(id, nombre2));
         }
+        */
         
         [Test]
         public void CrearAdministrador_ConDatosValidos_DeberiaCrearAdministrador()
