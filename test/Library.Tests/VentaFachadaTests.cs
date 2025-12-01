@@ -4,7 +4,7 @@ using Library;
 namespace Library.Tests
 {
     [TestFixture]
-    public class VentaTests
+    public class VentaFachadaTests
     {
         private Fachada fachada;
 
@@ -33,7 +33,7 @@ namespace Library.Tests
             
             Cliente cliente = fachada.Clientes.BuscarUnCliente(clienteId);
 
-            string expected = $"Venta registrada: {cliente.Nombre} compró '{producto}' por ${precio} el {fecha}.";
+            string expected = $"VentaFachada registrada: {cliente.Nombre} compró '{producto}' por ${precio} el {fecha}.";
 
             // Act
             string result = fachada.RegistrarVentaCliente(clienteId, producto, fecha, precio, usuarioId);
@@ -299,6 +299,7 @@ namespace Library.Tests
             // Assert
             Assert.That(result, Is.EqualTo(expected));
         }
+        
     }
 }
     

@@ -7,8 +7,8 @@ namespace Library
 {
     public class RepoVentas
     {
-        private List<Venta> ventas = new List<Venta>();
-        public IEnumerable<Venta> Ventas
+        private List<VentaFachada> ventas = new List<VentaFachada>();
+        public IEnumerable<VentaFachada> Ventas
         {
             get { return ventas; }
         }
@@ -45,8 +45,8 @@ namespace Library
             if (DateTime.TryParseExact(cuando, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None,
                     out fecha))
             {
-                this.ventas.Add(new Venta(cliente,producto, fecha, precio));
-                usuario.AgregarVenta(new Venta(cliente,producto,fecha,precio));
+                this.ventas.Add(new VentaFachada(cliente,producto, fecha, precio));
+                usuario.AgregarVenta(new VentaFachada(cliente,producto,fecha,precio));
             }
             else
             {
