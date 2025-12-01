@@ -405,13 +405,13 @@ namespace Library.Tests
             Assert.AreEqual(resultado,b);
         }
 
-        //[Test]
+        [Test]
         //Necesidad de aplicar trucos con las fechas para que funcione bien
-        /* public void PanelCorrectoTest()
+         public void PanelCorrectoTest()
         {
             DateTime fecha = DateTime.Now.AddDays(-2);
-            DateTime fecha1 = DateTime.Now.AddMonths(10);
-            string fechat = fecha1.Day.ToString() + "/0" + fecha1.Month.ToString() + "/" + fecha1.Year.ToString();
+            DateTime fecha1 = new DateTime(2025,11,10).AddYears(50);
+            string fechat = fecha1.Day.ToString() + "/" + fecha1.Month.ToString() + "/" + fecha1.Year.ToString();
            fachada.RegistrarCorreo("C1", "kaca", "maincra", "U1", $"{fecha.Day.ToString()}/{fecha.Month.ToString()}/{fecha.Year.ToString()}");
            fachada.RegistrarReunion("C1", "keso", "este", "U1", fechat, "nunca");
            Interaccion interaccion = fachada.Interacciones.BuscarInteraccion(usuario, "correo", "maincra");
@@ -420,7 +420,7 @@ namespace Library.Tests
            string esperado =
                $"Los Clientes totales son los siguientes:\nHarry ElSucioPotter\nHermione Granger\nSus interacciones mas recientes son:\nHarry ElSucioPotter. Interaccion de tipo Correo. Tema: maincra\nSus reuniones proximas son:\nTema de la reunion: este. ";
            Assert.That(resultado, Is.EqualTo(esperado));
-        } */
+        } 
 
 //         [TestCase(null, "Value cannot be null. (Parameter 'datos de usuario null')")]
 //         public void InterraccionClienteAusenteNull(string a, string esperado)
