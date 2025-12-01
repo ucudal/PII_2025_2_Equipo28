@@ -1200,7 +1200,6 @@ namespace Library
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Error: {e.Message}");
                 throw;
             }
         }
@@ -1245,7 +1244,6 @@ namespace Library
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Error: {e.Message}");
                 throw;
             }
         }
