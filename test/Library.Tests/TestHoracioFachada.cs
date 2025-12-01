@@ -331,10 +331,7 @@ namespace Library.Tests
 
             fachada.AgregarClienteContacto(idUsuario, idCliente);
             string resultado = fachada.AgregarClienteContacto(idUsuario, idCliente);
-
-            // Basado en la logica actual, lo agrega de nuevo a la lista (List<Cliente>), 
-            // no hay chequeo de duplicados en el metodo AgregarClienteContacto original si ya existe la key.
-            // Pero esperemos que el mensaje sea "cliente agregado"
+            
             Assert.That(resultado, Is.EqualTo("cliente agregado"));
         }
 
@@ -439,7 +436,6 @@ namespace Library.Tests
         {
             fachada.CrearCliente("C1", "Juan", "Perez", "099111222", "juan@correo.com");
             
-            // "etiqueta" case in ModificarInfo calls AsignarEtiqueta
             string resultado = fachada.ModificarInfo("C1", "etiqueta", "VIP");
 
             Assert.IsTrue(resultado.Contains("Se modificó la información")); 

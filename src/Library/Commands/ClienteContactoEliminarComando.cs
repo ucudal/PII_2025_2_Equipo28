@@ -12,13 +12,13 @@ namespace Ucu.Poo.DiscordBot.Commands
     /// Devuele la confirmacion de si se hizo o no.
     /// </summary>
 // ReSharper disable once UnusedType.Global
-    public class ClienteContactaEliminar : ModuleBase<SocketCommandContext>
+    public class ClienteContactoEliminar : ModuleBase<SocketCommandContext>
     {
         private Fachada fachada = Fachada.Instancia;
         /// <summary>
-        /// Implementa el comando 'clienteContactaEliminar' que elimina al cliente de una lista de clientes que se pusieron en contacto. Este comando es para la historia 19.
+        /// Implementa el comando 'clienteContactoEliminar' que elimina al cliente de una lista de clientes que se pusieron en contacto. Este comando es para la historia 19.
         /// </summary>
-        [Command("clienteContactaliminar")]
+        [Command("clienteContactoEliminar")]
         [Summary(
             "elimina de una lista al cliente el cual se puso en contacto con el usuario y este ya le respondio. En caso opuesto devuelve un error y su explicacion")]
         // ReSharper disable once UnusedMember.Global
