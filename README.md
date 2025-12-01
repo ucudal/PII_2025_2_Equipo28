@@ -300,7 +300,7 @@ direction TB
 | Como usuario quiero poder registrar que le envié una cotización a un cliente, cuándo se la mandé y por qué importe es la cotización, para hacer seguimiento de oportunidades de venta. | <b>!registrarCotiz</b> clienteId fecha precio usuarioId |
 | Como usuario quiero ver todas las interacciones de un cliente, con o sin filtro por tipo de interacción y por fecha, para entender el historial de la relación comercial. | <b>!interaccionCliente</b> clienteId usuarioId tipo fecha |
 | Cómo usuario quiero saber los clientes que hace cierto tiempo que no tengo ninguna interacción con ellos, para no peder contacto con ellos. | <b>!clienteAusente</b> usuarioId |
-| Como usuario quiero saber los clientes que se pusieron en contacto conmigo y no les contesté hace cierto tiempo, para no dejar de responder mensajes o llamadas. | <b>!clienteContacto</b> usuarioId |
+| Como usuario quiero saber los clientes que se pusieron en contacto conmigo y no les contesté hace cierto tiempo, para no dejar de responder mensajes o llamadas. | <b>!clienteContactaVer</b> usuarioId </br> <b>!clienteContactoaAgregar</b> usuarioid clienteid </br> <b>!clienteContactoEliminar</b> usuarioid clienteid|
 | Como administrador quiero crear usuarios. | <b>!crearUsuario</b> usuarioId nombre adminId |
 | Como administrador quiero eliminar usuarios. | <b>!eliminarUsuario</b> usuarioId adminId |
 | Como administrador quiero suspender usuarios. | <b>!suspenderUsuario</b> usuarioId adminId |
@@ -308,7 +308,14 @@ direction TB
 | Como usuario quiero saber el total de ventas de un periodo dado, para analizar en rendimiento de mi negocio. | <b>!totalVentas</b> usuarioId fechaInicio fechaFin |
 | Como usuario quiero ver un panel con clientes totales, interacciones recientes y reuniones próximas, para tener un resumen rápido. | <b>!panel</b> usuarioId |
 
+### Comandos no requeridos por las historias de usuario
+
+| Comando   | Descripción |
+|-----------| --- |
+| <b>!init</b> | Este comando crea un administrador, un usuario, un cliente y un vendedor. Esto para facilitar probar y/o utilizar el resto de comandos. |
+| <b>!verUsuarios</b> | Muestra los usuarios existentes |
+
 ## 📜 Notas
 
-Los principales desafios que encontramos al trabajar sobre el proyecto fueron la correcta distribución de responsabilidades entre las clases y sus relaciones entre sí, y el mantener una aplicación consistente de los principios SOLID, además de acostumbrarse a trabajar con y solucionar los conflicos de Git.<br><br>
-En general, el proyecto viene siendo una buena oportunidad para poner en práctica lo visto en clase, tanto lo que se trata de conceptos como de código.
+Los principales desafios que encontramos al trabajar sobre el proyecto fueron la correcta distribución de responsabilidades entre las clases y sus relaciones entre sí, la correcta implementación de los principios SOLID y GRASP, y acostumbrarse a trabajar con Git, que era una herramienta nueva para todos.<br><br>
+En general, el proyecto fue una buena oportunidad para poner en práctica lo visto en clase, tanto lo que se trata de conceptos como de código. 

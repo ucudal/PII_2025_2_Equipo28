@@ -9,18 +9,18 @@ namespace Ucu.Poo.DiscordBot.Commands
 
     /// <summary>
     /// Esta clase implementa el comando 'init' del bot.
-    /// Este comando crea una fachada con un administrador, un usuario y un cliente. Esto para facilitar probar el resto de comandos.
+    /// Este comando crea un administrador, un usuario, un cliente y un vendedor. Esto para facilitar probar y/o utilizar el resto de comandos.
     /// </summary>
 // ReSharper disable once UnusedType.Global
     public class InicializadorComando : ModuleBase<SocketCommandContext>
     {
         private Fachada fachada = Fachada.Instancia;
         /// <summary>
-        /// Implementa el comando 'ping'.
+        /// Implementa el comando 'init'.
         /// </summary>
         [Command("init")]
         [Summary(
-            "Devuelve 'pong'.")]
+            "Crea un administrador, un usuario, un cliente y un vendedor.")]
         // ReSharper disable once UnusedMember.Global
         public async Task ExecuteAsync()
         {
