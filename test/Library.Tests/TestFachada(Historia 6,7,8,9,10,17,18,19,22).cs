@@ -410,9 +410,9 @@ namespace Library.Tests
          public void PanelCorrectoTest()
         {
             DateTime fecha = DateTime.Now.AddDays(-2);
-            DateTime fecha1 = new DateTime(2025,11,10).AddYears(50);
-            string fechat = fecha1.Day.ToString() + "/" + fecha1.Month.ToString() + "/" + fecha1.Year.ToString();
-           fachada.RegistrarCorreo("C1", "kaca", "maincra", "U1", $"{fecha.Day.ToString()}/{fecha.Month.ToString()}/{fecha.Year.ToString()}");
+            DateTime fecha1 = DateTime.Now.AddMonths(10);
+            string fechat = fecha1.ToString("dd/MM/yyyy");
+           fachada.RegistrarCorreo("C1", "kaca", "maincra", "U1", fecha.ToString("dd/MM/yyyy"));
            fachada.RegistrarReunion("C1", "keso", "este", "U1", fechat, "nunca");
            Interaccion interaccion = fachada.Interacciones.BuscarInteraccion(usuario, "correo", "maincra");
            string resultado = (fachada.Panel("U1"));
