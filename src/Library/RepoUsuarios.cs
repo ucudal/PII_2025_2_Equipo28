@@ -230,9 +230,25 @@ namespace Library
         /// <summary>
         /// Devuelve la lista de usuarios
         /// </summary>
-        public List<Usuario> VerUsuarios()
+        public string VerUsuarios()
         {
-            return usuarios;
+            string resultado = "";
+            foreach (Usuario u in this.usuarios)
+            {
+                resultado += u.ToString() + ",";
+            }
+            return resultado;
+        }
+
+        public string VerAdministradores()
+        {
+            string resultado = "";
+            foreach (Administrador administrador in administradores)
+            {
+                resultado += administrador.ToString() + ",";
+            }
+
+            return resultado;
         }
     }
 }

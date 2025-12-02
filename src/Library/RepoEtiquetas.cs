@@ -60,5 +60,19 @@ namespace Library
         {
             this.etiquetas.Clear();
         }
+
+        /// <summary>
+        /// Devuelve todas las etiquetas, separadas por comas.
+        /// </summary>
+        public string VerEtiquetas()
+        {
+            string resultado = "";
+            foreach (string etiqueta in this.Etiquetas)
+            {
+                resultado += $"{etiqueta},";
+            }
+
+            return resultado;
+        }
     }
 }

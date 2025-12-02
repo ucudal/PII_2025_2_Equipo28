@@ -622,13 +622,14 @@ namespace Library
         /// </summary>
         public string CrearEtiqueta(string etiqueta, string idUsuario)
         {
+            etiqueta = etiqueta.Trim();
             Usuario usuario = this.Usuarios.BuscarUsuario(idUsuario);
             if (this.Usuarios.Usuarios.Contains(usuario))
             {
                 try
                 {
-                    Etiquetas.AgregarEtiqueta(etiqueta.Trim());
-                    return "Etiqueta creada correctamente.";
+                    Etiquetas.AgregarEtiqueta(etiqueta);
+                    return $"Etiqueta {etiqueta} creada correctamente.";
                 }
                 catch (ArgumentNullException e)
                 {
@@ -669,6 +670,36 @@ namespace Library
             }
 
             return "El Id del Usuario no se reconoce";
+        }
+
+        /// <summary>
+        /// Devuelve un string con todas las Etiquetas separadas por comas.
+        /// - SRP: Deja la responsabilidad de ver cuáles son todas las Etiquetas a RepoEtiquetas.
+        /// </summary>
+        public string VerEtiquetas()
+        {
+            string resultado = Etiquetas.VerEtiquetas();
+            return resultado;
+        }
+
+        /// <summary>
+        /// Devuelve un string con todos los Administradores separadas por comas.
+        /// - SRP: Deja la responsabilidad de ver cuáles son todos los Administradores a RepoUsuarios.
+        /// </summary>
+        public string VerAdministradores()
+        {
+            string resultado = Usuarios.VerAdministradores();
+            return resultado;
+        }
+
+        /// <summary>
+        /// Devuelve un string con todos los Usuarios separadas por comas.
+        /// - SRP: Deja la responsabilidad de ver cuáles son todos los Usuarios a RepoUsuarios.
+        /// </summary>
+        public string VerUsuarios()
+        {
+            string resultado = Usuarios.VerUsuarios();
+            return resultado;
         }
 
         /// <summary>
