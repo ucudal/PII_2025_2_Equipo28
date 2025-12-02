@@ -18,7 +18,7 @@ namespace Ucu.Poo.DiscordBot.Commands
         /// <summary>
         /// Implementa el comando 'clienteContactoaAgregar' que agrega al cliente a una lista de cleintes que se pusieron en contacto. Este comando es para la historia 19.
         /// </summary>
-        [Command("clienteContactoaAgregar")]
+        [Command("clienteContactaAgregar")]
         [Summary(
             "agrega a una lista al cliente el cual se puso en contacto con el usuario y este aun no le responde. En caso opuesto devuelve un error y su explicacion")]
         // ReSharper disable once UnusedMember.Global

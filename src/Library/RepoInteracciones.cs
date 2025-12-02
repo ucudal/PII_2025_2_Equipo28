@@ -189,8 +189,6 @@ namespace Library
                     return interaccion;
                 }
             }
-
-            Console.WriteLine("No se encontro la interaccion");
             return null;
         }
         /// <summary>
@@ -337,12 +335,12 @@ namespace Library
             {
                 if (UltimaInterracion.ContainsKey(interaccion.Cliente))
                 {
-                    if (UltimaInterracion[interaccion.Cliente].Fecha <= interaccion.Fecha && !(interaccion.Fecha > DateTime.Now))
+                    if (UltimaInterracion[interaccion.Cliente].Fecha <= interaccion.Fecha && interaccion.Fecha <= DateTime.Today)
                     {
                         UltimaInterracion[interaccion.Cliente] = interaccion;
                     }
                 }
-                else
+                else if (interaccion.Fecha <= DateTime.Today)
                 {
                     UltimaInterracion[interaccion.Cliente] = interaccion;
                 }

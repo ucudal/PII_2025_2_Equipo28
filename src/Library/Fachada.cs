@@ -10,7 +10,8 @@ namespace Library
     /// </summary>
     public class Fachada
     {
-        public Dictionary<Usuario, List<Cliente>> ClientesContacto = new Dictionary<Usuario, List<Cliente>>();
+        public RepoClientesContacta__Clientes_que_se_contactaron_ ClientesContacta =
+            new RepoClientesContacta__Clientes_que_se_contactaron_();
         public RepoEtiquetas Etiquetas = new RepoEtiquetas();
         public RepoClientes Clientes;
         public RepoInteracciones Interacciones = new RepoInteracciones();
@@ -282,6 +283,10 @@ namespace Library
             {
                 usuario = this.Usuarios.BuscarUsuario(usuarioId);
                 interaccion = Interacciones.BuscarInteraccion(usuario,tipointeraccion, tema);
+                if (interaccion == null)
+                {
+                    return "no se encontro la interaccion";                
+                }
                 interaccion.AgergarNotas(nota);
             }
             catch (ArgumentNullException e)
@@ -295,11 +300,7 @@ namespace Library
             }
             if (usuario != null)
             {
-                if (interaccion != null)
-                {
                     return "Nota agregada";
-                }
-                return "no se encontro la interaccion";
             }
 
             return "No se encontro al usuario";
@@ -541,21 +542,7 @@ namespace Library
 
             }
 
-            if (usuario != null && cliente != null)
-            {
-                if (!(this.ClientesContacto.ContainsKey(usuario)))
-                {
-                    this.ClientesContacto[usuario] = new List<Cliente>();
-                    this.ClientesContacto[usuario].Add(cliente);
-                }
-                else
-                {
-                    this.ClientesContacto[usuario].Add(cliente);
-                }
-                return "cliente agregado";
-            }
-
-            return "usuario o cliente no puden ser null";
+            return ClientesContacta.AgregarClienteQueSeContacta(usuario, cliente);
         }
 
         /// <summary>
@@ -588,19 +575,7 @@ namespace Library
 
             }
 
-            string clientes = $"Los clientes que se pusieron en contacto contigo son:\n";
-            if (usuario != null)
-            {
-                List<Cliente> lista = ClientesContacto[usuario];
-                foreach (var VARIABLE in lista)
-                {
-                    clientes += $"{VARIABLE.Nombre} {VARIABLE.Apellido}\n";
-                }
-
-                return clientes;
-            }
-
-            return "Usuario null";
+            return ClientesContacta.VerClienteQueSeContacta(usuario);
         }
         /// <summary>
         /// Permite eliminar clientes de la lista de clientesContacta.
@@ -635,24 +610,7 @@ namespace Library
 
             }
 
-            if (usuario != null && cliente != null)
-            {
-                if (this.ClientesContacto.ContainsKey(usuario))
-                {
-                    if (this.ClientesContacto[usuario].Contains(cliente))
-                    {
-                        this.ClientesContacto[usuario].Remove(cliente);
-                        return "cliente eliminado de la lista";
-                    }
-
-                    return "la lisat actual no contiene el cliente que desea eliminar";
-                }
-
-                return "el usuario aun no ah agregado ningun cliente a la lista";
-
-            }
-
-            return "usuario o cliente no puden ser null";
+            return ClientesContacta.EliminarClienteQueSeContacta(usuario, cliente);
         }
 
         

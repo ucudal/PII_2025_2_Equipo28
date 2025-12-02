@@ -25,7 +25,7 @@ namespace Library.Tests
             fachada.Interacciones.EliminarDatos();
             fachada.Etiquetas.EliminarDatos();
             fachada.Clientes.EliminarDatos();
-            fachada.ClientesContacto.Clear();
+            fachada.ClientesContacta.ElminarDatos();
             fachada.CrearAdministrador("A1", "Lansaguisantes");
             fachada.CrearUsuario("U1", "Petaseta", "A1");
             fachada.CrearCliente("C1", "Harry", "ElSucioPotter", "099786435", "Harringy@cabezatermo.com");

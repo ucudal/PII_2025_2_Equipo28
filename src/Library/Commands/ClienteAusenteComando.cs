@@ -25,7 +25,7 @@ namespace Ucu.Poo.DiscordBot.Commands
         public async Task ExecuteAsync([Remainder][Summary("xxx")]string parametros)
         {
             string[] parte = parametros.Split(',');
-            if (parte.Length != 2)
+            if (parte.Length != 1)
             {
                 await ReplyAsync($"Se nececitan 1 parametro usuarioid. Recurda separar los parametros por ','");
 
