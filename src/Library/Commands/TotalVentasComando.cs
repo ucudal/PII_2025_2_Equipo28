@@ -27,7 +27,7 @@ namespace Ucu.Poo.DiscordBot.Commands
             string[] parte = parametros.Split(',');
             if (parte.Length != 3)
             {
-                await ReplyAsync($"Se nececitan 5 parametros. Recurda separar los parametros por ','");
+                await ReplyAsync($"Se nececitan 3 parametros(usuarioid,fechainicio,fechafin). Recurda separar los parametros por ','");
 
             }
             else
