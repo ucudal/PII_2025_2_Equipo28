@@ -31,16 +31,17 @@ namespace Library.Tests
         [Test]
         public void Comando_crearVendedor()
         {
-            // Act
+            // Act 
             string resultado = fachada.CrearVendedor("V1", "Apu");
 
-            // Assert: mensaje del comando
+            // Assert del comando
             Assert.That(resultado, Is.EqualTo("Vendedor Apu con ID V1 creado correctamente."));
 
-            // 
-            var vendedor = fachada.Usuarios.BuscarVendedor("V1");
-            Assert.That(vendedor, Is.Not.Null);
-            Assert.That(vendedor.NombreCompleto, Is.EqualTo("Apu"));
+            // Act 
+            string detalle = fachada.ObtenerVendedorPorId("V1");
+
+            // Assert 
+            Assert.That(detalle, Is.EqualTo("Vendedor Apu con ID V1."));
         }
 
         [Test]
@@ -57,11 +58,19 @@ namespace Library.Tests
         [Test]
         public void Comando_registrarVenta()
         {
-            // Act
+           
+
+            // Act 
             string resultado = fachada.RegistrarVentaCliente("C1", "Mouse gamer", "29/11/2025", "1000", "U1");
 
-            // Assert: 
+            // Assert
             Assert.That(resultado, Is.EqualTo("Venta registrada: Diego compró 'Mouse gamer' por $1000 el 29/11/2025."));
+
+            // Act 
+            string total = fachada.TotalDeVentasEnPeriodo("U1", "29/11/2025", "29/11/2025");
+
+            // Assert 
+            Assert.That(total, Is.EqualTo("Total de ventas desde 29/11/2025 hasta 29/11/2025: $1000"));
         }
 
         [Test]
