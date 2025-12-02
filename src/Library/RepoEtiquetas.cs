@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Reflection.Metadata;
 
@@ -23,10 +24,17 @@ namespace Library
         /// <param name="etiqueta">Etiqueta a agregar</param>
         public void AgregarEtiqueta(string etiqueta)
         {
-            if (!(etiquetas.Contains(etiqueta)))
+            if (string.IsNullOrWhiteSpace(etiqueta))
             {
-                etiquetas.Add(etiqueta);
+                throw new ArgumentNullException("La etiqueta no puede ser null o vacia.");
             }
+
+            if (etiquetas.Contains(etiqueta))
+            {
+                throw new ArgumentException($"La etiqueta {etiqueta} ya existe.");
+            }
+            
+            etiquetas.Add(etiqueta);
         }
 
         /// <summary>

@@ -665,38 +665,22 @@ namespace Library
         public string CrearEtiqueta(string etiqueta, string idUsuario)
         {
             Usuario usuario = this.Usuarios.BuscarUsuario(idUsuario);
-            if (Usuarios.Usuarios.Contains(usuario))
+            if (this.Usuarios.Usuarios.Contains(usuario))
             {
                 try
                 {
-                    if (etiqueta == null)
-                    {
-                        throw new ArgumentNullException("La etiqueta no puede ser nula.");
-                    }
-
-                    if (string.IsNullOrWhiteSpace(etiqueta))
-                    {
-                        throw new ArgumentException("La etiqueta no puede estar vacía.");
-                    }
-
                     Etiquetas.AgregarEtiqueta(etiqueta.Trim());
                     return "Etiqueta creada correctamente.";
                 }
-                catch (ArgumentNullException ex)
+                catch (ArgumentNullException e)
                 {
-                    return $"Error: {ex.Message}";
-                }
-                catch (ArgumentException ex)
-                {
-                    return $"Error: {ex.Message}";
-                }
-                catch (Exception ex)
-                {
-                    return $"Error: {ex.Message}";
+                    return e.Message;
                 }
             }
-
-            return "Solo Usuarios pueden crear Etiquetas.";
+            else
+            {
+                return "No existe el Usuario";
+            }
         }
 
         
@@ -726,11 +710,9 @@ namespace Library
                 return "Solo Usuarios pueden agregar etiquetas a los clientes";
             }
 
-            return usuario.Nombre;
+            return "El Id del Usuario no se reconoce";
         }
 
-      
-        
         /// <summary>
         /// Crea un nuevo usuario en el sistema verificando permisos de administrador.
         /// - SRP: coordina la creación delegando la validación de permisos y persistencia a RepoUsuarios.
@@ -739,25 +721,30 @@ namespace Library
         /// </summary>
         public string CrearUsuario(string id, string nombre, string idAdmin)
         {
-            Usuario admin = this.Usuarios.BuscarAdministrador(idAdmin);
-            if (Usuarios.Administradores.Contains(admin))
+            try
             {
-                if (this.Usuarios.BuscarUsuario(id) != null)
+                Usuario admin = this.Usuarios.BuscarAdministrador(idAdmin);
+                if (Usuarios.Administradores.Contains(admin))
                 {
-                    return $"Ya existe un usuario con el ID '{id}'.";
+                    if (this.Usuarios.BuscarUsuario(id) != null)
+                    {
+                        throw new ArgumentException($"Ya existe un usuario con el ID '{id}'.");
+                    }
+                    
+                    Usuario nuevo = new Usuario(id, nombre);
+                    this.Usuarios.AgregarUsuario(nuevo);
+                    return $"Usuario '{nombre}' (ID: {id}) creado correctamente.";   
                 }
-                
-                Usuario nuevo = new Usuario(id, nombre);
-                this.Usuarios.AgregarUsuario(nuevo);
-                return $"Usuario '{nombre}' (ID: {id}) creado correctamente.";   
+
+                return "Solo Administradores pueden crear Usuarios.";
             }
-
-            return "Solo Administradores pueden crear Usuarios.";
+            catch (ArgumentException e)
+            {
+                return e.Message;
+            }
         }
-
         
         /// <summary>
-        /// Suspende a un usuario activo y lo mueve a la lista de suspendidos.
         /// - SRP: coordina la suspensión delegando la validación de permisos y persistencia a RepoUsuarios.
         /// - Expert: utiliza RepoUsuarios para verificar permisos de administrador y obtener el usuario a suspender.
         /// - Bajo acoplamiento: interactúa con los objetos a través de sus interfaces públicas sin conocer detalles de persistencia.
@@ -889,7 +876,7 @@ namespace Library
         /// </summary>
         public List<Cliente> BuscarCliente(string atributo, string valorBusqueda)
         {
-            List<Cliente> resultadoBusqueda = Clientes.BuscarCliente(atributo, valorBusqueda);
+            List<Cliente> resultadoBusqueda = Clientes.BuscarCliente(atributo, valorBusqueda); 
             return resultadoBusqueda;
         }
 
@@ -900,10 +887,9 @@ namespace Library
         public string CrearCliente(string id, string nombre, string apellido, string telefono, string correo)
         {
             try
-            {
+            {               
                 Cliente nuevo = new Cliente(id, nombre, apellido, telefono, correo);
                 this.Clientes.AgregaCliente(nuevo);
-                
                 return $"Cliente {nuevo} creado correctamente";
             }
             catch (Exception err)
@@ -922,6 +908,8 @@ namespace Library
             {
                 Cliente cliente = Clientes.BuscarCliente("id", id)[0];
                 cliente.ModificarInformacion(atributo, nuevoValor);
+
+
                 
                 return $"Se modificó la información del cliente {cliente.ToString()}. Su {atributo} ahora es {nuevoValor}";
             }
@@ -947,6 +935,14 @@ namespace Library
             catch (NullReferenceException err)
             {
                 return "No se encontró o no existe el cliente";
+            }
+            catch (ArgumentNullException err) 
+            {
+                return "El cliente no puede ser null.";
+            }
+            catch (ArgumentException err)
+            {
+                return "El cliente no se encuentra en la lista.";
             }
         }
 
@@ -1193,44 +1189,21 @@ namespace Library
         /// Crea un nuevo administrador en el sistema.
         /// Creator: crea instancias de Administrador y las agrega al repositorio.
         /// </summary>
-        public Administrador CrearAdministrador(string id, string nombre)
+        public string CrearAdministrador(string id, string nombre)
         {
             try
             {
-                if (id == null)
-                {
-                    throw new ArgumentNullException(nameof(id), "El ID del administrador no puede ser nulo");
-                }
-                if (nombre == null)
-                {
-                    throw new ArgumentNullException(nameof(nombre), "El nombre del administrador no puede ser nulo");
-                }
-                
-                if (string.IsNullOrWhiteSpace(id))
-                {
-                    throw new ArgumentException("El ID del administrador no puede estar vacío");
-                }
-                if (string.IsNullOrWhiteSpace(nombre))
-                {
-                    throw new ArgumentException("El nombre del administrador no puede estar vacío");
-                }
-
-                foreach (Administrador a in Usuarios.Administradores)
-                {
-                    if (a.ID == id)
-                    {
-                        throw new InvalidOperationException($"Ya existe un administrador con el ID: {id}");
-                    }
-                }
-
                 Administrador administrador = new Administrador(id, nombre);
                 Usuarios.AgregarAdministraodr(administrador);
-                return administrador;
+                return $"Administrador con nombre {nombre} e Id {id} creado correctamente";
             }
-            catch (Exception e)
+            catch (InvalidOperationException e)
             {
-                Console.WriteLine($"Error: {e.Message}");
-                throw;
+                return e.Message;
+            }
+            catch (ArgumentException e)
+            {
+                return e.Message;
             }
         }
     }

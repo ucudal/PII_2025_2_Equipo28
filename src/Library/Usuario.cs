@@ -25,6 +25,14 @@ namespace Library
         /// <param name="nombre">Nombre del usuario</param>
         public Usuario(string id,string nombre)
         {
+            if (string.IsNullOrWhiteSpace(id)) {
+                throw new ArgumentException("El ID no puede estar vacío.");
+            }
+
+            if (string.IsNullOrWhiteSpace(nombre)) {
+                throw new ArgumentException("El nombre no puede estar vacío.");
+            }
+
             this.ID = id;
             this.Nombre = nombre;
         }

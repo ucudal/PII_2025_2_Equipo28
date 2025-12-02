@@ -21,64 +21,6 @@ namespace Library.Tests
             fachada.Ventas = new RepoVentas();
             fachada.Cotizaciones = new RepoCotizaciones();
         }
-
-        /*
-        [Test]
-        public void CrearVendedor_ConDatosValidos_DeberiaCrearVendedor()
-        {
-            string id = "V1";
-            string nombre = "Juan Vendedor";
-
-            Vendedor resultado = fachada.CrearVendedor(id, nombre);
-
-            Assert.IsNotNull(resultado);
-            Assert.That(resultado.Id, Is.EqualTo(id));
-            Assert.That(resultado.NombreCompleto, Is.EqualTo(nombre));
-        }
-        */
-
-        /*[Test]
-        public void CrearVendedor_ConIdNulo_DeberiaLanzarArgumentNullException()
-        {
-            string id = null;
-            string nombre = "Juan Vendedor";
-            Assert.Throws<ArgumentNullException>(() => fachada.CrearVendedor(id, nombre));
-        }
-
-        [Test]
-        public void CrearVendedor_ConNombreNulo_DeberiaLanzarArgumentNullException()
-        {
-            string id = "V1";
-            string nombre = null;
-            Assert.Throws<ArgumentNullException>(() => fachada.CrearVendedor(id, nombre));
-        }
-
-        [Test]
-        public void CrearVendedor_ConIdVacio_DeberiaLanzarEmptyStringException()
-        {
-            string id = "";
-            string nombre = "Juan Vendedor";
-            Assert.Throws<ArgumentException>(() => fachada.CrearVendedor(id, nombre));
-        }
-
-        [Test]
-        public void CrearVendedor_ConNombreVacio_DeberiaLanzarEmptyStringException()
-        {
-            string id = "V1";
-            string nombre = "   ";
-            Assert.Throws<ArgumentException>(() => fachada.CrearVendedor(id, nombre));
-        }
-
-        [Test]
-        public void CrearVendedor_ConIdDuplicado_DeberiaLanzarInvalidOperationException()
-        {
-            string id = "U1";
-            string nombre1 = "Juan Vendedor";
-            string nombre2 = "Pedro Vendedor";
-            fachada.CrearVendedor(id, nombre1);
-            Assert.Throws<InvalidOperationException>(() => fachada.CrearVendedor(id, nombre2));
-        }
-        */
         
         [Test]
         public void CrearAdministrador_ConDatosValidos_DeberiaCrearAdministrador()
@@ -86,45 +28,55 @@ namespace Library.Tests
             string id = "A1";     
             string nombre = "Juan Admin";
 
-            Administrador resultado = fachada.CrearAdministrador(id, nombre);
+            string resultado = fachada.CrearAdministrador(id, nombre);
 
-            Assert.IsNotNull(resultado);
-            Assert.That(resultado.ID, Is.EqualTo(id));
-            Assert.That(resultado.Nombre, Is.EqualTo(nombre));
+            Assert.That(resultado.Contains("creado correctamente"));
         }
 
         [Test]
-        public void CrearAdministrador_ConIdNulo_DeberiaLanzarArgumentNullException()
+        public void CrearAdministrador_ConIdNulo_DeberiaRetornarMensajeError()
         {
             string id = null;
             string nombre = "Juan Admin";
-            Assert.Throws<ArgumentNullException>(() => fachada.CrearAdministrador(id, nombre));
+            
+            string resultado = fachada.CrearAdministrador(id, nombre);
+            
+            Assert.That(resultado, Does.Contain("El ID no puede estar vacío."));
         }
 
         [Test]
-        public void CrearAdministrador_ConNombreNulo_DeberiaLanzarArgumentNullException()
+        public void CrearAdministrador_ConNombreNulo_DeberiaRetornarMensajeError()
         {
             string id = "A1";
             string nombre = null;
-            Assert.Throws<ArgumentNullException>(() => fachada.CrearAdministrador(id, nombre));
+            
+            string resultado = fachada.CrearAdministrador(id, nombre);
+            
+            Assert.That(resultado, Does.Contain("El nombre no puede estar vacío."));
         }
 
         [Test]
-        public void CrearAdministrador_ConIdVacio_DeberiaLanzarEmptyStringException()
+        public void CrearAdministrador_ConIdVacio_DeberiaRetornarMensajeError()
         {
             string id = "";
             string nombre = "Juan Admin";
-            Assert.Throws<ArgumentException>(() => fachada.CrearAdministrador(id, nombre));
+            
+            string resultado = fachada.CrearAdministrador(id, nombre);
+            
+            Assert.That(resultado, Does.Contain("El ID no puede estar vacío."));
         }
 
         [Test]
-        public void CrearAdministrador_ConIdDuplicado_DeberiaLanzarInvalidOperationException()
+        public void CrearAdministrador_ConIdDuplicado_DeberiaRetornarMensajeError()
         {
             string id = "B1";
             string nombre1 = "Juan Admin";
             string nombre2 = "Pepe Admin";
             fachada.CrearAdministrador(id, nombre1);
-            Assert.Throws<InvalidOperationException>(() => fachada.CrearAdministrador(id, nombre2));
+            
+            string resultado = fachada.CrearAdministrador(id, nombre2);
+            
+            Assert.That(resultado, Does.Contain("Ya existe un administrador"));
         }
         
         [Test]

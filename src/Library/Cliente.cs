@@ -30,6 +30,30 @@ namespace Library
         /// <param name="correo">Correo del Cliente</param>
         public Cliente(string id, string nombre, string apellido, string telefono, string correo)
         {
+            if (string.IsNullOrWhiteSpace(id)) {
+                throw new ArgumentException("El ID no puede estar vacío.");
+            }
+
+            if (string.IsNullOrWhiteSpace(nombre))
+            {
+                throw new ArgumentException("El nombre no puede estar vacío.");
+            } 
+
+            if (string.IsNullOrWhiteSpace(apellido))
+            {
+                throw new ArgumentException("El apellido no puede estar vacío.");
+            }
+
+            if (string.IsNullOrWhiteSpace(telefono))
+            {
+                throw new ArgumentException("El telefono no puede estar vacío.");
+            }
+
+            if (string.IsNullOrWhiteSpace(correo))
+            {
+                throw new ArgumentException("El correo no puede estar vacío.");
+            }
+
             Id = id;
             Nombre = nombre;
             Apellido = apellido;
@@ -77,10 +101,6 @@ namespace Library
                 case "fechadenacimiento":
                     this.FechaDeNacimiento = nuevoValor;
                     break;
-
-                default:
-                    Console.WriteLine($"Atributo '{atributo}' no reconocido.");
-                    break;
             }
         }
         
@@ -88,10 +108,10 @@ namespace Library
         /// Asigna una etiqueta al cliente
         /// </summary>
         /// <param name="nuevaEtiqueta">Etiqueta a asignar</param>
-        public void AsignarEtiqueta(string nuevaEtiqueta)
+        public string AsignarEtiqueta(string nuevaEtiqueta)
         {
             Etiquetas.Add(nuevaEtiqueta);
-            Console.WriteLine($"Se asignó la etiqueta '{nuevaEtiqueta}' a {Nombre}");
+            return $"Se asignó la etiqueta '{nuevaEtiqueta}' a {Nombre}";
         }
         
         /// <summary>
