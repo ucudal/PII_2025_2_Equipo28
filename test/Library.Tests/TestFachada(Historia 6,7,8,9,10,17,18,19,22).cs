@@ -26,7 +26,7 @@ namespace Library.Tests
             fachada.Interacciones.EliminarDatos();
             fachada.Etiquetas.EliminarDatos();
             fachada.Clientes.EliminarDatos();
-            fachada.ClientesContacto.Clear();
+            fachada.ClientesContacta.ElminarDatos();
             fachada.CrearAdministrador("A1", "Lansaguisantes");
             fachada.CrearUsuario("U1", "Petaseta", "A1");
             fachada.CrearCliente("C1", "Harry", "ElSucioPotter", "099786435", "Harringy@cabezatermo.com");
@@ -464,8 +464,8 @@ namespace Library.Tests
           public void AgregarClienteContactoTest()
           {
               fachada.AgregarClienteContacto("U1", "C1");
-              Cliente esperado = fachada.ClientesContacto[usuario][0];
-              Assert.That(cliente1,Is.EqualTo(esperado));
+              string resultado = fachada.VerClienteContacto("U1");
+              Assert.That(resultado,Does.Contain(cliente1.Nombre));
           }
          [Test]
           public void VerClienteContactoTest()
@@ -483,8 +483,8 @@ namespace Library.Tests
               fachada.AgregarClienteContacto("U1", "C1");
               fachada.AgregarClienteContacto("U1", "C2");
               fachada.EliminarClienteContacto("U1", "C1");
-              int resultado = fachada.ClientesContacto[usuario].Count;
-              Assert.That(resultado, Is.EqualTo(1));
+              string resultado = fachada.VerClienteContacto("U1");
+              Assert.That(resultado, Does.Not.Contain(cliente1.Nombre));
           }
 //
          [TestCase(null, "C1", "Value cannot be null. (Parameter 'datos de usuario null') datos de usuario null")]

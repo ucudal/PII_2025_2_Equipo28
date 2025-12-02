@@ -19,7 +19,7 @@ namespace Library.Tests
             fachada.Interacciones.EliminarDatos();
             fachada.Etiquetas.EliminarDatos();
             fachada.Clientes.EliminarDatos();
-            fachada.ClientesContacto.Clear();
+            fachada.ClientesContacta.ElminarDatos();
             fachada.Ventas.EliminarDatos();   // para que no queden ventas viejas
 
             // Datos base para las pruebas
