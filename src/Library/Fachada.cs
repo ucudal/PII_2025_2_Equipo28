@@ -622,14 +622,13 @@ namespace Library
         /// </summary>
         public string CrearEtiqueta(string etiqueta, string idUsuario)
         {
-            etiqueta = etiqueta.Trim();
-            Usuario usuario = this.Usuarios.BuscarUsuario(idUsuario);
-            if (this.Usuarios.Usuarios.Contains(usuario))
+            Usuario usuario = Usuarios.BuscarUsuario(idUsuario);
+            if (Usuarios.Usuarios.Contains(usuario))
             {
                 try
                 {
-                    Etiquetas.AgregarEtiqueta(etiqueta);
-                    return $"Etiqueta {etiqueta} creada correctamente.";
+                    Etiquetas.CrearEtiqueta(etiqueta.Trim());
+                    return $"Etiqueta {etiqueta.Trim()} creada correctamente.";
                 }
                 catch (ArgumentNullException e)
                 {
@@ -721,7 +720,7 @@ namespace Library
                     }
                     
                     Usuario nuevo = new Usuario(id, nombre);
-                    this.Usuarios.AgregarUsuario(nuevo);
+                    Usuarios.AgregarUsuario(nuevo);
                     return $"Usuario '{nombre}' (ID: {id}) creado correctamente.";   
                 }
 
@@ -751,6 +750,7 @@ namespace Library
             {
                 Usuarios.EliminarUsuario(usuario);
                 UsuariosSuspendidos.Add(usuario);
+                Usuarios.SuspenderUsuario(usuario);
                 return $" El usuario '{usuario.Nombre}' ha sido suspendido correctamente.";   
             }
 

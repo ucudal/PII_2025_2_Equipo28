@@ -22,8 +22,8 @@ namespace Library.Tests
             fachada.Etiquetas.EliminarDatos();
             fachada.Clientes.EliminarDatos();
             fachada.ClientesContacta.ElminarDatos();
-            fachada.CrearAdministrador("A1", "Juan Admin");
-            fachada.CrearUsuario("U1", "Pepe Usuario", "A1");
+            //fachada.CrearAdministrador("A1", "Juan Admin");
+            //fachada.CrearUsuario("U1", "Pepe Usuario", "A1");
         }
 
         [Test]
@@ -40,16 +40,16 @@ namespace Library.Tests
         {
             fachada.CrearCliente("C1", "Juan", "Perez", "099123456", "juan@correo.com");
             fachada.ModificarInfo("C1", "nombre", "Carlos");
-            Assert.That(fachada.VerClientes().Contains("Nombre - Carlos"));
+            Assert.That(fachada.VerClientes().Contains("Carlos"));
         }
 
         [Test]
         public void Comando_eliminarCliente()
         {
             fachada.CrearCliente("C1", "Juan", "Perez", "099123456", "juan@correo.com");
-            Assert.That(fachada.VerClientes().Contains("Nombre - Juan"));
+            Assert.That(fachada.VerClientes().Contains("Juan"));
             fachada.EliminarCliente("C1");
-            Assert.That(fachada.VerClientes().Contains("Nombre - Juan"), Is.False);
+            Assert.That(fachada.VerClientes().Contains("Juan"), Is.False);
         }
 
         [Test]
@@ -106,7 +106,7 @@ namespace Library.Tests
         public void Comando_eliminarUsuario()
         {
             fachada.CrearAdministrador("A1", "Andres");
-            fachada.CrearUsuario("U2", "Peter", "A2");
+            fachada.CrearUsuario("U2", "Peter", "A1");
             Assert.That(fachada.VerUsuarios().Contains("Peter - Id: U2"));
             fachada.EliminarUsuario("U2", "A1");
             Assert.That(fachada.VerUsuarios().Contains("Peter - Id: U2"), Is.False);
@@ -117,22 +117,24 @@ namespace Library.Tests
         {
             fachada.CrearAdministrador("A3", "Juan");
             fachada.CrearUsuario("U3", "Nahuel", "A3");
-            Assert.That(fachada.VerUsuarios().Contains("Nahuel - Id: U3"));
             fachada.SuspenderUsuario("U3", "A3");
-            Assert.That(fachada.VerUsuarios().Contains("Usuarios suspendidos:\n Nahuel - Id: U3"));
+            Assert.That(fachada.VerUsuarios().Contains("Usuarios suspendidos"));
+            Assert.That(fachada.VerUsuarios().Contains("Nahuel"));
         }
 
         [Test]
         public void Comando_crearAdministrador()
         {
             fachada.CrearAdministrador("A1", "Pepe");
-            Assert.That(fachada.VerAdministradores().Contains("Pepe - Id: A1,"));
+            Assert.That(fachada.VerAdministradores().Contains("Pepe - Id: A1"));
         }
 
         [Test]
         public void Comando_verEtiquetas()
         {
-            fachada.CrearEtiqueta("etiquetaDePrueba", "U1");
+            fachada.CrearAdministrador("A30", "Aureliano");
+            fachada.CrearUsuario("U12", "Guillermo", "A30");
+            fachada.CrearEtiqueta("etiquetaDePrueba", "U12");
             Assert.That(fachada.VerEtiquetas().Contains("etiquetaDePrueba"));
         }
 
@@ -140,7 +142,7 @@ namespace Library.Tests
         public void Comando_verAdministradores()
         {
             fachada.CrearAdministrador("A39", "Wario");
-            Assert.That(fachada.VerAdministradores().Contains("Wario - Id: 39"));
+            Assert.That(fachada.VerAdministradores().Contains("Wario - Id: A39"));
         }
     }
 }

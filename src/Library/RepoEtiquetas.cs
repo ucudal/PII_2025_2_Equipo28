@@ -22,7 +22,7 @@ namespace Library
         /// Agrega una etiqueta a la lista de etiquetas
         /// </summary>
         /// <param name="etiqueta">Etiqueta a agregar</param>
-        public void AgregarEtiqueta(string etiqueta)
+        public void CrearEtiqueta(string etiqueta)
         {
             if (string.IsNullOrWhiteSpace(etiqueta))
             {
@@ -66,10 +66,10 @@ namespace Library
         /// </summary>
         public string VerEtiquetas()
         {
-            string resultado = "";
-            foreach (string etiqueta in this.Etiquetas)
+            string resultado = "Etiquetas totales son:";
+            foreach (string etiqueta in etiquetas)
             {
-                resultado += $"{etiqueta},";
+                resultado += $"{etiqueta}\n";
             }
 
             return resultado;
