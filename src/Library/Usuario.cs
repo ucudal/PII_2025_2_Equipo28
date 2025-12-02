@@ -14,7 +14,7 @@ namespace Library
         public string ID { get; protected set; }
         public string Nombre { get; protected set; }
         private List<Interaccion> interaccionesUsuario { get; set; } = new List<Interaccion>();
-        private List<Venta> ventasUsuario { get; set; } = new List<Venta>();
+        private List<VentaFachada> ventasUsuario { get; set; } = new List<VentaFachada>();
         private List<Cotizacion> cotizacionesUsuario { get; set; } = new List<Cotizacion>();
         private List<string> recordatorios = new List<string>();
 
@@ -25,6 +25,14 @@ namespace Library
         /// <param name="nombre">Nombre del usuario</param>
         public Usuario(string id,string nombre)
         {
+            if (string.IsNullOrWhiteSpace(id)) {
+                throw new ArgumentException("El ID no puede estar vacío.");
+            }
+
+            if (string.IsNullOrWhiteSpace(nombre)) {
+                throw new ArgumentException("El nombre no puede estar vacío.");
+            }
+
             this.ID = id;
             this.Nombre = nombre;
         }
@@ -41,12 +49,12 @@ namespace Library
         }
 
         /// <summary>
-        /// Agrega una venta al usuario
+        /// Agrega una ventaFachada al usuario
         /// </summary>
-        /// <param name="venta">Venta a agregar</param>
-        public void VentaClienteAdd(Venta venta)
+        /// <param name="ventaFachada">VentaFachada a agregar</param>
+        public void VentaClienteAdd(VentaFachada ventaFachada)
         {
-            ventasUsuario.Add(venta);
+            ventasUsuario.Add(ventaFachada);
         }
 
         /// <summary>
@@ -68,12 +76,12 @@ namespace Library
         }
 
         /// <summary>
-        /// Agrega una venta al usuario
+        /// Agrega una ventaFachada al usuario
         /// </summary>
-        /// <param name="venta">Venta a agregar</param>
-        public void AgregarVenta(Venta venta)
+        /// <param name="ventaFachada">VentaFachada a agregar</param>
+        public void AgregarVenta(VentaFachada ventaFachada)
         {
-            this.ventasUsuario.Add(venta);
+            this.ventasUsuario.Add(ventaFachada);
         }
 
         /// <summary>
@@ -85,7 +93,7 @@ namespace Library
         {
             //Suma importes en el rango [inicio, fin] 
             double total = 0.0;
-            foreach (Venta venta in this.ventasUsuario)
+            foreach (VentaFachada venta in this.ventasUsuario)
             {
                 if (venta.Fecha >= fechaInicio && venta.Fecha <= fechaFin)
                 {

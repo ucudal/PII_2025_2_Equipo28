@@ -8,16 +8,16 @@ namespace Library
     // contiene información sobre el cliente, el producto, la fecha y el importe.
     //
     // Expert 
-    // Venta es la experta en manejar su propia información, ya que contiene todos los datos
+    // VentaFachada es la experta en manejar su propia información, ya que contiene todos los datos
     // necesarios para describir la venta y generar un resumen.
-    public class Venta
+    public class VentaFachada
     {
         public Cliente Cliente { get; set; }
         public string Producto { get; set; }
         public DateTime Fecha { get; set; }
         public string Importe { get; set; }
 
-        public Venta(Cliente cliente, string producto, DateTime fecha, string importe)
+        public VentaFachada(Cliente cliente, string producto, DateTime fecha, string importe)
         {
             Cliente = cliente;
             Producto = producto;

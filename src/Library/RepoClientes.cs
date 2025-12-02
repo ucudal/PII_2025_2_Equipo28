@@ -50,6 +50,15 @@ namespace Library
         /// <param name="cliente">Cliente a eliminar</param>
         public void EliminarCliente(Cliente cliente)
         {
+            if (cliente == null)
+            {
+                throw new ArgumentNullException("El cliente no puede ser null.");
+            }
+            
+            if (!this.clientes.Contains(cliente))
+            {
+                throw new ArgumentException("El cliente no se encuentra en la lista.");
+            }
             bool removed = this.clientes.Remove(cliente);
         }
 
@@ -60,6 +69,17 @@ namespace Library
         /// <param name="valorBusqueda">Valor de busqueda</param>
         public List<Cliente> BuscarCliente(string atributo, string valorBusqueda)
         {
+            if (string.IsNullOrWhiteSpace(atributo) || string.IsNullOrWhiteSpace(valorBusqueda))
+            {
+                throw new ArgumentNullException("El atributo o el valor de busqueda no pueden ser vacios.");
+            }
+
+            List<string> atributos = new List<string>(){"id", "nombre", "apellido", "telefono", "correo", "genero", "fechadenacimiento"};
+            if (!atributos.Contains(atributo.ToLower()))
+            {
+                throw new ArgumentException("El atributo no es valido.");
+            }
+            
             string attr = atributo.Trim().ToLower();
             string val = valorBusqueda.Trim();
 

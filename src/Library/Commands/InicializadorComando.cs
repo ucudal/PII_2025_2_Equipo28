@@ -20,7 +20,7 @@ namespace Ucu.Poo.DiscordBot.Commands
         /// </summary>
         [Command("init")]
         [Summary(
-            "Crea un administrador, un usuario, un cliente y un vendedor.")]
+            "Crea un administrador, un usuario, un cliente.")]
         // ReSharper disable once UnusedMember.Global
         public async Task ExecuteAsync()
         {
@@ -29,7 +29,7 @@ namespace Ucu.Poo.DiscordBot.Commands
             fachada.CrearCliente("C1", "Andres", "Pérez", "099 298 626", "andres@mail.com");
            
             string respuesta =
-                "Inicializado correctamente. \n\nEste comando creo: \nEl Administrador Pepe con el ID: A1\nEl Usuario Juan con el ID: U1\nEl Cliente Andres con el ID: C1\nEl Vendedor Apu con el ID: V1";
+                "Inicializado correctamente. \n\nEste comando creo: \nEl Administrador Pepe con el ID: A1\nEl Usuario Juan con el ID: U1\nEl Cliente Andres con el ID: C1";
             
             await ReplyAsync(respuesta);
         }

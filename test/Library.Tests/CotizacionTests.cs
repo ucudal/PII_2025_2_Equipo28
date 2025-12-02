@@ -1,4 +1,3 @@
-/*
 using NUnit.Framework;
 using Library;
 
@@ -8,115 +7,133 @@ namespace Library.Tests
     public class CotizacionTests
     {
         private Fachada fachada;
-        private Cliente cliente;
-        private string usuarioId;
-        private string adminId;
 
         [SetUp]
         public void Setup()
         {
+            // Usamos la fachada singleton
             fachada = Fachada.Instancia;
 
-            /#1#/ Limpiar estado del singleton
-            fachada.Usuarios.Usuarios.Clear();
-            fachada.Usuarios.Administradores.Clear();
-            fachada.Usuarios.Vendedores.Clear();
-            fachada.Usuarios.ClientesTotales.Clear();
-            fachada.UsuariosSuspendidos.Clear();
-            #1#
-
-            // Crear admin y luego crear el usuario con ese admin
-            adminId = "A1";
-            fachada.CrearAdministrador(adminId, "Admin A1");
-
-            usuarioId = "U001";
-            fachada.CrearUsuario(usuarioId, "Matteo", adminId);
-
-            // Asegurar listas del usuario limpias (por si hay residuos de otras pruebas)
-            fachada.BuscarUsuario(usuarioId).CotizacionesUsuario.Clear();
-
-            // Crear cliente y registrarlo en repo
-            cliente = new Cliente("C001", "Juan", "Pérez", "099123123", "jperez@mail.com");
-            fachada.Clientes.AgregaCliente(cliente);
+            // Al menos limpiamos usuarios para evitar IDs duplicados entre tests
+            fachada.Usuarios.EliminarDatos();
         }
 
         [Test]
         public void RegistrarCotizacionCliente_DatosValidos_RetornaMensajeExito()
         {
             // Arrange
-            string expected = "Cotización registrada: se envió a Juan por $250 el 10/11/2025.";
+            fachada.CrearAdministrador("AC1", "Pepe");
+            fachada.CrearUsuario("UC1", "Juan", "AC1");
+            fachada.CrearCliente("CC1", "Andres", "Pérez", "099 123 456", "andres@mail.com");
+
+            string clienteId = "CC1";
+            string usuarioId = "UC1";
+            string fecha = "01/12/2025";
+            string precio = "1500";
+
+            // Tomo el cliente REAL desde el repo (por si ya existía con otro nombre)
+            Cliente cliente = fachada.Clientes.BuscarUnCliente(clienteId);
+
+            string expected =
+                $"Cotización registrada: se envió a {cliente.Nombre} por ${precio} el {fecha}.";
 
             // Act
-            string result = fachada.RegistrarCotizacionCliente(cliente.Id, "10/11/2025", "250", usuarioId);
+            string result = fachada.RegistrarCotizacionCliente(clienteId, fecha, precio, usuarioId);
 
             // Assert
             Assert.That(result, Is.EqualTo(expected));
         }
 
         [Test]
-        public void RegistrarCotizacionCliente_UsuarioNoExiste_RetornaError()
+        public void RegistrarCotizacionCliente_UsuarioIdNull_RetornaErrorArgumentNull()
         {
             // Arrange
-            string expected = "Error: no se encontró un usuario con ID 'U999'.";
+            string clienteId = "CC2";
+            string fecha = "01/12/2025";
+            string precio = "1000";
 
             // Act
-            string result = fachada.RegistrarCotizacionCliente(cliente.Id, "10/11/2025", "250", "U999");
+            string result = fachada.RegistrarCotizacionCliente(clienteId, fecha, precio, null);
 
             // Assert
-            Assert.That(result, Is.EqualTo(expected));
+            // RepoUsuarios lanza: new ArgumentNullException("datos de usuario null");
+            Assert.That(result, Does.Contain("datos de usuario null"));
         }
 
         [Test]
-        public void RegistrarCotizacionCliente_ClienteNoExiste_RetornaError()
+        public void RegistrarCotizacionCliente_UsuarioIdVacio_RetornaErrorArgumentException()
         {
             // Arrange
-            string expected = "Error: no se encontró un cliente con ID 'C999'.";
+            string clienteId = "CC3";
+            string fecha = "01/12/2025";
+            string precio = "1000";
 
-            // Act  (OJO: usar usuarioId correcto, no cliente.Id)
-            string result = fachada.RegistrarCotizacionCliente("C999", "10/11/2025", "250", usuarioId);
+            // Act
+            string result = fachada.RegistrarCotizacionCliente(clienteId, fecha, precio, "");
 
             // Assert
-            Assert.That(result, Is.EqualTo(expected));
+            // RepoUsuarios lanza: new ArgumentException("datos de usuario vacios");
+            Assert.That(result, Does.Contain("datos de usuario vacios"));
         }
 
         [Test]
-        public void RegistrarCotizacionCliente_FechaInvalida_RetornaError()
+        public void RegistrarCotizacionCliente_FechaInvalida_RetornaErrorInvalidDate()
         {
             // Arrange
-            string expected = "Error: la fecha ingresada no es válida.";
+            fachada.CrearAdministrador("AC2", "Pepe");
+            fachada.CrearUsuario("UC2", "Juan", "AC2");
+            fachada.CrearCliente("CC4", "Andres", "Pérez", "099 999 999", "andres@mail.com");
+
+            string clienteId = "CC4";
+            string usuarioId = "UC2";
+            string fechaInvalida = "fecha-mala";
+            string precio = "2000";
 
             // Act
-            string result = fachada.RegistrarCotizacionCliente(cliente.Id, "99/99/9999", "250", usuarioId);
+            string result = fachada.RegistrarCotizacionCliente(clienteId, fechaInvalida, precio, usuarioId);
 
             // Assert
-            Assert.That(result, Is.EqualTo(expected));
+            // InvalidDateException debería hablar de la fecha
+            Assert.That(result, Does.Contain("fecha"));
         }
 
         [Test]
-        public void RegistrarCotizacionCliente_PrecioVacio_RetornaError()
+        public void RegistrarCotizacionCliente_ClienteNoExiste_RetornaErrorClienteNull()
         {
             // Arrange
-            string expected = "Error: uno o más campos están vacíos.";
+            fachada.CrearAdministrador("AC3", "Pepe");
+            fachada.CrearUsuario("UC3", "Juan", "AC3");
+            // NO creo el cliente CC99
+            string clienteIdInexistente = "CC99";
+            string usuarioId = "UC3";
+            string fecha = "01/12/2025";
+            string precio = "2000";
 
             // Act
-            string result = fachada.RegistrarCotizacionCliente(cliente.Id, "10/11/2025", "", usuarioId);
+            string result = fachada.RegistrarCotizacionCliente(clienteIdInexistente, fecha, precio, usuarioId);
 
             // Assert
-            Assert.That(result, Is.EqualTo(expected));
+            // Cotizaciones.AgregarCotizacion probablemente lanza ArgumentNullException por cliente null
+            Assert.That(result, Does.Contain("cliente"));
         }
 
         [Test]
-        public void RegistrarCotizacionCliente_DatosNulos_RetornaError()
+        public void RegistrarCotizacionCliente_UsuarioNoExiste_RetornaErrorUsuarioNull()
         {
             // Arrange
-            string expected = "Error: faltan datos para registrar la cotización.";
+            fachada.CrearCliente("CC5", "Andres", "Pérez", "099 555 555", "andres@mail.com");
+            // NO creo el usuario UC99
+            string clienteId = "CC5";
+            string usuarioIdInexistente = "UC99";
+            string fecha = "01/12/2025";
+            string precio = "2000";
 
             // Act
-            string result = fachada.RegistrarCotizacionCliente(null, null, null, null);
+            string result = fachada.RegistrarCotizacionCliente(clienteId, fecha, precio, usuarioIdInexistente);
 
             // Assert
-            Assert.That(result, Is.EqualTo(expected));
+            // Cotizaciones.AgregarCotizacion probablemente lanza ArgumentNullException por usuario null
+            Assert.That(result, Does.Contain("usuario"));
         }
     }
 }
-*/
