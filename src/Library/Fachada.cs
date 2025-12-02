@@ -282,6 +282,10 @@ namespace Library
             {
                 usuario = this.Usuarios.BuscarUsuario(usuarioId);
                 interaccion = Interacciones.BuscarInteraccion(usuario,tipointeraccion, tema);
+                if (interaccion == null)
+                {
+                    return "no se encontro la interaccion";                
+                }
                 interaccion.AgergarNotas(nota);
             }
             catch (ArgumentNullException e)
@@ -295,11 +299,7 @@ namespace Library
             }
             if (usuario != null)
             {
-                if (interaccion != null)
-                {
                     return "Nota agregada";
-                }
-                return "no se encontro la interaccion";
             }
 
             return "No se encontro al usuario";
