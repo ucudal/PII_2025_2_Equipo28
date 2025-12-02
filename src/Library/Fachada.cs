@@ -700,7 +700,7 @@ namespace Library
                 {
                     if (Etiquetas.BuscarEtiqueta(etiqueta))
                     {
-                        cliente.Etiquetas.Add(etiqueta);
+                        cliente.AsignarEtiqueta(etiqueta);
                         return "Etiqueta agregada";
                     }
                 }
