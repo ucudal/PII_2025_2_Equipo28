@@ -42,7 +42,7 @@ namespace Library.Tests
             
             string resultado = fachada.CrearAdministrador(id, nombre);
             
-            Assert.That(resultado, Does.Contain("El ID no puede estar vacío."));
+            Assert.That(resultado.Contains("El ID no puede estar vacío."));
         }
 
         [Test]
@@ -53,7 +53,7 @@ namespace Library.Tests
             
             string resultado = fachada.CrearAdministrador(id, nombre);
             
-            Assert.That(resultado, Does.Contain("El nombre no puede estar vacío."));
+            Assert.That(resultado.Contains("El nombre no puede estar vacío."));
         }
 
         [Test]
@@ -64,7 +64,7 @@ namespace Library.Tests
             
             string resultado = fachada.CrearAdministrador(id, nombre);
             
-            Assert.That(resultado, Does.Contain("El ID no puede estar vacío."));
+            Assert.That(resultado.Contains("El ID no puede estar vacío."));
         }
 
         [Test]
@@ -77,7 +77,7 @@ namespace Library.Tests
             
             string resultado = fachada.CrearAdministrador(id, nombre2);
             
-            Assert.That(resultado, Does.Contain("Ya existe un administrador"));
+            Assert.That(resultado.Contains("Ya existe un administrador"));
         }
         
         [Test]
@@ -211,7 +211,7 @@ namespace Library.Tests
         {
             string resultado = fachada.EliminarCliente("ClienteInexistente99");
             
-            Assert.That(resultado, Does.Contain("El cliente no se encuentra en la lista."));
+            Assert.That(resultado.Contains("El cliente no se encuentra en la lista."));
         }
 
         [Test]
@@ -222,7 +222,7 @@ namespace Library.Tests
             fachada.EliminarCliente("C1");
             string resultadoSegundaEliminacion = fachada.EliminarCliente("C1");
             
-            Assert.That(resultadoSegundaEliminacion, Does.Contain("El cliente no se encuentra en la lista."));
+            Assert.That(resultadoSegundaEliminacion.Contains("El cliente no se encuentra en la lista."));
         }
 
         [Test]
@@ -232,8 +232,8 @@ namespace Library.Tests
             
             string resultado = fachada.EliminarCliente("C1");
             
-            Assert.That(resultado, Does.Contain("Se eliminó el cliente"));
-            Assert.That(resultado, Does.Contain("Ana Ruiz"));
+            Assert.That(resultado.Contains("Se eliminó el cliente"));
+            Assert.That(resultado.Contains("Ana Ruiz"));
         }
         
         [Test]
@@ -386,7 +386,7 @@ namespace Library.Tests
 
             string resultado = fachada.CrearEtiqueta("", idUsuario);
             
-            Assert.That(resultado, Does.Contain("no puede ser null o vacia"));
+            Assert.That(resultado.Contains("no puede ser null o vacia"));
         }
 
         [Test]
@@ -445,8 +445,8 @@ namespace Library.Tests
             string resultado = fachada.ModificarInfo("C1", atributo, nuevoValor);
             
             // Assert - Verificar que el resultado contiene el mensaje de éxito
-            Assert.That(resultado, Does.Contain("Se modificó la información"));
-            Assert.That(resultado, Does.Contain(nuevoValor));
+            Assert.That(resultado.Contains("Se modificó la información"));
+            Assert.That(resultado.Contains(nuevoValor));
             
             // Verificar que el valor realmente cambió
             var cliente = fachada.BuscarCliente("id", "C1")[0];
