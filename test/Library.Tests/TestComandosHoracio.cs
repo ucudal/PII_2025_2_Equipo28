@@ -30,7 +30,7 @@ namespace Library.Tests
         public void Comando_nuevoCliente()
         {
             string resultado = fachada.CrearCliente("C1", "Juan", "Perez", "099123456", "juan@correo.com");
-            Assert.That(resultado, Does.Contain("creado correctamente"));
+            Assert.That(resultado.Contains("creado correctamente"));
             Assert.IsNotNull(fachada.BuscarCliente("id", "C1"));
         }
 
@@ -39,7 +39,7 @@ namespace Library.Tests
         {
             fachada.CrearCliente("C1", "Juan", "Perez", "099123456", "juan@correo.com");
             string resultado = fachada.ModificarInfo("C1", "nombre", "Carlos");
-            Assert.That(resultado, Does.Contain("Se modificó la información"));
+            Assert.That(resultado.Contains("Se modificó la información"));
             var cliente = fachada.BuscarCliente("id", "C1")[0];
             Assert.That(cliente.Nombre, Is.EqualTo("Carlos"));
         }
@@ -49,7 +49,7 @@ namespace Library.Tests
         {
             fachada.CrearCliente("C1", "Juan", "Perez", "099123456", "juan@correo.com");
             string resultado = fachada.EliminarCliente("C1");
-            Assert.That(resultado, Does.Contain("Se eliminó el cliente"));
+            Assert.That(resultado.Contains("Se eliminó el cliente"));
             Assert.That(fachada.BuscarCliente("id", "C1").Count, Is.EqualTo(0));
         }
 
@@ -68,15 +68,15 @@ namespace Library.Tests
             fachada.CrearCliente("C1", "Juan", "Perez", "099123456", "juan@correo.com");
             fachada.CrearCliente("C2", "Maria", "Gomez", "099654321", "maria@correo.com");
             string resultado = fachada.VerClientes();
-            Assert.That(resultado, Does.Contain("Juan"));
-            Assert.That(resultado, Does.Contain("Maria"));
+            Assert.That(resultado.Contains("Juan"));
+            Assert.That(resultado.Contains("Maria"));
         }
 
         [Test]
         public void Comando_crearEtiqueta()
         {
             string resultado = fachada.CrearEtiqueta("Comun", "U1");
-            Assert.That(resultado, Does.Contain("Etiqueta creada correctamente"));
+            Assert.That(resultado.Contains("Etiqueta creada correctamente"));
             Assert.IsTrue(fachada.Etiquetas.BuscarEtiqueta("Comun"));
         }
 
@@ -95,7 +95,7 @@ namespace Library.Tests
         public void Comando_crearUsuario()
         {
             string resultado = fachada.CrearUsuario("U2", "Roberto", "A1");
-            Assert.That(resultado, Does.Contain("creado correctamente"));
+            Assert.That(resultado.Contains("creado correctamente"));
             Assert.IsNotNull(fachada.BuscarUsuario("U2"));
         }
 
@@ -104,7 +104,7 @@ namespace Library.Tests
         {
             fachada.CrearUsuario("U2", "Roberto", "A1");
             string resultado = fachada.EliminarUsuario("U2", "A1");
-            Assert.That(resultado, Does.Contain("eliminado del sistema"));
+            Assert.That(resultado.Contains("eliminado del sistema"));
             Assert.IsNull(fachada.BuscarUsuario("U2"));
         }
 
@@ -113,8 +113,15 @@ namespace Library.Tests
         {
             fachada.CrearUsuario("U2", "Roberto", "A1");
             string resultado = fachada.SuspenderUsuario("U2", "A1");
-            Assert.That(resultado, Does.Contain("suspendido correctamente"));
+            Assert.That(resultado.Contains("suspendido correctamente"));
             Assert.IsNull(fachada.BuscarUsuario("U2"));
+        }
+
+        [Test]
+        public void Comando_crearAdministrador()
+        {
+            string admin = fachada.CrearAdministrador("A10", "Pepe Admin");
+            Assert.That(admin.Contains("creado correctamente"));
         }
     }
 }
