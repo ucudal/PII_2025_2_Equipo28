@@ -13,7 +13,7 @@ namespace Library
     {
         private List<string> etiquetas = new List<string>();
 
-        public IEnumerable<string> Etiquetas
+        private IEnumerable<string> Etiquetas
         {
             get { return etiquetas; }
         }

@@ -10,14 +10,14 @@ namespace Library
     /// </summary>
     public class Cliente
     {
-        public string Id { get; set; }
-        public string Nombre { get; set; }
-        public string Apellido { get; set; }
-        public string Telefono { get; set; }
-        public string Correo { get; set; }
-        public string Genero { get; set; }
-        public List<string> Etiquetas { get; set; } = new List<string>();
-        public string FechaDeNacimiento { get; set; }
+        public string Id { get;  }
+        public string Nombre { get; private set; }
+        public string Apellido { get; private set; }
+        public string Telefono { get; private set; }
+        public string Correo { get; private set; }
+        public string Genero { get; private set; }
+        public List<string> Etiquetas { get; } = new List<string>();
+        public string FechaDeNacimiento { get; private set; }
         
 
         /// <summary>
@@ -122,21 +122,6 @@ namespace Library
         {
             return $"{Nombre} {Apellido} ({Correo}) - Id: {Id}";
         }
-        
-        /// <summary>
-        /// Asigna un vendedor a este cliente.
-        /// </summary>
-        /// <param name="vendedor">Vendedor que se quiere asignar.</param>
-        /// <exception cref="ArgumentNullException">Si el vendedor es null.</exception>
-        /*public void AsignarVendedor(Usuario vendedor)
-        {
-            if (vendedor == null)
-            {
-                throw new ArgumentNullException(nameof(vendedor), "El vendedor no puede ser null.");
-            }
-
-            this.VendedorAsignado = vendedor;
-        }*/
     }
 }
     
