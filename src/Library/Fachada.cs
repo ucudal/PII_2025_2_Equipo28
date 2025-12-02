@@ -193,7 +193,7 @@ namespace Library
                 if (cliente != null)
                 {
                     Interacciones.AgregarInteraccion(LLamada, usuario);
-                    return "Mensaje registrado";
+                    return "Llamada registrado";
                 }
             
                 return "no se encontro al cliente";
@@ -556,7 +556,7 @@ namespace Library
         /// información de contactos pendientes.
         /// </summary>
         /// <param name="usuarioId">Para verificar el si el usuario es valido.</param>
-        /// <returns>Devuelbe un string con el nombre de los clientes que se pusieron en contacto.</returns>
+        /// <returns>Devuelve un string con el nombre de los clientes que se pusieron en contacto.</returns>
         public string VerClienteContacto(string usuarioId)
         {
             Usuario usuario = null;
