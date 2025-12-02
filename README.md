@@ -283,7 +283,7 @@ direction TB
 
 | Historias | Comandos |
 | --------- | -------- |
-| Como usuario quiero crear un nuevo cliente con su información básica: nombre, apellido, teléfono y correo electrónico, para poder contactarme con ellos cuando lo necesite. | <b>!nuevoCliente</b> nombre apellido telefono correo |
+| Como usuario quiero crear un nuevo cliente con su información básica: nombre, apellido, teléfono y correo electrónico, para poder contactarme con ellos cuando lo necesite. | <b>!crearCliente</b> nombre apellido telefono correo |
 | Como usuario quiero modificar la información de un cliente existente, para mantenerla actualizada. | <b>!modfInfo</b> id atributo nuevoValor |
 | Como usuario quiero eliminar un cliente, para mantener limpia la base de datos. | <b>!eliminarCliente</b> id |
 | Como usuario quiero buscar clientes por nombre, apellido, teléfono o correo electrónico, para identificarlos rápidamente. | <b>!buscarCliente</b> atributo busqueda |
@@ -300,7 +300,7 @@ direction TB
 | Como usuario quiero poder registrar que le envié una cotización a un cliente, cuándo se la mandé y por qué importe es la cotización, para hacer seguimiento de oportunidades de venta. | <b>!registrarCotiz</b> clienteId fecha precio usuarioId |
 | Como usuario quiero ver todas las interacciones de un cliente, con o sin filtro por tipo de interacción y por fecha, para entender el historial de la relación comercial. | <b>!interaccionCliente</b> clienteId usuarioId tipo fecha |
 | Cómo usuario quiero saber los clientes que hace cierto tiempo que no tengo ninguna interacción con ellos, para no peder contacto con ellos. | <b>!clienteAusente</b> usuarioId |
-| Como usuario quiero saber los clientes que se pusieron en contacto conmigo y no les contesté hace cierto tiempo, para no dejar de responder mensajes o llamadas. | <b>!clienteContactaVer</b> usuarioId </br> <b>!clienteContactoaAgregar</b> usuarioid clienteid </br> <b>!clienteContactoEliminar</b> usuarioid clienteid|
+| Como usuario quiero saber los clientes que se pusieron en contacto conmigo y no les contesté hace cierto tiempo, para no dejar de responder mensajes o llamadas. | <b>!clienteContactaVer</b> usuarioId </br> <b>!clienteContactaAgregar</b> usuarioid clienteid </br> <b>!clienteContactaEliminar</b> usuarioid clienteid|
 | Como administrador quiero crear usuarios. | <b>!crearUsuario</b> usuarioId nombre adminId |
 | Como administrador quiero eliminar usuarios. | <b>!eliminarUsuario</b> usuarioId adminId |
 | Como administrador quiero suspender usuarios. | <b>!suspenderUsuario</b> usuarioId adminId |
@@ -310,11 +310,12 @@ direction TB
 
 ### Comandos no requeridos por las historias de usuario
 
-| Comando                                 | Descripción |
-|-----------------------------------------| --- |
-| <b>!init</b>                            | Este comando crea un administrador, un usuario, un cliente y un vendedor. Esto para facilitar probar y/o utilizar el resto de comandos. |
-| <b>!verUsuarios</b>                     | Muestra los usuarios existentes |
-| <b>!crearVendedor</b> vendedorId nombre | Este comando crea un vendedor | 
+| Comando                                   | Descripción |
+|-------------------------------------------| --- |
+| <b>!init</b>                              | Este comando crea un administrador, un usuario, un cliente y un vendedor. Esto para facilitar probar y/o utilizar el resto de comandos. |
+| <b>!verUsuarios</b>                       | Muestra los usuarios existentes |
+| <b>!crearVendedor</b> vendedorId nombre   | Este comando crea un vendedor |
+| <b>!crearAdministrador</b> adminId nombre | Este comando crea un Administrador |
 
 ## 📜 Notas
 

@@ -52,6 +52,13 @@ namespace Library
         /// <param name="admin">Administrador a agregar</param>
         public void AgregarAdministraodr(Administrador admin)
         {
+            foreach (Administrador a in administradores)
+            {
+                if (a.ID == admin.ID)
+                {
+                    throw new InvalidOperationException($"Ya existe un administrador con el ID: {a.ID}");
+                }
+            }
             this.administradores.Add(admin);
         }
 
@@ -61,6 +68,13 @@ namespace Library
         /// <param name="vendedor">Vendedor a agregar</param>
         public void AgregarVendedor(Vendedor vendedor)
         {
+            foreach (Vendedor v in vendedores)
+            {
+                if (v.ID == vendedor.ID)
+                {
+                    throw new InvalidOperationException($"Ya existe un vendedor con el ID: {v.ID}");
+                }
+            }
             this.vendedores.Add(vendedor);
         }
 
@@ -70,6 +84,13 @@ namespace Library
         /// <param name="cliente">Cliente a agregar</param>
         public void AgregarCliente(Cliente cliente)
         {
+            foreach (Cliente c in clientesTotales)
+            {
+                if (c.Id == cliente.Id)
+                {
+                    throw new InvalidOperationException($"Ya existe un cliente con el ID: {c.Id}");
+                }
+            }
             this.clientesTotales.Add(cliente);
         }
 
@@ -79,7 +100,15 @@ namespace Library
         /// <param name="usuario">Usuario a eliminar</param>
         public void EliminarUsuario(Usuario usuario)
         {
-            this.usuarios.Remove(usuario);
+            foreach (Usuario u in usuarios)
+            {
+                if (u.ID == usuario.ID)
+                {
+                    this.usuarios.Remove(u);
+                    return;
+                }
+            } 
+            throw new InvalidOperationException($"No se encontro el usuario con el ID: {usuario.ID}");
         }
 
         /// <summary>
@@ -88,7 +117,15 @@ namespace Library
         /// <param name="admin">Administrador a eliminar</param>
         public void EliminarAdministrador(Administrador admin)
         {
-            this.usuarios.Remove(admin);
+            foreach (Administrador a in administradores)
+            {
+                if (a.ID == admin.ID)
+                {
+                    this.administradores.Remove(a);
+                    return;
+                }
+            } 
+            throw new InvalidOperationException($"No se encontro el administrador con el ID: {admin.ID}");
         }
 
         /// <summary>
@@ -114,7 +151,7 @@ namespace Library
                     return usuario;
                 } 
             }
-            
+
             return null;
         }
 
@@ -141,6 +178,16 @@ namespace Library
         /// <param name="id">ID del administrador a buscar</param>
         public Administrador BuscarAdministrador(string id)
         {
+            if (id == null)
+            {
+                throw new ArgumentNullException("datos de administrador null");
+            }
+
+            if (id == "")
+            {
+                throw new ArgumentException("datos de administrador vacios");
+            }
+
             foreach (Administrador administrador in this.administradores)
             {
                 if (administrador.ID == id)
