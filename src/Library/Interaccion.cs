@@ -88,12 +88,7 @@ public class Interaccion
             {
                 throw new ArgumentNullException(nameof(usuario), "El usuario no puede ser null.");
             }
-            //
-            // if (string.IsNullOrEmpty(tipo))
-            // {
-            //     throw new ArgumentException("El tipo no puede estar vacío.", nameof(tipo));
-            // }
-
+           
             if (string.IsNullOrEmpty(contenido))
             {
                 throw new ArgumentException("El contenido no puede estar vacío.", nameof(contenido));
@@ -120,23 +115,6 @@ public class Interaccion
             {
                 throw new InvalidDateException($"la fecha no es valida. Recuerda escribir una fecha anterior o identica a la fecha actual, y usar el fomranto dd/mm/yyyy",nameof(fecha));
             }
-            // tipo = tipo.ToLower();
-            // Interaccion.TipoInterracion tipoFinal = Interaccion.TipoInterracion.Nada; //para inicializarlo
-            // switch (tipo)
-            // {
-            //     case "mensaje":
-            //         tipoFinal = Interaccion.TipoInterracion.Mensaje;
-            //         break;
-            //     case "llamada":
-            //         tipoFinal = Interaccion.TipoInterracion.Llamada;
-            //         break;
-            //     case "correo":
-            //         tipoFinal = Interaccion.TipoInterracion.Correo;
-            //         break;
-            //     case "reunion":
-            //         tipoFinal = Interaccion.TipoInterracion.Reunion;
-            //         break;
-            // }
             this.Cliente = cliente;
             this.Tema = tema;
             this.Contenido = contenido;

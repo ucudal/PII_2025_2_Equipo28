@@ -22,7 +22,7 @@ namespace Library
     /// Utiliza polimorfismo para redefinir la validación de fechas,
     /// adaptando el comportamiento sin romper la estructura general.</para>
     ///
-    /// <para><b>Information Expert (GRASP):</b>
+    /// <para><b>Expert:</b>
     /// Es experta en gestionar todo lo realacionado a reunion (nose porque esta azul)
     /// lugar, fecha y participantes. Contiene los datos y la lógica necesaria.</para>
     ///

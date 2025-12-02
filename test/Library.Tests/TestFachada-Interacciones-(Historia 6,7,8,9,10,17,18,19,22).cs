@@ -382,9 +382,9 @@ namespace Library.Tests
              Assert.AreEqual(esperado,resultado);
 
          }
-//
+
         [Test]
-//Verifica que el método devuelva correctamente los clientes con los que no se interactúa hace un mes o más.
+        //Verifica que el método devuelva correctamente los clientes con los que no se interactúa hace un mes o más.
         public void InterraccionClienteAusenteCorrectoTest()
         {
             fachada.RegistrarMensaje("C1", "mensaje viejo", "seguimiento", "U1", "10/09/2024");
@@ -421,45 +421,7 @@ namespace Library.Tests
                $"Los Clientes totales son los siguientes:\nHarry ElSucioPotter\nHermione Granger\nSus interacciones mas recientes son:\nHarry ElSucioPotter. Interaccion de tipo Correo. Tema: maincra\nSus reuniones proximas son:\nTema de la reunion: este. ";
            Assert.That(resultado, Is.EqualTo(esperado));
         } 
-
-//         [TestCase(null, "Value cannot be null. (Parameter 'datos de usuario null')")]
-//         public void InterraccionClienteAusenteNull(string a, string esperado)
-//         {
-//             string resultado = fachada.InterraccionClienteAusente(a);
-//             Assert.That(resultado, Is.EqualTo(esperado));
-//         }
-//
-//         [TestCase("", "datos de usuario vacios")]
-//         public void InterraccionClienteAusenteVacio(string a, string esperado)
-//         {
-//             string resultado = fachada.InterraccionClienteAusente(a);
-//             Assert.That(resultado, Is.EqualTo(esperado));
-//         }
-//
-//         [TestCase("999", "No se reconoce el usuario")]
-//         public void InterraccionClienteAusenteUsuarioInexistente(string a, string esperado)
-//         {
-//             string resultado = fachada.InterraccionClienteAusente(a);
-//             Assert.That(resultado, Is.EqualTo(esperado));
-//         }
-//
-//           // [Test]
-//           //   // Tiene problemas por el tema singleton, pero solo por el resultado, al cambiar con cada agregado de test:
-//           // //Verifica que el panel muestre correctamente los clientes, interacciones recientes y reuniones próximas.
-//           // public void PanelCorrectoTest()
-//           // {
-//           //     fachada.CrearUsuario("1", "El petizo", "A1");
-//           //     usuario = fachada.BuscarUsuario("1");
-//           //     fachada.RegistrarCorreo("0", "k", "e", "1", "10/12/2000");
-//           //     fachada.RegistarReunion("0", "k", "e", "1", "12/10/2050", "n");
-//           //     Interaccion interaccion = fachada.Interacciones.BuscarInteraccion(usuario, "correo", "e");
-//           //     interaccion.Fecha = DateTime.Now.AddDays(-2);
-//           //     string resultado = fachada.Panel("1");
-//           //     string esperado =
-//           //         "Los Clientes totales son los siguientes:\nSape 099872521\nSus interacciones mas recientes son:\nSape 099872521. Interaccion de tipo Correo. Tema: e\nSus reuniones proximas son:\nTema de la reunion: e. Fecha: 12/10/2050 0:00:00\n";
-//           //     Assert.That(resultado, Is.EqualTo(esperado));
-//           // }
-//
+        
           [Test]
           public void AgregarClienteContactoTest()
           {
