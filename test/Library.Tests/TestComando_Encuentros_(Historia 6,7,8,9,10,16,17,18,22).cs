@@ -6,7 +6,7 @@ using System.Text;
 using NUnit.Framework;
 namespace Library.Tests
 {
-    public class TetsComando_Encuentros_6_7_8_9_10_17_18_19_22_
+    public class TetsComando_Encuentros_6_7_8_9_10_16_17_18_22_
     {
         private Fachada fachada;
         private Usuario usuario;
