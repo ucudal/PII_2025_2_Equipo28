@@ -3,13 +3,15 @@ using System.Collections.Generic;
 
 namespace Library
 {
-    // SRP 
-    // Esta clase cumple SRP porque su única responsabilidad es representar una cotización:
-    // contiene información del cliente, fecha e importe, y puede generar un resumen.
-    //
-    // Expert 
-    // Cotizacion es la experta en manejar su propia información, ya que contiene todos
-    // los datos necesarios sobre la cotización (cliente, fecha, importe).
+    /// <summary>
+    /// Representa una cotización realizada a un cliente, con sus datos principales y un resumen textual.
+    /// Principios que cumple:
+    /// - SRP: Se enfoca en modelar la cotización y validar/representar sus datos.
+    /// - EXPERT : Posee toda la información necesaria (cliente, fecha, importe) para construir el resumen.
+    /// - Bajo acoplamiento : Solo depende de la interfaz pública de Cliente para obtener nombre y apellido.
+    /// - Alta cohesión : Sus miembros giran en torno a la cotización y su representación.
+    /// -Demeter: Resumen() accede solo al colaborador directo Cliente y sus propiedades públicas.
+    /// </summary>
     public class Cotizacion
     {
         public Cliente Cliente { get; set; }

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 
 namespace Library
 {
-    // SRP 
-    // Esta clase cumple SRP porque su única responsabilidad es representar una venta:
-    // contiene información sobre el cliente, el producto, la fecha y el importe.
-    //
-    // Expert 
-    // VentaFachada es la experta en manejar su propia información, ya que contiene todos los datos
-    // necesarios para describir la venta y generar un resumen.
+    /// <summary>
+    /// Representa una venta simplificada (fachada) con los datos principales y su resumen textual.
+    /// Principios que cumple:
+    /// - SRP (Single Responsibility Principle): La clase se enfoca en modelar una venta resumida y generar su resumen en texto.
+    /// - EXPERT (Information Expert - GRASP): Tiene toda la información necesaria (cliente, producto, fecha, importe) para construir el resumen.
+    /// - Alta cohesión (High Cohesion - GRASP): Todas sus propiedades y métodos giran en torno a describir la venta y su resumen.
+    /// Demeter: Resumen() solo accede a los datos públicos de Cliente, su colaborador directo.
+    /// </summary>
     public class VentaFachada
     {
         public Cliente Cliente { get; set; }

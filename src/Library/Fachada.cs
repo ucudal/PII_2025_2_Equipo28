@@ -971,6 +971,22 @@ namespace Library
             return this.Usuarios.BuscarUsuario(usuarioId);
         }
         
+        /// <summary>
+        /// Registra una venta para un cliente existente.
+        /// Principios que cumple:
+        /// - SRP: El método se enfoca solo en registrar una venta y devolver el resultado.
+        /// - EXPERT: Esta clase conoce cómo buscar usuario/cliente y delegar el registro a Ventas.
+        /// - Alta cohesiónTodo el método está orientado a la operación de registrar la venta.
+        /// </summary>
+        /// <param name="clienteId">ID del cliente que realiza la compra.</param>
+        /// <param name="producto">Nombre o descripción del producto vendido.</param>
+        /// <param name="fecha">Fecha de la venta en formato de texto.</param>
+        /// <param name="precio">Precio de la venta en formato de texto.</param>
+        /// <param name="usuarioId">ID del usuario que registra la venta.</param>
+        /// <returns>
+        /// Mensaje de confirmación si la venta se registró correctamente,
+        /// o un mensaje de error si hubo datos inválidos o no se encontró el usuario/cliente.
+        /// </returns>
         public string RegistrarVentaCliente(string clienteId, string producto, string fecha, string precio, string usuarioId)
         {
             Usuario usuario = null;
@@ -1012,7 +1028,23 @@ namespace Library
 
             return "No se encontro al usuario";
         }
-        
+        /// <summary>
+        /// Calcula el total de ventas realizadas por un usuario en un período de fechas.
+        /// - SRP El método tiene una única razón para cambiar: la forma de obtener y presentar el total de ventas
+        ///   de un usuario en un período dado.
+        /// - EXPERT La clase conoce cómo localizar al usuario y delega el cálculo del total al experto en la información
+        ///   de ventas (`Usuario.SumarImportes`).
+        /// - Alta cohesióntodo el método está enfocado en validar entradas, localizar al usuario y devolver el total para
+        ///   el período indicado.
+        /// </summary>
+        /// <param name="usuarioId">ID del usuario cuyas ventas se desean consultar.</param>
+        /// <param name="fechaInicioTexto">Fecha de inicio del período, en formato dd/MM/yyyy.</param>
+        /// <param name="fechaFinTexto">Fecha de fin del período, en formato dd/MM/yyyy.</param>
+        /// <returns>
+        /// Un mensaje descriptivo con el total de ventas del usuario entre las fechas indicadas si todo es válido;
+        /// en caso de error, un mensaje indicando el problema.
+        /// </returns>
+
         
         public string TotalDeVentasEnPeriodo(string usuarioId, string fechaInicioTexto, string fechaFinTexto)
         {
@@ -1070,12 +1102,26 @@ namespace Library
                 return "Error: la fecha de inicio no puede ser posterior a la fecha de fin.";
             }
 
-          // Calcular total
             double total = usuario.SumarImportes(fechaInicio, fechaFin);
 
          
             return $"Total de ventas desde {fechaInicio:dd/MM/yyyy} hasta {fechaFin:dd/MM/yyyy}: ${total:0.##}";
         }
+        
+        /// <summary>
+        /// Registra una cotización para un cliente existente.
+        /// - SRP: El método se enfoca solo en registrar una cotización y devolver el resultado.
+        /// - EXPERT: Esta clase conoce cómo buscar usuario/cliente y delegar el registro a Cotizaciones.
+        /// - Alta cohesión: Todo el método está orientado a la operación de registrar la cotización.
+        /// </summary>
+        /// <param name="clienteId">ID del cliente al que se envía la cotización.</param>
+        /// <param name="fecha">Fecha de la cotización en formato de texto.</param>
+        /// <param name="precio">Monto cotizado en formato de texto.</param>
+        /// <param name="usuarioId">ID del usuario que registra la cotización.</param>
+        /// <returns>
+        /// Mensaje de confirmación si la cotización se registró correctamente,
+        /// o un mensaje de error si hubo datos inválidos o no se encontró el usuario/cliente.
+        /// </returns>
         
         public string RegistrarCotizacionCliente(string clienteId, string fecha, string precio, string usuarioId)
         {
@@ -1093,12 +1139,12 @@ namespace Library
             }
             catch (ArgumentNullException e)
             {
-                // Mismo estilo que RegistrarReunion
+                
                 return $"{e.Message} {e.ParamName}";
             }
             catch (InvalidDateException e)
             {
-                // Si la fecha está mal, el bot va a mostrar exactamente este mensaje
+                
                 return $"{e.Message} {e.ParamName}";
             }
             catch (ArgumentException e)
@@ -1106,7 +1152,7 @@ namespace Library
                 return $"{e.Message} {e.ParamName}";
             }
 
-            // Si no hubo excepciones, validamos igual que en RegistrarReunion
+            
             if (usuario != null)
             {
                 if (cliente != null)
@@ -1120,7 +1166,18 @@ namespace Library
             return "No se encontro al usuario";
         }
         
-        
+        /// <summary>
+        /// Crea un nuevo vendedor.
+        /// - SRP: Solo se encarga de crear un vendedor y devolver el resultado.
+        /// - EXPERT: La clase conoce cómo validar y registrar vendedores en el repositorio de usuarios.
+        /// - Alta cohesión: Todo el método está orientado a la creación del vendedor.
+        /// </summary>
+        /// <param name="id">ID del vendedor a crear.</param>
+        /// <param name="nombre">Nombre del vendedor a crear.</param>
+        /// <returns>
+        /// Mensaje de éxito si el vendedor se crea correctamente,
+        /// o un mensaje de error si hay datos inválidos, IDs duplicados o fallos inesperados.
+        /// </returns>
         public string CrearVendedor(string id, string nombre)
         {
             try
@@ -1136,7 +1193,7 @@ namespace Library
                     throw new ArgumentNullException(nameof(nombre), "El nombre del vendedor no puede ser nulo.");
                 }
 
-                // Validaciones de vacío / espacios
+                
                 if (string.IsNullOrWhiteSpace(id))
                 {
                     throw new ArgumentException("El ID del vendedor no puede estar vacío.", nameof(id));
@@ -1147,7 +1204,7 @@ namespace Library
                     throw new ArgumentException("El nombre del vendedor no puede estar vacío.", nameof(nombre));
                 }
 
-                // Evitar IDs duplicados (en cualquier usuario o vendedor)
+                
                 if (this.Usuarios.BuscarUsuario(id) != null)
                 {
                     throw new InvalidOperationException($"Ya existe un usuario con el ID: {id}");
@@ -1158,14 +1215,13 @@ namespace Library
                     throw new InvalidOperationException($"Ya existe un vendedor con el ID: {id}");
                 }
 
-                // Crear el vendedor
+          
                 Vendedor vendedor = new Vendedor(id, nombre);
 
-                // Guardarlo en el repo como vendedor y como usuario
+                
                 this.Usuarios.AgregarVendedor(vendedor);
                 this.Usuarios.AgregarUsuario(vendedor);
-
-                // ✅ Mensaje de éxito para el bot
+                
                 return $"Vendedor {vendedor.NombreCompleto} con ID {vendedor.Id} creado correctamente.";
             }
             catch (ArgumentNullException e)
