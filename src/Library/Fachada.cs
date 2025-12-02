@@ -193,7 +193,7 @@ namespace Library
                 if (cliente != null)
                 {
                     Interacciones.AgregarInteraccion(LLamada, usuario);
-                    return "Mensaje registrado";
+                    return "Llamada registrada";
                 }
             
                 return "no se encontro al cliente";
