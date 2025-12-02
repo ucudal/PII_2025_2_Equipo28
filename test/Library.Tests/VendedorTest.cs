@@ -17,7 +17,7 @@ namespace Library.Tests
         }
 
         [Test]
-        public void AsignarClienteAVendedor_VendedorNoExiste_RetornaError()
+        public void AsignarClienteAVendedor_VendedorNoExiste()
         {
             // Arrange
             string expected = "No se encontro un vendedor con ID 'V99'.";
@@ -30,7 +30,7 @@ namespace Library.Tests
         }
 
         [Test]
-        public void AsignarClienteAVendedor_ClienteNoExiste_RetornaError()
+        public void AsignarClienteAVendedor_ClienteNoExiste()
         {
             // Arrange
             fachada.CrearVendedor("V1", "Apu");
@@ -47,7 +47,7 @@ namespace Library.Tests
         
 
        
-        public void AsignarClienteAVendedor_VendedorIdNull_DisparaArgumentNullExceptionYCaeEnCatch()
+        public void AsignarClienteAVendedor_VendedorIdNull()
         {
             // Arrange
             // No importa si el cliente existe, la excepción sale antes de buscarlo
@@ -59,7 +59,7 @@ namespace Library.Tests
         }
 
         [Test]
-        public void AsignarClienteAVendedor_VendedorIdVacio_DisparaArgumentExceptionYCaeEnCatch()
+        public void AsignarClienteAVendedor_VendedorIdVacio()
         {
             // Arrange
             string result = fachada.AsignarClienteAVendedor("C1", "");
@@ -71,7 +71,7 @@ namespace Library.Tests
         }
 
         [Test]
-        public void AsignarClienteAVendedor_UsuarioEsAdministrador_RetornaQueNoEsVendedor()
+        public void AsignarClienteAVendedor_UsuarioEsAdministrador()
         {
             // Arrange
             // Creamos un admin y lo ponemos explícitamente en la lista de usuarios del repo
@@ -93,7 +93,7 @@ namespace Library.Tests
         
         [Test]
         
-        public void CrearVendedor_IdNull_RetornaMensajeError()
+        public void CrearVendedor_IdNull()
         {
             // Arrange & Act
             string result = fachada.CrearVendedor(null, "Nombre");
@@ -103,7 +103,7 @@ namespace Library.Tests
         }
 
         [Test]
-        public void CrearVendedor_NombreNull_RetornaMensajeError()
+        public void CrearVendedor_NombreNull()
         {
             // Arrange & Act
             string result = fachada.CrearVendedor("V3", null);
@@ -113,7 +113,7 @@ namespace Library.Tests
         }
 
         [Test]
-        public void CrearVendedor_IdVacio_RetornaMensajeError()
+        public void CrearVendedor_IdVacio()
         {
             // Arrange & Act
             string result = fachada.CrearVendedor("   ", "Apua");
@@ -123,7 +123,7 @@ namespace Library.Tests
         }
 
         [Test]
-        public void CrearVendedor_NombreVacio_RetornaMensajeError()
+        public void CrearVendedor_NombreVacio()
         {
             // Arrange & Act
             string result = fachada.CrearVendedor("V3", "   ");
@@ -133,7 +133,7 @@ namespace Library.Tests
         }
 
         [Test]
-        public void CrearVendedor_IdDuplicado_RetornaMensajeError()
+        public void CrearVendedor_IdDuplicado()
         {
             // Arrange
             fachada.CrearVendedor("V3", "Apua");

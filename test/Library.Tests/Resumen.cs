@@ -26,7 +26,7 @@ namespace Library.Tests
             Assert.That(result, Is.EqualTo(expected));
         }
         [Test]
-        public void VentaFachada_Resumen_DatosValidos_RetornaMensajeEsperado()
+        public void VentaFachada_Resumen_DatosValidos()
         {
             // Arrange
             var cliente = new Cliente("C1", "Harry", "Potter", "098 111 111", "harry@mail.com");
