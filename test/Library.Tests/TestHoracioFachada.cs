@@ -336,7 +336,7 @@ namespace Library.Tests
 
             string resultado = fachada.CrearEtiqueta("Importante", idUsuario);
 
-            Assert.That(resultado, Is.EqualTo("Etiqueta Importante creada correctamente."));
+            Assert.That(resultado, Is.EqualTo("Se creó la etiqueta Importante"));
             Assert.IsTrue(fachada.Etiquetas.BuscarEtiqueta("Importante"));
         }
 
@@ -398,7 +398,7 @@ namespace Library.Tests
 
             string resultado = fachada.CrearEtiqueta("  Cliente VIP  ", idUsuario);
             
-            Assert.That(resultado, Is.EqualTo("Etiqueta Cliente VIP creada correctamente."));
+            Assert.That(resultado, Is.EqualTo("Se creó la etiqueta Cliente VIP"));
             Assert.IsTrue(fachada.Etiquetas.BuscarEtiqueta("Cliente VIP"));
         }
 
