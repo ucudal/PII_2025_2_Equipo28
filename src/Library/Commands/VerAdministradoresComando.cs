@@ -27,16 +27,14 @@ namespace Ucu.Poo.DiscordBot.Commands
         public async Task ExecuteAsync()
         {
             string[] administradores = fachada.VerAdministradores().Split(',');
-            bool hayAdministradores = false; 
-            string resultado = "Administradores totales son: \n";
+            string resultado = "Administradores totales son: \n\n";
                 
             foreach (string administrador in administradores)
             {
-                hayAdministradores = true;
                 resultado += administrador + "\n";
             }
 
-            if (hayAdministradores == false)
+            if (administradores.Length == 0)
             {
                 resultado = "No hay administradores.";
             }

@@ -233,7 +233,7 @@ namespace Library
         /// </summary>
         public string VerUsuarios()
         {
-            string resultado = "Usuarios totales:\n";
+            string resultado = "";
             foreach (Usuario u in this.usuarios)
             {
                 if (!usuariosSuspendidos.Contains(u))
@@ -242,17 +242,27 @@ namespace Library
                 }
             }
 
+            if (this.usuarios.Count == 0)
+            {
+                resultado += "No hay usuarios\n";
+            }
+
             resultado += "\nUsuarios suspendidos:\n";
             foreach (Usuario u in this.usuariosSuspendidos)
             { 
                 resultado += u.ToString() + "\n";    
-            }    
+            }
+
+            if (usuariosSuspendidos.Count == 0)
+            {
+                resultado += "No hay usuarios suspendidos";
+            }
             return resultado;
         }
 
         public string VerAdministradores()
         {
-            string resultado = "Administradores totales:\n";
+            string resultado = "";
             foreach (Administrador administrador in administradores)
             {
                 resultado += administrador.ToString() + "\n";
