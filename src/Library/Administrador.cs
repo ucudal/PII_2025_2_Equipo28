@@ -23,5 +23,10 @@ namespace Library
             this.ID = id;
             this.Nombre = nombre;
         }
+
+        public override string ToString()
+        {
+            return $"{this.Nombre} - Id: {this.ID}";
+        }
     }
 }

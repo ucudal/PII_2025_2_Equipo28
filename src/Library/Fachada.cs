@@ -622,13 +622,13 @@ namespace Library
         /// </summary>
         public string CrearEtiqueta(string etiqueta, string idUsuario)
         {
-            Usuario usuario = this.Usuarios.BuscarUsuario(idUsuario);
-            if (this.Usuarios.Usuarios.Contains(usuario))
+            Usuario usuario = Usuarios.BuscarUsuario(idUsuario);
+            if (Usuarios.Usuarios.Contains(usuario))
             {
                 try
                 {
-                    Etiquetas.AgregarEtiqueta(etiqueta.Trim());
-                    return "Etiqueta creada correctamente.";
+                    Etiquetas.CrearEtiqueta(etiqueta.Trim());
+                    return $"Etiqueta {etiqueta.Trim()} creada correctamente.";
                 }
                 catch (ArgumentNullException e)
                 {
@@ -672,6 +672,36 @@ namespace Library
         }
 
         /// <summary>
+        /// Devuelve un string con todas las Etiquetas separadas por comas.
+        /// - SRP: Deja la responsabilidad de ver cuáles son todas las Etiquetas a RepoEtiquetas.
+        /// </summary>
+        public string VerEtiquetas()
+        {
+            string resultado = Etiquetas.VerEtiquetas();
+            return resultado;
+        }
+
+        /// <summary>
+        /// Devuelve un string con todos los Administradores separadas por comas.
+        /// - SRP: Deja la responsabilidad de ver cuáles son todos los Administradores a RepoUsuarios.
+        /// </summary>
+        public string VerAdministradores()
+        {
+            string resultado = Usuarios.VerAdministradores();
+            return resultado;
+        }
+
+        /// <summary>
+        /// Devuelve un string con todos los Usuarios separadas por comas.
+        /// - SRP: Deja la responsabilidad de ver cuáles son todos los Usuarios a RepoUsuarios.
+        /// </summary>
+        public string VerUsuarios()
+        {
+            string resultado = Usuarios.VerUsuarios();
+            return resultado;
+        }
+
+        /// <summary>
         /// Crea un nuevo usuario en el sistema verificando permisos de administrador.
         /// - SRP: coordina la creación delegando la validación de permisos y persistencia a RepoUsuarios.
         /// - Expert: utiliza RepoUsuarios para verificar permisos de administrador y unicidad del ID.
@@ -690,7 +720,7 @@ namespace Library
                     }
                     
                     Usuario nuevo = new Usuario(id, nombre);
-                    this.Usuarios.AgregarUsuario(nuevo);
+                    Usuarios.AgregarUsuario(nuevo);
                     return $"Usuario '{nombre}' (ID: {id}) creado correctamente.";   
                 }
 
@@ -720,6 +750,7 @@ namespace Library
             {
                 Usuarios.EliminarUsuario(usuario);
                 UsuariosSuspendidos.Add(usuario);
+                Usuarios.SuspenderUsuario(usuario);
                 return $" El usuario '{usuario.Nombre}' ha sido suspendido correctamente.";   
             }
 

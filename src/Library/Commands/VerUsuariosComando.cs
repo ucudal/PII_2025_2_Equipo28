@@ -26,14 +26,14 @@ namespace Ucu.Poo.DiscordBot.Commands
         // ReSharper disable once UnusedMember.Global
         public async Task ExecuteAsync()
         {
-            List<Usuario> usuarios = fachada.Usuarios.VerUsuarios();
+            string[] usuarios = fachada.VerUsuarios().Split(',');
             bool hayClientes = false; 
             string resultado = "Usuarios totales son: \n";
                 
-            foreach (Usuario usuario in usuarios)
+            foreach (string usuario in usuarios)
             {
                 hayClientes = true;
-                resultado += usuario.ToString() + "\n";
+                resultado += usuario + "\n";
             }
 
             if (hayClientes == false)

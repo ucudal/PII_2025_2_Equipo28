@@ -120,7 +120,12 @@ namespace Library
         /// <returns>Representación string del cliente</returns>
         public override string ToString()
         {
-            return $"{Nombre} {Apellido} ({Correo}) - Id: {Id}";
+            string etiquetas = "";
+            foreach (string e in Etiquetas)
+            {
+                etiquetas += e + ",";
+            }    
+            return $"{Nombre} {Apellido} - Id: {Id}\nCorreo: {Correo}\nTelefono: {Telefono}\nGenero: {Genero}\nFecha de nacimiento: {FechaDeNacimiento}\nEtiquetas: {etiquetas}";
         }
     }
 }

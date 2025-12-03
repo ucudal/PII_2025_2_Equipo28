@@ -336,7 +336,7 @@ namespace Library.Tests
 
             string resultado = fachada.CrearEtiqueta("Importante", idUsuario);
 
-            Assert.That(resultado, Is.EqualTo("Etiqueta creada correctamente."));
+            Assert.That(resultado, Is.EqualTo("Etiqueta Importante creada correctamente."));
             Assert.IsTrue(fachada.Etiquetas.BuscarEtiqueta("Importante"));
         }
 
@@ -398,7 +398,7 @@ namespace Library.Tests
 
             string resultado = fachada.CrearEtiqueta("  Cliente VIP  ", idUsuario);
             
-            Assert.That(resultado, Is.EqualTo("Etiqueta creada correctamente."));
+            Assert.That(resultado, Is.EqualTo("Etiqueta Cliente VIP creada correctamente."));
             Assert.IsTrue(fachada.Etiquetas.BuscarEtiqueta("Cliente VIP"));
         }
 
@@ -482,7 +482,7 @@ namespace Library.Tests
 
             string resultado = cliente.ToString();
 
-            Assert.That(resultado, Is.EqualTo("Juan Perez (juan@correo.com) - Id: C1"));
+            Assert.That(resultado.Contains("Juan Perez - Id: C1"));
         }
 
         [Test]

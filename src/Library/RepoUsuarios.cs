@@ -16,6 +16,7 @@ namespace Library
         private List<Administrador> administradores = new List<Administrador>();
         private List<Vendedor> vendedores = new List<Vendedor>();
         private List<Cliente> clientesTotales = new List<Cliente>();
+        private List<Usuario> usuariosSuspendidos = new List<Usuario>();
 
         public IEnumerable<Usuario> Usuarios
         {   
@@ -43,7 +44,7 @@ namespace Library
         /// <param name="usuario">Usuario a agregar</param>
         public void AgregarUsuario(Usuario usuario)
         {
-            this.usuarios.Add(usuario);
+            usuarios.Add(usuario);
         }
 
         /// <summary>
@@ -230,9 +231,39 @@ namespace Library
         /// <summary>
         /// Devuelve la lista de usuarios
         /// </summary>
-        public List<Usuario> VerUsuarios()
+        public string VerUsuarios()
         {
-            return usuarios;
+            string resultado = "Usuarios totales:\n";
+            foreach (Usuario u in this.usuarios)
+            {
+                if (!usuariosSuspendidos.Contains(u))
+                {
+                    resultado += u.ToString() + "\n";    
+                }
+            }
+
+            resultado += "\nUsuarios suspendidos:\n";
+            foreach (Usuario u in this.usuariosSuspendidos)
+            { 
+                resultado += u.ToString() + "\n";    
+            }    
+            return resultado;
+        }
+
+        public string VerAdministradores()
+        {
+            string resultado = "Administradores totales:\n";
+            foreach (Administrador administrador in administradores)
+            {
+                resultado += administrador.ToString() + "\n";
+            }
+
+            return resultado;
+        }
+
+        public void SuspenderUsuario(Usuario usuario)
+        {
+            this.usuariosSuspendidos.Add(usuario);
         }
     }
 }

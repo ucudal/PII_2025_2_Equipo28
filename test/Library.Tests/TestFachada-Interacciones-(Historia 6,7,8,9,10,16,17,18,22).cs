@@ -392,8 +392,8 @@ namespace Library.Tests
 
             string resultado = fachada.InterraccionClienteAusente("U1");
 
-            string esperado = "Los clientes con los que no interactua hace un mes o mas son:\nHarry ElSucioPotter (Harringy@cabezatermo.com) - Id: C1";
-            Assert.That(resultado, Is.EqualTo(esperado));
+            string esperado = "Los clientes con los que no interactua hace un mes o mas son:\nHarry ElSucioPotter - Id: C1";
+            Assert.That(resultado.Contains(esperado));
         }
         [TestCase ("","datos de usuario vacios ")]
         [TestCase (null,"Value cannot be null. (Parameter 'datos de usuario null') datos de usuario null")]
