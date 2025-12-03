@@ -27,16 +27,14 @@ namespace Ucu.Poo.DiscordBot.Commands
         public async Task ExecuteAsync()
         {
             string[] etiquetas = fachada.VerEtiquetas().Split(',');
-            bool hayEtiquetas = false; 
-            string resultado = "Etiquetas totales son: \n";
+            string resultado = "Etiquetas totales son: \n\n";
                 
             foreach (string etiqueta in etiquetas)
             {
-                hayEtiquetas = true;
-                resultado += etiqueta + "\n";
+                resultado += $"{etiqueta}\n";
             }
 
-            if (hayEtiquetas == false)
+            if (etiquetas.Length == 1 && etiquetas[0] == "")
             {
                 resultado = "No hay etiquetas.";
             }

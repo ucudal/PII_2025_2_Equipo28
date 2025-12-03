@@ -28,7 +28,6 @@ namespace Ucu.Poo.DiscordBot.Commands
             if (parte.Length != 5)
             {
                 await ReplyAsync($"Se nececitan 5 parametros: clienteId, nombre, apellido, telefono y correo. Recurda separar los parametros por ','");
-
             }
             else
             {

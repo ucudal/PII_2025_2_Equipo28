@@ -27,16 +27,14 @@ namespace Ucu.Poo.DiscordBot.Commands
         public async Task ExecuteAsync()
         {
             string[] clientes = fachada.VerClientes().Split(',');
-            bool hayClientes = false; 
-            string resultado = "Clientes totales son: \n";
+            string resultado = "Clientes totales son: \n\n";
                 
             foreach (string cliente in clientes)
             {
-                hayClientes = true;
-                resultado += cliente.ToString() + "\n";
+                resultado += cliente.ToString() + "\n\n";
             }
 
-            if (hayClientes == false)
+            if (clientes.Length == 1 && clientes[0] == "")
             {
                 resultado = "No hay clientes.";
             }

@@ -627,8 +627,7 @@ namespace Library
             {
                 try
                 {
-                    Etiquetas.CrearEtiqueta(etiqueta.Trim());
-                    return $"Etiqueta {etiqueta.Trim()} creada correctamente.";
+                    return Etiquetas.CrearEtiqueta(etiqueta.Trim());
                 }
                 catch (ArgumentNullException e)
                 {
@@ -879,7 +878,7 @@ namespace Library
             {               
                 Cliente nuevo = new Cliente(id, nombre, apellido, telefono, correo);
                 this.Clientes.AgregaCliente(nuevo);
-                return $"Cliente {nuevo} creado correctamente";
+                return $"Cliente:\n\n{nuevo}\n\nCreado correctamente";
             }
             catch (Exception err)
             {
