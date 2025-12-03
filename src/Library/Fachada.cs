@@ -1272,6 +1272,36 @@ namespace Library
                 return e.Message;
             }
         }
+        
+        /// <summary>
+        /// Muestra todas las ventas registradas en el sistema.
+        /// Principios que cumple:
+        /// - SRP  Se enfoca solo en listar ventas como texto.
+        /// - EXPERT  La fachada conoce el repositorio de ventas y delega en VentaFachada el resumen.
+        /// - Alta cohesión  Todo el método está orientado a mostrar las ventas.
+        /// </summary>
+        /// <returns>
+        /// "No hay ventas registradas." si no existe ninguna venta,
+        /// o un listado en texto con el resumen de cada venta registrada.
+        /// </returns>
+        public string VerVentas()
+        {
+            string resultado = "Ventas registradas:\n";
+            int cantidad = 0;
+
+            foreach (var venta in this.Ventas.Ventas)
+            {
+                resultado += venta.Resumen() + "\n";
+                cantidad++;
+            }
+
+            if (cantidad == 0)
+            {
+                return "No hay ventas registradas.";
+            }
+
+            return resultado.TrimEnd();
+        }
         /// <summary>
         /// Crea un nuevo administrador en el sistema.
         /// Creator: crea instancias de Administrador y las agrega al repositorio.

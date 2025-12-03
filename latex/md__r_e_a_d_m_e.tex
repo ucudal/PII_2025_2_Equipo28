@@ -13,7 +13,374 @@ El diseño de clases fue hecho con {\bfseries{Mermaid}} para tener una idea de q
 
 🔗 \href{https://www.mermaidchart.com/app/projects/d3c42d9d-aa06-4e81-b08e-e9ba599f56fb/diagrams/e8dd9a10-86d6-4e84-8737-7c0717ca9ea4/version/v0.1/edit}{\texttt{Abrir en Mermaid}}
 
- \hypertarget{md__r_e_a_d_m_e_autotoc_md2}{}\doxysubsection{\texorpdfstring{📜 Notas}{📜 Notas}}\label{md__r_e_a_d_m_e_autotoc_md2}
-Los principales desafios que encontramos al trabajar sobre el proyecto fueron la correcta distribución de responsabilidades entre las clases y sus relaciones entre sí, y el mantener una aplicación consistente de los principios SOLID, además de acostumbrarse a trabajar con y solucionar los conflicos de Git.~\newline
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{-\/-\/-\/}
+\DoxyCodeLine{config:}
+\DoxyCodeLine{\ \ theme:\ mc}
+\DoxyCodeLine{\ \ look:\ neo}
+\DoxyCodeLine{-\/-\/-\/}
+\DoxyCodeLine{classDiagram}
+\DoxyCodeLine{direction\ TB}
+\DoxyCodeLine{\ \ \ \ class\ Cliente\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +string\ Id}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +string\ Nombre}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +string\ Apellido}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +string\ Telefono}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +string\ Correo}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +string\ Genero}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +List\string~string\string~\ Etiquetas}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +string\ FechaDeNacimiento}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +Cliente(id:\ string,\ nombre:\ string,\ apellido:\ string,\ telefono:\ string,\ correo:\ string)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +CambiarNombre(nuevoNombre:\ string)\ void}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +CambiarApellido(nuevoApellido:\ string)\ void}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +CambiarTelefono(nuevoTelefono:\ string)\ void}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +CambiarCorreo(nuevoCorreo:\ string)\ void}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +AsignarGenero(nuevoGenero:\ string)\ void}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +AsignarEtiqueta(nuevaEtiqueta:\ string)\ void}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +AsignarFechaDeNacimiento(nuevaFecha:\ string)\ void}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +ToString()\ string}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ class\ RepoClientes\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ -\/\ List\string~Cliente\string~\ Clientes}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ IEnumerable\string~Cliente\string~\ Clientes2}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ -\/\ RepoEtiquetas\ etiquetas}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ -\/\ RepoUsuarios\ usuarios}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ RepoClientes(RepoEtiquetas\ etiquetas,\ RepoUsuarios\ usuarios)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ AgregaCliente(Cliente\ cliente)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ EliminarCliente(Cliente\ cliente)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ BuscarCliente(string\ atributo,\ string\ valorBusqueda)\ List\string~Cliente\string~}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ BuscarUnCliente(string\ ClienteId)\ Cliente}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ class\ RepoEtiquetas\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ -\/\ List\string~string\string~\ Etiquetas}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ void\ AgregarEtiqueta(string\ etiqueta)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ bool\ BuscarEtiqueta(string\ etiqueta)}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ class\ RepoUsuarios\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +List\ Usuarios}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +List\ Administradores}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +List\ Vendedores}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +List\ ClientesTotales}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +AgregarUsuario(usuario:\ Usuario)\ void}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +EliminarUsuario(usuario:\ Usuario)\ void}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +BuscarUsuario(id:\ string)\ Usuario}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +BuscarVendedor(id:\ string)\ Vendedor}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +BuscarAdministrador(id:\ string)\ Administrador}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +BuscarCliente(id:\ string)\ Cliente}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ class\ Vendedor\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ List\string~Cliente\string~\ Clientes}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ string\ Id}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ string\ NombreCompleto}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ Vendedor(string\ id,\ string\ nombre)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ AsignarCliente(Cliente\ cliente,\ Vendedor\ vendedor)}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ class\ Usuario\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ -\/\ string\ ID}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ -\/\ string\ Nombre}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ -\/\ List\string~Interaccion\string~\ InteraccionesUsuario}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ -\/\ List\string~Venta\string~\ TotalVentas}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ -\/\ List\string~Venta\string~\ VentaCliente}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ -\/\ List\string~Cotizacion\string~\ CotizacionesUsuario}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ Usuario(string\ id,\ string\ nombre)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ Recordatorio(string\ que,\ string\ cuando)\ void}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ VentaClienteAdd(Venta\ venta)\ void}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ AgregarCotizacion(Cotizacion\ cotizacion)\ void}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ AgregarInteraccion(Interaccion\ interaccion)\ void}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ class\ Administrador\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ List\string~Usuario\string~\ UsuariosSuspendidos}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ Administrador(string\ id,\ string\ nombre)}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ class\ Interaccion\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ string\ Notas}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ Cliente\ Cliente}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ Usuario\ Usuario}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ string\ Tema}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ DateTime\ Fecha}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ TipoInterracion\ Tipo}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ string\ Contenido}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ string\ Lugar}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ Interaccion(Usuario\ usuario,\ Cliente\ cliente,\ string\ tema,\ string\ contenido,\ string\ cuando\ =\ "{}00/00/0000"{})}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ AgergarNotas(string\ notas)\ void}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \#\ FechaIncorrecta(DateTime\ fecha)\ void}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ class\ Venta\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +Cliente\ Cliente}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +string\ Producto}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +DateTime\ Fecha}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +string\ Importe}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +Venta(cliente:\ Cliente,\ producto:\ string,\ fecha:\ DateTime,\ importe:\ string)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +Resumen()\ string}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ class\ Cotizacion\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ Cliente\ Cliente}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ DateTime\ Fecha}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ string\ Importe}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ Cotizacion(Cliente\ cliente,\ DateTime\ fecha,\ string\ importe)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ Resumen()\ string}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ class\ TipoInterracion\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Mensaje}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Llamada}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Reunion}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Correo}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Nada}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ class\ Llamadas\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ Llamadas(Usuario\ usuario,\ Cliente\ cliente,\ string\ tema,\ string\ llamada,\ string\ cuando)}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ class\ Mensajes\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ Mensajes(Usuario\ usuario,\ Cliente\ cliente,\ string\ tema,\ string\ mensaje,\ string\ cuando)}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ class\ Correos\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ Correos(Usuario\ usuario,\ Cliente\ cliente,\ string\ tema,\ string\ correo,\ string\ cuando)}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ class\ Reunion\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ Reunion(Usuario\ usuario,\ Cliente\ cliente,\ string\ tema,\ string\ lugar,\ string\ reunion,\ string\ cuando)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \#\ FechaIncorrecta(DateTime\ fecha)\ void}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ class\ RepoCotizaciones\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ -\/\ List\string~Cotizacion\string~\ Cotizaciones}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ void\ AgregarCotizacion(Cliente\ cliente,\ string\ cuando,\ string\ precio,\ Usuario\ usuario)}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ class\ RepoInteracciones\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ -\/\ List\string~Interaccion\string~\ Interacciones}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ IEnumerable\string~Interaccion\string~\ Interacciones2}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ Interaccion\ BuscarInteraccion(Usuario\ usuario,\ string\ tipo,\ string\ tema)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ List\string~Interaccion\string~\ BuscarInteraccion(Usuario\ usuario,\ Cliente\ cliente,\ string\ tipo="{}"{},\ string\ fecha1="{}"{})}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ void\ AgregarInteraccion(Interaccion\ interaccion,\ Usuario\ usuario)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ Dictionary\string~Cliente,Interaccion\string~\ UltimasInteraccionesClientes(Usuario\ usuario)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ void\ eliminarinteraciones()}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ class\ RepoVentas\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ -\/\ List\string~Venta\string~\ Ventas}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ void\ AgregarVenta(Cliente\ cliente,\ string\ cuando,\ string\ precio,\ string\ producto,\ Usuario\ usuario)}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ class\ Fachada\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ -\/\ instancia\ :\ Fachada}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ -\/\ ClientesContacto\ :\ Dictionary\string~}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ -\/\ Etiquetas\ :\ RepoEtiquetas}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ -\/\ Clientes\ :\ RepoClientes}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ -\/\ Interacciones\ :\ RepoInteracciones}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ -\/\ Cotizaciones\ :\ RepoCotizaciones}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ -\/\ Ventas\ :\ RepoVentas}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ -\/\ Usuarios\ :\ RepoUsuarios}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ -\/\ UsuariosSuspendidos\ :\ List}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ Instancia\ :\ Fachada}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ RegistarMensaje(clienteId,\ mensaje,\ tema,\ usuarioId,\ cuando)\ string}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ RegistrarCorreo(clienteId,\ correo,\ tema,\ usuarioId,\ cuando)\ string}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ RegistarLlamada(clienteId,\ llamada,\ tema,\ usuarioId,\ cuando)\ string}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ RegistarReunion(clienteId,\ reunion,\ tema,\ usuarioId,\ cuando,\ lugar)\ string}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ AgregarNota(nota,\ tipointeraccion,\ tema,\ usuarioId)\ string}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ InteraccionesCliente(clienteId,\ usuarioId,\ tipo,\ fecha)\ string}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ InterraccionClienteAusente(usuarioId)\ string}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ Panel(usuarioId)\ string}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ AgregarClienteContacto(usuarioId,\ clienteId)\ string}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ VerClienteContacto(usuarioId)\ string}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ CrearEtiqueta(etiqueta,\ idUsuario)\ string}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ AgregarEtiquetaCliente(clienteId,\ etiqueta,\ usuarioId)\ string}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ RegistrarVenta(clienteId,\ producto,\ fecha,\ precio,\ usuarioId)\ void}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ RegistarCotizacion(clienteId,\ fecha,\ precio,\ usuarioId)\ void}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ CrearUsuario(id,\ nombre,\ idAdmin)\ string}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ SuspenderUsuario(idSuspender,\ idAdmin)\ string}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ EliminarUsuario(idEliminar,\ idAdmin)\ string}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ AsignarClienteAOtroVendedor(idVendedorActual,\ idVendedorNuevo,\ nombreCliente,\ apellidoCliente)\ void}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ BuscarClientesFachada(atributo,\ valorBusqueda)\ List\string~Cliente\string~}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ CrearNuevoCliente(id,\ nombre,\ apellido,\ telefono,\ correo)\ Cliente}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ ModificarInfo(id,\ atributo,\ nuevoValor)\ void}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ EliminarClienteFachada(id)\ void}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ VerClientes()\ RepoClientes}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ BuscarUsuario(usuarioId)\ Usuario}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ RegistrarVentaCliente(clienteId,\ producto,\ fecha,\ precio,\ usuarioId)\ string}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +\ TotalDeVentasEnPeriodo(usuarioId,\ fechaInicioTexto,\ fechaFinTexto)\ string}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ class\ Excepciones\ \{}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ class\ InvalidDateException\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +InvalidDateException(string\ mensaje\ =\ null)}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ class\ EmptyStringException\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ +EmptyStringException(string\ mensaje\ =\ null)}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ class\ Exception\ \{}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ <<enumeration>>\ TipoInterracion}
+\DoxyCodeLine{\ \ \ \ <<singleton>>\ Fachada}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Excepciones\ <|-\/-\/\ InvalidDateException}
+\DoxyCodeLine{\ \ \ \ Excepciones\ <|-\/-\/\ EmptyStringException}
+\DoxyCodeLine{\ \ \ \ InvalidDateException\ -\/-\/|>\ Exception}
+\DoxyCodeLine{\ \ \ \ EmptyStringException\ -\/-\/|>\ Exception}
+\DoxyCodeLine{\ \ \ \ RepoClientes\ "{}1"{}\ -\/-\/>\ "{}*"{}\ Cliente}
+\DoxyCodeLine{\ \ \ \ RepoClientes\ "{}1"{}\ -\/-\/>\ "{}1"{}\ RepoEtiquetas}
+\DoxyCodeLine{\ \ \ \ RepoClientes\ "{}1"{}\ -\/-\/>\ "{}1"{}\ RepoUsuarios}
+\DoxyCodeLine{\ \ \ \ Vendedor\ -\/-\/|>\ Usuario}
+\DoxyCodeLine{\ \ \ \ Administrador\ -\/-\/|>\ Usuario}
+\DoxyCodeLine{\ \ \ \ Vendedor\ "{}1"{}\ -\/-\/>\ "{}*"{}\ Cliente}
+\DoxyCodeLine{\ \ \ \ Administrador\ "{}1"{}\ -\/-\/>\ "{}*"{}\ Usuario}
+\DoxyCodeLine{\ \ \ \ Usuario\ "{}1"{}\ o-\/-\/\ "{}*"{}\ Interaccion}
+\DoxyCodeLine{\ \ \ \ Usuario\ "{}1"{}\ o-\/-\/\ "{}*"{}\ Venta}
+\DoxyCodeLine{\ \ \ \ Usuario\ "{}1"{}\ o-\/-\/\ "{}*"{}\ Cotizacion}
+\DoxyCodeLine{\ \ \ \ Interaccion\ "{}1"{}\ o-\/-\/\ "{}1"{}\ Cliente}
+\DoxyCodeLine{\ \ \ \ Interaccion\ "{}1"{}\ o-\/-\/\ "{}1"{}\ Usuario}
+\DoxyCodeLine{\ \ \ \ Interaccion\ *-\/-\/\ TipoInterracion}
+\DoxyCodeLine{\ \ \ \ Llamadas\ -\/-\/|>\ Interaccion}
+\DoxyCodeLine{\ \ \ \ Mensajes\ -\/-\/|>\ Interaccion}
+\DoxyCodeLine{\ \ \ \ Correos\ -\/-\/|>\ Interaccion}
+\DoxyCodeLine{\ \ \ \ Reunion\ -\/-\/|>\ Interaccion}
+\DoxyCodeLine{\ \ \ \ Cotizacion\ "{}1"{}\ o-\/-\/\ "{}1"{}\ Cliente}
+\DoxyCodeLine{\ \ \ \ RepoUsuarios\ -\/-\/>\ "{}0..*"{}\ Usuario}
+\DoxyCodeLine{\ \ \ \ RepoInteracciones\ -\/-\/>\ Interaccion}
+\DoxyCodeLine{\ \ \ \ RepoInteracciones\ -\/-\/>\ Usuario}
+\DoxyCodeLine{\ \ \ \ RepoInteracciones\ -\/-\/>\ Cliente}
+\DoxyCodeLine{\ \ \ \ RepoVentas\ -\/-\/>\ Venta}
+\DoxyCodeLine{\ \ \ \ RepoVentas\ -\/-\/>\ Cliente}
+\DoxyCodeLine{\ \ \ \ RepoVentas\ -\/-\/>\ Usuario}
+\DoxyCodeLine{\ \ \ \ RepoCotizaciones\ "{}1"{}\ -\/-\/>\ "{}*"{}\ Cotizacion}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ style\ Cliente\ stroke:\#FF5978,fill:\#FFDFE5,color:\#8E2236}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ style\ Vendedor\ stroke:\#46EDC8,fill:\#DEFFF8,color:\#378E7A}
+\DoxyCodeLine{\ \ \ \ style\ Usuario\ stroke:\#374D7C,fill:\#E2EBFF,color:\#374D7C}
+\DoxyCodeLine{\ \ \ \ style\ Administrador\ stroke:\#46EDC8,fill:\#DEFFF8,color:\#378E7A}
+\DoxyCodeLine{\ \ \ \ style\ Venta\ stroke:\#FBB35A,fill:\#FFEFDB,color:\#8F632D}
+\DoxyCodeLine{\ \ \ \ style\ Cotizacion\ stroke:\#46EDC8,fill:\#DEFFF8,color:\#378E7A}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ style\ Reunion\ stroke:\#FF5978,fill:\#FFDFE5,color:\#8E2236}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ style\ Fachada\ stroke:\#46EDC8,fill:\#DEFFF8,color:\#378E7A}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ class\ RepoClientes:::Sky}
+\DoxyCodeLine{\ \ \ \ class\ RepoEtiquetas:::Peach}
+\DoxyCodeLine{\ \ \ \ class\ RepoUsuarios:::Peach}
+\DoxyCodeLine{\ \ \ \ class\ Interaccion:::Peach}
+\DoxyCodeLine{\ \ \ \ class\ TipoInterracion:::Sky}
+\DoxyCodeLine{\ \ \ \ class\ Llamadas:::Aqua}
+\DoxyCodeLine{\ \ \ \ class\ Mensajes:::Rose}
+\DoxyCodeLine{\ \ \ \ class\ Correos:::Sky}
+\DoxyCodeLine{\ \ \ \ class\ RepoCotizaciones:::Aqua}
+\DoxyCodeLine{\ \ \ \ class\ RepoInteracciones:::Peach}
+\DoxyCodeLine{\ \ \ \ class\ RepoVentas:::Rose}
+\DoxyCodeLine{\ \ \ \ class\ Excepciones:::Peach}
+\DoxyCodeLine{\ \ \ \ class\ InvalidDateException:::Rose}
+\DoxyCodeLine{\ \ \ \ class\ EmptyStringException:::Sky}
+\DoxyCodeLine{\ \ \ \ class\ Exception:::Aqua}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ classDef\ Sky\ :,stroke-\/width:1px,stroke-\/dasharray:none,stroke:\#374D7C,fill:\#E2EBFF,color:\#374D7C,stroke-\/width:1px,stroke-\/dasharray:none,stroke:\#374D7C,fill:\#E2EBFF,color:\#374D7C,stroke-\/width:1px,stroke-\/dasharray:none,stroke:\#374D7C,fill:\#E2EBFF,color:\#374D7C,stroke-\/width:1px,stroke-\/dasharray:none,stroke:\#374D7C,fill:\#E2EBFF,color:\#374D7C}
+\DoxyCodeLine{\ \ \ \ classDef\ Peach\ :,stroke-\/width:1px,stroke-\/dasharray:none,stroke:\#FBB35A,fill:\#FFEFDB,color:\#8F632D,stroke-\/width:1px,stroke-\/dasharray:none,stroke:\#FBB35A,fill:\#FFEFDB,color:\#8F632D,stroke-\/width:1px,stroke-\/dasharray:none,stroke:\#FBB35A,fill:\#FFEFDB,color:\#8F632D,stroke-\/width:1px,stroke-\/dasharray:none,stroke:\#FBB35A,fill:\#FFEFDB,color:\#8F632D,stroke-\/width:1px,stroke-\/dasharray:none,stroke:\#FBB35A,fill:\#FFEFDB,color:\#8F632D}
+\DoxyCodeLine{\ \ \ \ classDef\ Aqua\ :,stroke-\/width:1px,stroke-\/dasharray:none,stroke:\#46EDC8,fill:\#DEFFF8,color:\#378E7A,stroke-\/width:1px,stroke-\/dasharray:none,stroke:\#46EDC8,fill:\#DEFFF8,color:\#378E7A,stroke-\/width:1px,stroke-\/dasharray:none,stroke:\#46EDC8,fill:\#DEFFF8,color:\#378E7A}
+\DoxyCodeLine{\ \ \ \ classDef\ Rose\ :,stroke-\/width:1px,stroke-\/dasharray:none,stroke:\#FF5978,fill:\#FFDFE5,color:\#8E2236,stroke-\/width:1px,stroke-\/dasharray:none,stroke:\#FF5978,fill:\#FFDFE5,color:\#8E2236,stroke-\/width:1px,stroke-\/dasharray:none,stroke:\#FF5978,fill:\#FFDFE5,color:\#8E2236}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md2}{}\doxysubsection{\texorpdfstring{💻 Comandos e historias}{💻 Comandos e historias}}\label{md__r_e_a_d_m_e_autotoc_md2}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Historias  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Comandos  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Ejemplo  }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Historias  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Comandos  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Ejemplo  }\\\cline{1-3}
+\endhead
+Como usuario quiero crear un nuevo cliente con su información básica\+: nombre, apellido, teléfono y correo electrónico, para poder contactarme con ellos cuando lo necesite.  &{\bfseries{!crear\+Cliente}} cliente\+Id nombre apellido telefono correo  &{\bfseries{!crear\+Cliente}} C1,Tony,Gonzales,099287345,\href{mailto:juan@correo.com}{\texttt{juan@correo.\+com}}{\bfseries{!ver\+Clientes}}  \\\cline{1-3}
+Como usuario quiero modificar la información de un cliente existente, para mantenerla actualizada.  &{\bfseries{!modf\+Info}} cliente\+Id atributo nuevo\+Valor  &{\bfseries{!crear\+Cliente}} C2,Juan,Martinez,099287345,\href{mailto:martinezjuan@correo.com}{\texttt{martinezjuan@correo.\+com}}{\bfseries{!modf\+Info}} C2,nombre,Horacio{\bfseries{!ver\+Clientes}}  \\\cline{1-3}
+Como usuario quiero eliminar un cliente, para mantener limpia la base de datos.  &{\bfseries{!eliminar\+Cliente}} id  &{\bfseries{!crear\+Cliente}} C3,Kevin,Rodriguez,099281245,\href{mailto:kevinrod@correo.com}{\texttt{kevinrod@correo.\+com}}{\bfseries{!ver\+Clientes}}{\bfseries{!eliminar\+Cliente}} C3{\bfseries{!ver\+Clientes}}  \\\cline{1-3}
+Como usuario quiero buscar clientes por nombre, apellido, teléfono o correo electrónico, para identificarlos rápidamente.  &{\bfseries{!buscar\+Cliente}} atributo busqueda  &{\bfseries{!crear\+Cliente}} C4,Romualdo,Perez,092287345,\href{mailto:perezromualdo@correo.com}{\texttt{perezromualdo@correo.\+com}}{\bfseries{!buscar\+Cliente}} nombre,Romualdo{\bfseries{!ver\+Clientes}}  \\\cline{1-3}
+Como usuario quiero ver una lista de todos mis clientes, para tener una vista general de mi cartera.  &{\bfseries{!ver\+Clientes}}  &{\bfseries{!ver\+Clientes}}  \\\cline{1-3}
+Como usuario quiero registrar llamadas enviadas o recibidas de clientes, incluyendo cuándo fueron y de qué tema trataron, para poder saber mis interacciones con los clientes.  &{\bfseries{!registrar\+Llamada}} cliente\+Id llamada tema usuario\+Id fecha  &{\bfseries{!crear\+Administrador}} A1,Pablo~\newline
+{\bfseries{!crear\+Usuario}} U1,Lucas,A1~\newline
+{\bfseries{!crear\+Cliente}} C1,Juan,Pinocho,099765432,\href{mailto:JuanP@gmail.com}{\texttt{Juan\+P@gmail.\+com}}~\newline
+{\bfseries{!registrar\+Llamada}} C1,hola,saludo,U1,10/11/2025~\newline
+{\bfseries{!interaccion\+Cliente}} C1,U1,llamada,10/11/2025  \\\cline{1-3}
+Como usuario quiero registrar reuniones con los clientes, incluyendo cuándo y dónde fueron, y de qué tema trataron, para poder saber mis interacciones con los clientes.  &{\bfseries{!registrar\+Reunion}} cliente\+Id reunion tema usuario\+Id fecha lugar  &{\bfseries{!crear\+Administrador}} A1,Pablo~\newline
+{\bfseries{!crear\+Usuario}} U1,Lucas,A1~\newline
+{\bfseries{!crear\+Cliente}} C1,Juan,Pinocho,099765432,\href{mailto:JuanP@gmail.com}{\texttt{Juan\+P@gmail.\+com}}~\newline
+{\bfseries{!registrar\+Reunion}} C1,hola todo bien,saludo,U1,10/11/2025,Marte~\newline
+{\bfseries{!interaccion\+Cliente}} C1,U1,reunion,10/11/2025  \\\cline{1-3}
+Como usuario quiero registrar mensajes enviados a o recibidos de los clientes, incluendo cuándo y de qué tema fueron, para poder saber mis interacciones con los clientes.  &{\bfseries{!registrar\+Mensaje}} cliente\+Id mensaje tema usuario\+Id fecha  &{\bfseries{!crear\+Administrador}} A1,Pablo~\newline
+{\bfseries{!crear\+Usuario}} U1,Lucas,A1~\newline
+{\bfseries{!crear\+Cliente}} C1,Juan,Pinocho,099765432,\href{mailto:JuanP@gmail.com}{\texttt{Juan\+P@gmail.\+com}}~\newline
+{\bfseries{!registrar\+Mensaje}} C1,hola todo bien,saludo,U1,11/11/2025~\newline
+{\bfseries{!interaccion\+Cliente}} C1,U1,mensaje,11/11/2025  \\\cline{1-3}
+Como usuario quiero registrar correos electrónicos enviados a o recibidos de los clientes, incluendo cuándo y de qué tema fueron, para poder saber mis interacciones con los clientes.  &{\bfseries{!registrar\+Correo}} cliente\+Id correo tema usuario\+Id fecha  &{\bfseries{!crear\+Administrador}} A1,Pablo~\newline
+{\bfseries{!crear\+Usuario}} U1,Lucas,A1~\newline
+{\bfseries{!crear\+Cliente}} C1,Juan,Pinocho,099765432,\href{mailto:JuanP@gmail.com}{\texttt{Juan\+P@gmail.\+com}}~\newline
+{\bfseries{!registrar\+Correo}} C1,hola todo bien,saludo,U1,12/11/2025~\newline
+{\bfseries{!interaccion\+Cliente}} C1,U1,correo,12/11/2025  \\\cline{1-3}
+Como usuario quiero agregar notas o comentarios a las llamadas, reuniones, mensajes y correos enviados o recibidos de los clientes, para tener información adicional de mis interacciones con los clientes.  &{\bfseries{!agregar\+Nota}} tipo\+Interaccion tema usuario\+Id  &{\bfseries{!crear\+Administrador}} A1,Pablo~\newline
+{\bfseries{!crear\+Usuario}} U1,Lucas,A1~\newline
+{\bfseries{!crear\+Cliente}} C1,Juan,Pinocho,099765432,\href{mailto:JuanP@gmail.com}{\texttt{Juan\+P@gmail.\+com}}~\newline
+{\bfseries{!registrar\+Correo}} C1,hola todo bien,saludo,U1,12/11/2025~\newline
+{\bfseries{!agregar\+Nota}} este saludo es fue muy bueno,correo,saludo,U1~\newline
+{\bfseries{!interaccion\+Cliente}} C1,U1,correo,12/11/2025  \\\cline{1-3}
+Como usuario quiero registrar otros datos de los clientes como género y fecha de nacimiento de los clientes, para realizar campañas y saludarlos en sus cumpleaños.  &{\bfseries{!modf\+Info}} id atributo nuevo\+Valor  &{\bfseries{!crear\+Cliente}} C5,Jovani,Vazquez,099289455,\href{mailto:jovanivazquez@correo.com}{\texttt{jovanivazquez@correo.\+com}}{\bfseries{!modf\+Info}} C5,genero,Mujer{\bfseries{!ver\+Clientes}}  \\\cline{1-3}
+Como usuario quiero poder definir etiquetas para poder organizar y segmentar a mis clientes.  &{\bfseries{!crear\+Etiqueta}} etiqueta usuario\+Id  &{\bfseries{!crear\+Administrador}} A25,Hector{\bfseries{!crear\+Usuario}} U1,Franco,A25{\bfseries{!crear\+Etiqueta}} etiqueta\+De\+Prueba,U1~\newline
+{\bfseries{!ver\+Etiquetas}}  \\\cline{1-3}
+Como usuario quiero poder agregar una etiqueta a un cliente, para luego organizar y segmentar mi cartera de clientes.  &{\bfseries{!agregar\+Etiqueta}} cliente\+Id etiqueta usuario\+Id  &{\bfseries{!crear\+Administrador}} A32,Liliana{\bfseries{!crear\+Cliente}} C6,Edmundo,Gutierrez,0982827315,\href{mailto:edmundoguti@correo.com}{\texttt{edmundoguti@correo.\+com}}{\bfseries{!crear\+Usuario}} U20,Alejandro,A32{\bfseries{!crear\+Etiqueta}} etiqueta\+De\+Prueba,U1{\bfseries{!ver\+Etiquetas}}{\bfseries{!agregar\+Etiqueta}} C6,etiqueta\+De\+Prueba,U1{\bfseries{!ver\+Clientes}}  \\\cline{1-3}
+Como usuario quiero poder registrar una venta a un cliente, incluyendo qué le vendí, cuándo se lo vendí y cuánto le cobré, para saber lo que compran los clientes.  &{\bfseries{!registrar\+Venta}} cliente\+Id producto fecha precio usuario\+Id  &{\bfseries{!crear\+Administrador}} A9,Ema9{\bfseries{!crear\+Usuario}} U9,Ezequiel9,A9{\bfseries{!crear\+Cliente}} C9,Jean9,Rodriguez9,099281245,\href{mailto:kevinrod@correo.com}{\texttt{kevinrod@correo.\+com}}{\bfseries{!registrar\+Venta}} C9,ATUN,11/12/2025,100,U9  \\\cline{1-3}
+Como usuario quiero poder registrar que le envié una cotización a un cliente, cuándo se la mandé y por qué importe es la cotización, para hacer seguimiento de oportunidades de venta.  &{\bfseries{!registrar\+Cotiz}} cliente\+Id fecha precio usuario\+Id  &{\bfseries{!crear\+Administrador}} A10,Ema10{\bfseries{!crear\+Usuario}} U10,Ezequiel10,A10{\bfseries{!crear\+Cliente}} C10,Jean10,Rodriguez10,099281245,\href{mailto:kevinrod@correo.com}{\texttt{kevinrod@correo.\+com}}{\bfseries{!registrar\+Cotiz}} C10,11/12/2025,100,U10  \\\cline{1-3}
+Como usuario quiero ver todas las interacciones de un cliente, con o sin filtro por tipo de interacción y por fecha, para entender el historial de la relación comercial.  &{\bfseries{!interaccion\+Cliente}} cliente\+Id usuario\+Id tipo fecha  &{\bfseries{!crear\+Administrador}} A1,Pablo~\newline
+{\bfseries{!crear\+Usuario}} U1,Lucas,A1~\newline
+{\bfseries{!crear\+Cliente}} C1,Juan,Pinocho,099765432,\href{mailto:JuanP@gmail.com}{\texttt{Juan\+P@gmail.\+com}}~\newline
+{\bfseries{!registrar\+Correo}} C1,hola todo bien,saludo,U1,12/11/2025~\newline
+{\bfseries{!registrar\+Llamada}} C1,nos vimos,despedida,U1,10/11/2025~\newline
+{\bfseries{!interaccion\+Cliente}} C1,U1,,~\newline
+{\bfseries{!interaccion\+Cliente}} C1,U1,,12/11/2025~\newline
+{\bfseries{!interaccion\+Cliente}} C1,U1,llamada,~\newline
+{\bfseries{!interaccion\+Cliente}} C1,U1,correo,12/11/2025  \\\cline{1-3}
+Cómo usuario quiero saber los clientes que hace cierto tiempo que no tengo ninguna interacción con ellos, para no peder contacto con ellos.  &{\bfseries{!cliente\+Ausente}} usuario\+Id  &{\bfseries{!crear\+Administrador}} A1,Pablo~\newline
+{\bfseries{!crear\+Usuario}} U1,Lucas,A1~\newline
+{\bfseries{!crear\+Cliente}} C1,Juan,Pinocho,099765432,\href{mailto:JuanP@gmail.com}{\texttt{Juan\+P@gmail.\+com}}~\newline
+{\bfseries{!registrar\+Reunion}} C1,hola todo bien,saludo,U1,10/10/2024,Marte~\newline
+{\bfseries{!cliente\+Ausente}} U1  \\\cline{1-3}
+Como usuario quiero saber los clientes que se pusieron en contacto conmigo y no les contesté hace cierto tiempo, para no dejar de responder mensajes o llamadas.  &{\bfseries{!cliente\+Contacta\+Ver}} usuario\+Id  {\bfseries{!cliente\+Contacta\+Agregar}} usuarioid clienteid  {\bfseries{!cliente\+Contacta\+Eliminar}} usuarioid clienteid  &{\bfseries{!crear\+Administrador}} A1,Pablo~\newline
+{\bfseries{!crear\+Usuario}} U1,Lucas,A1~\newline
+{\bfseries{!crear\+Cliente}} C1,Juan,Pinocho,099765432,\href{mailto:JuanP@gmail.com}{\texttt{Juan\+P@gmail.\+com}}~\newline
+ {\bfseries{!cliente\+Contacta\+Agregar}} U1,C1  {\bfseries{!cliente\+Contacta\+Ver}} U1  \\\cline{1-3}
+Como administrador quiero crear usuarios.  &{\bfseries{!crear\+Usuario}} usuario\+Id nombre admin\+Id  &{\bfseries{!crear\+Administrador}} A1,Pepe{\bfseries{!crear\+Usuario}} U1,Ezequiel,A1{\bfseries{!ver\+Usuarios}}  \\\cline{1-3}
+Como administrador quiero eliminar usuarios.  &{\bfseries{!eliminar\+Usuario}} usuario\+Id admin\+Id  &{\bfseries{!crear\+Administrador}} A2,Andres{\bfseries{!crear\+Usuario}} U2,Peter,A2{\bfseries{!ver\+Usuarios}}{\bfseries{!eliminar\+Usuario}} U2,A2{\bfseries{!ver\+Usuarios}}  \\\cline{1-3}
+Como administrador quiero suspender usuarios.  &{\bfseries{!suspender\+Usuario}} usuario\+Id admin\+Id  &{\bfseries{!crear\+Administrador}} A3,Juan{\bfseries{!crear\+Usuario}} U3,Nahuel,A3{\bfseries{!ver\+Usuarios}}{\bfseries{!suspender\+Usuario}} U3,A3{\bfseries{!ver\+Usuarios}}  \\\cline{1-3}
+Como vendedor, quiero poder asignar un cliente a otro vendedor para distribuir el trabajo en el equipo.  &{\bfseries{!asignar\+Cliente}} cliente\+Id vendedor\+Id  &{\bfseries{!crear\+Vendedor}} V11,Juan\+Vendedor11{\bfseries{!crear\+Cliente}} C11,Jean11,Rodriguez11,099281245,\href{mailto:kevinrod@correo.com}{\texttt{kevinrod@correo.\+com}}{\bfseries{ {\bfseries{!asignar\+Cliente}} C11,V11  }}\\\cline{1-3}
+{\bfseries{ Como usuario quiero saber el total de ventas de un periodo dado, para analizar en rendimiento de mi negocio.  }}&{\bfseries{ {\bfseries{!total\+Ventas}} usuario\+Id fecha\+Inicio fecha\+Fin  }}&{\bfseries{ {\bfseries{!crear\+Administrador}} A12,Juan12{\bfseries{!crear\+Usuario}} U12,Nahuel12,A12{\bfseries{!crear\+Cliente}} C12,Jean12,Rodriguez12,099281245,\href{mailto:kevinrod@correo.com}{\texttt{kevinrod@correo.\+com}}{\bfseries{!registrar\+Venta}} C12,ATUN,11/12/2025,100,U12{\bfseries{!registrar\+Venta}} C12,ATUN,12/12/2025,100,U12{\bfseries{!total\+Ventas}} U12,11/12/2025,14/12/2025  }}\\\cline{1-3}
+{\bfseries{ Como usuario quiero ver un panel con clientes totales, interacciones recientes y reuniones próximas, para tener un resumen rápido.  }}&{\bfseries{ {\bfseries{!panel}} usuario\+Id  }}&{\bfseries{ {\bfseries{!crear\+Administrador}} A1,Pablo~\newline
+{\bfseries{!crear\+Usuario}} U1,Lucas,A1~\newline
+{\bfseries{!crear\+Cliente}} C1,Juan,Pinocho,099765432,\href{mailto:JuanP@gmail.com}{\texttt{Juan\+P@gmail.\+com}}~\newline
+{\bfseries{!registrar\+Llamada}} C1,hola,saludo,U1,29/11/2025~\newline
+}}!crear\+Cliente C2,Marta,Mora,099383214,\href{mailto:MartaM@gmail.com}{\texttt{Marta\+M@gmail.\+com}}~\newline
+{\bfseries{!registrar\+Mensaje}} C2,tengo una duda,duda,U1,30/11/2025~\newline
+{\bfseries{!registrar\+Reunion}} C1,Tenemos que discutir sobre los aliens,extraterestres,U1,10/11/2026,Marte~\newline
+{\bfseries{!panel U1  }}\\\cline{1-3}
+\end{longtabu}
+
+
+{\bfseries{}}\hypertarget{md__r_e_a_d_m_e_autotoc_md3}{}\doxysubsubsection{\texorpdfstring{{\bfseries{Comandos no requeridos por las historias de usuario}}}{{\bfseries{Comandos no requeridos por las historias de usuario}}}}\label{md__r_e_a_d_m_e_autotoc_md3}
+{\bfseries{}}
+
+{\bfseries{\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Comando  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Descripción  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Ejemplos  }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Comando  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Descripción  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Ejemplos  }\\\cline{1-3}
+\endhead
+{\bfseries{!init}}  &Este comando crea un administrador, un usuario, un cliente y un vendedor. Esto para facilitar probar y/o utilizar el resto de comandos.  &{\bfseries{!init}}  \\\cline{1-3}
+{\bfseries{!ver\+Usuarios}}  &Muestra los usuarios existentes  &{\bfseries{!ver\+Usuarios}}  \\\cline{1-3}
+{\bfseries{!crear\+Vendedor}} vendedor\+Id nombre  &Este comando crea un vendedor  &{\bfseries{!crear\+Vendedor}} V1,Juan\+Vendedor  \\\cline{1-3}
+{\bfseries{!crear\+Administrador}} admin\+Id nombre  &Este comando crea un Administrador  &{\bfseries{!crear\+Administrador}} A1,Pepe{\bfseries{!ver\+Administradores}}  \\\cline{1-3}
+{\bfseries{!ver\+Etiquetas}}  &Este comando muestra todas las etiquetas existentes  &{\bfseries{!ver\+Etiquetas}}  \\\cline{1-3}
+\end{longtabu}
+}}
+
+{\bfseries{}}\hypertarget{md__r_e_a_d_m_e_autotoc_md4}{}\doxysubsection{\texorpdfstring{{\bfseries{📜 Notas}}}{{\bfseries{📜 Notas}}}}\label{md__r_e_a_d_m_e_autotoc_md4}
+{\bfseries{}}
+
+{\bfseries{Los principales desafios que encontramos al trabajar sobre el proyecto fueron la correcta distribución de responsabilidades entre las clases y sus relaciones entre sí, la correcta implementación de los principios SOLID y GRASP, y acostumbrarse a trabajar con Git, que era una herramienta nueva para todos.~\newline
 ~\newline
- En general, el proyecto viene siendo una buena oportunidad para poner en práctica lo visto en clase, tanto lo que se trata de conceptos como de código. 
+ En general, el proyecto fue una buena oportunidad para poner en práctica lo visto en clase, tanto lo que se trata de conceptos como de código. }}
