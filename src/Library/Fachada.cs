@@ -1181,7 +1181,7 @@ namespace Library
                 return "No hay cotizaciones registradas.";
             }
 
-            return resultado.TrimEnd();
+            return resultado;
         }
         /// <summary>
         /// Crea un nuevo vendedor.
@@ -1350,6 +1350,51 @@ namespace Library
             {
                 return e.Message;
             }
+        }
+        /// <summary>
+        /// Muestra todos los clientes asignados a un vendedor.
+        
+        /// - SRP Se enfoca solo en listar clientes de un vendedor como texto.
+        /// - EXPERT Usa al repositorio de usuarios y al vendedor como fuente de información.
+        /// - Alta cohesión Todo el método está orientado a mostrar clientes de un vendedor.
+        /// </summary>
+        /// <param name="vendedorId">ID del vendedor cuyas asignaciones se desean ver.</param>
+        /// <returns>
+        /// Un mensaje indicando que no se encontró el vendedor, que no es vendedor,
+        /// que no tiene clientes asignados, o un listado con los clientes asignados.
+        /// </returns>
+        public string VerClientesDeVendedor(string vendedorId)
+        {
+            
+            Usuario usuario = this.Usuarios.BuscarUsuario(vendedorId);
+
+            if (usuario == null)
+            {
+                return $"No se encontro un vendedor con ID '{vendedorId}'.";
+            }
+
+            
+            Vendedor vendedor = usuario as Vendedor;
+            if (vendedor == null)
+            {
+                return $"El usuario con ID '{vendedorId}' no es un vendedor.";
+            }
+
+            
+            if (vendedor.Clientes == null || vendedor.Clientes.Count == 0)
+            {
+                return $"El vendedor {vendedor.NombreCompleto} (ID '{vendedor.Id}') no tiene clientes asignados.";
+            }
+
+            
+            string resultado = $"Clientes del vendedor {vendedor.NombreCompleto} (ID '{vendedor.Id}'):\n";
+
+            foreach (var cliente in vendedor.Clientes)
+            {
+                resultado += $"- {cliente.Nombre} {cliente.Apellido}\n";
+            }
+
+            return resultado;
         }
     }
 }
