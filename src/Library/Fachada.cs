@@ -1153,7 +1153,35 @@ namespace Library
 
             return "No se encontro al usuario";
         }
-        
+
+        /// <summary>
+        /// Muestra todas las cotizaciones registradas en el sistema.
+        /// - SRP  Se enfoca solo en listar cotizaciones como texto.
+        /// - EXPERT  La fachada conoce el repositorio de cotizaciones y delega en Cotizacion el resumen.
+        /// - Alta cohesión Todo el método está orientado a mostrar cotizaciones.
+        /// </summary>
+        /// <returns>
+        /// "No hay cotizaciones registradas." si no existe ninguna cotización,
+        /// o un listado en texto con el resumen de cada cotización registrada.
+        /// </returns>
+        public string VerCotizaciones()
+        {
+            string resultado = "Cotizaciones registradas:\n";
+            int cantidad = 0;
+
+            foreach (var cotizacion in this.Cotizaciones.Cotizaciones)
+            {
+                resultado += cotizacion.Resumen() + "\n";
+                cantidad++;
+            }
+
+            if (cantidad == 0)
+            {
+                return "No hay cotizaciones registradas.";
+            }
+
+            return resultado.TrimEnd();
+        }
         /// <summary>
         /// Crea un nuevo vendedor.
         /// - SRP: Solo se encarga de crear un vendedor y devolver el resultado.
@@ -1270,6 +1298,36 @@ namespace Library
             {
                 return e.Message;
             }
+        }
+        
+        /// <summary>
+        /// Muestra todas las ventas registradas en el sistema.
+        /// Principios que cumple:
+        /// - SRP  Se enfoca solo en listar ventas como texto.
+        /// - EXPERT  La fachada conoce el repositorio de ventas y delega en VentaFachada el resumen.
+        /// - Alta cohesión  Todo el método está orientado a mostrar las ventas.
+        /// </summary>
+        /// <returns>
+        /// "No hay ventas registradas." si no existe ninguna venta,
+        /// o un listado en texto con el resumen de cada venta registrada.
+        /// </returns>
+        public string VerVentas()
+        {
+            string resultado = "Ventas registradas:\n";
+            int cantidad = 0;
+
+            foreach (var venta in this.Ventas.Ventas)
+            {
+                resultado += venta.Resumen() + "\n";
+                cantidad++;
+            }
+
+            if (cantidad == 0)
+            {
+                return "No hay ventas registradas.";
+            }
+
+            return resultado;
         }
         /// <summary>
         /// Crea un nuevo administrador en el sistema.

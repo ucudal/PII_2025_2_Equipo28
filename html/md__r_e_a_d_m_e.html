@@ -103,12 +103,388 @@ $(function(){initNavTree('md__r_e_a_d_m_e.html','',''); });
 🧩 Diagrama de Clases (Mermaid)</h2>
 <p>El diseño de clases fue hecho con <b>Mermaid</b> para tener una idea de qué clases serían necesarias para llevar a cabo este proyecto previamente a hacerlo.</p>
 <p>🔗 <a href="https://www.mermaidchart.com/app/projects/d3c42d9d-aa06-4e81-b08e-e9ba599f56fb/diagrams/e8dd9a10-86d6-4e84-8737-7c0717ca9ea4/version/v0.1/edit">Abrir en Mermaid</a></p>
-<p><img src="https://github.com/user-attachments/assets/b4006d5b-7789-47f2-adc3-e9eb365f0715" alt="" width="800" class="inline"/> </p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md2"></a>
-📜 Notas</h2>
-<p>Los principales desafios que encontramos al trabajar sobre el proyecto fueron la correcta distribución de responsabilidades entre las clases y sus relaciones entre sí, y el mantener una aplicación consistente de los principios SOLID, además de acostumbrarse a trabajar con y solucionar los conflicos de Git.<br  />
+<div class="fragment"><div class="line">---</div>
+<div class="line">config:</div>
+<div class="line">  theme: mc</div>
+<div class="line">  look: neo</div>
+<div class="line">---</div>
+<div class="line">classDiagram</div>
+<div class="line">direction TB</div>
+<div class="line">    class Cliente {</div>
+<div class="line">        +string Id</div>
+<div class="line">        +string Nombre</div>
+<div class="line">        +string Apellido</div>
+<div class="line">        +string Telefono</div>
+<div class="line">        +string Correo</div>
+<div class="line">        +string Genero</div>
+<div class="line">        +List~string~ Etiquetas</div>
+<div class="line">        +string FechaDeNacimiento</div>
+<div class="line">        +Cliente(id: string, nombre: string, apellido: string, telefono: string, correo: string)</div>
+<div class="line">        +CambiarNombre(nuevoNombre: string) void</div>
+<div class="line">        +CambiarApellido(nuevoApellido: string) void</div>
+<div class="line">        +CambiarTelefono(nuevoTelefono: string) void</div>
+<div class="line">        +CambiarCorreo(nuevoCorreo: string) void</div>
+<div class="line">        +AsignarGenero(nuevoGenero: string) void</div>
+<div class="line">        +AsignarEtiqueta(nuevaEtiqueta: string) void</div>
+<div class="line">        +AsignarFechaDeNacimiento(nuevaFecha: string) void</div>
+<div class="line">        +ToString() string</div>
+<div class="line">    }</div>
+<div class="line">    class RepoClientes {</div>
+<div class="line">        - List~Cliente~ Clientes</div>
+<div class="line">        + IEnumerable~Cliente~ Clientes2</div>
+<div class="line">        - RepoEtiquetas etiquetas</div>
+<div class="line">        - RepoUsuarios usuarios</div>
+<div class="line">        + RepoClientes(RepoEtiquetas etiquetas, RepoUsuarios usuarios)</div>
+<div class="line">        + AgregaCliente(Cliente cliente)</div>
+<div class="line">        + EliminarCliente(Cliente cliente)</div>
+<div class="line">        + BuscarCliente(string atributo, string valorBusqueda) List~Cliente~</div>
+<div class="line">        + BuscarUnCliente(string ClienteId) Cliente</div>
+<div class="line">    }</div>
+<div class="line">    class RepoEtiquetas {</div>
+<div class="line">        - List~string~ Etiquetas</div>
+<div class="line">        + void AgregarEtiqueta(string etiqueta)</div>
+<div class="line">        + bool BuscarEtiqueta(string etiqueta)</div>
+<div class="line">    }</div>
+<div class="line">    class RepoUsuarios {</div>
+<div class="line">        +List Usuarios</div>
+<div class="line">        +List Administradores</div>
+<div class="line">        +List Vendedores</div>
+<div class="line">        +List ClientesTotales</div>
+<div class="line">        +AgregarUsuario(usuario: Usuario) void</div>
+<div class="line">        +EliminarUsuario(usuario: Usuario) void</div>
+<div class="line">        +BuscarUsuario(id: string) Usuario</div>
+<div class="line">        +BuscarVendedor(id: string) Vendedor</div>
+<div class="line">        +BuscarAdministrador(id: string) Administrador</div>
+<div class="line">        +BuscarCliente(id: string) Cliente</div>
+<div class="line">    }</div>
+<div class="line">    class Vendedor {</div>
+<div class="line">        + List~Cliente~ Clientes</div>
+<div class="line">        + string Id</div>
+<div class="line">        + string NombreCompleto</div>
+<div class="line">        + Vendedor(string id, string nombre)</div>
+<div class="line">        + AsignarCliente(Cliente cliente, Vendedor vendedor)</div>
+<div class="line">    }</div>
+<div class="line">    class Usuario {</div>
+<div class="line">        - string ID</div>
+<div class="line">        - string Nombre</div>
+<div class="line">        - List~Interaccion~ InteraccionesUsuario</div>
+<div class="line">        - List~Venta~ TotalVentas</div>
+<div class="line">        - List~Venta~ VentaCliente</div>
+<div class="line">        - List~Cotizacion~ CotizacionesUsuario</div>
+<div class="line">        + Usuario(string id, string nombre)</div>
+<div class="line">        + Recordatorio(string que, string cuando) void</div>
+<div class="line">        + VentaClienteAdd(Venta venta) void</div>
+<div class="line">        + AgregarCotizacion(Cotizacion cotizacion) void</div>
+<div class="line">        + AgregarInteraccion(Interaccion interaccion) void</div>
+<div class="line">    }</div>
+<div class="line">    class Administrador {</div>
+<div class="line">        + List~Usuario~ UsuariosSuspendidos</div>
+<div class="line">        + Administrador(string id, string nombre)</div>
+<div class="line">    }</div>
+<div class="line">    class Interaccion {</div>
+<div class="line">        + string Notas</div>
+<div class="line">        + Cliente Cliente</div>
+<div class="line">        + Usuario Usuario</div>
+<div class="line">        + string Tema</div>
+<div class="line">        + DateTime Fecha</div>
+<div class="line">        + TipoInterracion Tipo</div>
+<div class="line">        + string Contenido</div>
+<div class="line">        + string Lugar</div>
+<div class="line">        + Interaccion(Usuario usuario, Cliente cliente, string tema, string contenido, string cuando = &quot;00/00/0000&quot;)</div>
+<div class="line">        + AgergarNotas(string notas) void</div>
+<div class="line">        # FechaIncorrecta(DateTime fecha) void</div>
+<div class="line">    }</div>
+<div class="line">    class Venta {</div>
+<div class="line">        +Cliente Cliente</div>
+<div class="line">        +string Producto</div>
+<div class="line">        +DateTime Fecha</div>
+<div class="line">        +string Importe</div>
+<div class="line">        +Venta(cliente: Cliente, producto: string, fecha: DateTime, importe: string)</div>
+<div class="line">        +Resumen() string</div>
+<div class="line">    }</div>
+<div class="line">    class Cotizacion {</div>
+<div class="line">        + Cliente Cliente</div>
+<div class="line">        + DateTime Fecha</div>
+<div class="line">        + string Importe</div>
+<div class="line">        + Cotizacion(Cliente cliente, DateTime fecha, string importe)</div>
+<div class="line">        + Resumen() string</div>
+<div class="line">    }</div>
+<div class="line">    class TipoInterracion {</div>
+<div class="line">        Mensaje</div>
+<div class="line">        Llamada</div>
+<div class="line">        Reunion</div>
+<div class="line">        Correo</div>
+<div class="line">        Nada</div>
+<div class="line">    }</div>
+<div class="line">    class Llamadas {</div>
+<div class="line">        + Llamadas(Usuario usuario, Cliente cliente, string tema, string llamada, string cuando)</div>
+<div class="line">    }</div>
+<div class="line">    class Mensajes {</div>
+<div class="line">        + Mensajes(Usuario usuario, Cliente cliente, string tema, string mensaje, string cuando)</div>
+<div class="line">    }</div>
+<div class="line">    class Correos {</div>
+<div class="line">        + Correos(Usuario usuario, Cliente cliente, string tema, string correo, string cuando)</div>
+<div class="line">    }</div>
+<div class="line">    class Reunion {</div>
+<div class="line">        + Reunion(Usuario usuario, Cliente cliente, string tema, string lugar, string reunion, string cuando)</div>
+<div class="line">        # FechaIncorrecta(DateTime fecha) void</div>
+<div class="line">    }</div>
+<div class="line">    class RepoCotizaciones {</div>
+<div class="line">        - List~Cotizacion~ Cotizaciones</div>
+<div class="line">        + void AgregarCotizacion(Cliente cliente, string cuando, string precio, Usuario usuario)</div>
+<div class="line">    }</div>
+<div class="line">    class RepoInteracciones {</div>
+<div class="line">        - List~Interaccion~ Interacciones</div>
+<div class="line">        + IEnumerable~Interaccion~ Interacciones2</div>
+<div class="line">        + Interaccion BuscarInteraccion(Usuario usuario, string tipo, string tema)</div>
+<div class="line">        + List~Interaccion~ BuscarInteraccion(Usuario usuario, Cliente cliente, string tipo=&quot;&quot;, string fecha1=&quot;&quot;)</div>
+<div class="line">        + void AgregarInteraccion(Interaccion interaccion, Usuario usuario)</div>
+<div class="line">        + Dictionary~Cliente,Interaccion~ UltimasInteraccionesClientes(Usuario usuario)</div>
+<div class="line">        + void eliminarinteraciones()</div>
+<div class="line">    }</div>
+<div class="line">    class RepoVentas {</div>
+<div class="line">        - List~Venta~ Ventas</div>
+<div class="line">        + void AgregarVenta(Cliente cliente, string cuando, string precio, string producto, Usuario usuario)</div>
+<div class="line">    }</div>
+<div class="line">    class Fachada {</div>
+<div class="line">        - instancia : Fachada</div>
+<div class="line">        - ClientesContacto : Dictionary~</div>
+<div class="line">        - Etiquetas : RepoEtiquetas</div>
+<div class="line">        - Clientes : RepoClientes</div>
+<div class="line">        - Interacciones : RepoInteracciones</div>
+<div class="line">        - Cotizaciones : RepoCotizaciones</div>
+<div class="line">        - Ventas : RepoVentas</div>
+<div class="line">        - Usuarios : RepoUsuarios</div>
+<div class="line">        - UsuariosSuspendidos : List</div>
+<div class="line">        + Instancia : Fachada</div>
+<div class="line">        + RegistarMensaje(clienteId, mensaje, tema, usuarioId, cuando) string</div>
+<div class="line">        + RegistrarCorreo(clienteId, correo, tema, usuarioId, cuando) string</div>
+<div class="line">        + RegistarLlamada(clienteId, llamada, tema, usuarioId, cuando) string</div>
+<div class="line">        + RegistarReunion(clienteId, reunion, tema, usuarioId, cuando, lugar) string</div>
+<div class="line">        + AgregarNota(nota, tipointeraccion, tema, usuarioId) string</div>
+<div class="line">        + InteraccionesCliente(clienteId, usuarioId, tipo, fecha) string</div>
+<div class="line">        + InterraccionClienteAusente(usuarioId) string</div>
+<div class="line">        + Panel(usuarioId) string</div>
+<div class="line">        + AgregarClienteContacto(usuarioId, clienteId) string</div>
+<div class="line">        + VerClienteContacto(usuarioId) string</div>
+<div class="line">        + CrearEtiqueta(etiqueta, idUsuario) string</div>
+<div class="line">        + AgregarEtiquetaCliente(clienteId, etiqueta, usuarioId) string</div>
+<div class="line">        + RegistrarVenta(clienteId, producto, fecha, precio, usuarioId) void</div>
+<div class="line">        + RegistarCotizacion(clienteId, fecha, precio, usuarioId) void</div>
+<div class="line">        + CrearUsuario(id, nombre, idAdmin) string</div>
+<div class="line">        + SuspenderUsuario(idSuspender, idAdmin) string</div>
+<div class="line">        + EliminarUsuario(idEliminar, idAdmin) string</div>
+<div class="line">        + AsignarClienteAOtroVendedor(idVendedorActual, idVendedorNuevo, nombreCliente, apellidoCliente) void</div>
+<div class="line">        + BuscarClientesFachada(atributo, valorBusqueda) List~Cliente~</div>
+<div class="line">        + CrearNuevoCliente(id, nombre, apellido, telefono, correo) Cliente</div>
+<div class="line">        + ModificarInfo(id, atributo, nuevoValor) void</div>
+<div class="line">        + EliminarClienteFachada(id) void</div>
+<div class="line">        + VerClientes() RepoClientes</div>
+<div class="line">        + BuscarUsuario(usuarioId) Usuario</div>
+<div class="line">        + RegistrarVentaCliente(clienteId, producto, fecha, precio, usuarioId) string</div>
+<div class="line">        + TotalDeVentasEnPeriodo(usuarioId, fechaInicioTexto, fechaFinTexto) string</div>
+<div class="line">    }</div>
+<div class="line">    class Excepciones {</div>
+<div class="line">    }</div>
+<div class="line">    class InvalidDateException {</div>
+<div class="line">        +InvalidDateException(string mensaje = null)</div>
+<div class="line">    }</div>
+<div class="line">    class EmptyStringException {</div>
+<div class="line">        +EmptyStringException(string mensaje = null)</div>
+<div class="line">    }</div>
+<div class="line">    class Exception {</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    &lt;&lt;enumeration&gt;&gt; TipoInterracion</div>
+<div class="line">    &lt;&lt;singleton&gt;&gt; Fachada</div>
+<div class="line"> </div>
+<div class="line">    Excepciones &lt;|-- InvalidDateException</div>
+<div class="line">    Excepciones &lt;|-- EmptyStringException</div>
+<div class="line">    InvalidDateException --|&gt; Exception</div>
+<div class="line">    EmptyStringException --|&gt; Exception</div>
+<div class="line">    RepoClientes &quot;1&quot; --&gt; &quot;*&quot; Cliente</div>
+<div class="line">    RepoClientes &quot;1&quot; --&gt; &quot;1&quot; RepoEtiquetas</div>
+<div class="line">    RepoClientes &quot;1&quot; --&gt; &quot;1&quot; RepoUsuarios</div>
+<div class="line">    Vendedor --|&gt; Usuario</div>
+<div class="line">    Administrador --|&gt; Usuario</div>
+<div class="line">    Vendedor &quot;1&quot; --&gt; &quot;*&quot; Cliente</div>
+<div class="line">    Administrador &quot;1&quot; --&gt; &quot;*&quot; Usuario</div>
+<div class="line">    Usuario &quot;1&quot; o-- &quot;*&quot; Interaccion</div>
+<div class="line">    Usuario &quot;1&quot; o-- &quot;*&quot; Venta</div>
+<div class="line">    Usuario &quot;1&quot; o-- &quot;*&quot; Cotizacion</div>
+<div class="line">    Interaccion &quot;1&quot; o-- &quot;1&quot; Cliente</div>
+<div class="line">    Interaccion &quot;1&quot; o-- &quot;1&quot; Usuario</div>
+<div class="line">    Interaccion *-- TipoInterracion</div>
+<div class="line">    Llamadas --|&gt; Interaccion</div>
+<div class="line">    Mensajes --|&gt; Interaccion</div>
+<div class="line">    Correos --|&gt; Interaccion</div>
+<div class="line">    Reunion --|&gt; Interaccion</div>
+<div class="line">    Cotizacion &quot;1&quot; o-- &quot;1&quot; Cliente</div>
+<div class="line">    RepoUsuarios --&gt; &quot;0..*&quot; Usuario</div>
+<div class="line">    RepoInteracciones --&gt; Interaccion</div>
+<div class="line">    RepoInteracciones --&gt; Usuario</div>
+<div class="line">    RepoInteracciones --&gt; Cliente</div>
+<div class="line">    RepoVentas --&gt; Venta</div>
+<div class="line">    RepoVentas --&gt; Cliente</div>
+<div class="line">    RepoVentas --&gt; Usuario</div>
+<div class="line">    RepoCotizaciones &quot;1&quot; --&gt; &quot;*&quot; Cotizacion</div>
+<div class="line"> </div>
+<div class="line">    style Cliente stroke:#FF5978,fill:#FFDFE5,color:#8E2236</div>
+<div class="line"> </div>
+<div class="line">    style Vendedor stroke:#46EDC8,fill:#DEFFF8,color:#378E7A</div>
+<div class="line">    style Usuario stroke:#374D7C,fill:#E2EBFF,color:#374D7C</div>
+<div class="line">    style Administrador stroke:#46EDC8,fill:#DEFFF8,color:#378E7A</div>
+<div class="line">    style Venta stroke:#FBB35A,fill:#FFEFDB,color:#8F632D</div>
+<div class="line">    style Cotizacion stroke:#46EDC8,fill:#DEFFF8,color:#378E7A</div>
+<div class="line"> </div>
+<div class="line">    style Reunion stroke:#FF5978,fill:#FFDFE5,color:#8E2236</div>
+<div class="line"> </div>
+<div class="line">    style Fachada stroke:#46EDC8,fill:#DEFFF8,color:#378E7A</div>
+<div class="line"> </div>
+<div class="line">    class RepoClientes:::Sky</div>
+<div class="line">    class RepoEtiquetas:::Peach</div>
+<div class="line">    class RepoUsuarios:::Peach</div>
+<div class="line">    class Interaccion:::Peach</div>
+<div class="line">    class TipoInterracion:::Sky</div>
+<div class="line">    class Llamadas:::Aqua</div>
+<div class="line">    class Mensajes:::Rose</div>
+<div class="line">    class Correos:::Sky</div>
+<div class="line">    class RepoCotizaciones:::Aqua</div>
+<div class="line">    class RepoInteracciones:::Peach</div>
+<div class="line">    class RepoVentas:::Rose</div>
+<div class="line">    class Excepciones:::Peach</div>
+<div class="line">    class InvalidDateException:::Rose</div>
+<div class="line">    class EmptyStringException:::Sky</div>
+<div class="line">    class Exception:::Aqua</div>
+<div class="line"> </div>
+<div class="line">    classDef Sky :,stroke-width:1px,stroke-dasharray:none,stroke:#374D7C,fill:#E2EBFF,color:#374D7C,stroke-width:1px,stroke-dasharray:none,stroke:#374D7C,fill:#E2EBFF,color:#374D7C,stroke-width:1px,stroke-dasharray:none,stroke:#374D7C,fill:#E2EBFF,color:#374D7C,stroke-width:1px,stroke-dasharray:none,stroke:#374D7C,fill:#E2EBFF,color:#374D7C</div>
+<div class="line">    classDef Peach :,stroke-width:1px,stroke-dasharray:none,stroke:#FBB35A,fill:#FFEFDB,color:#8F632D,stroke-width:1px,stroke-dasharray:none,stroke:#FBB35A,fill:#FFEFDB,color:#8F632D,stroke-width:1px,stroke-dasharray:none,stroke:#FBB35A,fill:#FFEFDB,color:#8F632D,stroke-width:1px,stroke-dasharray:none,stroke:#FBB35A,fill:#FFEFDB,color:#8F632D,stroke-width:1px,stroke-dasharray:none,stroke:#FBB35A,fill:#FFEFDB,color:#8F632D</div>
+<div class="line">    classDef Aqua :,stroke-width:1px,stroke-dasharray:none,stroke:#46EDC8,fill:#DEFFF8,color:#378E7A,stroke-width:1px,stroke-dasharray:none,stroke:#46EDC8,fill:#DEFFF8,color:#378E7A,stroke-width:1px,stroke-dasharray:none,stroke:#46EDC8,fill:#DEFFF8,color:#378E7A</div>
+<div class="line">    classDef Rose :,stroke-width:1px,stroke-dasharray:none,stroke:#FF5978,fill:#FFDFE5,color:#8E2236,stroke-width:1px,stroke-dasharray:none,stroke:#FF5978,fill:#FFDFE5,color:#8E2236,stroke-width:1px,stroke-dasharray:none,stroke:#FF5978,fill:#FFDFE5,color:#8E2236</div>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md2"></a>
+💻 Comandos e historias</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Historias  </th><th class="markdownTableHeadNone">Comandos  </th><th class="markdownTableHeadNone">Ejemplo  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Como usuario quiero crear un nuevo cliente con su información básica: nombre, apellido, teléfono y correo electrónico, para poder contactarme con ellos cuando lo necesite.  </td><td class="markdownTableBodyNone"><b>!crearCliente</b> clienteId nombre apellido telefono correo  </td><td class="markdownTableBodyNone"><b>!crearCliente</b> C1,Tony,Gonzales,099287345,<a href="#" onclick="location.href='mai'+'lto:'+'jua'+'n@'+'cor'+'re'+'o.c'+'om'; return false;">juan@<span class="obfuscator">.nosp@m.</span>corr<span class="obfuscator">.nosp@m.</span>eo.co<span class="obfuscator">.nosp@m.</span>m</a><b>!verClientes</b>  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Como usuario quiero modificar la información de un cliente existente, para mantenerla actualizada.  </td><td class="markdownTableBodyNone"><b>!modfInfo</b> clienteId atributo nuevoValor  </td><td class="markdownTableBodyNone"><b>!crearCliente</b> C2,Juan,Martinez,099287345,<a href="#" onclick="location.href='mai'+'lto:'+'mar'+'ti'+'nez'+'ju'+'an@'+'co'+'rre'+'o.'+'com'; return false;">marti<span class="obfuscator">.nosp@m.</span>nezj<span class="obfuscator">.nosp@m.</span>uan@c<span class="obfuscator">.nosp@m.</span>orre<span class="obfuscator">.nosp@m.</span>o.com</a><b>!modfInfo</b> C2,nombre,Horacio<b>!verClientes</b>  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Como usuario quiero eliminar un cliente, para mantener limpia la base de datos.  </td><td class="markdownTableBodyNone"><b>!eliminarCliente</b> id  </td><td class="markdownTableBodyNone"><b>!crearCliente</b> C3,Kevin,Rodriguez,099281245,<a href="#" onclick="location.href='mai'+'lto:'+'kev'+'in'+'rod'+'@c'+'orr'+'eo'+'.co'+'m'; return false;">kevin<span class="obfuscator">.nosp@m.</span>rod@<span class="obfuscator">.nosp@m.</span>corre<span class="obfuscator">.nosp@m.</span>o.co<span class="obfuscator">.nosp@m.</span>m</a><b>!verClientes</b><b>!eliminarCliente</b> C3<b>!verClientes</b>  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Como usuario quiero buscar clientes por nombre, apellido, teléfono o correo electrónico, para identificarlos rápidamente.  </td><td class="markdownTableBodyNone"><b>!buscarCliente</b> atributo busqueda  </td><td class="markdownTableBodyNone"><b>!crearCliente</b> C4,Romualdo,Perez,092287345,<a href="#" onclick="location.href='mai'+'lto:'+'per'+'ez'+'rom'+'ua'+'ldo'+'@c'+'orr'+'eo'+'.co'+'m'; return false;">perez<span class="obfuscator">.nosp@m.</span>romu<span class="obfuscator">.nosp@m.</span>aldo@<span class="obfuscator">.nosp@m.</span>corr<span class="obfuscator">.nosp@m.</span>eo.co<span class="obfuscator">.nosp@m.</span>m</a><b>!buscarCliente</b> nombre,Romualdo<b>!verClientes</b>  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Como usuario quiero ver una lista de todos mis clientes, para tener una vista general de mi cartera.  </td><td class="markdownTableBodyNone"><b>!verClientes</b>  </td><td class="markdownTableBodyNone"><b>!verClientes</b>  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Como usuario quiero registrar llamadas enviadas o recibidas de clientes, incluyendo cuándo fueron y de qué tema trataron, para poder saber mis interacciones con los clientes.  </td><td class="markdownTableBodyNone"><b>!registrarLlamada</b> clienteId llamada tema usuarioId fecha  </td><td class="markdownTableBodyNone"><b>!crearAdministrador</b> A1,Pablo<br  />
+<b>!crearUsuario</b> U1,Lucas,A1<br  />
+<b>!crearCliente</b> C1,Juan,Pinocho,099765432,<a href="#" onclick="location.href='mai'+'lto:'+'Jua'+'nP'+'@gm'+'ai'+'l.c'+'om'; return false;">JuanP<span class="obfuscator">.nosp@m.</span>@gma<span class="obfuscator">.nosp@m.</span>il.co<span class="obfuscator">.nosp@m.</span>m</a><br  />
+<b>!registrarLlamada</b> C1,hola,saludo,U1,10/11/2025<br  />
+<b>!interaccionCliente</b> C1,U1,llamada,10/11/2025  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Como usuario quiero registrar reuniones con los clientes, incluyendo cuándo y dónde fueron, y de qué tema trataron, para poder saber mis interacciones con los clientes.  </td><td class="markdownTableBodyNone"><b>!registrarReunion</b> clienteId reunion tema usuarioId fecha lugar  </td><td class="markdownTableBodyNone"><b>!crearAdministrador</b> A1,Pablo<br  />
+<b>!crearUsuario</b> U1,Lucas,A1<br  />
+<b>!crearCliente</b> C1,Juan,Pinocho,099765432,<a href="#" onclick="location.href='mai'+'lto:'+'Jua'+'nP'+'@gm'+'ai'+'l.c'+'om'; return false;">JuanP<span class="obfuscator">.nosp@m.</span>@gma<span class="obfuscator">.nosp@m.</span>il.co<span class="obfuscator">.nosp@m.</span>m</a><br  />
+<b>!registrarReunion</b> C1,hola todo bien,saludo,U1,10/11/2025,Marte<br  />
+<b>!interaccionCliente</b> C1,U1,reunion,10/11/2025  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Como usuario quiero registrar mensajes enviados a o recibidos de los clientes, incluendo cuándo y de qué tema fueron, para poder saber mis interacciones con los clientes.  </td><td class="markdownTableBodyNone"><b>!registrarMensaje</b> clienteId mensaje tema usuarioId fecha  </td><td class="markdownTableBodyNone"><b>!crearAdministrador</b> A1,Pablo<br  />
+<b>!crearUsuario</b> U1,Lucas,A1<br  />
+<b>!crearCliente</b> C1,Juan,Pinocho,099765432,<a href="#" onclick="location.href='mai'+'lto:'+'Jua'+'nP'+'@gm'+'ai'+'l.c'+'om'; return false;">JuanP<span class="obfuscator">.nosp@m.</span>@gma<span class="obfuscator">.nosp@m.</span>il.co<span class="obfuscator">.nosp@m.</span>m</a><br  />
+<b>!registrarMensaje</b> C1,hola todo bien,saludo,U1,11/11/2025<br  />
+<b>!interaccionCliente</b> C1,U1,mensaje,11/11/2025  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Como usuario quiero registrar correos electrónicos enviados a o recibidos de los clientes, incluendo cuándo y de qué tema fueron, para poder saber mis interacciones con los clientes.  </td><td class="markdownTableBodyNone"><b>!registrarCorreo</b> clienteId correo tema usuarioId fecha  </td><td class="markdownTableBodyNone"><b>!crearAdministrador</b> A1,Pablo<br  />
+<b>!crearUsuario</b> U1,Lucas,A1<br  />
+<b>!crearCliente</b> C1,Juan,Pinocho,099765432,<a href="#" onclick="location.href='mai'+'lto:'+'Jua'+'nP'+'@gm'+'ai'+'l.c'+'om'; return false;">JuanP<span class="obfuscator">.nosp@m.</span>@gma<span class="obfuscator">.nosp@m.</span>il.co<span class="obfuscator">.nosp@m.</span>m</a><br  />
+<b>!registrarCorreo</b> C1,hola todo bien,saludo,U1,12/11/2025<br  />
+<b>!interaccionCliente</b> C1,U1,correo,12/11/2025  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Como usuario quiero agregar notas o comentarios a las llamadas, reuniones, mensajes y correos enviados o recibidos de los clientes, para tener información adicional de mis interacciones con los clientes.  </td><td class="markdownTableBodyNone"><b>!agregarNota</b> tipoInteraccion tema usuarioId  </td><td class="markdownTableBodyNone"><b>!crearAdministrador</b> A1,Pablo<br  />
+<b>!crearUsuario</b> U1,Lucas,A1<br  />
+<b>!crearCliente</b> C1,Juan,Pinocho,099765432,<a href="#" onclick="location.href='mai'+'lto:'+'Jua'+'nP'+'@gm'+'ai'+'l.c'+'om'; return false;">JuanP<span class="obfuscator">.nosp@m.</span>@gma<span class="obfuscator">.nosp@m.</span>il.co<span class="obfuscator">.nosp@m.</span>m</a><br  />
+<b>!registrarCorreo</b> C1,hola todo bien,saludo,U1,12/11/2025<br  />
+<b>!agregarNota</b> este saludo es fue muy bueno,correo,saludo,U1<br  />
+<b>!interaccionCliente</b> C1,U1,correo,12/11/2025  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Como usuario quiero registrar otros datos de los clientes como género y fecha de nacimiento de los clientes, para realizar campañas y saludarlos en sus cumpleaños.  </td><td class="markdownTableBodyNone"><b>!modfInfo</b> id atributo nuevoValor  </td><td class="markdownTableBodyNone"><b>!crearCliente</b> C5,Jovani,Vazquez,099289455,<a href="#" onclick="location.href='mai'+'lto:'+'jov'+'an'+'iva'+'zq'+'uez'+'@c'+'orr'+'eo'+'.co'+'m'; return false;">jovan<span class="obfuscator">.nosp@m.</span>ivaz<span class="obfuscator">.nosp@m.</span>quez@<span class="obfuscator">.nosp@m.</span>corr<span class="obfuscator">.nosp@m.</span>eo.co<span class="obfuscator">.nosp@m.</span>m</a><b>!modfInfo</b> C5,genero,Mujer<b>!verClientes</b>  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Como usuario quiero poder definir etiquetas para poder organizar y segmentar a mis clientes.  </td><td class="markdownTableBodyNone"><b>!crearEtiqueta</b> etiqueta usuarioId  </td><td class="markdownTableBodyNone"><b>!crearAdministrador</b> A25,Hector<b>!crearUsuario</b> U1,Franco,A25<b>!crearEtiqueta</b> etiquetaDePrueba,U1<br  />
+<b>!verEtiquetas</b>  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Como usuario quiero poder agregar una etiqueta a un cliente, para luego organizar y segmentar mi cartera de clientes.  </td><td class="markdownTableBodyNone"><b>!agregarEtiqueta</b> clienteId etiqueta usuarioId  </td><td class="markdownTableBodyNone"><b>!crearAdministrador</b> A32,Liliana<b>!crearCliente</b> C6,Edmundo,Gutierrez,0982827315,<a href="#" onclick="location.href='mai'+'lto:'+'edm'+'un'+'dog'+'ut'+'i@c'+'or'+'reo'+'.c'+'om'; return false;">edmun<span class="obfuscator">.nosp@m.</span>dogu<span class="obfuscator">.nosp@m.</span>ti@co<span class="obfuscator">.nosp@m.</span>rreo<span class="obfuscator">.nosp@m.</span>.com</a><b>!crearUsuario</b> U20,Alejandro,A32<b>!crearEtiqueta</b> etiquetaDePrueba,U1<b>!verEtiquetas</b><b>!agregarEtiqueta</b> C6,etiquetaDePrueba,U1<b>!verClientes</b>  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Como usuario quiero poder registrar una venta a un cliente, incluyendo qué le vendí, cuándo se lo vendí y cuánto le cobré, para saber lo que compran los clientes.  </td><td class="markdownTableBodyNone"><b>!registrarVenta</b> clienteId producto fecha precio usuarioId  </td><td class="markdownTableBodyNone"><b>!crearAdministrador</b> A9,Ema9<b>!crearUsuario</b> U9,Ezequiel9,A9<b>!crearCliente</b> C9,Jean9,Rodriguez9,099281245,<a href="#" onclick="location.href='mai'+'lto:'+'kev'+'in'+'rod'+'@c'+'orr'+'eo'+'.co'+'m'; return false;">kevin<span class="obfuscator">.nosp@m.</span>rod@<span class="obfuscator">.nosp@m.</span>corre<span class="obfuscator">.nosp@m.</span>o.co<span class="obfuscator">.nosp@m.</span>m</a><b>!registrarVenta</b> C9,ATUN,11/12/2025,100,U9  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Como usuario quiero poder registrar que le envié una cotización a un cliente, cuándo se la mandé y por qué importe es la cotización, para hacer seguimiento de oportunidades de venta.  </td><td class="markdownTableBodyNone"><b>!registrarCotiz</b> clienteId fecha precio usuarioId  </td><td class="markdownTableBodyNone"><b>!crearAdministrador</b> A10,Ema10<b>!crearUsuario</b> U10,Ezequiel10,A10<b>!crearCliente</b> C10,Jean10,Rodriguez10,099281245,<a href="#" onclick="location.href='mai'+'lto:'+'kev'+'in'+'rod'+'@c'+'orr'+'eo'+'.co'+'m'; return false;">kevin<span class="obfuscator">.nosp@m.</span>rod@<span class="obfuscator">.nosp@m.</span>corre<span class="obfuscator">.nosp@m.</span>o.co<span class="obfuscator">.nosp@m.</span>m</a><b>!registrarCotiz</b> C10,11/12/2025,100,U10  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Como usuario quiero ver todas las interacciones de un cliente, con o sin filtro por tipo de interacción y por fecha, para entender el historial de la relación comercial.  </td><td class="markdownTableBodyNone"><b>!interaccionCliente</b> clienteId usuarioId tipo fecha  </td><td class="markdownTableBodyNone"><b>!crearAdministrador</b> A1,Pablo<br  />
+<b>!crearUsuario</b> U1,Lucas,A1<br  />
+<b>!crearCliente</b> C1,Juan,Pinocho,099765432,<a href="#" onclick="location.href='mai'+'lto:'+'Jua'+'nP'+'@gm'+'ai'+'l.c'+'om'; return false;">JuanP<span class="obfuscator">.nosp@m.</span>@gma<span class="obfuscator">.nosp@m.</span>il.co<span class="obfuscator">.nosp@m.</span>m</a><br  />
+<b>!registrarCorreo</b> C1,hola todo bien,saludo,U1,12/11/2025<br  />
+<b>!registrarLlamada</b> C1,nos vimos,despedida,U1,10/11/2025<br  />
+<b>!interaccionCliente</b> C1,U1,,<br  />
+<b>!interaccionCliente</b> C1,U1,,12/11/2025<br  />
+<b>!interaccionCliente</b> C1,U1,llamada,<br  />
+<b>!interaccionCliente</b> C1,U1,correo,12/11/2025  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Cómo usuario quiero saber los clientes que hace cierto tiempo que no tengo ninguna interacción con ellos, para no peder contacto con ellos.  </td><td class="markdownTableBodyNone"><b>!clienteAusente</b> usuarioId  </td><td class="markdownTableBodyNone"><b>!crearAdministrador</b> A1,Pablo<br  />
+<b>!crearUsuario</b> U1,Lucas,A1<br  />
+<b>!crearCliente</b> C1,Juan,Pinocho,099765432,<a href="#" onclick="location.href='mai'+'lto:'+'Jua'+'nP'+'@gm'+'ai'+'l.c'+'om'; return false;">JuanP<span class="obfuscator">.nosp@m.</span>@gma<span class="obfuscator">.nosp@m.</span>il.co<span class="obfuscator">.nosp@m.</span>m</a><br  />
+<b>!registrarReunion</b> C1,hola todo bien,saludo,U1,10/10/2024,Marte<br  />
+<b>!clienteAusente</b> U1  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Como usuario quiero saber los clientes que se pusieron en contacto conmigo y no les contesté hace cierto tiempo, para no dejar de responder mensajes o llamadas.  </td><td class="markdownTableBodyNone"><b>!clienteContactaVer</b> usuarioId  <b>!clienteContactaAgregar</b> usuarioid clienteid  <b>!clienteContactaEliminar</b> usuarioid clienteid  </td><td class="markdownTableBodyNone"><b>!crearAdministrador</b> A1,Pablo<br  />
+<b>!crearUsuario</b> U1,Lucas,A1<br  />
+<b>!crearCliente</b> C1,Juan,Pinocho,099765432,<a href="#" onclick="location.href='mai'+'lto:'+'Jua'+'nP'+'@gm'+'ai'+'l.c'+'om'; return false;">JuanP<span class="obfuscator">.nosp@m.</span>@gma<span class="obfuscator">.nosp@m.</span>il.co<span class="obfuscator">.nosp@m.</span>m</a><br  />
+ <b>!clienteContactaAgregar</b> U1,C1  <b>!clienteContactaVer</b> U1  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Como administrador quiero crear usuarios.  </td><td class="markdownTableBodyNone"><b>!crearUsuario</b> usuarioId nombre adminId  </td><td class="markdownTableBodyNone"><b>!crearAdministrador</b> A1,Pepe<b>!crearUsuario</b> U1,Ezequiel,A1<b>!verUsuarios</b>  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Como administrador quiero eliminar usuarios.  </td><td class="markdownTableBodyNone"><b>!eliminarUsuario</b> usuarioId adminId  </td><td class="markdownTableBodyNone"><b>!crearAdministrador</b> A2,Andres<b>!crearUsuario</b> U2,Peter,A2<b>!verUsuarios</b><b>!eliminarUsuario</b> U2,A2<b>!verUsuarios</b>  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Como administrador quiero suspender usuarios.  </td><td class="markdownTableBodyNone"><b>!suspenderUsuario</b> usuarioId adminId  </td><td class="markdownTableBodyNone"><b>!crearAdministrador</b> A3,Juan<b>!crearUsuario</b> U3,Nahuel,A3<b>!verUsuarios</b><b>!suspenderUsuario</b> U3,A3<b>!verUsuarios</b>  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Como vendedor, quiero poder asignar un cliente a otro vendedor para distribuir el trabajo en el equipo.  </td><td class="markdownTableBodyNone"><b>!asignarCliente</b> clienteId vendedorId  </td><td class="markdownTableBodyNone"><b>!crearVendedor</b> V11,JuanVendedor11<b>!crearCliente</b> C11,Jean11,Rodriguez11,099281245,<a href="#" onclick="location.href='mai'+'lto:'+'kev'+'in'+'rod'+'@c'+'orr'+'eo'+'.co'+'m'; return false;">kevin<span class="obfuscator">.nosp@m.</span>rod@<span class="obfuscator">.nosp@m.</span>corre<span class="obfuscator">.nosp@m.</span>o.co<span class="obfuscator">.nosp@m.</span>m</a><b> <b>!asignarCliente</b> C11,V11  </b></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b> Como usuario quiero saber el total de ventas de un periodo dado, para analizar en rendimiento de mi negocio.  </b></td><td class="markdownTableBodyNone"><b> <b>!totalVentas</b> usuarioId fechaInicio fechaFin  </b></td><td class="markdownTableBodyNone"><b> <b>!crearAdministrador</b> A12,Juan12<b>!crearUsuario</b> U12,Nahuel12,A12<b>!crearCliente</b> C12,Jean12,Rodriguez12,099281245,<a href="#" onclick="location.href='mai'+'lto:'+'kev'+'in'+'rod'+'@c'+'orr'+'eo'+'.co'+'m'; return false;">kevin<span class="obfuscator">.nosp@m.</span>rod@<span class="obfuscator">.nosp@m.</span>corre<span class="obfuscator">.nosp@m.</span>o.co<span class="obfuscator">.nosp@m.</span>m</a><b>!registrarVenta</b> C12,ATUN,11/12/2025,100,U12<b>!registrarVenta</b> C12,ATUN,12/12/2025,100,U12<b>!totalVentas</b> U12,11/12/2025,14/12/2025  </b></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b> Como usuario quiero ver un panel con clientes totales, interacciones recientes y reuniones próximas, para tener un resumen rápido.  </b></td><td class="markdownTableBodyNone"><b> <b>!panel</b> usuarioId  </b></td><td class="markdownTableBodyNone"><b> <b>!crearAdministrador</b> A1,Pablo<br  />
+<b>!crearUsuario</b> U1,Lucas,A1<br  />
+<b>!crearCliente</b> C1,Juan,Pinocho,099765432,<a href="#" onclick="location.href='mai'+'lto:'+'Jua'+'nP'+'@gm'+'ai'+'l.c'+'om'; return false;">JuanP<span class="obfuscator">.nosp@m.</span>@gma<span class="obfuscator">.nosp@m.</span>il.co<span class="obfuscator">.nosp@m.</span>m</a><br  />
+<b>!registrarLlamada</b> C1,hola,saludo,U1,29/11/2025<br  />
+</b>!crearCliente C2,Marta,Mora,099383214,<a href="#" onclick="location.href='mai'+'lto:'+'Mar'+'ta'+'M@g'+'ma'+'il.'+'co'+'m'; return false;">Marta<span class="obfuscator">.nosp@m.</span>M@gm<span class="obfuscator">.nosp@m.</span>ail.c<span class="obfuscator">.nosp@m.</span>om</a><br  />
+<b>!registrarMensaje</b> C2,tengo una duda,duda,U1,30/11/2025<br  />
+<b>!registrarReunion</b> C1,Tenemos que discutir sobre los aliens,extraterestres,U1,10/11/2026,Marte<br  />
+<b>!panel U1  </b></td></tr>
+</table>
+<p><b></b></p>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md3"></a>
+<b>Comandos no requeridos por las historias de usuario</b></h3>
+<p><b></b></p>
+<p><b></p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Comando  </th><th class="markdownTableHeadNone">Descripción  </th><th class="markdownTableHeadNone">Ejemplos  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>!init</b>  </td><td class="markdownTableBodyNone">Este comando crea un administrador, un usuario, un cliente y un vendedor. Esto para facilitar probar y/o utilizar el resto de comandos.  </td><td class="markdownTableBodyNone"><b>!init</b>  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b>!verUsuarios</b>  </td><td class="markdownTableBodyNone">Muestra los usuarios existentes  </td><td class="markdownTableBodyNone"><b>!verUsuarios</b>  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>!crearVendedor</b> vendedorId nombre  </td><td class="markdownTableBodyNone">Este comando crea un vendedor  </td><td class="markdownTableBodyNone"><b>!crearVendedor</b> V1,JuanVendedor  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b>!crearAdministrador</b> adminId nombre  </td><td class="markdownTableBodyNone">Este comando crea un Administrador  </td><td class="markdownTableBodyNone"><b>!crearAdministrador</b> A1,Pepe<b>!verAdministradores</b>  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>!verEtiquetas</b>  </td><td class="markdownTableBodyNone">Este comando muestra todas las etiquetas existentes  </td><td class="markdownTableBodyNone"><b>!verEtiquetas</b>  </td></tr>
+</table>
+<p></b></p>
+<p><b></b></p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md4"></a>
+<b>📜 Notas</b></h2>
+<p><b></b></p>
+<p><b>Los principales desafios que encontramos al trabajar sobre el proyecto fueron la correcta distribución de responsabilidades entre las clases y sus relaciones entre sí, la correcta implementación de los principios SOLID y GRASP, y acostumbrarse a trabajar con Git, que era una herramienta nueva para todos.<br  />
 <br  />
- En general, el proyecto viene siendo una buena oportunidad para poner en práctica lo visto en clase, tanto lo que se trata de conceptos como de código. </p>
+ En general, el proyecto fue una buena oportunidad para poner en práctica lo visto en clase, tanto lo que se trata de conceptos como de código. </b></p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
