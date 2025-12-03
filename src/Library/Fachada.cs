@@ -1231,6 +1231,48 @@ namespace Library
             }
         }
         /// <summary>
+        /// Obtiene la información de un vendedor por su ID y la devuelve como texto.
+        /// - SRP Solo se encarga de validar el ID y describir al vendedor.
+        /// - EXPERT  La fachada sabe cómo buscar al vendedor en el repositorio de usuarios.
+        /// - Alta cohesión todo el método está orientado a la consulta de un vendedor por ID.
+        /// </summary>
+        /// <param name="id">ID del vendedor a buscar.</param>
+        /// <returns>
+        /// Mensaje con la descripción del vendedor si existe, o un mensaje de error si el ID es inválido o no se encuentra.
+        /// </returns>
+        public string ObtenerVendedorPorId(string id)
+        {
+            try
+            {
+                if (id == null)
+                {
+                    throw new ArgumentNullException(nameof(id), "El ID no puede ser nulo.");
+                }
+
+                if (string.IsNullOrWhiteSpace(id))
+                {
+                    throw new ArgumentException("El ID no puede estar vacío.", nameof(id));
+                }
+
+                var vendedor = this.Usuarios.BuscarVendedor(id);
+
+                if (vendedor == null)
+                {
+                    return $"No se encontró un vendedor con ID {id}.";
+                }
+
+                return $"Vendedor {vendedor.NombreCompleto} con ID {vendedor.Id}.";
+            }
+            catch (ArgumentNullException e)
+            {
+                return $"{e.Message} {e.ParamName}";
+            }
+            catch (ArgumentException e)
+            {
+                return e.Message;
+            }
+        }
+        /// <summary>
         /// Crea un nuevo administrador en el sistema.
         /// Creator: crea instancias de Administrador y las agrega al repositorio.
         /// </summary>
