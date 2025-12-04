@@ -71,13 +71,9 @@ namespace Library
         /// </summary>
         /// <param name="producto">El producto a buscar</param>
         /// <returns>devuelve una lista con los clientes cuya venta, haya sido ese producto</returns>
-        public List<Cliente> ClientesProducto(string producto,Usuario usuario)
+        public List<Cliente> ClientesProducto(string producto)
         {
-            if (usuario==null)
-            {
-                throw new ArgumentNullException(nameof(usuario), "El usuario no puede ser null");
-            }
-
+           
             if (string.IsNullOrEmpty(producto))
             {
                 throw new ArgumentNullException(nameof(producto), "El producto no puede ser vacio o null");

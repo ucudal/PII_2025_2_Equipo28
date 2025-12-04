@@ -150,8 +150,8 @@ namespace Library.Tests
             Assert.That(resultado,Does.Contain("Lucas Gonzales"));
         }
 
-        [TestCase ("U9","El usuario no puede ser null (Parameter 'usuario') usuario")]
-        [TestCase ("","El usuario no puede ser null (Parameter 'usuario') usuario")]
+        [TestCase ("U9","El Id del usuario no es valido")]
+        [TestCase ("","El Id del usuario no es valido")]
         public void Comando_verClientesProducto_UsuarioIncorrecto(string usuarioId,string esperado)
         {
             fachada.CrearAdministrador("A6", "Pepe");

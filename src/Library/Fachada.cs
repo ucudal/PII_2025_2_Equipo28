@@ -1413,7 +1413,11 @@ namespace Library
             try
             {
                 usuario = this.Usuarios.BuscarUsuario(usuarioId);
-                clientes = this.Ventas.ClientesProducto(producto, usuario);
+                if (usuario == null)
+                {
+                    return "El Id del usuario no es valido";
+                }
+                clientes = this.Ventas.ClientesProducto(producto);
             }
             catch (ArgumentNullException e)
             {
