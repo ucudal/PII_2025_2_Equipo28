@@ -2,15 +2,10 @@ using NUnit.Framework;
 
 namespace Library.Tests
 {
-    public class TestHistoria3Defensa
+    public class TestComandoHistoria3Defensa
     {
         private Fachada fachada;
-        private Usuario usuario;
-        private Cliente cliente1;
-        private Cliente cliente2;
-        private Administrador administrador;
-
-
+        
         [SetUp]
         public void Setup()
         {
@@ -22,10 +17,6 @@ namespace Library.Tests
             fachada.Etiquetas.EliminarDatos();
             fachada.Clientes.EliminarDatos();
             fachada.ClientesContacta.ElminarDatos();
-            fachada.CrearAdministrador("A1", "Lansaguisantes");
-            fachada.CrearUsuario("U1", "Petaseta", "A1");
-            fachada.CrearCliente("C1", "Harry", "ElSucioPotter", "099786435", "Harringy@cabezatermo.com");
-            fachada.CrearCliente("C2", "Hermione", "Granger", "46872390", "Hermy@cabezatermo.com");
         }
 
         [Test]
