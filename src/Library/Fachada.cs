@@ -12,6 +12,7 @@ namespace Library
     {
         public RepoClientesContacta__Clientes_que_se_contactaron_ ClientesContacta =
             new RepoClientesContacta__Clientes_que_se_contactaron_();
+
         public RepoEtiquetas Etiquetas = new RepoEtiquetas();
         public RepoClientes Clientes;
         public RepoInteracciones Interacciones = new RepoInteracciones();
@@ -25,6 +26,7 @@ namespace Library
         {
             this.Clientes = new RepoClientes(this.Etiquetas, this.Usuarios);
         }
+
         private static Fachada instancia;
 
         public static Fachada Instancia
@@ -36,6 +38,7 @@ namespace Library
                 return instancia;
             }
         }
+
         /// <summary>
         /// El metodos RegistrarMensaje crea una instancia de interaccion de tipo mensaje y la guarda en repoInteracciones.
         /// Principios que cumple:
@@ -76,6 +79,7 @@ namespace Library
                 return $"{e.Message} {e.ParamName}";
 
             }
+
             if (usuario != null)
             {
                 if (cliente != null)
@@ -114,7 +118,7 @@ namespace Library
             {
                 usuario = this.Usuarios.BuscarUsuario(usuarioId);
                 cliente = Clientes.BuscarUnCliente(clienteId);
-                Correo = Interacciones.CrearCorreo(usuario,cliente, tema, contenido, fecha);
+                Correo = Interacciones.CrearCorreo(usuario, cliente, tema, contenido, fecha);
             }
             catch (ArgumentNullException e)
             {
@@ -138,7 +142,7 @@ namespace Library
                     Interacciones.AgregarInteraccion(Correo, usuario);
                     return "Correo registrado";
                 }
-           
+
                 return "no se encontro al cliente";
             }
 
@@ -195,12 +199,13 @@ namespace Library
                     Interacciones.AgregarInteraccion(LLamada, usuario);
                     return "Llamada registrada";
                 }
-            
+
                 return "no se encontro al cliente";
             }
 
             return "No se encontro al usuario";
         }
+
         /// <summary>
         /// El metodos RegistrarReunion crea una instancia de Reunion, subtipo de Interaccion, y la guarda en repoInteracciones.
         /// Principios que cumple:
@@ -226,7 +231,7 @@ namespace Library
             {
                 usuario = this.Usuarios.BuscarUsuario(usuarioId);
                 cliente = Clientes.BuscarUnCliente(clienteId);
-                Reunion = Interacciones.CrearReunion(usuario, cliente, tema, contenido, fecha,lugar);
+                Reunion = Interacciones.CrearReunion(usuario, cliente, tema, contenido, fecha, lugar);
 
             }
             catch (ArgumentNullException e)
@@ -253,7 +258,7 @@ namespace Library
                     return "Reunion registrada";
 
                 }
-          
+
                 return "no se encontro al cliente";
             }
 
@@ -282,11 +287,12 @@ namespace Library
             try
             {
                 usuario = this.Usuarios.BuscarUsuario(usuarioId);
-                interaccion = Interacciones.BuscarInteraccion(usuario,tipointeraccion, tema);
+                interaccion = Interacciones.BuscarInteraccion(usuario, tipointeraccion, tema);
                 if (interaccion == null)
                 {
-                    return "no se encontro la interaccion";                
+                    return "no se encontro la interaccion";
                 }
+
                 interaccion.AgergarNotas(nota);
             }
             catch (ArgumentNullException e)
@@ -298,9 +304,10 @@ namespace Library
                 return $"{e.Message} {e.ParamName}";
 
             }
+
             if (usuario != null)
             {
-                    return "Nota agregada";
+                return "Nota agregada";
             }
 
             return "No se encontro al usuario";
@@ -319,7 +326,7 @@ namespace Library
         /// <param name="tipo">el tipo de interaccion, parametro opcional para buscar en base a el</param>
         /// <param name="fecha">la fecha de la interaccion, parametro opcional para buscar en base a el.</param>
         /// <returns>Devuelbe un string de las interacciones del cliente en base a los datos brindados</returns>
-        public string InteraccionesCliente(string clienteId,string usuarioId,string tipo="",string fecha="")
+        public string InteraccionesCliente(string clienteId, string usuarioId, string tipo = "", string fecha = "")
         {
             Usuario usuario = null;
             List<Interaccion> interaccionesCliente = null;
@@ -328,7 +335,7 @@ namespace Library
             {
                 usuario = this.Usuarios.BuscarUsuario(usuarioId);
                 cliente = Clientes.BuscarUnCliente(clienteId);
-                interaccionesCliente = Interacciones.BuscarInteraccion(usuario,cliente, tipo, fecha);
+                interaccionesCliente = Interacciones.BuscarInteraccion(usuario, cliente, tipo, fecha);
             }
             catch (ArgumentNullException e)
             {
@@ -345,7 +352,7 @@ namespace Library
                 return $"{e.Message} {e.ParamName}";
 
             }
-            
+
             if (tipo != "" && fecha != "")
             {
                 string informacion =
@@ -361,7 +368,7 @@ namespace Library
 
                 return informacion;
             }
-            else if (tipo=="" && fecha !="")
+            else if (tipo == "" && fecha != "")
             {
                 string informacion =
                     $"las interaccion de {cliente.Nombre} {cliente.Apellido} de la fecha {fecha} son las siguientes:\n";
@@ -376,7 +383,7 @@ namespace Library
 
                 return informacion;
             }
-            else if (tipo!="" && fecha =="")
+            else if (tipo != "" && fecha == "")
             {
                 string informacion =
                     $"las interaccion de {cliente.Nombre} {cliente.Apellido} del tipo {tipo} son las siguientes:\n";
@@ -391,7 +398,7 @@ namespace Library
 
                 return informacion;
             }
-            else 
+            else
             {
                 string informacion = $"Las interacciones de {cliente.Nombre} {cliente.Apellido} son:\n";
                 foreach (Interaccion interaccion in interaccionesCliente)
@@ -423,7 +430,7 @@ namespace Library
             Usuario usuario = null;
             try
             {
-                usuario=this.Usuarios.BuscarUsuario(usuarioId);
+                usuario = this.Usuarios.BuscarUsuario(usuarioId);
             }
             catch (ArgumentNullException e)
             {
@@ -435,12 +442,15 @@ namespace Library
                 return $"{e.Message} {e.ParamName}";
 
             }
+
             if (usuario == null)
             {
                 return "No se reconoce el usuario";
             }
-            Dictionary<Cliente, Interaccion> InteraccionLista = this.Interacciones.UltimasInteraccionesClientes(usuario);
-            string ClientesAusentes=$"Los clientes con los que no interactua hace un mes o mas son:\n";
+
+            Dictionary<Cliente, Interaccion>
+                InteraccionLista = this.Interacciones.UltimasInteraccionesClientes(usuario);
+            string ClientesAusentes = $"Los clientes con los que no interactua hace un mes o mas son:\n";
             foreach (var dato in InteraccionLista)
             {
                 if (dato.Value.Fecha.AddMonths(1) <= DateTime.Now)
@@ -448,6 +458,7 @@ namespace Library
                     ClientesAusentes += $"{dato.Key}";
                 }
             }
+
             return ClientesAusentes;
         }
 
@@ -466,7 +477,7 @@ namespace Library
             Usuario usuario = null;
             try
             {
-                usuario=this.Usuarios.BuscarUsuario(usuarioId);
+                usuario = this.Usuarios.BuscarUsuario(usuarioId);
             }
             catch (ArgumentNullException e)
             {
@@ -478,6 +489,7 @@ namespace Library
                 return $"{e.Message} {e.ParamName}";
 
             }
+
             if (usuario == null)
             {
                 return "No se reconoce el usuario";
@@ -490,15 +502,17 @@ namespace Library
             }
 
             Panel += $"Sus interacciones mas recientes son:\n";
-            Dictionary<Cliente,Interaccion> interaccionesRecientes = this.Interacciones.UltimasInteraccionesClientes(usuario);
+            Dictionary<Cliente, Interaccion> interaccionesRecientes =
+                this.Interacciones.UltimasInteraccionesClientes(usuario);
             foreach (var dato in interaccionesRecientes)
             {
-                if (dato.Value.Fecha.AddDays(7) >= DateTime.Now && dato.Value.Fecha<=DateTime.Now)
+                if (dato.Value.Fecha.AddDays(7) >= DateTime.Now && dato.Value.Fecha <= DateTime.Now)
                 {
                     Panel +=
                         $"{dato.Key.Nombre} {dato.Key.Apellido}. Interaccion de tipo {dato.Value.Tipo}. Tema: {dato.Value.Tema}\n";
                 }
             }
+
             Panel += $"Sus reuniones proximas son:\n";
             foreach (Interaccion interaccion in this.Interacciones.Interacciones)
             {
@@ -507,6 +521,7 @@ namespace Library
                     Panel += $"Tema de la reunion: {interaccion.Tema}. Fecha: {interaccion.Fecha}\n";
                 }
             }
+
             return Panel;
         }
 
@@ -577,6 +592,7 @@ namespace Library
 
             return ClientesContacta.VerClienteQueSeContacta(usuario);
         }
+
         /// <summary>
         /// Permite eliminar clientes de la lista de clientesContacta.
         ///  /// Principios que cumple:
@@ -613,7 +629,7 @@ namespace Library
             return ClientesContacta.EliminarClienteQueSeContacta(usuario, cliente);
         }
 
-        
+
         /// <summary>
         /// Crea una nueva etiqueta en el sistema.
         /// - SRP: delega la validación y persistencia a las clases expertas (Usuarios, Etiquetas), coordinando solo el flujo.
@@ -640,7 +656,7 @@ namespace Library
             }
         }
 
-        
+
         /// <summary>
         /// Agrega una etiqueta existente a un cliente.
         /// - SRP: coordina la asignación delegando la búsqueda y validación a los expertos (Usuarios, Etiquetas).
@@ -648,8 +664,8 @@ namespace Library
         /// - Bajo acoplamiento: interactúa con los objetos a través de sus interfaces públicas sin conocer detalles de persistencia.
         /// </summary>
         public string AgregarEtiquetaCliente(string clienteId, string etiqueta, string usuarioId)
-        { 
-            Usuario usuario = Usuarios.BuscarUsuario(usuarioId); 
+        {
+            Usuario usuario = Usuarios.BuscarUsuario(usuarioId);
             if (usuario != null)
             {
                 Cliente cliente = Usuarios.BuscarCliente(clienteId);
@@ -717,10 +733,10 @@ namespace Library
                     {
                         throw new ArgumentException($"Ya existe un usuario con el ID '{id}'.");
                     }
-                    
+
                     Usuario nuevo = new Usuario(id, nombre);
                     Usuarios.AgregarUsuario(nuevo);
-                    return $"Usuario '{nombre}' (ID: {id}) creado correctamente.";   
+                    return $"Usuario '{nombre}' (ID: {id}) creado correctamente.";
                 }
 
                 return "Solo Administradores pueden crear Usuarios.";
@@ -730,7 +746,7 @@ namespace Library
                 return e.Message;
             }
         }
-        
+
         /// <summary>
         /// - SRP: coordina la suspensión delegando la validación de permisos y persistencia a RepoUsuarios.
         /// - Expert: utiliza RepoUsuarios para verificar permisos de administrador y obtener el usuario a suspender.
@@ -750,7 +766,7 @@ namespace Library
                 Usuarios.EliminarUsuario(usuario);
                 UsuariosSuspendidos.Add(usuario);
                 Usuarios.SuspenderUsuario(usuario);
-                return $" El usuario '{usuario.Nombre}' ha sido suspendido correctamente.";   
+                return $" El usuario '{usuario.Nombre}' ha sido suspendido correctamente.";
             }
 
             return "Solo Administradores pueden suspender usuarios.";
@@ -802,10 +818,10 @@ namespace Library
 
             return "Solo Adminsitradores pueden eliminar usuarios.";
         }
-        
 
-        
-      
+
+
+
         public string AsignarClienteAVendedor(string clienteId, string vendedorId)
         {
             Usuario usuario = null;
@@ -850,11 +866,12 @@ namespace Library
             }
 
             // Si llegamos hasta acá, salió todo bien
-            return $"El cliente {cliente.Nombre} {cliente.Apellido} fue asignado al vendedor {vendedor.NombreCompleto} (ID '{vendedor.Id}').";
+            return
+                $"El cliente {cliente.Nombre} {cliente.Apellido} fue asignado al vendedor {vendedor.NombreCompleto} (ID '{vendedor.Id}').";
         }
 
-        
-        
+
+
         /// <summary>
         /// Busca clientes en el sistema según un criterio específico.
         /// - SRP: delega la responsabilidad de búsqueda al repositorio de clientes, encargándose solo de formatear la respuesta.
@@ -864,7 +881,7 @@ namespace Library
         /// </summary>
         public List<Cliente> BuscarCliente(string atributo, string valorBusqueda)
         {
-            List<Cliente> resultadoBusqueda = Clientes.BuscarCliente(atributo, valorBusqueda); 
+            List<Cliente> resultadoBusqueda = Clientes.BuscarCliente(atributo, valorBusqueda);
             return resultadoBusqueda;
         }
 
@@ -875,7 +892,7 @@ namespace Library
         public string CrearCliente(string id, string nombre, string apellido, string telefono, string correo)
         {
             try
-            {               
+            {
                 Cliente nuevo = new Cliente(id, nombre, apellido, telefono, correo);
                 this.Clientes.AgregaCliente(nuevo);
                 return $"Cliente:\n\n{nuevo}\n\nCreado correctamente";
@@ -898,8 +915,9 @@ namespace Library
                 cliente.ModificarInformacion(atributo, nuevoValor);
 
 
-                
-                return $"Se modificó la información del cliente {cliente.ToString()}. Su {atributo} ahora es {nuevoValor}";
+
+                return
+                    $"Se modificó la información del cliente {cliente.ToString()}. Su {atributo} ahora es {nuevoValor}";
             }
             catch (NullReferenceException ex)
             {
@@ -924,7 +942,7 @@ namespace Library
             {
                 return "No se encontró o no existe el cliente";
             }
-            catch (ArgumentNullException err) 
+            catch (ArgumentNullException err)
             {
                 return "El cliente no puede ser null.";
             }
@@ -958,7 +976,7 @@ namespace Library
         {
             return this.Usuarios.BuscarUsuario(usuarioId);
         }
-        
+
         /// <summary>
         /// Registra una venta para un cliente existente.
         /// Principios que cumple:
@@ -975,7 +993,8 @@ namespace Library
         /// Mensaje de confirmación si la venta se registró correctamente,
         /// o un mensaje de error si hubo datos inválidos o no se encontró el usuario/cliente.
         /// </returns>
-        public string RegistrarVentaCliente(string clienteId, string producto, string fecha, string precio, string usuarioId)
+        public string RegistrarVentaCliente(string clienteId, string producto, string fecha, string precio,
+            string usuarioId)
         {
             Usuario usuario = null;
             Cliente cliente = null;
@@ -986,7 +1005,7 @@ namespace Library
                 usuario = this.Usuarios.BuscarUsuario(usuarioId);
                 cliente = this.Clientes.BuscarUnCliente(clienteId);
 
-                
+
                 this.Ventas.AgregarVenta(cliente, fecha, precio, producto, usuario);
             }
             catch (ArgumentNullException e)
@@ -1016,6 +1035,7 @@ namespace Library
 
             return "No se encontro al usuario";
         }
+
         /// <summary>
         /// Calcula el total de ventas realizadas por un usuario en un período de fechas.
         /// - SRP El método tiene una única razón para cambiar: la forma de obtener y presentar el total de ventas
@@ -1033,7 +1053,7 @@ namespace Library
         /// en caso de error, un mensaje indicando el problema.
         /// </returns>
 
-        
+
         public string TotalDeVentasEnPeriodo(string usuarioId, string fechaInicioTexto, string fechaFinTexto)
         {
             Usuario usuario = null;
@@ -1057,7 +1077,7 @@ namespace Library
                 return $"No se encontró un usuario con ID '{usuarioId}'.";
             }
 
-            
+
             if (string.IsNullOrWhiteSpace(fechaInicioTexto))
             {
                 return "La fecha de inicio no puede estar vacía.";
@@ -1084,7 +1104,7 @@ namespace Library
                 return "Error: la fecha de fin no es válida. Usa el formato dd/MM/yyyy.";
             }
 
-            
+
             if (fechaInicio > fechaFin)
             {
                 return "Error: la fecha de inicio no puede ser posterior a la fecha de fin.";
@@ -1092,10 +1112,10 @@ namespace Library
 
             double total = usuario.SumarImportes(fechaInicio, fechaFin);
 
-         
+
             return $"Total de ventas desde {fechaInicio:dd/MM/yyyy} hasta {fechaFin:dd/MM/yyyy}: ${total:0.##}";
         }
-        
+
         /// <summary>
         /// Registra una cotización para un cliente existente.
         /// - SRP: El método se enfoca solo en registrar una cotización y devolver el resultado.
@@ -1110,7 +1130,7 @@ namespace Library
         /// Mensaje de confirmación si la cotización se registró correctamente,
         /// o un mensaje de error si hubo datos inválidos o no se encontró el usuario/cliente.
         /// </returns>
-        
+
         public string RegistrarCotizacionCliente(string clienteId, string fecha, string precio, string usuarioId)
         {
             Usuario usuario = null;
@@ -1122,17 +1142,17 @@ namespace Library
                 usuario = this.Usuarios.BuscarUsuario(usuarioId);
                 cliente = this.Clientes.BuscarUnCliente(clienteId);
 
-                
+
                 this.Cotizaciones.AgregarCotizacion(cliente, fecha, precio, usuario);
             }
             catch (ArgumentNullException e)
             {
-                
+
                 return $"{e.Message} {e.ParamName}";
             }
             catch (InvalidDateException e)
             {
-                
+
                 return $"{e.Message} {e.ParamName}";
             }
             catch (ArgumentException e)
@@ -1140,7 +1160,7 @@ namespace Library
                 return $"{e.Message} {e.ParamName}";
             }
 
-            
+
             if (usuario != null)
             {
                 if (cliente != null)
@@ -1182,6 +1202,7 @@ namespace Library
 
             return resultado;
         }
+
         /// <summary>
         /// Crea un nuevo vendedor.
         /// - SRP: Solo se encarga de crear un vendedor y devolver el resultado.
@@ -1209,7 +1230,7 @@ namespace Library
                     throw new ArgumentNullException(nameof(nombre), "El nombre del vendedor no puede ser nulo.");
                 }
 
-                
+
                 if (string.IsNullOrWhiteSpace(id))
                 {
                     throw new ArgumentException("El ID del vendedor no puede estar vacío.", nameof(id));
@@ -1220,7 +1241,7 @@ namespace Library
                     throw new ArgumentException("El nombre del vendedor no puede estar vacío.", nameof(nombre));
                 }
 
-                
+
                 if (this.Usuarios.BuscarUsuario(id) != null)
                 {
                     throw new InvalidOperationException($"Ya existe un usuario con el ID: {id}");
@@ -1231,13 +1252,13 @@ namespace Library
                     throw new InvalidOperationException($"Ya existe un vendedor con el ID: {id}");
                 }
 
-          
+
                 Vendedor vendedor = new Vendedor(id, nombre);
 
-                
+
                 this.Usuarios.AgregarVendedor(vendedor);
                 this.Usuarios.AgregarUsuario(vendedor);
-                
+
                 return $"Vendedor {vendedor.NombreCompleto} con ID {vendedor.Id} creado correctamente.";
             }
             catch (ArgumentNullException e)
@@ -1257,6 +1278,7 @@ namespace Library
                 return "Ocurrió un error inesperado al crear el vendedor.";
             }
         }
+
         /// <summary>
         /// Obtiene la información de un vendedor por su ID y la devuelve como texto.
         /// - SRP Solo se encarga de validar el ID y describir al vendedor.
@@ -1299,7 +1321,7 @@ namespace Library
                 return e.Message;
             }
         }
-        
+
         /// <summary>
         /// Muestra todas las ventas registradas en el sistema.
         /// Principios que cumple:
@@ -1329,6 +1351,7 @@ namespace Library
 
             return resultado;
         }
+
         /// <summary>
         /// Crea un nuevo administrador en el sistema.
         /// Creator: crea instancias de Administrador y las agrega al repositorio.
@@ -1350,9 +1373,10 @@ namespace Library
                 return e.Message;
             }
         }
+
         /// <summary>
         /// Muestra todos los clientes asignados a un vendedor.
-        
+
         /// - SRP Se enfoca solo en listar clientes de un vendedor como texto.
         /// - EXPERT Usa al repositorio de usuarios y al vendedor como fuente de información.
         /// - Alta cohesión Todo el método está orientado a mostrar clientes de un vendedor.
@@ -1364,7 +1388,7 @@ namespace Library
         /// </returns>
         public string VerClientesDeVendedor(string vendedorId)
         {
-            
+
             Usuario usuario = this.Usuarios.BuscarUsuario(vendedorId);
 
             if (usuario == null)
@@ -1372,20 +1396,20 @@ namespace Library
                 return $"No se encontro un vendedor con ID '{vendedorId}'.";
             }
 
-            
+
             Vendedor vendedor = usuario as Vendedor;
             if (vendedor == null)
             {
                 return $"El usuario con ID '{vendedorId}' no es un vendedor.";
             }
 
-            
+
             if (vendedor.Clientes == null || vendedor.Clientes.Count == 0)
             {
                 return $"El vendedor {vendedor.NombreCompleto} (ID '{vendedor.Id}') no tiene clientes asignados.";
             }
 
-            
+
             string resultado = $"Clientes del vendedor {vendedor.NombreCompleto} (ID '{vendedor.Id}'):\n";
 
             foreach (var cliente in vendedor.Clientes)
@@ -1395,5 +1419,115 @@ namespace Library
 
             return resultado;
         }
+        /// <summary>
+        /// Lista los clientes cuyas ventas totales son mayores o menores a un monto dado.
+        /// - SRP : Solo se encarga de validar parámetros y construir el listado filtrado.
+        /// - EXPERT: Usa la información de clientes y ventas para calcular el total por cliente.
+        /// - Alta cohesión: Todo el método está orientado al filtrado y presentación de clientes por monto.
+        /// </summary>
+        /// <param name="montoTexto">Monto de referencia en texto; debe ser un número válido y no negativo.</param>
+        /// <param name="tipoFiltro">Criterio de filtro: "mayor" o "menor".</param>
+        /// <returns>
+        /// Mensaje de error si los datos son inválidos, o un texto con el encabezado y la lista de clientes
+        /// que cumplen el filtro indicado (mayores o menores al monto dado).
+        /// </returns>
+
+        
+        public string ListarClientesPorMontoDeVentas(string montoTexto, string tipoFiltro)
+        {
+            if (string.IsNullOrEmpty(montoTexto))
+            {
+                return "el monto no puede estar vacio";
+
+            }
+
+            double monto;
+            if (!double.TryParse(montoTexto, out monto))
+            {
+                return "el monto debe ser un nuemrp valido";
+            }
+
+            if (monto < 0)
+            {
+                return "el monto no puede ser negativo";
+            }
+
+            if (string.IsNullOrEmpty(tipoFiltro))
+            {
+                return "el filtro no puede estar vacio";
+
+            }
+
+            string criterio = tipoFiltro.Trim().ToLower();
+
+            if (criterio != "mayor" && criterio != "menor")
+            {
+                return "El tipo de filtro es mayor o menor";
+            }
+
+            string encabezado = null;
+
+            if (criterio == "mayor")
+            {
+                encabezado = "Clientes con ventas mayores a " + monto + ": \n";
+            }
+
+            if (criterio == "menor")
+            {
+                encabezado = "Clientes con ventas menores a " + monto + ": \n";
+            }
+
+            string resultado = encabezado;
+            int cantidaMostrados = 0;
+            bool hayAlguno = false;
+
+            foreach (Cliente cliente in this.Clientes.Clientes)
+            {
+                double totalCliente = 0.0;
+                foreach (VentaFachada venta in this.Ventas.Ventas)
+                {
+                    if (venta.Cliente == cliente)
+                    {
+                        double importe;
+                        if (double.TryParse(venta.Importe, out importe))
+                        {
+                            totalCliente += importe;
+                        }
+                    }
+                }
+
+                bool cumple = false;
+                if (criterio == "mayor" && totalCliente > monto)
+                {
+                    cumple = true;
+                }
+                else if (criterio == "menor" && totalCliente < monto)
+                {
+                    cumple = true;
+                }
+
+                if (cumple)
+                {
+                    hayAlguno = true;
+                    resultado += "Cliente:" + cliente.Nombre + " " + cliente.Apellido + "Id:" + cliente.Id +
+                                 "Totla vendido" + totalCliente.ToString() + "\n";
+                }
+
+                if (!hayAlguno)
+                {
+                    if (criterio == "mayor")
+                    {
+                        return " no se encontraron clientes con ventas mayores a " + monto + ".";
+                    }
+                    
+                }
+
+               
+            }
+            return resultado;
+        }
     }
 }
+
+            
+        

@@ -51,8 +51,7 @@ namespace Library.Tests
             string resultado = fachada.RegistrarCotizacionCliente("C1", "29/11/2025", "1500", "U1");
 
             // Assert: 
-            Assert.That(resultado, Is.EqualTo(
-                "Cotización registrada: se envió a Diego por $1500 el 29/11/2025."));
+            Assert.That(resultado, Is.EqualTo("Cotización registrada: se envió a Diego por $1500 el 29/11/2025."));
         }
 
         [Test]

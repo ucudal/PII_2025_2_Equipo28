@@ -290,7 +290,7 @@ Como usuario quiero crear un nuevo cliente con su información básica\+: nombre
 Como usuario quiero modificar la información de un cliente existente, para mantenerla actualizada.  &{\bfseries{!modf\+Info}} cliente\+Id atributo nuevo\+Valor  &{\bfseries{!crear\+Cliente}} C2,Juan,Martinez,099287345,\href{mailto:martinezjuan@correo.com}{\texttt{martinezjuan@correo.\+com}}{\bfseries{!modf\+Info}} C2,nombre,Horacio{\bfseries{!ver\+Clientes}}  \\\cline{1-3}
 Como usuario quiero eliminar un cliente, para mantener limpia la base de datos.  &{\bfseries{!eliminar\+Cliente}} id  &{\bfseries{!crear\+Cliente}} C3,Kevin,Rodriguez,099281245,\href{mailto:kevinrod@correo.com}{\texttt{kevinrod@correo.\+com}}{\bfseries{!ver\+Clientes}}{\bfseries{!eliminar\+Cliente}} C3{\bfseries{!ver\+Clientes}}  \\\cline{1-3}
 Como usuario quiero buscar clientes por nombre, apellido, teléfono o correo electrónico, para identificarlos rápidamente.  &{\bfseries{!buscar\+Cliente}} atributo busqueda  &{\bfseries{!crear\+Cliente}} C4,Romualdo,Perez,092287345,\href{mailto:perezromualdo@correo.com}{\texttt{perezromualdo@correo.\+com}}{\bfseries{!buscar\+Cliente}} nombre,Romualdo{\bfseries{!ver\+Clientes}}  \\\cline{1-3}
-Como usuario quiero ver una lista de todos mis clientes, para tener una vista general de mi cartera.  &{\bfseries{!ver\+Clientes}}  &{\bfseries{!ver\+Clientes}}  \\\cline{1-3}
+Como usuario quiero ver una lista de todos mis clientes, para tener una vista general de mi cartera.  &{\bfseries{!ver\+Clientes}}  &{\bfseries{!crear\+Cliente}} C8,Ronaldo,Rodriguez,099827345,\href{mailto:ronaldorodri@correo.com}{\texttt{ronaldorodri@correo.\+com}}{\bfseries{!ver\+Clientes}}  \\\cline{1-3}
 Como usuario quiero registrar llamadas enviadas o recibidas de clientes, incluyendo cuándo fueron y de qué tema trataron, para poder saber mis interacciones con los clientes.  &{\bfseries{!registrar\+Llamada}} cliente\+Id llamada tema usuario\+Id fecha  &{\bfseries{!crear\+Administrador}} A1,Pablo~\newline
 {\bfseries{!crear\+Usuario}} U1,Lucas,A1~\newline
 {\bfseries{!crear\+Cliente}} C1,Juan,Pinocho,099765432,\href{mailto:JuanP@gmail.com}{\texttt{Juan\+P@gmail.\+com}}~\newline
@@ -318,11 +318,12 @@ Como usuario quiero agregar notas o comentarios a las llamadas, reuniones, mensa
 {\bfseries{!agregar\+Nota}} este saludo es fue muy bueno,correo,saludo,U1~\newline
 {\bfseries{!interaccion\+Cliente}} C1,U1,correo,12/11/2025  \\\cline{1-3}
 Como usuario quiero registrar otros datos de los clientes como género y fecha de nacimiento de los clientes, para realizar campañas y saludarlos en sus cumpleaños.  &{\bfseries{!modf\+Info}} id atributo nuevo\+Valor  &{\bfseries{!crear\+Cliente}} C5,Jovani,Vazquez,099289455,\href{mailto:jovanivazquez@correo.com}{\texttt{jovanivazquez@correo.\+com}}{\bfseries{!modf\+Info}} C5,genero,Mujer{\bfseries{!ver\+Clientes}}  \\\cline{1-3}
-Como usuario quiero poder definir etiquetas para poder organizar y segmentar a mis clientes.  &{\bfseries{!crear\+Etiqueta}} etiqueta usuario\+Id  &{\bfseries{!crear\+Administrador}} A25,Hector{\bfseries{!crear\+Usuario}} U1,Franco,A25{\bfseries{!crear\+Etiqueta}} etiqueta\+De\+Prueba,U1~\newline
-{\bfseries{!ver\+Etiquetas}}  \\\cline{1-3}
+Como usuario quiero poder definir etiquetas para poder organizar y segmentar a mis clientes.  &{\bfseries{!crear\+Etiqueta}} etiqueta usuario\+Id  &{\bfseries{!crear\+Administrador}} A25,Hector{\bfseries{!crear\+Usuario}} U1,Franco,A25{\bfseries{!crear\+Etiqueta}} etiqueta\+De\+Prueba,U1{\bfseries{!ver\+Etiquetas}}  \\\cline{1-3}
 Como usuario quiero poder agregar una etiqueta a un cliente, para luego organizar y segmentar mi cartera de clientes.  &{\bfseries{!agregar\+Etiqueta}} cliente\+Id etiqueta usuario\+Id  &{\bfseries{!crear\+Administrador}} A32,Liliana{\bfseries{!crear\+Cliente}} C6,Edmundo,Gutierrez,0982827315,\href{mailto:edmundoguti@correo.com}{\texttt{edmundoguti@correo.\+com}}{\bfseries{!crear\+Usuario}} U20,Alejandro,A32{\bfseries{!crear\+Etiqueta}} etiqueta\+De\+Prueba,U1{\bfseries{!ver\+Etiquetas}}{\bfseries{!agregar\+Etiqueta}} C6,etiqueta\+De\+Prueba,U1{\bfseries{!ver\+Clientes}}  \\\cline{1-3}
-Como usuario quiero poder registrar una venta a un cliente, incluyendo qué le vendí, cuándo se lo vendí y cuánto le cobré, para saber lo que compran los clientes.  &{\bfseries{!registrar\+Venta}} cliente\+Id producto fecha precio usuario\+Id  &{\bfseries{!crear\+Administrador}} A9,Ema9{\bfseries{!crear\+Usuario}} U9,Ezequiel9,A9{\bfseries{!crear\+Cliente}} C9,Jean9,Rodriguez9,099281245,\href{mailto:kevinrod@correo.com}{\texttt{kevinrod@correo.\+com}}{\bfseries{!registrar\+Venta}} C9,ATUN,11/12/2025,100,U9  \\\cline{1-3}
-Como usuario quiero poder registrar que le envié una cotización a un cliente, cuándo se la mandé y por qué importe es la cotización, para hacer seguimiento de oportunidades de venta.  &{\bfseries{!registrar\+Cotiz}} cliente\+Id fecha precio usuario\+Id  &{\bfseries{!crear\+Administrador}} A10,Ema10{\bfseries{!crear\+Usuario}} U10,Ezequiel10,A10{\bfseries{!crear\+Cliente}} C10,Jean10,Rodriguez10,099281245,\href{mailto:kevinrod@correo.com}{\texttt{kevinrod@correo.\+com}}{\bfseries{!registrar\+Cotiz}} C10,11/12/2025,100,U10  \\\cline{1-3}
+Como usuario quiero poder registrar una venta a un cliente, incluyendo qué le vendí, cuándo se lo vendí y cuánto le cobré, para saber lo que compran los clientes.  &{\bfseries{!registrar\+Venta}} cliente\+Id producto fecha precio usuario\+Id  &{\bfseries{!crear\+Administrador}} A9,Ema9{\bfseries{!crear\+Usuario}} U9,Ezequiel9,A9{\bfseries{!crear\+Cliente}} C9,Jean9,Rodriguez9,099281245,\href{mailto:kevinrod@correo.com}{\texttt{kevinrod@correo.\+com}}{\bfseries{!registrar\+Venta}} C9,ATUN,11/12/2025,100,U9~\newline
+{\bfseries{!ver\+Ventas}}  \\\cline{1-3}
+Como usuario quiero poder registrar que le envié una cotización a un cliente, cuándo se la mandé y por qué importe es la cotización, para hacer seguimiento de oportunidades de venta.  &{\bfseries{!registrar\+Cotiz}} cliente\+Id fecha precio usuario\+Id  &{\bfseries{!crear\+Administrador}} A10,Ema10{\bfseries{!crear\+Usuario}} U10,Ezequiel10,A10{\bfseries{!crear\+Cliente}} C10,Jean10,Rodriguez10,099281245,\href{mailto:kevinrod@correo.com}{\texttt{kevinrod@correo.\+com}}{\bfseries{!registrar\+Cotiz}} C10,11/12/2025,100,U10~\newline
+!ver\+Cotizaciones  \\\cline{1-3}
 Como usuario quiero ver todas las interacciones de un cliente, con o sin filtro por tipo de interacción y por fecha, para entender el historial de la relación comercial.  &{\bfseries{!interaccion\+Cliente}} cliente\+Id usuario\+Id tipo fecha  &{\bfseries{!crear\+Administrador}} A1,Pablo~\newline
 {\bfseries{!crear\+Usuario}} U1,Lucas,A1~\newline
 {\bfseries{!crear\+Cliente}} C1,Juan,Pinocho,099765432,\href{mailto:JuanP@gmail.com}{\texttt{Juan\+P@gmail.\+com}}~\newline
@@ -344,23 +345,26 @@ Como usuario quiero saber los clientes que se pusieron en contacto conmigo y no 
 Como administrador quiero crear usuarios.  &{\bfseries{!crear\+Usuario}} usuario\+Id nombre admin\+Id  &{\bfseries{!crear\+Administrador}} A1,Pepe{\bfseries{!crear\+Usuario}} U1,Ezequiel,A1{\bfseries{!ver\+Usuarios}}  \\\cline{1-3}
 Como administrador quiero eliminar usuarios.  &{\bfseries{!eliminar\+Usuario}} usuario\+Id admin\+Id  &{\bfseries{!crear\+Administrador}} A2,Andres{\bfseries{!crear\+Usuario}} U2,Peter,A2{\bfseries{!ver\+Usuarios}}{\bfseries{!eliminar\+Usuario}} U2,A2{\bfseries{!ver\+Usuarios}}  \\\cline{1-3}
 Como administrador quiero suspender usuarios.  &{\bfseries{!suspender\+Usuario}} usuario\+Id admin\+Id  &{\bfseries{!crear\+Administrador}} A3,Juan{\bfseries{!crear\+Usuario}} U3,Nahuel,A3{\bfseries{!ver\+Usuarios}}{\bfseries{!suspender\+Usuario}} U3,A3{\bfseries{!ver\+Usuarios}}  \\\cline{1-3}
-Como vendedor, quiero poder asignar un cliente a otro vendedor para distribuir el trabajo en el equipo.  &{\bfseries{!asignar\+Cliente}} cliente\+Id vendedor\+Id  &{\bfseries{!crear\+Vendedor}} V11,Juan\+Vendedor11{\bfseries{!crear\+Cliente}} C11,Jean11,Rodriguez11,099281245,\href{mailto:kevinrod@correo.com}{\texttt{kevinrod@correo.\+com}}{\bfseries{ {\bfseries{!asignar\+Cliente}} C11,V11  }}\\\cline{1-3}
-{\bfseries{ Como usuario quiero saber el total de ventas de un periodo dado, para analizar en rendimiento de mi negocio.  }}&{\bfseries{ {\bfseries{!total\+Ventas}} usuario\+Id fecha\+Inicio fecha\+Fin  }}&{\bfseries{ {\bfseries{!crear\+Administrador}} A12,Juan12{\bfseries{!crear\+Usuario}} U12,Nahuel12,A12{\bfseries{!crear\+Cliente}} C12,Jean12,Rodriguez12,099281245,\href{mailto:kevinrod@correo.com}{\texttt{kevinrod@correo.\+com}}{\bfseries{!registrar\+Venta}} C12,ATUN,11/12/2025,100,U12{\bfseries{!registrar\+Venta}} C12,ATUN,12/12/2025,100,U12{\bfseries{!total\+Ventas}} U12,11/12/2025,14/12/2025  }}\\\cline{1-3}
-{\bfseries{ Como usuario quiero ver un panel con clientes totales, interacciones recientes y reuniones próximas, para tener un resumen rápido.  }}&{\bfseries{ {\bfseries{!panel}} usuario\+Id  }}&{\bfseries{ {\bfseries{!crear\+Administrador}} A1,Pablo~\newline
+Como vendedor, quiero poder asignar un cliente a otro vendedor para distribuir el trabajo en el equipo.  &{\bfseries{!asignar\+Cliente}} cliente\+Id vendedor\+Id  &{\bfseries{!crear\+Vendedor}} V11,Juan\+Vendedor11{\bfseries{!crear\+Cliente}} C11,Jean11,Rodriguez11,099281245,\href{mailto:kevinrod@correo.com}{\texttt{kevinrod@correo.\+com}}{\bfseries{ {\bfseries{!asignar\+Cliente}} C11,V11~\newline
+{\bfseries{!ver\+Clientes\+Vendedor}} V11  }}\\\cline{1-3}
+{\bfseries{ Como usuario quiero ver un panel con clientes totales, interacciones recientes y reuniones próximas, para tener un resumen rápido.  }}&{\bfseries{ {\bfseries{!panel}} usuario\+Id ~\newline
+{\bfseries{(Dato\+: Este comando mostrará las interacciones de hace una semana o menos de antigüedad a la fecha actual)}}  }}&{\bfseries{ {\bfseries{!crear\+Administrador}} A1,Pablo~\newline
 {\bfseries{!crear\+Usuario}} U1,Lucas,A1~\newline
 {\bfseries{!crear\+Cliente}} C1,Juan,Pinocho,099765432,\href{mailto:JuanP@gmail.com}{\texttt{Juan\+P@gmail.\+com}}~\newline
 {\bfseries{!registrar\+Llamada}} C1,hola,saludo,U1,29/11/2025~\newline
-}}!crear\+Cliente C2,Marta,Mora,099383214,\href{mailto:MartaM@gmail.com}{\texttt{Marta\+M@gmail.\+com}}~\newline
+}}{\bfseries{!crear\+Cliente}} C2,Marta,Mora,099383214,\href{mailto:MartaM@gmail.com}{\texttt{Marta\+M@gmail.\+com}}~\newline
 {\bfseries{!registrar\+Mensaje}} C2,tengo una duda,duda,U1,30/11/2025~\newline
 {\bfseries{!registrar\+Reunion}} C1,Tenemos que discutir sobre los aliens,extraterestres,U1,10/11/2026,Marte~\newline
 {\bfseries{!panel U1  }}\\\cline{1-3}
+{\bfseries{ Como usuario quiero saber el total de ventas de un periodo dado, para analizar en rendimiento de mi negocio.  }}&{\bfseries{ {\bfseries{!total\+Ventas}} usuario\+Id fecha\+Inicio fecha\+Fin  }}&{\bfseries{ {\bfseries{!crear\+Administrador}} A12,Juan12{\bfseries{!crear\+Usuario}} U12,Nahuel12,A12{\bfseries{!crear\+Cliente}} C12,Jean12,Rodriguez12,099281245,\href{mailto:kevinrod@correo.com}{\texttt{kevinrod@correo.\+com}}{\bfseries{!registrar\+Venta}} C12,ATUN,11/12/2025,100,U12{\bfseries{!registrar\+Venta}} C12,ATUN,12/12/2025,100,U12{\bfseries{!total\+Ventas}} U12,11/12/2025,14/12/2025~\newline
+{\bfseries{!ver\+Ventas{\bfseries{  }}}}}}\\\cline{1-3}
 \end{longtabu}
 
 
-{\bfseries{}}\hypertarget{md__r_e_a_d_m_e_autotoc_md3}{}\doxysubsubsection{\texorpdfstring{{\bfseries{Comandos no requeridos por las historias de usuario}}}{{\bfseries{Comandos no requeridos por las historias de usuario}}}}\label{md__r_e_a_d_m_e_autotoc_md3}
-{\bfseries{}}
+{\bfseries{{\bfseries{{\bfseries{}}}}}}\hypertarget{md__r_e_a_d_m_e_autotoc_md3}{}\doxysubsubsection{\texorpdfstring{{\bfseries{{\bfseries{{\bfseries{Comandos no requeridos por las historias de usuario}}}}}}}{{\bfseries{{\bfseries{{\bfseries{Comandos no requeridos por las historias de usuario}}}}}}}}\label{md__r_e_a_d_m_e_autotoc_md3}
+{\bfseries{{\bfseries{{\bfseries{}}}}}}
 
-{\bfseries{\tabulinesep=1mm
+{\bfseries{{\bfseries{{\bfseries{\tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
 \hline
 \PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Comando  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Descripción  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Ejemplos  }\\\cline{1-3}
@@ -371,16 +375,17 @@ Como vendedor, quiero poder asignar un cliente a otro vendedor para distribuir e
 \PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Comando  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Descripción  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Ejemplos  }\\\cline{1-3}
 \endhead
 {\bfseries{!init}}  &Este comando crea un administrador, un usuario, un cliente y un vendedor. Esto para facilitar probar y/o utilizar el resto de comandos.  &{\bfseries{!init}}  \\\cline{1-3}
-{\bfseries{!ver\+Usuarios}}  &Muestra los usuarios existentes  &{\bfseries{!ver\+Usuarios}}  \\\cline{1-3}
+{\bfseries{!ver\+Usuarios}}  &Muestra los usuarios existentes  &{\bfseries{!crear\+Usuario}} U1,Lucas,A1{\bfseries{!ver\+Usuarios}}  \\\cline{1-3}
 {\bfseries{!crear\+Vendedor}} vendedor\+Id nombre  &Este comando crea un vendedor  &{\bfseries{!crear\+Vendedor}} V1,Juan\+Vendedor  \\\cline{1-3}
 {\bfseries{!crear\+Administrador}} admin\+Id nombre  &Este comando crea un Administrador  &{\bfseries{!crear\+Administrador}} A1,Pepe{\bfseries{!ver\+Administradores}}  \\\cline{1-3}
-{\bfseries{!ver\+Etiquetas}}  &Este comando muestra todas las etiquetas existentes  &{\bfseries{!ver\+Etiquetas}}  \\\cline{1-3}
+{\bfseries{!ver\+Etiquetas}}  &Este comando muestra todas las etiquetas existentes  &{\bfseries{!crear\+Administrador}} A27,Andres{\bfseries{!crear\+Usuario}} 34,Peter,A27{\bfseries{!crear\+Etiqueta}} etiqueta\+Prueba,U34\texorpdfstring{$<$}{<}/br{\bfseries{!ver\+Etiquetas}}  \\\cline{1-3}
+{\bfseries{!ver\+Administradores}}  &Este comando muestra una lista con todos los Administradores  &{\bfseries{!ver\+Administradores}}  \\\cline{1-3}
 \end{longtabu}
-}}
+}}}}}}
 
-{\bfseries{}}\hypertarget{md__r_e_a_d_m_e_autotoc_md4}{}\doxysubsection{\texorpdfstring{{\bfseries{📜 Notas}}}{{\bfseries{📜 Notas}}}}\label{md__r_e_a_d_m_e_autotoc_md4}
-{\bfseries{}}
+{\bfseries{{\bfseries{{\bfseries{}}}}}}\hypertarget{md__r_e_a_d_m_e_autotoc_md4}{}\doxysubsection{\texorpdfstring{{\bfseries{{\bfseries{{\bfseries{📜 Notas}}}}}}}{{\bfseries{{\bfseries{{\bfseries{📜 Notas}}}}}}}}\label{md__r_e_a_d_m_e_autotoc_md4}
+{\bfseries{{\bfseries{{\bfseries{}}}}}}
 
-{\bfseries{Los principales desafios que encontramos al trabajar sobre el proyecto fueron la correcta distribución de responsabilidades entre las clases y sus relaciones entre sí, la correcta implementación de los principios SOLID y GRASP, y acostumbrarse a trabajar con Git, que era una herramienta nueva para todos.~\newline
+{\bfseries{{\bfseries{{\bfseries{Los principales desafios que encontramos al trabajar sobre el proyecto fueron la correcta distribución de responsabilidades entre las clases y sus relaciones entre sí, la correcta implementación de los principios SOLID y GRASP, y acostumbrarse a trabajar con Git, que era una herramienta nueva para todos.~\newline
 ~\newline
- En general, el proyecto fue una buena oportunidad para poner en práctica lo visto en clase, tanto lo que se trata de conceptos como de código. }}
+ En general, el proyecto fue una buena oportunidad para poner en práctica lo visto en clase, tanto lo que se trata de conceptos como de código. }}}}}}

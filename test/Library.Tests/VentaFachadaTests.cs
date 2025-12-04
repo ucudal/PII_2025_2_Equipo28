@@ -17,7 +17,7 @@ namespace Library.Tests
         }
 
         [Test]
-        public void RegistrarVentaCliente_DatosValidos()
+        public void RegistrarVentaCliente()
         {
             // Arrange
             fachada.CrearAdministrador("A1", "Pepe");

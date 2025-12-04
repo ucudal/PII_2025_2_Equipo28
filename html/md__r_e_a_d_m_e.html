@@ -375,7 +375,7 @@ $(function(){initNavTree('md__r_e_a_d_m_e.html','',''); });
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">Como usuario quiero buscar clientes por nombre, apellido, teléfono o correo electrónico, para identificarlos rápidamente.  </td><td class="markdownTableBodyNone"><b>!buscarCliente</b> atributo busqueda  </td><td class="markdownTableBodyNone"><b>!crearCliente</b> C4,Romualdo,Perez,092287345,<a href="#" onclick="location.href='mai'+'lto:'+'per'+'ez'+'rom'+'ua'+'ldo'+'@c'+'orr'+'eo'+'.co'+'m'; return false;">perez<span class="obfuscator">.nosp@m.</span>romu<span class="obfuscator">.nosp@m.</span>aldo@<span class="obfuscator">.nosp@m.</span>corr<span class="obfuscator">.nosp@m.</span>eo.co<span class="obfuscator">.nosp@m.</span>m</a><b>!buscarCliente</b> nombre,Romualdo<b>!verClientes</b>  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Como usuario quiero ver una lista de todos mis clientes, para tener una vista general de mi cartera.  </td><td class="markdownTableBodyNone"><b>!verClientes</b>  </td><td class="markdownTableBodyNone"><b>!verClientes</b>  </td></tr>
+<td class="markdownTableBodyNone">Como usuario quiero ver una lista de todos mis clientes, para tener una vista general de mi cartera.  </td><td class="markdownTableBodyNone"><b>!verClientes</b>  </td><td class="markdownTableBodyNone"><b>!crearCliente</b> C8,Ronaldo,Rodriguez,099827345,<a href="#" onclick="location.href='mai'+'lto:'+'ron'+'al'+'dor'+'od'+'ri@'+'co'+'rre'+'o.'+'com'; return false;">ronal<span class="obfuscator">.nosp@m.</span>doro<span class="obfuscator">.nosp@m.</span>dri@c<span class="obfuscator">.nosp@m.</span>orre<span class="obfuscator">.nosp@m.</span>o.com</a><b>!verClientes</b>  </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">Como usuario quiero registrar llamadas enviadas o recibidas de clientes, incluyendo cuándo fueron y de qué tema trataron, para poder saber mis interacciones con los clientes.  </td><td class="markdownTableBodyNone"><b>!registrarLlamada</b> clienteId llamada tema usuarioId fecha  </td><td class="markdownTableBodyNone"><b>!crearAdministrador</b> A1,Pablo<br  />
 <b>!crearUsuario</b> U1,Lucas,A1<br  />
@@ -410,14 +410,15 @@ $(function(){initNavTree('md__r_e_a_d_m_e.html','',''); });
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Como usuario quiero registrar otros datos de los clientes como género y fecha de nacimiento de los clientes, para realizar campañas y saludarlos en sus cumpleaños.  </td><td class="markdownTableBodyNone"><b>!modfInfo</b> id atributo nuevoValor  </td><td class="markdownTableBodyNone"><b>!crearCliente</b> C5,Jovani,Vazquez,099289455,<a href="#" onclick="location.href='mai'+'lto:'+'jov'+'an'+'iva'+'zq'+'uez'+'@c'+'orr'+'eo'+'.co'+'m'; return false;">jovan<span class="obfuscator">.nosp@m.</span>ivaz<span class="obfuscator">.nosp@m.</span>quez@<span class="obfuscator">.nosp@m.</span>corr<span class="obfuscator">.nosp@m.</span>eo.co<span class="obfuscator">.nosp@m.</span>m</a><b>!modfInfo</b> C5,genero,Mujer<b>!verClientes</b>  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Como usuario quiero poder definir etiquetas para poder organizar y segmentar a mis clientes.  </td><td class="markdownTableBodyNone"><b>!crearEtiqueta</b> etiqueta usuarioId  </td><td class="markdownTableBodyNone"><b>!crearAdministrador</b> A25,Hector<b>!crearUsuario</b> U1,Franco,A25<b>!crearEtiqueta</b> etiquetaDePrueba,U1<br  />
-<b>!verEtiquetas</b>  </td></tr>
+<td class="markdownTableBodyNone">Como usuario quiero poder definir etiquetas para poder organizar y segmentar a mis clientes.  </td><td class="markdownTableBodyNone"><b>!crearEtiqueta</b> etiqueta usuarioId  </td><td class="markdownTableBodyNone"><b>!crearAdministrador</b> A25,Hector<b>!crearUsuario</b> U1,Franco,A25<b>!crearEtiqueta</b> etiquetaDePrueba,U1<b>!verEtiquetas</b>  </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Como usuario quiero poder agregar una etiqueta a un cliente, para luego organizar y segmentar mi cartera de clientes.  </td><td class="markdownTableBodyNone"><b>!agregarEtiqueta</b> clienteId etiqueta usuarioId  </td><td class="markdownTableBodyNone"><b>!crearAdministrador</b> A32,Liliana<b>!crearCliente</b> C6,Edmundo,Gutierrez,0982827315,<a href="#" onclick="location.href='mai'+'lto:'+'edm'+'un'+'dog'+'ut'+'i@c'+'or'+'reo'+'.c'+'om'; return false;">edmun<span class="obfuscator">.nosp@m.</span>dogu<span class="obfuscator">.nosp@m.</span>ti@co<span class="obfuscator">.nosp@m.</span>rreo<span class="obfuscator">.nosp@m.</span>.com</a><b>!crearUsuario</b> U20,Alejandro,A32<b>!crearEtiqueta</b> etiquetaDePrueba,U1<b>!verEtiquetas</b><b>!agregarEtiqueta</b> C6,etiquetaDePrueba,U1<b>!verClientes</b>  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Como usuario quiero poder registrar una venta a un cliente, incluyendo qué le vendí, cuándo se lo vendí y cuánto le cobré, para saber lo que compran los clientes.  </td><td class="markdownTableBodyNone"><b>!registrarVenta</b> clienteId producto fecha precio usuarioId  </td><td class="markdownTableBodyNone"><b>!crearAdministrador</b> A9,Ema9<b>!crearUsuario</b> U9,Ezequiel9,A9<b>!crearCliente</b> C9,Jean9,Rodriguez9,099281245,<a href="#" onclick="location.href='mai'+'lto:'+'kev'+'in'+'rod'+'@c'+'orr'+'eo'+'.co'+'m'; return false;">kevin<span class="obfuscator">.nosp@m.</span>rod@<span class="obfuscator">.nosp@m.</span>corre<span class="obfuscator">.nosp@m.</span>o.co<span class="obfuscator">.nosp@m.</span>m</a><b>!registrarVenta</b> C9,ATUN,11/12/2025,100,U9  </td></tr>
+<td class="markdownTableBodyNone">Como usuario quiero poder registrar una venta a un cliente, incluyendo qué le vendí, cuándo se lo vendí y cuánto le cobré, para saber lo que compran los clientes.  </td><td class="markdownTableBodyNone"><b>!registrarVenta</b> clienteId producto fecha precio usuarioId  </td><td class="markdownTableBodyNone"><b>!crearAdministrador</b> A9,Ema9<b>!crearUsuario</b> U9,Ezequiel9,A9<b>!crearCliente</b> C9,Jean9,Rodriguez9,099281245,<a href="#" onclick="location.href='mai'+'lto:'+'kev'+'in'+'rod'+'@c'+'orr'+'eo'+'.co'+'m'; return false;">kevin<span class="obfuscator">.nosp@m.</span>rod@<span class="obfuscator">.nosp@m.</span>corre<span class="obfuscator">.nosp@m.</span>o.co<span class="obfuscator">.nosp@m.</span>m</a><b>!registrarVenta</b> C9,ATUN,11/12/2025,100,U9<br  />
+<b>!verVentas</b>  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Como usuario quiero poder registrar que le envié una cotización a un cliente, cuándo se la mandé y por qué importe es la cotización, para hacer seguimiento de oportunidades de venta.  </td><td class="markdownTableBodyNone"><b>!registrarCotiz</b> clienteId fecha precio usuarioId  </td><td class="markdownTableBodyNone"><b>!crearAdministrador</b> A10,Ema10<b>!crearUsuario</b> U10,Ezequiel10,A10<b>!crearCliente</b> C10,Jean10,Rodriguez10,099281245,<a href="#" onclick="location.href='mai'+'lto:'+'kev'+'in'+'rod'+'@c'+'orr'+'eo'+'.co'+'m'; return false;">kevin<span class="obfuscator">.nosp@m.</span>rod@<span class="obfuscator">.nosp@m.</span>corre<span class="obfuscator">.nosp@m.</span>o.co<span class="obfuscator">.nosp@m.</span>m</a><b>!registrarCotiz</b> C10,11/12/2025,100,U10  </td></tr>
+<td class="markdownTableBodyNone">Como usuario quiero poder registrar que le envié una cotización a un cliente, cuándo se la mandé y por qué importe es la cotización, para hacer seguimiento de oportunidades de venta.  </td><td class="markdownTableBodyNone"><b>!registrarCotiz</b> clienteId fecha precio usuarioId  </td><td class="markdownTableBodyNone"><b>!crearAdministrador</b> A10,Ema10<b>!crearUsuario</b> U10,Ezequiel10,A10<b>!crearCliente</b> C10,Jean10,Rodriguez10,099281245,<a href="#" onclick="location.href='mai'+'lto:'+'kev'+'in'+'rod'+'@c'+'orr'+'eo'+'.co'+'m'; return false;">kevin<span class="obfuscator">.nosp@m.</span>rod@<span class="obfuscator">.nosp@m.</span>corre<span class="obfuscator">.nosp@m.</span>o.co<span class="obfuscator">.nosp@m.</span>m</a><b>!registrarCotiz</b> C10,11/12/2025,100,U10<br  />
+!verCotizaciones  </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">Como usuario quiero ver todas las interacciones de un cliente, con o sin filtro por tipo de interacción y por fecha, para entender el historial de la relación comercial.  </td><td class="markdownTableBodyNone"><b>!interaccionCliente</b> clienteId usuarioId tipo fecha  </td><td class="markdownTableBodyNone"><b>!crearAdministrador</b> A1,Pablo<br  />
 <b>!crearUsuario</b> U1,Lucas,A1<br  />
@@ -446,45 +447,50 @@ $(function(){initNavTree('md__r_e_a_d_m_e.html','',''); });
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Como administrador quiero suspender usuarios.  </td><td class="markdownTableBodyNone"><b>!suspenderUsuario</b> usuarioId adminId  </td><td class="markdownTableBodyNone"><b>!crearAdministrador</b> A3,Juan<b>!crearUsuario</b> U3,Nahuel,A3<b>!verUsuarios</b><b>!suspenderUsuario</b> U3,A3<b>!verUsuarios</b>  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Como vendedor, quiero poder asignar un cliente a otro vendedor para distribuir el trabajo en el equipo.  </td><td class="markdownTableBodyNone"><b>!asignarCliente</b> clienteId vendedorId  </td><td class="markdownTableBodyNone"><b>!crearVendedor</b> V11,JuanVendedor11<b>!crearCliente</b> C11,Jean11,Rodriguez11,099281245,<a href="#" onclick="location.href='mai'+'lto:'+'kev'+'in'+'rod'+'@c'+'orr'+'eo'+'.co'+'m'; return false;">kevin<span class="obfuscator">.nosp@m.</span>rod@<span class="obfuscator">.nosp@m.</span>corre<span class="obfuscator">.nosp@m.</span>o.co<span class="obfuscator">.nosp@m.</span>m</a><b> <b>!asignarCliente</b> C11,V11  </b></td></tr>
+<td class="markdownTableBodyNone">Como vendedor, quiero poder asignar un cliente a otro vendedor para distribuir el trabajo en el equipo.  </td><td class="markdownTableBodyNone"><b>!asignarCliente</b> clienteId vendedorId  </td><td class="markdownTableBodyNone"><b>!crearVendedor</b> V11,JuanVendedor11<b>!crearCliente</b> C11,Jean11,Rodriguez11,099281245,<a href="#" onclick="location.href='mai'+'lto:'+'kev'+'in'+'rod'+'@c'+'orr'+'eo'+'.co'+'m'; return false;">kevin<span class="obfuscator">.nosp@m.</span>rod@<span class="obfuscator">.nosp@m.</span>corre<span class="obfuscator">.nosp@m.</span>o.co<span class="obfuscator">.nosp@m.</span>m</a><b> <b>!asignarCliente</b> C11,V11<br  />
+<b>!verClientesVendedor</b> V11  </b></td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><b> Como usuario quiero saber el total de ventas de un periodo dado, para analizar en rendimiento de mi negocio.  </b></td><td class="markdownTableBodyNone"><b> <b>!totalVentas</b> usuarioId fechaInicio fechaFin  </b></td><td class="markdownTableBodyNone"><b> <b>!crearAdministrador</b> A12,Juan12<b>!crearUsuario</b> U12,Nahuel12,A12<b>!crearCliente</b> C12,Jean12,Rodriguez12,099281245,<a href="#" onclick="location.href='mai'+'lto:'+'kev'+'in'+'rod'+'@c'+'orr'+'eo'+'.co'+'m'; return false;">kevin<span class="obfuscator">.nosp@m.</span>rod@<span class="obfuscator">.nosp@m.</span>corre<span class="obfuscator">.nosp@m.</span>o.co<span class="obfuscator">.nosp@m.</span>m</a><b>!registrarVenta</b> C12,ATUN,11/12/2025,100,U12<b>!registrarVenta</b> C12,ATUN,12/12/2025,100,U12<b>!totalVentas</b> U12,11/12/2025,14/12/2025  </b></td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><b> Como usuario quiero ver un panel con clientes totales, interacciones recientes y reuniones próximas, para tener un resumen rápido.  </b></td><td class="markdownTableBodyNone"><b> <b>!panel</b> usuarioId  </b></td><td class="markdownTableBodyNone"><b> <b>!crearAdministrador</b> A1,Pablo<br  />
+<td class="markdownTableBodyNone"><b> Como usuario quiero ver un panel con clientes totales, interacciones recientes y reuniones próximas, para tener un resumen rápido.  </b></td><td class="markdownTableBodyNone"><b> <b>!panel</b> usuarioId <br  />
+<b>(Dato: Este comando mostrará las interacciones de hace una semana o menos de antigüedad a la fecha actual)</b>  </b></td><td class="markdownTableBodyNone"><b> <b>!crearAdministrador</b> A1,Pablo<br  />
 <b>!crearUsuario</b> U1,Lucas,A1<br  />
 <b>!crearCliente</b> C1,Juan,Pinocho,099765432,<a href="#" onclick="location.href='mai'+'lto:'+'Jua'+'nP'+'@gm'+'ai'+'l.c'+'om'; return false;">JuanP<span class="obfuscator">.nosp@m.</span>@gma<span class="obfuscator">.nosp@m.</span>il.co<span class="obfuscator">.nosp@m.</span>m</a><br  />
 <b>!registrarLlamada</b> C1,hola,saludo,U1,29/11/2025<br  />
-</b>!crearCliente C2,Marta,Mora,099383214,<a href="#" onclick="location.href='mai'+'lto:'+'Mar'+'ta'+'M@g'+'ma'+'il.'+'co'+'m'; return false;">Marta<span class="obfuscator">.nosp@m.</span>M@gm<span class="obfuscator">.nosp@m.</span>ail.c<span class="obfuscator">.nosp@m.</span>om</a><br  />
+</b><b>!crearCliente</b> C2,Marta,Mora,099383214,<a href="#" onclick="location.href='mai'+'lto:'+'Mar'+'ta'+'M@g'+'ma'+'il.'+'co'+'m'; return false;">Marta<span class="obfuscator">.nosp@m.</span>M@gm<span class="obfuscator">.nosp@m.</span>ail.c<span class="obfuscator">.nosp@m.</span>om</a><br  />
 <b>!registrarMensaje</b> C2,tengo una duda,duda,U1,30/11/2025<br  />
 <b>!registrarReunion</b> C1,Tenemos que discutir sobre los aliens,extraterestres,U1,10/11/2026,Marte<br  />
 <b>!panel U1  </b></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b> Como usuario quiero saber el total de ventas de un periodo dado, para analizar en rendimiento de mi negocio.  </b></td><td class="markdownTableBodyNone"><b> <b>!totalVentas</b> usuarioId fechaInicio fechaFin  </b></td><td class="markdownTableBodyNone"><b> <b>!crearAdministrador</b> A12,Juan12<b>!crearUsuario</b> U12,Nahuel12,A12<b>!crearCliente</b> C12,Jean12,Rodriguez12,099281245,<a href="#" onclick="location.href='mai'+'lto:'+'kev'+'in'+'rod'+'@c'+'orr'+'eo'+'.co'+'m'; return false;">kevin<span class="obfuscator">.nosp@m.</span>rod@<span class="obfuscator">.nosp@m.</span>corre<span class="obfuscator">.nosp@m.</span>o.co<span class="obfuscator">.nosp@m.</span>m</a><b>!registrarVenta</b> C12,ATUN,11/12/2025,100,U12<b>!registrarVenta</b> C12,ATUN,12/12/2025,100,U12<b>!totalVentas</b> U12,11/12/2025,14/12/2025<br  />
+<b>!verVentas<b>  </b></b></b></td></tr>
 </table>
-<p><b></b></p>
+<p><b><b><b></b></b></b></p>
 <h3 class="doxsection"><a class="anchor" id="autotoc_md3"></a>
-<b>Comandos no requeridos por las historias de usuario</b></h3>
-<p><b></b></p>
-<p><b></p><table class="markdownTable">
+<b><b><b>Comandos no requeridos por las historias de usuario</b></b></b></h3>
+<p><b><b><b></b></b></b></p>
+<p><b><b><b></p><table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Comando  </th><th class="markdownTableHeadNone">Descripción  </th><th class="markdownTableHeadNone">Ejemplos  </th></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><b>!init</b>  </td><td class="markdownTableBodyNone">Este comando crea un administrador, un usuario, un cliente y un vendedor. Esto para facilitar probar y/o utilizar el resto de comandos.  </td><td class="markdownTableBodyNone"><b>!init</b>  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><b>!verUsuarios</b>  </td><td class="markdownTableBodyNone">Muestra los usuarios existentes  </td><td class="markdownTableBodyNone"><b>!verUsuarios</b>  </td></tr>
+<td class="markdownTableBodyNone"><b>!verUsuarios</b>  </td><td class="markdownTableBodyNone">Muestra los usuarios existentes  </td><td class="markdownTableBodyNone"><b>!crearUsuario</b> U1,Lucas,A1<b>!verUsuarios</b>  </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><b>!crearVendedor</b> vendedorId nombre  </td><td class="markdownTableBodyNone">Este comando crea un vendedor  </td><td class="markdownTableBodyNone"><b>!crearVendedor</b> V1,JuanVendedor  </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><b>!crearAdministrador</b> adminId nombre  </td><td class="markdownTableBodyNone">Este comando crea un Administrador  </td><td class="markdownTableBodyNone"><b>!crearAdministrador</b> A1,Pepe<b>!verAdministradores</b>  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><b>!verEtiquetas</b>  </td><td class="markdownTableBodyNone">Este comando muestra todas las etiquetas existentes  </td><td class="markdownTableBodyNone"><b>!verEtiquetas</b>  </td></tr>
+<td class="markdownTableBodyNone"><b>!verEtiquetas</b>  </td><td class="markdownTableBodyNone">Este comando muestra todas las etiquetas existentes  </td><td class="markdownTableBodyNone"><b>!crearAdministrador</b> A27,Andres<b>!crearUsuario</b> 34,Peter,A27<b>!crearEtiqueta</b> etiquetaPrueba,U34&lt;/br<b>!verEtiquetas</b>  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b>!verAdministradores</b>  </td><td class="markdownTableBodyNone">Este comando muestra una lista con todos los Administradores  </td><td class="markdownTableBodyNone"><b>!verAdministradores</b>  </td></tr>
 </table>
-<p></b></p>
-<p><b></b></p>
+<p></b></b></b></p>
+<p><b><b><b></b></b></b></p>
 <h2 class="doxsection"><a class="anchor" id="autotoc_md4"></a>
-<b>📜 Notas</b></h2>
-<p><b></b></p>
-<p><b>Los principales desafios que encontramos al trabajar sobre el proyecto fueron la correcta distribución de responsabilidades entre las clases y sus relaciones entre sí, la correcta implementación de los principios SOLID y GRASP, y acostumbrarse a trabajar con Git, que era una herramienta nueva para todos.<br  />
+<b><b><b>📜 Notas</b></b></b></h2>
+<p><b><b><b></b></b></b></p>
+<p><b><b><b>Los principales desafios que encontramos al trabajar sobre el proyecto fueron la correcta distribución de responsabilidades entre las clases y sus relaciones entre sí, la correcta implementación de los principios SOLID y GRASP, y acostumbrarse a trabajar con Git, que era una herramienta nueva para todos.<br  />
 <br  />
- En general, el proyecto fue una buena oportunidad para poner en práctica lo visto en clase, tanto lo que se trata de conceptos como de código. </b></p>
+ En general, el proyecto fue una buena oportunidad para poner en práctica lo visto en clase, tanto lo que se trata de conceptos como de código. </b></b></b></p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
