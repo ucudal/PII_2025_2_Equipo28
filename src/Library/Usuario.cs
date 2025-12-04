@@ -109,6 +109,40 @@ namespace Library
         }
         
         /// <summary>
+        /// Devuelve una lista con los clientes cuyas ventas totales están en un rango de montos.
+        /// <param name="montoInicial">Monto inicial</param>
+        /// <param name="montoFinal">Monto final/param>
+        /// /// <returns>
+        /// Una lista de Clientes.
+        /// </returns>
+        /// </summary>
+        public List<Cliente> VerClientesConVentasDentroDeRangoDeMontos(int montoInicial, int montoFinal)
+        {
+            Dictionary<Cliente, double> ClientesYVentas = new Dictionary<Cliente, double>();
+            foreach (VentaFachada venta in ventasUsuario)
+            {
+                if (!ClientesYVentas.Keys.Contains(venta.Cliente))
+                {
+                    ClientesYVentas[venta.Cliente] = double.Parse(venta.Importe);
+                } else if (ClientesYVentas.Keys.Contains(venta.Cliente))
+                {
+                    ClientesYVentas[venta.Cliente] = double.Parse(venta.Importe);
+                }     
+            }
+
+            List<Cliente> resultado = new List<Cliente>();
+            foreach (Cliente cliente in ClientesYVentas.Keys)
+            {
+                if (ClientesYVentas[cliente] > montoInicial && ClientesYVentas[cliente] < montoFinal)
+                {
+                    resultado.Add(cliente);
+                }
+            }
+
+            return resultado;
+        }
+        
+        /// <summary>
         /// Devuelve una representacion en string del usuario
         /// </summary>
         public override string ToString()

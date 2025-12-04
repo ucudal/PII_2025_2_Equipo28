@@ -144,5 +144,15 @@ namespace Library.Tests
             fachada.CrearAdministrador("A39", "Wario");
             Assert.That(fachada.VerAdministradores().Contains("Wario - Id: A39"));
         }
+        
+        [Test]
+        public void Comando_verClientesEnRangoDeMontos()
+        {
+            fachada.CrearAdministrador("A1", "JuanAdmin");
+            fachada.CrearUsuario("U1", "Pepe", "A1");
+            fachada.CrearCliente("C1", "Rodolfo", "Gutierrez", "099217987", "rodo@gmail.com");
+            fachada.RegistrarVentaCliente("C1", "Arroz", "04/12/2025", "70", "U1");
+            Assert.That(fachada.ClientesConVentasDentroDeRangoDeMontos("U1", "0", "700").Contains("Rodolfo Gutierrez"));
+        }
     }
 }

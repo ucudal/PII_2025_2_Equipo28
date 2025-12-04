@@ -1329,6 +1329,7 @@ namespace Library
 
             return resultado;
         }
+        
         /// <summary>
         /// Crea un nuevo administrador en el sistema.
         /// Creator: crea instancias de Administrador y las agrega al repositorio.
@@ -1391,6 +1392,39 @@ namespace Library
             foreach (var cliente in vendedor.Clientes)
             {
                 resultado += $"- {cliente.Nombre} {cliente.Apellido}\n";
+            }
+
+            return resultado;
+        }
+        
+        /// <summary>
+        /// Devuelve una lista de todos los clientes con ventas totales dentro de cierto monto
+        /// Expert: Deja que Usuario obtenga esta información porque es quién conoce sus clientes y ventas.
+        /// <param name="usuarioId">Id del usuario</param>
+        /// <param name="montoInicial">Monto inicial</param>
+        /// <param name="montoFinal">Monto final</param>
+        /// <returns>
+        /// Un string con los Clientes separados por comas.
+        /// </returns>
+        /// </summary>
+        public string ClientesConVentasDentroDeRangoDeMontos(string usuarioId, string montoInicial, string montoFinal)
+        {
+            Usuario usuario =  Usuarios.BuscarUsuario(usuarioId);
+            if (usuario == null)
+            {
+                return "El usuario no existe";
+            }
+            
+            int montoInicialNumero = int.Parse(montoInicial);
+            int montoFinalNumero = int.Parse(montoFinal);
+
+            List<Cliente> clientesResultado =
+                usuario.VerClientesConVentasDentroDeRangoDeMontos(montoInicialNumero, montoFinalNumero);
+
+            string resultado = "";
+            foreach (Cliente cliente in clientesResultado)
+            {
+                resultado += cliente.ToString() + ',';
             }
 
             return resultado;

@@ -569,5 +569,39 @@ namespace Library.Tests
             
             Assert.That(resultado.Count, Is.EqualTo(3));
         }
+
+        [Test]
+        public void VerClientesEnRangoDeMontos_Deberia_Devolver_Cliente()
+        {
+            fachada.CrearAdministrador("A1", "JuanAdmin");
+            fachada.CrearUsuario("U1", "Pepe", "A1");
+            fachada.CrearCliente("C1", "Rodolfo", "Gutierrez", "099217987", "rodo@gmail.com");
+            fachada.RegistrarVentaCliente("C1", "Arroz", "04/12/2025", "70", "U1");
+            Assert.That(fachada.ClientesConVentasDentroDeRangoDeMontos("U1", "0", "700").Contains("Rodolfo Gutierrez"));
+        }
+        
+        [Test]
+        public void VerClientesEnRangoDeMontos_ConVariosClientes_Deberia_Devolver_VariosClientes()
+        {
+            fachada.CrearAdministrador("A1", "JuanAdmin");
+            fachada.CrearUsuario("U1", "Pepe", "A1");
+            fachada.CrearCliente("C1", "Rodolfo", "Gutierrez", "099217987", "rodo@gmail.com");
+            fachada.CrearCliente("C2", "Alfonso", "Rodriguez", "099218187", "alfo@gmail.com");
+            fachada.RegistrarVentaCliente("C1", "Arroz", "04/12/2025", "70", "U1");
+            fachada.RegistrarVentaCliente("C2", "Agua", "04/12/2025", "50", "U1");
+            Assert.That(fachada.ClientesConVentasDentroDeRangoDeMontos("U1", "0", "100").Contains("Rodolfo Gutierrez"));
+            Assert.That(fachada.ClientesConVentasDentroDeRangoDeMontos("U1", "0", "100").Contains("Alfonso Rodriguez"));
+        }
+        
+        [Test]
+        public void VerClientesEnRangoDeMontos_ConVariasVentas_MismoCliente()
+        {
+            fachada.CrearAdministrador("A1", "JuanAdmin");
+            fachada.CrearUsuario("U1", "Pepe", "A1");
+            fachada.CrearCliente("C1", "Alfonso", "Rodriguez", "099218187", "alfo@gmail.com");
+            fachada.RegistrarVentaCliente("C1", "Arroz", "04/12/2025", "70", "U1");
+            fachada.RegistrarVentaCliente("C1", "Agua", "04/12/2025", "50", "U1");
+            Assert.That(fachada.ClientesConVentasDentroDeRangoDeMontos("U1", "0", "100").Contains("Alfonso Rodriguez"));
+        }
     }
 }
