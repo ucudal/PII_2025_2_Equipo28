@@ -299,6 +299,21 @@ namespace Library.Tests
             // Assert
             Assert.That(result, Is.EqualTo(expected));
         }
+
+        [Test]
+        public void ClienteVentasProducto_Correcto()
+        {
+            fachada.CrearAdministrador("A6", "Pepe");
+            fachada.CrearUsuario("U6", "Juan", "A6");
+            fachada.CrearCliente("C4", "Andres", "Perez", "099 298 626", "andres@mail.com");
+            fachada.CrearCliente("C3", "Lucas", "Gonzales", "099 876 321", "Luca@mail.com");
+            fachada.RegistrarVentaCliente("C4", "computadora", "10/11/2025", "300", "U6");
+            fachada.RegistrarVentaCliente("C3", "computadora", "14/11/2025", "300", "U6");
+            string resultado = fachada.VerClientesVentaProducto("computadora", "U6");
+            Assert.That(resultado,Does.Contain("Andres Perez"));
+            Assert.That(resultado,Does.Contain("Lucas Gonzales"));
+
+        }
         
     }
 }

@@ -1395,5 +1395,40 @@ namespace Library
 
             return resultado;
         }
+        /// <summary>
+        /// Este metodo muestra los clientes cuyas ventas hayan sido del producto especificacado.
+        ///
+        /// SRP: Cumple srp ya que se encarga expclusivamente de dar un string con los nombres de los clientes que le brinde el metodo que usa.
+        /// Bajo acoplamiento: tiene bajo acomplamiento, proque unicamnete depende de repoventas
+        /// Alta cohesion: El metodo se encarga unicamente de verificar el cleinte y agregar la lista de clientes a un string.
+        /// Demeter: cumple demeter ya que no entra a la lista de ventas de repoventas, sino que deja que el experto en la informacion, repoventas, lo haga.
+        /// </summary>
+        /// <param name="producto">producto por el cual se desea buscar</param>
+        /// <param name="usuarioId">usuario id para verificar que le usuario es un usuario valido</param>
+        /// <returns>devuelve un string con los nombres de los clientes que tengan una venta de ese producto</returns>
+        public string VerClientesVentaProducto(string producto, string usuarioId)
+        {
+            Usuario usuario = null;
+            List<Cliente> clientes = null;
+            try
+            {
+                usuario = this.Usuarios.BuscarUsuario(usuarioId);
+                clientes = this.Ventas.ClientesProducto(producto, usuario);
+            }
+            catch (ArgumentNullException e)
+            {
+                return $"{e.Message} {e.ParamName}";
+            }
+            catch (ArgumentException e)
+            {
+                return $"{e.Message} {e.ParamName}";
+            }
+            string informacion = $"Los clientes con las ventas de el producto {producto} son:\n";
+            foreach (Cliente cliente in clientes)
+            {
+                informacion += $"{cliente.Nombre} {cliente.Apellido}\n";
+            }
+            return informacion;
+        }
     }
 }
