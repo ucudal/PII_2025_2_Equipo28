@@ -110,9 +110,11 @@ namespace Library
         
         /// <summary>
         /// Devuelve una lista con los clientes cuyas ventas totales están en un rango de montos.
+        /// SRP: El usuario es el responsable de todo lo relacionado con el usuario, como conocer sus ventas y clientes
+        /// Expert: EL usuario es quien tiene la información necesaria para cumplir con esta tarea, porque conoce sus ventas y clietes
         /// <param name="montoInicial">Monto inicial</param>
-        /// <param name="montoFinal">Monto final/param>
-        /// /// <returns>
+        /// <param name="montoFinal">Monto final</param>
+        /// <returns>
         /// Una lista de Clientes.
         /// </returns>
         /// </summary>

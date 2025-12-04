@@ -1409,25 +1409,56 @@ namespace Library
         /// </summary>
         public string ClientesConVentasDentroDeRangoDeMontos(string usuarioId, string montoInicial, string montoFinal)
         {
-            Usuario usuario =  Usuarios.BuscarUsuario(usuarioId);
-            if (usuario == null)
+            try
             {
-                return "El usuario no existe";
+                Usuario usuario = Usuarios.BuscarUsuario(usuarioId);
+                if (usuario == null)
+                {
+                    throw new ArgumentNullException(nameof(usuarioId), "El usuario no existe");
+                }
+
+                if (montoInicial == null)
+                {
+                    throw new ArgumentNullException(nameof(montoInicial), "El monto inicial no puede ser null");
+                }
+
+                if (montoFinal == null)
+                {
+                    throw new ArgumentNullException(nameof(montoFinal), "El monto final no puede ser null");
+                }
+
+                int montoInicialNumero = int.Parse(montoInicial);
+                int montoFinalNumero = int.Parse(montoFinal);
+
+                if (montoInicialNumero == 0 && !montoInicial.Contains("0"))
+                {
+                    throw new InvalidOperationException("El monto inicial debe contener números");
+                }
+
+                if (montoFinalNumero == 0 && !montoInicial.Contains("0"))
+                {
+                    throw new InvalidOperationException("El monto final debe contener númeors");
+                }
+
+                List<Cliente> clientesResultado =
+                    usuario.VerClientesConVentasDentroDeRangoDeMontos(montoInicialNumero, montoFinalNumero);
+
+                string resultado = "";
+                foreach (Cliente cliente in clientesResultado)
+                {
+                    resultado += cliente.ToString() + ',';
+                }
+
+                return resultado;
             }
-            
-            int montoInicialNumero = int.Parse(montoInicial);
-            int montoFinalNumero = int.Parse(montoFinal);
-
-            List<Cliente> clientesResultado =
-                usuario.VerClientesConVentasDentroDeRangoDeMontos(montoInicialNumero, montoFinalNumero);
-
-            string resultado = "";
-            foreach (Cliente cliente in clientesResultado)
+            catch (ArgumentNullException e)
             {
-                resultado += cliente.ToString() + ',';
+                return e.Message;
             }
-
-            return resultado;
+            catch (InvalidOperationException e)
+            {
+                return e.Message;
+            }
         }
     }
 }
